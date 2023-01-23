@@ -17,8 +17,8 @@ org_slug: OpenG2P
 rebel_module_groups: []
 repo_description: Self Service Portal
 repo_name: OpenG2P Self Service Portal
-repo_slug: openg2p-ssp
-repo_website: https://github.com/OpenG2P/openg2p-ssp
+repo_slug: openg2p-self-service-portal
+repo_website: https://github.com/OpenG2P/openg2p-self-service-portal
 travis_apt_packages: []
 travis_apt_sources: []
 
