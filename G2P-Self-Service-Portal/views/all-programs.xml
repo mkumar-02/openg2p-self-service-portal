@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="all_programs" name="all programs">
+        <t t-name="website.allprograms">
+            <t t-call="website.layout">
+                <div id="wrap" class="oe_structure oe_empty">
+                <div class="container">
+                <div class="row s_nb_column_fixed s_col_no_bgcolor">
+                <div class="col-lg-12 s_media_list_item pt16 pb16"
+                    data-name="Media item">
+                <div
+                    class="row s_col_no_resize s_col_no_bgcolor no-gutters o_cc o_cc1 o_colored_level align-items-center">
+                <div class="col-lg-8 s_media_list_body"
+                    data-original-title="" title=""
+                    aria-describedby="tooltip134933">
+                <br />
+                <table
+                    class="table table-bordered table-stripped ">
+                <caption-top>All Programs</caption-top>
+                <thead>
+                    <tr>
+                        <th>Sl.No</th>
+                        <th>Program Name</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <t t-foreach="programs" t-as="program">
+                    <tr>
+                        <td>
+                            <t t-esc="program['id']" />
+                        </td>
+                        <td>
+                            <a href='#'>
+                                <t t-esc="program['name']" />
+                            </a>
+                        </td>
+                        <t t-if="partner_id.id == memberships.partner_id.id">
+                            <td>
+                                <span>Applied</span>
+                            </td>
+                            <td>
+                                <a href="#">View</a>
+                            </td>
+                        </t>
+                        <t t-else=''>
+                            <td>
+                                <span>Not Applied</span>
+                            </td>
+                            <td>
+                                <a href="#">Apply</a>
+                            </td>
+                        </t>
+
+                </tr>
+            </t>
+            </tbody>
+            </table>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </t>
+        </t>
+    </template>
+</odoo>
