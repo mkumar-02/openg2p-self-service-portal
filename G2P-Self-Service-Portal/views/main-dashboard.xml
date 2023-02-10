@@ -1,264 +1,178 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="main_page" name="main dashboard">
-        <t name="Homepage" t-name="website.homepage1">
-            <t t-call="website.layout">
-                <t t-set="pageName" t-value="'homepage'" />
-                <div id="wrap" class="container oe_structure oe_empty">
-                    <section class="s_title o_colored_level pb0 pt8" data-vcss="001"
-                        data-snippet="s_title" data-name="Title" style="background-image: none;">
-                        <div class="container s_allow_columns">
-                            <h4 style="text-align: center;">
-                                <font style="color: rgb(231, 148, 57);">
-                                    <strong> Welcome to National Social Benefits Portal​</strong>
-                                </font>
-                                <br />
-                            </h4>
-                        </div>
-                    </section>
-                    <section class="s_media_list pt32 pb32 o_cc o_cc2 o_colored_level"
-                        data-vcss="001" data-snippet="s_media_list" data-name="Media List"
-                        style="background-image: none;">
-                        <div class="container">
-                            <div class="row s_nb_column_fixed s_col_no_bgcolor">
-                                <div class="col-lg-12 s_media_list_item pt16 pb16" data-name="">
-                                    <div
-                                        class="row s_col_no_resize s_col_no_bgcolor no-gutters o_cc o_cc1 o_colored_level align-items-center rounded"
-                                        style="border-radius: 10px !important;">
-                                        <div class="s_media_list_body col-lg-12"
-                                            data-original-title="" title=""
-                                            aria-describedby="tooltip94357">
-                                            <h4>My Programs</h4>
-                                            <table class="table table-bordered table-stripped">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Sl.No</th>
-                                                        <th>Program Name</th>
-                                                        <th>Application ID</th>
-                                                        <th>Status</th>
-                                                        <th>Submission Date</th>
-                                                        <th>Entitlement(USD)</th>
-                                                        <th>Amount Received(USD)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Row 1, Column 1</td>
-                                                        <td>Row 1, Column 2</td>
-                                                        <td>Row 1, Column 3</td>
-                                                        <td>Row 1, Column 3</td>
-                                                        <td>Row 1, Column 3</td>
-                                                        <td>Row 1, Column 3</td>
-                                                        <td>Row 1, Column 3</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+        <t name="main dashboard" t-name="G2P-Self-Service-Portal.main_page">
+            <t name="Homepage" t-name="website.homepage1">
+                <t t-call="website.layout">
+                    <t t-set="pageName" t-value="homepage" />
+                    <script src="js/jquery.min.js" type="text/javascript"></script>
+                    <script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+                    <div class="main-container">
+                        <div class="table-container">
+                            <div class="table-head-container">
+                                <p class='table-title'>My Programs</p>
+                                <form class="form-inline my-2 my-lg-0">
+                                    <div class="search-box">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                            height="16"
+                                            fill="currentColor" class="bi bi-search search-icon"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+
+                                        <input placeholder="Search by program name"
+                                            class="search-text" aria-controls="myprogramstable" />
+
                                     </div>
-                                </div>
+                                </form>
+                            </div>
+                            <div class="tables-values-container">
+                                <table id='myprogramstable'
+                                    class='table table-stripped sortable table-sm'>
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Sl.No</th>
+                                            <th aria-sort="ascending">Program Name </th>
+                                            <th>Application ID</th>
+                                            <th>Status</th>
+                                            <th>Submission Date</th>
+                                            <th>Entitlement(USD)</th>
+                                            <th>Amount Received(USD)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="programs" t-as="program">
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="program['id']" />
+                                                </td>
+                                                <td>
+                                                    <a href="/program/">
+                                                        <t t-esc="program['name']" />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span>Applied</span>
+                                                </td>
+                                                <td>
+                                                    <a href="#">
+                                                        <t t-esc="program['state']" />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <span>Not Applied</span>
+                                                </td>
+                                                <td>
+                                                    <a href="#">Apply</a>
+                                                </td>
+                                                <td>
+                                                    <a href="#">Apply</a>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                    </tbody>
+                                    <div>
+
+                                    </div>
+                                </table>
                             </div>
                         </div>
-                    </section>
-                    <section class="s_comparisons o_colored_level pb56 pt16"
-                        data-snippet="s_comparisons" data-name="Comparisons"
-                        style="background-image: none;" id="allprograms" data-anchor="true"
-                        data-original-title="" title="" aria-describedby="tooltip193567">
-                        <div>
-                            <div class="row" data-original-title="" title=""
-                                aria-describedby="tooltip835851">
-                                <div class="s_col_no_bgcolor text-center pb0 pt0 col-lg-4"
-                                    data-name="Box" data-original-title="" title=""
-                                    aria-describedby="tooltip785107">
-                                    <div class="card border rounded bg-200"
-                                        style="border-width: 5px !important; border-radius: 40px !important;"
-                                        data-original-title="" title=""
-                                        aria-describedby="tooltip906578">
-                                        <span aria-describedby="tooltip385505" title=""
-                                            data-original-title="">
-                                            <br />
-                                        </span>
-                                        <span aria-describedby="tooltip385505" title=""
-                                            data-original-title="" style="text-align: center;">
-                                            <a href="/allPrograms"
-                                                data-original-title="" title=""><i class="fa fa-eye" />
-                                                All Programs&amp;nbsp;</a>
-                                        </span>
-                                        <span aria-describedby="tooltip385505" title=""
-                                            data-original-title="">
-                                            <br />
-                                        </span>
-                                        <a href="/allPrograms" data-original-title="" title="">
-                                            <div class="card-body text-center"
-                                                data-original-title="" title=""
-                                                aria-describedby="tooltip592842">
-                                                <p />
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083"
-                                                    style="text-align: left;"> &amp;nbsp;<span
-                                                        aria-describedby="tooltip65215" title=""
-                                                        data-original-title="">View &amp;amp; apply
-                                                    for your eligible programs</span>
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                            </div>
-                                        </a>
-                                        <div class="card-footer" data-original-title="" title=""
-                                            aria-describedby="tooltip522926">
-                                            <p data-original-title="" title=""
-                                                aria-describedby="tooltip252196">
-                                                <i class="o_default_snippet_text">​</i>
-                                                <br />
-                                            </p>
+
+                        <div class="card-container">
+                            <div class="card">
+                                <h5 class="card-heading">All Programs</h5>
+                                <hr />
+                                <ul class="card-block">
+                                    <li>
+                                        <img
+                                            src="G2P-Self-Service-Portal/static/src/img/medical.png"
+                                            class="icon-image" />
+                                        <div>
+                                            <a href="#">
+                                                Healthcare </a>
+                                            <p>30+ Schemes
+                                                available</p>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="s_col_no_bgcolor text-center pb0 pt0 col-lg-4"
-                                    data-name="Box" data-original-title="" title=""
-                                    aria-describedby="tooltip785107">
-                                    <a href="/All%20Programs">
-                                    </a>
-                                    <div class="card border rounded bg-200"
-                                        style="border-width: 5px !important; border-radius: 40px !important;"
-                                        data-original-title="" title=""
-                                        aria-describedby="tooltip906578">
-                                        <a href="/AllPrograms" data-original-title="" title=""
-                                            aria-describedby="popover571303">
-                                            <p>
-                                            </p>
-                                            <p class="card-header" data-original-title=""
-                                                title="All Programs"
-                                                aria-describedby="tooltip897465"
-                                                style="text-align: center;"><i
-                                                    class="fa-regular fa-list-check"></i>&amp;nbsp;Other
-                                                Services <br />
-                                            </p>
-                                            <div class="card-body text-center"
-                                                data-original-title="" title=""
-                                                aria-describedby="tooltip592842">
-                                                <p>
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083"
-                                                    style="text-align: center;">
-                                                    Click here to access Other Services</p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083">
-                                                    <br />
-                                                </p>
-                                                <p class="card-title" data-original-title=""
-                                                    title="" aria-describedby="tooltip688083"
-                                                    style="text-align: center;">&amp;nbsp;</p>
-                                            </div>
-                                        </a>
-                                        <div class="card-footer" data-original-title="" title=""
-                                            aria-describedby="tooltip522926">
-                                            <p data-original-title="" title=""
-                                                aria-describedby="tooltip252196">
-                                                <i class="o_default_snippet_text">​</i>
-                                                <br />
-                                            </p>
+
+                                    </li>
+                                    <li>
+                                        <img
+                                            src="G2P-Self-Service-Portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.svg"
+                                            class="icon-image" />
+                                        <div>
+                                            <a href="#">
+                                                Education </a>
+                                            <p>55+ Schemes available</p>
                                         </div>
-                                    </div>
+
+                                    </li>
+
+
+                                </ul>
+                                <div class='viewprograms'>
+                                    <a href="/allprograms"
+                                        class='justify-content-center'>View more</a>
                                 </div>
-                                <div class="s_col_no_bgcolor text-center pb0 pt0 col-lg-4"
-                                    data-name="Box" data-original-title="" title=""
-                                    aria-describedby="tooltip785107">
-                                    <a href="/All%20Programs">
-                                    </a>
-                                    <div class="card border rounded bg-200"
-                                        style="border-width: 5px !important; border-radius: 40px !important;"
-                                        data-original-title="" title=""
-                                        aria-describedby="tooltip906578">
-                                        <span>
-                                            <p>
-                                            </p>
-                                            <p class="card-header" data-original-title="" title=""
-                                                aria-describedby="tooltip897465">
-                                                <font style="color: rgb(8, 49, 57);">
-                                                    &amp;nbsp;Entitlement </font>
-                                                <br />
-                                            </p>
-                                            <div class="card-body text-center"
-                                                data-original-title="" title=""
-                                                aria-describedby="tooltip592842">
-                                                <div class="s_chart" data-type="pie"
-                                                    data-legend-position="left"
-                                                    data-tooltip-display="true" data-stacked="false"
-                                                    data-border-width="2"
-                                                    data-data="{&quot;labels&quot;:[&quot;Received&quot;,&quot;Pending&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;One&quot;,&quot;data&quot;:[&quot;1500&quot;,&quot;400&quot;],&quot;backgroundColor&quot;:[&quot;#00FF00&quot;,&quot;#0000FF&quot;],&quot;borderColor&quot;:[&quot;&quot;,&quot;o-color-3&quot;]}]}"
-                                                    data-snippet="s_chart" data-name="Chart">
-                                                    <h2 data-original-title="" title=""
-                                                        aria-describedby="tooltip299951">
-                                                    </h2>
-                                                    <canvas data-original-title="" title=""
-                                                        aria-describedby="tooltip367550" style=""
-                                                        width="300" />
-                                                </div>
-                                                <p data-original-title="" title=""
-                                                    aria-describedby="tooltip78830">
-                                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <br />
-                                                </p>
-                                            </div>
-                                        </span>
-                                        <div class="card-footer" data-original-title="" title=""
-                                            aria-describedby="tooltip522926">
-                                            <p data-original-title="" title=""
-                                                aria-describedby="tooltip252196"><i
-                                                    class="o_default_snippet_text">​</i>
-                                                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; <br /></p>
+
+                            </div>
+                            <div class='card'>
+                                <h5 class="card-heading">Other Services</h5>
+                                <hr />
+                                <ul class="card-block">
+                                    <li>
+                                        <img
+                                            src="/home/ramakrishna/Desktop/openg2p/openg2p-self-service-portal/G2P-Self-Service-Portal/static/src/img/medical_services_FILL0_wght400_GRAD0_opsz48.png"
+                                            class="icon-image" />
+                                        <div>
+                                            <a href="#">
+                                                KYC </a>
+                                            <p>Tap to know more</p>
                                         </div>
-                                    </div>
+
+                                    </li>
+                                    <li>
+
+                                        <img
+                                            src="G2P-Self-Service-Portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.svg"
+                                        />
+                                        <div>
+                                            <a href="#">
+                                                Housing </a>
+                                            <p>Tap to know more</p>
+                                        </div>
+
+                                    </li>
+
+
+                                </ul>
+                                <div class='viewprograms'>
+                                    <a href="/otherservices"
+                                        class='justify-content-center'>View more</a>
                                 </div>
+
+                            </div>
+                            <div class='card'>
+                                <div class="s_chart" data-type="pie"
+                                    data-legend-position="top"
+                                    data-tooltip-display="true" data-stacked="false"
+                                    data-border-width="2"
+                                    data-data="{&quot;labels&quot;:[&quot;Pending&quot;,&quot;Received&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;One&quot;,&quot;data&quot;:[&quot;12&quot;,&quot;24&quot;],&quot;backgroundColor&quot;:[&quot;#0000FF&quot;,&quot;#00FF00&quot;],&quot;borderColor&quot;:[&quot;o-color-4&quot;,&quot;o-color-4&quot;]}]}"
+                                    data-snippet="s_chart" data-name="Chart">
+                                    <h2 class="o_default_snippet_text">
+                                        <br />
+                                    </h2>
+                                    <canvas style="" width="400" />
+                                </div>
+
                             </div>
                         </div>
-                    </section>
-                </div>
+                    </div>
+
+                </t>
             </t>
         </t>
-
     </template>
-
 </odoo>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_header" inherit_id="website.layout" name="Custom Header">
+        <xpath expr="//header" position="replace">
+            <div class="nav-container">
+                <div class='nav'>
+                    <a href='/'>
+                        <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
+                    </a>
+                    <div class='nav-user'>
+                        <div class="search-box">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" class="bi bi-search search-icon"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                            <input placeholder="Search here" class="search-text" />
+
+                        </div>
+                        <div class="js_language_selector dropdown show language-box">
+                            <button type="button" data-toggle="dropdown"
+                                class="button">
+                                <img class="flag" data-oe-model="ir.ui.view"
+                                    data-oe-id="1359" data-oe-field="arch"
+                                    data-oe-xpath="/t[1]/img[1]"
+                                    src="/base/static/img/country_flags/us.png?height=25"
+                                    loading="lazy" />
+                                <span class="align-middle lang-text dropdown-toggle">English</span>
+                            </button>
+                            <div role="menu" class="dropdown-menu lang-block hide"
+                                x-placement="top-start">
+                                <a href="/en/"
+                                    class="dropdown-item js_change_lang active"
+                                    data-url_code="en">
+                                    <img class="flag" data-oe-model="ir.ui.view"
+                                        data-oe-id="1359" data-oe-field="arch"
+                                        data-oe-xpath="/t[1]/img[1]"
+                                        src="/base/static/img/country_flags/us.png?height=25"
+                                        loading="lazy" style="" />
+                                    <span>English</span>
+                                </a>
+                                <a href="/en/"
+                                    class="dropdown-item js_change_lang active"
+                                    data-url_code="en">
+                                    <img class="flag" data-oe-model="ir.ui.view"
+                                        data-oe-id="1359" data-oe-field="arch"
+                                        data-oe-xpath="/t[1]/img[1]"
+                                        src="/base/static/img/country_flags/us.png?height=25"
+                                        loading="lazy" style="" />
+                                    <span>English</span>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="dropdown user">
+                            <a class="nav-link py-0 text-white d-inline-block dropdown-toggle"
+                                href="#"
+                                data-toggle="dropdown">
+                                <span
+                                    class="d-inline-block rounded-circle border border-grey text-secondary py-2 px-2">
+                                    <t t-esc="request.env.user.name[0:3]" />
+                                </span>
+                            </a>
+                            <div class="dropdown-menu user-block">
+                                <!-- Existing user menu content here -->
+
+                                <a href='/user'>user Profile</a>
+                                <br />
+                                <a href="/web/session/logout?redirect=/web">Logout</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </xpath>
+
+    </template>
+</odoo>

@@ -3,14 +3,14 @@ from odoo.http import Controller, request, route
 
 
 class Dashboard(Controller):
-    @route("/allPrograms", website=True, auth="public")
+    @route("/allprograms", website=True, auth="public")
     def AllPrograms(self, **kw):
-        programs = request.env["g2p.program"].sudo().search([])
+        programs = request.env["g2p.program"].sudo().search([]).sorted('id')
         partner_id = request.env["res.users"].browse(request.session.uid).partner_id
-        memberships = request.env["g2p.program_membership"].sudo().search([])
+        memberships = request.env["g2p.program_membership"].sudo().search([('partner_id','=',partner_id.id)])
         
         return request.render(
-            "G2P-Self-Service-Portal.all_programs",
+            "G2P-Self-Service-Portal.allprograms",
             {
                 "programs": programs,
                 "partner_id":partner_id,
@@ -20,12 +20,13 @@ class Dashboard(Controller):
 
     @route("/", website=True, auth="public")
     def MyPrograms(self, **kw):
-        programs = request.env["g2p.program"].sudo().search([])
+        myprograms = request.env["g2p.program"].sudo().search([]).sorted('id')
         partner_id = request.env["res.users"].browse(request.session.uid).partner_id
+
         return request.render(
             "G2P-Self-Service-Portal.main_page",
             {
-                "programs": programs,
+                "programs": myprograms,
 
             },
         )

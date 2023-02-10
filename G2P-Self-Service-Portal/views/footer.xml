@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+        <xpath expr="//footer" position="replace">
+            <footer>
+                <div class="nav-container">
+                    <div class='nav'>
+                        <a href='/'>
+                            <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
+                        </a>
+                        
+                </div>
+                </div>
+
+            </footer>
+        </xpath>
+
+    </template>
+</odoo>

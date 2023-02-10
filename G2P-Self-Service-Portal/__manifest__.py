@@ -10,18 +10,27 @@
     'license': 'LGPL-3',
     'category': 'G2P',
     'depends': [
-        'base','website'
+        'base', 'website'
     ],
     'data': [
-	  'views/main-dashboard.xml',
-      'views/all-programs.xml'
-
+        'views/main-dashboard.xml',
+        'views/all-programs.xml',
+        'views/header.xml',
+        'views/footer.xml'
     ],
 
-    "application": False,
-    "installable": True,
-    "auto_install": False,
+    'application': False,
+    'installable': True,
+    'auto_install': False,
     'assets': {
-        
-    }
+
+        'web.assets_common': [
+            ('prepend', 'G2P-Self-Service-Portal/static/src/css/style.css'),
+
+        ],
+        # 'web.assets_backend': [
+        #     'G2P-Self-Service-Portal/static/src/js/table.js',
+        # ]
+    },
+
 }
