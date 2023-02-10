@@ -1,0 +1,19 @@
+body{
+    background-color:#F5F9FC;
+}
+
+.breadcrumb{
+    background-color:none;
+}
+
+.details{
+    top: 118px;
+    left: 139px;
+    width: 169px;
+    height: 26px;
+    text-align: left;
+    font: normal normal 600 22px/26px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}

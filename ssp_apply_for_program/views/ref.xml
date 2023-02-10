@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="all_program">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty"/>
+            
+            <h5 class="details">Program Details</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                </ol>
+            </nav>
+            
+            
+        </t>
+    </template>
+</odoo>

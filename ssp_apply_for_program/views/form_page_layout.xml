@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <template id="custom_main" inherit_id="website.layout" name="Custom Main">
+       <xpath expr="//main" position="replace">
+           <main>
+            <h5 class="details">Program Details</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-md-1"/>
+                <div class="col-md-7 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-0">Application Form</h5>
+                            <p>Covid-19 relief scheme</p>
+                            <p><t t-esc="value" /></p>
+                            <hr/>
+                            <!-- <form id="formId" action="/submit" method="POST" role="form">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            </form> -->
+
+                            <div id="wrap" class="oe_structure oe_empty"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
+                        <p>This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
+                        <hr/>
+                        <button form="formId" type="submit" class="btn btn-primary btn-lg btn-block">
+                        Submit
+                        </button>
+                        <form action="/" class="mt-2">
+                            <input type="submit" class="btn btn-outline-primary btn-lg btn-block" value="Cancel" />
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-1 mb-4"/>
+            </div>
+            
+            <div class="row">
+
+            </div>
+           </main>
+       </xpath>
+   </template>
+</odoo>
+
+
