@@ -65,9 +65,11 @@
                             <div class="dropdown-menu user-block">
                                 <!-- Existing user menu content here -->
 
-                                <a href='/user'>user Profile</a>
-                                <br />
-                                <a href="/web/session/logout?redirect=/web">Logout</a>
+                                <p><a href='/user'>user Profile</a></p>
+   
+                                <p><a href="/web/session/logout?redirect=/web">Logout</a></p>
+                 
+                                <p><a href="/web/session/logout?redirect=/web">Logout</a></p>
 
                             </div>
                         </div>

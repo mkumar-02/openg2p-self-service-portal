@@ -3,21 +3,98 @@
     <template id="allprograms" name="all programs">
         <t t-name="website.allprograms">
             <t t-call="website.layout">
-   
-                    <div class="main-container">
-                        <div class='all-programs-container'>
-                            <h5>All Programs</h5>
-                            <nav aria-label="breadcrumb" >
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item">
-                                        <a href="/">Home</a>
-                                    </li>
-                                    <li class="breadcrumb-item active" aria-current="page">All Programs</li>
-                                </ol>
-                            </nav>
-                        </div>
 
+                <div class="main-container">
+                    <h5 class='all-title'>All Programs</h5>
+                       
+                        <ol class="breadcrumb  breadcrumb-list bg-transparent">
+                            
+                            <br/>
+                            <li class="breadcrumb-item">
+                                <a href="/">Home</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">All Programs</li>
+                        </ol>
+
+
+                    <div class="table-container">
+                        <div class="table-all-container">
+                            <p class='table-title'>All Programs</p>
+                            <form class="form-inline my-2 my-lg-0">
+                                <div class="search-box">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16"
+                                        fill="currentColor" class="bi bi-search search-icon"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                    </svg>
+
+                                    <input placeholder="Search by program name"
+                                        class="search-text" aria-controls="myprogramstable" />
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tables-values-container">
+                            <table id='myprogramstable'
+                                class='table table-stripped  table-sm'>
+                                <thead class="thead">
+                                    <tr>
+                                        <th>Sl.No</th>
+                                        <th>Program Name</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="programs" t-as="program">
+                                        
+                                        <tr>
+                                            <td>
+                                                <t t-esc="program['id']" />
+                                            </td>
+                                            <td class='program-name'>
+                                                <a href='#'>
+                                                    <t t-esc="program['name']" />
+                                                </a>
+                                            </td>
+                                            <t
+                                                t-if="program['has_applied']">
+                                                <td>
+                                                    <span><t t-esc="program['status']" /></span>
+                                                </td>
+                                                <td>
+                                                    <a href="#">
+                                                        <button string="Apply" type="object"
+                                                            class="oe_highlight btn btn-primary">
+                                                            View</button>
+                                                    </a>
+                                                </td>
+                                            </t>
+                                            <t t-else=''>
+                                                <td>
+                                                    <span>Not Applied</span>
+                                                </td>
+                                                <td>
+                                                    <a href="#">
+                                                        <button string="Apply" type="object"
+                                                            class="oe_highlight btn btn-primary">
+                                                            Apply</button>
+                                                    </a>
+                                                </td>
+                                            </t>
+
+                                        </tr>
+                                    </t>
+                                </tbody>
+                                <div>
+
+                                </div>
+                            </table>
+                        </div>
                     </div>
+                </div>
 
 
             </t>

@@ -3,12 +3,26 @@
     <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
         <xpath expr="//footer" position="replace">
             <footer>
-                <div class="nav-container">
+                <div class="nav-footer">
                     <div class='nav'>
                         <a href='/'>
                             <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
                         </a>
-                        
+                        <ul class='list-container'>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">ContactUs</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">StaticPage</a>
+                              </li>
+                              <li class="nav-item">
+                                <a class="nav-link" href="#">ErrorPage</a>
+                              </li>
+                        </ul>
+
                 </div>
                 </div>
 

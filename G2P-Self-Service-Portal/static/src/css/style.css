@@ -132,23 +132,12 @@ body {
   border: 1px solid #757373;
   opacity: 1;
 }
-.user-block {
-  top: 73px;
-  left: 1038px;
-  width: 184px;
-  height: 116px;
-  margin-left: 0px;
-  /* UI Properties */
 
-  background: #ffffff 0% 0% no-repeat padding-box;
-  border: 1px solid #d8d8d8;
-  opacity: 1;
-}
 
 /* main body */
 .main-container {
   background-color: #f5f9fc;
-  height:100%;
+  height: 100%;
   display: block;
   padding-top: 30px;
 }
@@ -190,6 +179,7 @@ body {
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 4px 5px #0000000d;
   opacity: 1;
+  color: #484848;
 }
 .tables-values-container {
   height: 266px;
@@ -199,7 +189,7 @@ body {
 .thead {
   height: 52px;
   width: 100%;
-  height: 52px;
+
   box-shadow: 0px 2px 2px #0000000d;
   font: normal normal 600 13px/16px Inter;
   background: #f8f8f8 0% 0% no-repeat padding-box;
@@ -211,8 +201,6 @@ th {
   letter-spacing: 0px;
   color: #a2a2a2;
   opacity: 1;
-  padding-left: 10px;
-  
   box-shadow: 0px 2px 2px #0000000d;
   background: #f8f8f8 0% 0% no-repeat padding-box;
   position: -webkit-sticky;
@@ -226,10 +214,25 @@ th[scope="row"] {
   left: 0;
   z-index: 1;
 }
-td{
+td {
   box-shadow: 0px 2px 2px #0000000d;
+  height: 39px;
 }
-
+.program-name {
+  text-align: left;
+  font: normal normal 600 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #494daf;
+  height: 16px;
+  opacity: 1;
+}
+.table-data {
+  text-align: left;
+  font: normal normal normal 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #535353;
+  opacity: 1;
+}
 .card-container {
   display: flex;
   justify-content: space-between;
@@ -297,21 +300,58 @@ td{
   border-radius: 10px;
   opacity: 1;
 }
-.viewprograms{
-  margin-top:0px;
+.viewprograms {
+  margin-top: 0px;
   display: flex;
   justify-content: center;
 }
 
-
-
-
-.all-programs-container{
-   margin-left: 10%;
-   margin-right: 10%;
-   width: 90%;
-   
+.all-programs-container {
+  margin-left: 10%;
+  margin-right: 20%;
+  width: 90%;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 5px #0000001a;
+  border-radius: 10px;
+  opacity: 1;
 }
-.breadcrumb{
+.breadcrumb {
   background-color: transparent;
+}
+
+.list-container {
+  display: flex;
+  justify-content: space-between;
+}
+.nav-item {
+  list-style: none;
+  font: normal normal 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #484848;
+  opacity: 1;
+}
+.table-all-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.breadcrumb-list{
+
+  margin-left: 9%;
+  margin-right: 10%;
+  margin-bottom: 33px;
+}
+.all-title{
+
+height: 26px;
+margin-bottom: 0px;
+
+/* UI Properties */
+margin-left: 10%;
+text-align: left;
+font: normal normal 600 22px/26px Inter;
+letter-spacing: 0px;
+color: #484848;
+opacity: 1;
 }
