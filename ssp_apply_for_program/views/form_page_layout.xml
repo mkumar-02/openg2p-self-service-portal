@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-   <template id="custom_main" inherit_id="website.layout" name="Custom Main">
+   <template 
+        id="custom_main" 
+        inherit_id="website.layout" 
+        name="Custom Main"
+        primary="True"    
+    >
        <xpath expr="//main" position="replace">
            <main>
             <h5 class="details">Program Details</h5>

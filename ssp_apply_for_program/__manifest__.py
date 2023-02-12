@@ -18,21 +18,26 @@
         "views/landing_view.xml",
         "views/submitted_view.xml",
         "views/ref.xml",
+        "views/sample_form.xml"
+        # "views/form_submit_button.xml"
+    ],
+    "css": [
+        'static/src/css/tyles.css',
     ],
     "assets": {
-        # 'web.assets_common':[
-        #     ('prepend', 'ssp_apply_for_program/static/src/css/style.css'),
-        # ],
-        # 'web.assets_backend': [
-        #     'ssp_apply_for_program/static/src/css/style.css',
+        'web.assets_common':[
+            ('prepend', 'ssp_apply_for_program/static/src/css/style.css'),
+        ],
+        'web.assets_backend': [
+             'ssp_apply_for_program/static/src/css/style.css',
         #     'ssp_apply_for_program/static/src/js/popup.js',
         #     'ssp_apply_for_program/static/stc/js/form_validation.js'
-        # ],
-        # 'web.assets_frontend': [
-        #     'ssp_apply_for_program/static/src/css/style.css',
+        ],
+        'web.assets_frontend': [
+            'ssp_apply_for_program/static/src/css/style.css',
         #     'ssp_apply_for_program/static/src/js/popup.js',
         #     'ssp_apply_for_program/static/stc/js/form_validation.js'
-        # ],
+        ],
     },
     "demo": [],
     "images": [],

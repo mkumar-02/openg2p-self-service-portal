@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="website_form_submit" inherit_id="s_website_form" name="Website Form Action">
+    <section class="s_website_form pt16 pb16" data-vcss="001" data-snippet="s_website_form">
+        <div class="container">
+            <form action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-pre-fill="true">
+                <div class="s_website_form_rows row s_col_no_bgcolor">
+                    <div class="form-group col-12 s_website_form_submit" data-name="Submit Button">
+                        <div style="width: 200px;" class="s_website_form_label"/>
+                        <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send">Cancel</a>
+                        <span id="s_website_form_result"></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</template>
+
+</odoo>

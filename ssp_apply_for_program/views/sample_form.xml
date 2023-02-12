@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sample_form">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty">
+
+                <main>
+                    <h5 class="details">Program Details</h5>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                        </ol>
+                    </nav>
+
+                    <div class="row">
+                        <div class="col-md-1"/>
+                        <div class="col-md-7 mb-4">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h5 class="mb-0">Application Form</h5>
+                                    <p>Covid-19 relief scheme</p>
+                                    <p><t t-esc="value" /></p>
+                                    <hr/>
+                                    <!-- <form id="formId" action="/submit" method="POST" role="form">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/> -->
+                                    
+
+                                    <section class="s_website_form pt16 pb16 o_colored_level" data-vcss="001" data-snippet="s_website_form" data-name="Form" style="background-image: none;">
+                                        <div class="container">
+                                            <form action="/website/form/" method="post" enctype="multipart/form-data" class="o_mark_required" data-mark="*" data-pre-fill="true" data-success-mode="redirect" data-success-page="/contactus-thank-you" data-model_name="res.partner">
+                                                <div class="s_website_form_rows row s_col_no_bgcolor">
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label" style="width: 200px" for="ov48h21655k">
+                                                    <span class="s_website_form_label_content">Region/Province/Municipality</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="Region/Province/Municipality" value="" placeholder="" id="ov48h21655k" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="oxrz0zjefnrr">
+                                                    <span class="s_website_form_label_content">Barangay</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="Barangay" value="" placeholder="" id="oxrz0zjefnrr" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="owuuru9kngrf">
+                                                    <span class="s_website_form_label_content">House No./Street Name</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="House No./Street Name" value="" placeholder="" id="owuuru9kngrf" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="ozxns9e4cnop">
+                                                    <span class="s_website_form_label_content">Full Name</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="Full Name" value="" placeholder="" id="ozxns9e4cnop" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="date" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="oqtrbqckzc2">
+                                                    <span class="s_website_form_label_content">Birth Date</span>
+                                                    </label>
+                                                    <div class="s_website_form_date input-group date" id="datepicker3866991745727144" data-target-input="nearest">
+                                                    <input type="text" class="form-control datetimepicker-input s_website_form_input" data-target="#datepicker3866991745727144" name="Birth Date" placeholder="" id="oqtrbqckzc2" data-fill-with="undefined"/>
+                                                    <div class="input-group-append" data-target="#datepicker3866991745727144" data-toggle="datetimepicker">
+                                                        <div class="input-group-text">
+                                                        <i class="fa fa-calendar"/>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="selection" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="ovff3s3zicaj">
+                                                    <span class="s_website_form_label_content">Sex</span>
+                                                    </label>
+                                                    <div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="Sex" data-display="horizontal">
+                                                    <div class="radio col-12 col-lg-4 col-md-6">
+                                                        <div class="form-check">
+                                                        <input type="radio" class="s_website_form_input form-check-input" id="ovff3s3zicaj0" name="Sex" value="Male" data-fill-with="undefined"/>
+                                                        <label class="form-check-label s_website_form_check_label" for="ovff3s3zicaj0">
+                                                        Male
+                                                    </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio col-12 col-lg-4 col-md-6">
+                                                        <div class="form-check">
+                                                        <input type="radio" class="s_website_form_input form-check-input" id="ovff3s3zicaj1" name="Sex" value="Female"/>
+                                                        <label class="form-check-label s_website_form_check_label" for="ovff3s3zicaj1">
+                                                        Female
+                                                    </label>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="selection" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="o3qgnxjzs6it">
+                                                    <span class="s_website_form_label_content">Visiting HF?</span>
+                                                    </label>
+                                                    <div class="row s_col_no_resize s_col_no_bgcolor s_website_form_multiple" data-name="Visiting HF?" data-display="horizontal">
+                                                    <div class="radio col-12 col-lg-4 col-md-6">
+                                                        <div class="form-check">
+                                                        <input type="radio" class="s_website_form_input form-check-input" id="o3qgnxjzs6it0" name="Visiting HF?" value="Yes" data-fill-with="undefined"/>
+                                                        <label class="form-check-label s_website_form_check_label" for="o3qgnxjzs6it0">
+                                                        Yes
+                                                    </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="radio col-12 col-lg-4 col-md-6">
+                                                        <div class="form-check">
+                                                        <input type="radio" class="s_website_form_input form-check-input" id="o3qgnxjzs6it1" name="Visiting HF?" value="No"/>
+                                                        <label class="form-check-label s_website_form_check_label" for="o3qgnxjzs6it1">
+                                                        No
+                                                    </label>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                                <div data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom s_website_form_field_hidden_if d-none" data-type="text" data-name="Field" data-visibility-dependency="Visiting HF?" data-visibility-condition="No" data-visibility-comparator="selected">
+                                                    <label class="s_website_form_label " style="width: 200px" for="oiurm18moi9c">
+                                                    <span class="s_website_form_label_content">Reason for Not Visiting Health Facility</span>
+                                                    </label>
+                                                    <textarea class="form-control s_website_form_input" name="Reason for Not Visiting Health Facility" placeholder="" id="oiurm18moi9c" rows="3"/>
+                                                </div>
+                                                <div data-visibility-between="" data-visibility-dependency="Visiting HF?" data-visibility-condition="Yes" data-visibility-comparator="selected" class="form-group s_website_form_field col-12 s_website_form_custom s_website_form_field_hidden_if d-none" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="osh79nsc35v">
+                                                    <span class="s_website_form_label_content">Name of Health Facility</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="Name of Health Facility" value="" placeholder="" id="osh79nsc35v" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom s_website_form_field_hidden_if d-none" data-type="text" data-name="Field" data-visibility-dependency="Visiting HF?" data-visibility-condition="Yes" data-visibility-comparator="selected">
+                                                    <label class="s_website_form_label " style="width: 200px" for="o2k6hrfbhuh7">
+                                                    <span class="s_website_form_label_content">Health Facility Address</span>
+                                                    </label>
+                                                    <textarea class="form-control s_website_form_input" name="Health Facility Address" placeholder="" id="o2k6hrfbhuh7" rows="3"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="integer" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="ons5k2boxopo">
+                                                    <span class="s_website_form_label_content">PhilSys Card No</span>
+                                                    </label>
+                                                    <input type="number" class="form-control s_website_form_input" name="PhilSys Card No" step="1" value="" placeholder="" id="ons5k2boxopo" data-fill-with="undefined"/>
+                                                </div>
+                                                <div data-visibility-condition="" data-visibility-between="" class="form-group s_website_form_field col-12 s_website_form_custom" data-type="char" data-name="Field">
+                                                    <label class="s_website_form_label " style="width: 200px" for="o8syz1qqs4rb">
+                                                    <span class="s_website_form_label_content">Highest Educ Attainment/ Current Grade Level</span>
+                                                    </label>
+                                                    <input type="text" class="form-control s_website_form_input" name="Highest Educ Attainment/ Current Grade Level" value="" placeholder="" id="o8syz1qqs4rb" data-fill-with="undefined"/>
+                                                </div>
+                                                <div class="form-group col-12 s_website_form_submit" data-name="Submit Button" data-original-title="" title="" aria-describedby="tooltip497695">
+                                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                                    <a href="#" role="button" class="btn btn-primary btn-lg s_website_form_send o_default_snippet_text">Submit</a>
+                                                    <span id="s_website_form_result"/>
+                                                </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-4">
+                            <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
+                                <p>This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
+                                <hr/>
+                                <button form="formId" type="submit" class="btn btn-primary btn-lg btn-block">
+                                Submit
+                                </button>
+                                <form action="/" class="mt-2">
+                                    <input type="submit" class="btn btn-outline-primary btn-lg btn-block" value="Cancel" />
+                                </form>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1 mb-4"/>
+                    </div>
+                    
+                    <div class="row">
+
+                    </div>
+                </main>
+                
+            </div>
+        </t>
+    </template>
+</odoo>
