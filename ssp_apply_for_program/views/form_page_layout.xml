@@ -3,8 +3,8 @@
    <template 
         id="custom_main" 
         inherit_id="website.layout" 
-        name="Custom Main"
-        primary="True"    
+        name="Custom Main"  
+        primary="True" 
     >
        <xpath expr="//main" position="replace">
            <main>
@@ -30,7 +30,9 @@
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             </form> -->
 
-                            <div id="wrap" class="oe_structure oe_empty"/>
+                            <!-- <div id="wrap" class="oe_structure oe_empty"/> -->
+                            
+                            
                         </div>
                     </div>
                 </div>

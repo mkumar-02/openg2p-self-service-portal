@@ -10,6 +10,11 @@ class Website(http.Controller):
     def all_program(self, **kw):
         return request.render("ssp_apply_for_program.sample_form",{})
 
+    @http.route("/form_layout", type="http", website=True, auth="public")
+    def all_program(self, **kw):
+        value_to_pass = "4Ps"
+        return request.render("ssp_apply_for_program.custom_main",{'value': value_to_pass})
+
     @http.route("/apply_for_program", type="http", website=True, auth="public")
     def program_controller(self, **kw):
         value_to_pass = "4Ps"
