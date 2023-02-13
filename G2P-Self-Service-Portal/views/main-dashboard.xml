@@ -5,7 +5,7 @@
             <t name="Homepage" t-name="website.homepage1">
                 <t t-call="website.layout">
                     <t t-set="pageName" t-value="homepage" />
-     
+
                     <div class="main-container">
                         <div class="table-container">
                             <div class="table-head-container">
@@ -27,13 +27,12 @@
                                 </form>
                             </div>
                             <div class="tables-values-container">
-                                <table id='myprogramstable'
-                                    class='table table-stripped sortable table-sm'>
-                                    <thead class="thead">
+                                <table class='css-serial'>
+                                    <thead>
                                         <tr>
                                             <th>Sl.No</th>
                                             <th aria-sort="ascending">Program Name
-                                                 </th>
+                                            </th>
                                             <th>Application ID</th>
                                             <th>Status</th>
                                             <th>Submission Date</th>
@@ -41,13 +40,11 @@
                                             <th>Amount Received(USD)</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <t t-foreach="programs" t-as="program">
-                                            <t
+                                    <t t-foreach="programs" t-as="program">
+                                        <t
                                             t-if="program['has_applied']">
                                             <tr>
-                                                <td class='table-data'>
-                                                    <t t-esc="program['id']" />
+                                                <td>
                                                 </td>
                                                 <td class='program-name'>
                                                     <a href="/program/">
@@ -63,10 +60,10 @@
                                                     </a>
                                                 </td>
                                                 <td class='table-data'>
-                                                    <t t-esc="program['enrollment_date']"/>
+                                                    <t t-esc="program['enrollment_date']" />
                                                 </td>
                                                 <td class='table-data'>
-                                                    <t t-esc="program['issued']"/>
+                                                    <t t-esc="program['issued']" />
                                                 </td>
                                                 <td class='table-data'>
                                                     <span>Amount Received</span>
@@ -74,14 +71,9 @@
                                             </tr>
 
                                         </t>
-                                        </t>
-
-
-                                    </tbody>
-                                    <div>
-
-                                    </div>
+                                    </t>
                                 </table>
+
                             </div>
                         </div>
 
@@ -91,9 +83,11 @@
                                 <hr />
                                 <ul class="card-block">
                                     <li>
-                                        <img
-                                            src="G2P-Self-Service-Portal/static/src/img/medical.png"
-                                            class="icon-image" />
+                                        <div class="icon-image">
+                                            <img
+                                                src="G2P-Self-Service-Portal/static/src/img/medical.png"
+                                            />
+                                        </div>
                                         <div>
                                             <a href="#">
                                                 Healthcare </a>
@@ -103,9 +97,11 @@
 
                                     </li>
                                     <li>
-                                        <img
-                                            src="G2P-Self-Service-Portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.svg"
-                                            class="icon-image" />
+                                        <div class="icon-image">
+                                            <img
+                                                src="G2P-Self-Service-Portal/static/src/img/school_FILL0_wght400_GRAD0_opsz48.png"
+                                            />
+                                        </div>
                                         <div>
                                             <a href="#">
                                                 Education </a>
@@ -127,9 +123,11 @@
                                 <hr />
                                 <ul class="card-block">
                                     <li>
-                                        <img
-                                            src="/home/ramakrishna/Desktop/openg2p/openg2p-self-service-portal/G2P-Self-Service-Portal/static/src/img/medical_services_FILL0_wght400_GRAD0_opsz48.png"
-                                            class="icon-image" />
+                                        <div class="icon-image">
+                                            <img
+                                                src="G2P-Self-Service-Portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.png"
+                                            />
+                                        </div>
                                         <div>
                                             <a href="#">
                                                 KYC </a>
@@ -139,9 +137,11 @@
                                     </li>
                                     <li>
 
-                                        <img
-                                            src="G2P-Self-Service-Portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.svg"
-                                        />
+                                        <div class="icon-image">
+                                            <img
+                                                src="G2P-Self-Service-Portal/static/src/img/real_estate_agent_FILL0_wght400_GRAD0_opsz48.png"
+                                            />
+                                        </div>
                                         <div>
                                             <a href="#">
                                                 Housing </a>
@@ -159,13 +159,19 @@
 
                             </div>
                             <div class="card">
-                                <div class="s_chart" data-type="doughnut" data-legend-position="bottom" data-tooltip-display="true" data-stacked="false" data-border-width="2" data-data="{&quot;labels&quot;:[&quot;Pending&quot;,&quot;Received&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;One&quot;,&quot;data&quot;:[&quot;12&quot;,&quot;24&quot;],&quot;backgroundColor&quot;:[&quot;#00FFFF&quot;,&quot;#0000FF&quot;],&quot;borderColor&quot;:[&quot;o-color-4&quot;,&quot;&quot;]}]}" data-snippet="s_chart" data-name="Chart">
-                                  <h2 class="o_default_snippet_text">
-                                    <br/>
-                                  </h2>
-                                  <canvas style="" width="400"/>
+                                <h5 class="card-heading">Entitlements</h5>
+                                <hr />
+                                <div class="s_chart" data-type="doughnut"
+                                    data-legend-position="bottom" data-tooltip-display="true"
+                                    data-stacked="false" data-border-width="2"
+                                    data-data="{&quot;labels&quot;:[&quot;Pending&quot;,&quot;Received&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;data&quot;:[&quot;400&quot;,&quot;1500&quot;],&quot;backgroundColor&quot;:[&quot;#00FFFF&quot;,&quot;#0000FF&quot;],&quot;borderColor&quot;:[&quot;o-color-4&quot;,&quot;&quot;]}]}"
+                                    data-snippet="s_chart" data-name="Chart">
+                                    <h2 class="o_default_snippet_text">
+                                        <br />
+                                    </h2>
+                                    <canvas style="" width="500" />
                                 </div>
-                              </div>
+                            </div>
                         </div>
                     </div>
 

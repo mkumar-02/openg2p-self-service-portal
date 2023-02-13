@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
-        <xpath expr="//footer" position="replace">
-            <footer>
-                <div class="nav-footer">
-                    <div class='nav'>
-                        <a href='/'>
-                            <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
-                        </a>
-                        <ul class='list-container'>
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">About Us</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">ContactUs</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">StaticPage</a>
-                              </li>
-                              <li class="nav-item">
-                                <a class="nav-link" href="#">ErrorPage</a>
-                              </li>
-                        </ul>
+  <template id="custom_footer" inherit_id="website.layout" name="Custom Footer">
+    <xpath expr="//footer" position="replace">
+      <footer>
+        <div class="nav-footer">
+          <div class='nav'>
+            <a href='/'>
+              <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
+            </a>
+            <ul class='list-container'>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ContactUs</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">StaticPage</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">ErrorPage</a>
+              </li>
+            </ul>
 
-                </div>
-                </div>
 
-            </footer>
-        </xpath>
+          </div>
+          <hr/>
+          <div class='copyright'>
+          <p>© 2023 National Social Benefits Portal. All rights reserved.</p>
+        </div>
+        </div>
 
-    </template>
+      </footer>
+    </xpath>
+
+  </template>
 </odoo>

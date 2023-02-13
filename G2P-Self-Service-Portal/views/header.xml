@@ -28,9 +28,9 @@
                                     loading="lazy" />
                                 <span class="align-middle lang-text dropdown-toggle">English</span>
                             </button>
-                            <div role="menu" class="dropdown-menu lang-block hide"
+                            <ul role="menu" class="dropdown-menu lang-block hide"
                                 x-placement="top-start">
-                                <a href="/en/"
+                                <li><a href="/en/"
                                     class="dropdown-item js_change_lang active"
                                     data-url_code="en">
                                     <img class="flag" data-oe-model="ir.ui.view"
@@ -39,19 +39,17 @@
                                         src="/base/static/img/country_flags/us.png?height=25"
                                         loading="lazy" style="" />
                                     <span>English</span>
-                                </a>
-                                <a href="/en/"
+                                </a></li>
+                                <li><a href="/en/"
                                     class="dropdown-item js_change_lang active"
                                     data-url_code="en">
                                     <img class="flag" data-oe-model="ir.ui.view"
-                                        data-oe-id="1359" data-oe-field="arch"
-                                        data-oe-xpath="/t[1]/img[1]"
                                         src="/base/static/img/country_flags/us.png?height=25"
                                         loading="lazy" style="" />
                                     <span>English</span>
-                                </a>
+                                </a></li>
 
-                            </div>
+                            </ul>
                         </div>
                         <div class="dropdown user">
                             <a class="nav-link py-0 text-white d-inline-block dropdown-toggle"
@@ -62,14 +60,17 @@
                                     <t t-esc="request.env.user.name[0:3]" />
                                 </span>
                             </a>
-                            <div class="dropdown-menu user-block">
+                            <div class="dropdown-menu">
                                 <!-- Existing user menu content here -->
-
-                                <p><a href='/user'>user Profile</a></p>
+                                <ul>
+                                    <li><a href='/user' class="link">user Profile</a></li>
    
-                                <p><a href="/web/session/logout?redirect=/web">Logout</a></p>
-                 
-                                <p><a href="/web/session/logout?redirect=/web">Logout</a></p>
+                                    <li><a href="/web/session/logout?redirect=/web" class="link">Menu Item</a></li>
+                     
+                                    <li><a href="/web/session/logout?redirect=/web" class="link">Logout</a></li>
+
+                                </ul>
+
 
                             </div>
                         </div>
