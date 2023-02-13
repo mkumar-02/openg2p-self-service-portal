@@ -18,7 +18,7 @@
  - Available services,Entitlements
  - Footer
 ### Screenshot Updated
-![Main dashboard](/home/ramakrishna/Desktop/openg2p/openg2p-self-service-portal/G2P-Self-Service-Portal/static/src/img/main.png)
+![Main dashboard](https://github.com/RamakrishnaVellala/openg2p-self-service-portal/blob/15.0-develop/G2P-Self-Service-Portal/static/src/img/main.png)
   
 
 ## Functionalities Added

@@ -250,11 +250,17 @@ td {
   height: 39px;
 }
 .program-name {
+  top: 398px;
+  left: 213px;
+  width: 182px;
+  height: 18px;
+
+  /* UI Properties */
+
   text-align: left;
   font: normal normal 600 13px/16px Inter;
   letter-spacing: 0px;
   color: #494daf;
-  height: 16px;
   opacity: 1;
 }
 .table-data {
@@ -380,6 +386,16 @@ li div p {
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 2px 5px #0000001a;
   border-radius: 10px;
+  top: 201px;
+  left: 139px;
+  width: 1088px;
+
+
+  /* UI Properties */
+
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 5px #0000001a;
+  border-radius: 10px;
   opacity: 1;
 }
 .breadcrumb {
@@ -392,14 +408,12 @@ li div p {
 }
 .nav-item {
   list-style: none;
-
 }
-.nav-link{
+.nav-link {
   font: normal normal 13px/16px Inter;
   letter-spacing: 0px;
   color: #484848;
   opacity: 1;
-
 }
 .table-all-container {
   display: flex;
@@ -415,11 +429,52 @@ table {
 td,
 th {
   text-align: left;
-  padding: 8px;
+  padding: 10px;
+  text-align: left;
+  font: normal normal normal 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #535353;
+  opacity: 1;
 }
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+.view-button {
+  top: 336px;
+  left: 1110px;
+  width: 84px;
+  height: 30px;
+
+  /* UI Properties */
+
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 1px solid #494daf;
+  border-radius: 4px;
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #494daf;
+  opacity: 1;
+
+  opacity: 1;
+}
+.apply-button {
+  top: 386px;
+  left: 1110px;
+  width: 84px;
+  height: 30px;
+
+  /* UI Properties */
+
+  background: #494daf 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #ffffff;
+
+  opacity: 1;
 }
 
 .breadcrumb-list {
@@ -450,11 +505,10 @@ tr:nth-child(even) {
   opacity: 1;
 }
 .css-serial {
-  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  counter-reset: serial-number; /* Set the serial number counter to 0 */
 }
 
 .css-serial td:first-child:before {
-  counter-increment: serial-number;  /* Increment the serial number counter */
-  content: counter(serial-number);  /* Display the counter */
+  counter-increment: serial-number; /* Increment the serial number counter */
+  content: counter(serial-number); /* Display the counter */
 }
-

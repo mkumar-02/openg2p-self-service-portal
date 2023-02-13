@@ -36,10 +36,9 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="tables-values-container">
-                            <table id='myprogramstable'
-                                class='table table-stripped  table-sm'>
-                                <thead class="thead">
+                        <div>
+                            <table class='css-serial'>
+                                <thead>
                                     <tr>
                                         <th>Sl.No</th>
                                         <th>Program Name</th>
@@ -52,10 +51,10 @@
                                         
                                         <tr>
                                             <td>
-                                                <t t-esc="program['id']" />
+                                               
                                             </td>
-                                            <td class='program-name'>
-                                                <a href='#'>
+                                            <td>
+                                                <a href='#' class='program-name'>
                                                     <t t-esc="program['name']" />
                                                 </a>
                                             </td>
@@ -66,8 +65,8 @@
                                                 </td>
                                                 <td>
                                                     <a href="#">
-                                                        <button string="Apply" type="object"
-                                                            class="oe_highlight btn btn-primary">
+                                                        <button string="View" type="object"
+                                                            class="view-button">
                                                             View</button>
                                                     </a>
                                                 </td>
@@ -78,8 +77,7 @@
                                                 </td>
                                                 <td>
                                                     <a href="#">
-                                                        <button string="Apply" type="object"
-                                                            class="oe_highlight btn btn-primary">
+                                                        <button string="Apply" type="object" class='apply-button'>
                                                             Apply</button>
                                                     </a>
                                                 </td>
@@ -92,6 +90,9 @@
 
                                 </div>
                             </table>
+                            <div t-if="pager" class="o_portal_pager text-center">
+                                <t t-call="portal.pager"/>
+                            </div>
                         </div>
                     </div>
                 </div>

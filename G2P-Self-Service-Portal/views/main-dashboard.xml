@@ -46,8 +46,8 @@
                                             <tr>
                                                 <td>
                                                 </td>
-                                                <td class='program-name'>
-                                                    <a href="/program/">
+                                                <td>
+                                                    <a href="/program/" >
                                                         <t t-esc="program['name']" />
                                                     </a>
                                                 </td>
