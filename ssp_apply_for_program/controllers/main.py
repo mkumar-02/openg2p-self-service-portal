@@ -13,7 +13,10 @@ class Website(http.Controller):
     @http.route("/form_layout", type="http", website=True, auth="public")
     def all_program(self, **kw):
         value_to_pass = "4Ps"
-        return request.render("ssp_apply_for_program.custom_main",{'value': value_to_pass})
+        views = request.env['ir.ui.view'].browse(14912)
+        print("------------------- current view ------------------")
+        print(views.name)
+        return request.render("ssp_apply_for_program.custom_main",{'value': value_to_pass, 'view': views})
 
     @http.route("/apply_for_program", type="http", website=True, auth="public")
     def program_controller(self, **kw):
@@ -55,9 +58,6 @@ class WebsiteForm(form.WebsiteForm):
 
         
         return record.id
-
-
-
 
 
 

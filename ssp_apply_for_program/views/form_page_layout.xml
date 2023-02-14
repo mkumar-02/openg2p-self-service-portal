@@ -30,8 +30,8 @@
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             </form> -->
 
-                            <!-- <div id="wrap" class="oe_structure oe_empty"/> -->
-                            
+                            <!-- <t t-esc="view.arch_db" /> -->
+                            <t t-out="0" />
                             
                         </div>
                     </div>
