@@ -1,4 +1,6 @@
 import json
+import datetime
+import random
 from odoo import http
 from odoo.http import request
 from odoo.addons.website.controllers import form
@@ -41,14 +43,39 @@ class Website(http.Controller):
         program_id = request.env['g2p.program'].sudo().search([('name', '=', program_name),]).id
     
 
+        #Passing submission date and application date to the view
+        today_date = datetime.date.today().strftime("%d-%b-%Y")
+
+        d = datetime.date.today().strftime("%d")
+        m = datetime.date.today().strftime("%m")
+        y = datetime.date.today().strftime("%y")
+
+        random_number= str(random.randint(1,100000))
+
+        def random_number_length(n):
+            n = str(n)
+            l = len(n)
+            if (l<5):
+                while l>5:
+                    n = '0'+ n
+                    l = l+1
+                return '0'+n
+        
+            return n
+
+        application_id = int(d+ m+ y+ random_number_length(random_number))
+
         apply_to_program = {
             'partner_id': current_user.partner_id.id,
-            'program_id': program_id
+            'program_id': program_id,
+            'application_id': application_id
         }
+
+        print(apply_to_program)
 
         request.env['g2p.program_membership'].sudo().create(apply_to_program)
 
-        return request.render("ssp_apply_for_program.form_submitted",{})
+        return request.render("ssp_apply_for_program.form_submitted",{"submission_date": today_date, "application_id": application_id})
 
 
 

@@ -8,7 +8,7 @@
     "license": "Other OSI approved licence",
     "development_status": "Production/Stable",
     "maintainers": ["jeremi", "gonzalesedwin1123"],
-    "depends": ["website","web"],
+    "depends": ["website","web","g2p_programs"],
     "data": [
         "data/action_data.xml",
         "views/header_template.xml",

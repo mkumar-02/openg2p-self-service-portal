@@ -11,28 +11,3 @@ function cancel_action(){
     location.href = ("/")
   }
 }
-
-
-n =  new Date();
-const month_names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-];
-
-y = n.getFullYear();
-m_name = month_names[n.getMonth()];
-m = n.getMonth()+1;
-d = n.getDate();
-
-function modify_number(x){
-  x = x.toString();
-  if(x.length == 1){
-    return ('0'+ x);
-  }
-  else{
-    return x;
-  }
-}
-
-document.getElementById("date").innerHTML = modify_number(d) + "-" + m_name + "-" + y;
-
-document.getElementById("application_id").innerHTML = modify_number(d)+ modify_number(m)+ y.toString()[2]+ y.toString()[3]+ (Math.floor(Math.random() * 100000) + 1);

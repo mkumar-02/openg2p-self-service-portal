@@ -37,14 +37,14 @@
                         <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
                         <hr/>
                         <p>Application ID</p>
-                        <b><p id="application_id"></p></b>
+                        <b><t t-esc="application_id" /></b>
 
                         <p>Submitted On</p>
-                        <b><p id="date"></p></b>
+                        <b><t t-esc="submission_date" /></b>
 
                         <hr/>
 
-                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                        <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
                             View My Programs
                         </button>
                     </div>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-1 mb-4"/>
             </div>
-            
+            <script type="text/javascript" src="ssp_apply_for_program/static/src/js/form_action.js"></script>
             <div class="row">
 
             </div>
