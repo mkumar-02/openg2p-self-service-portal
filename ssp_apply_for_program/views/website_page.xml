@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="website_page_tree_updated" model="ir.ui.view">
+        <field name="name">website.page.tree</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_tree_view" />
+        <field name="arch" type="xml">
+            <field name="url" position="after">
+                <field name="base_template" />
+            </field> 
+        </field>
+    </record>
+
+    <record id="website_page_form_updated" model="ir.ui.view">
+        <field name="name">website.page.form</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_form_view" />
+        <field name="arch" type="xml">
+            <field name="url" position="after">
+                <field name="base_template" />
+            </field> 
+        </field>
+    </record>
+
+    <!-- <template id="website_page_tree_updated" inherit_id="website.one_page_line">
+        <xpath expr="//tr" position="inside">
+            <td><t t-esc="page.base_template"/></td>
+        </xpath>
+    </template> -->
+</odoo>

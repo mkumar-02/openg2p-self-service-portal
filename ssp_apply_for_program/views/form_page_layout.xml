@@ -43,18 +43,18 @@
                         <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
                         <p>This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                         <hr/>
-                        <button form="formId" type="submit" class="btn btn-primary btn-lg btn-block">
+                        <button onclick="func()" type="submit" class="btn btn-primary btn-lg btn-block form_action">
                         Submit
                         </button>
-                        <form action="/" class="mt-2">
-                            <input type="submit" class="btn btn-outline-primary btn-lg btn-block" value="Cancel" />
-                        </form>
+                        <button onclick="cancel_action()" type="submit" class="btn btn-primary btn-lg btn-block">
+                        Cancel
+                        </button>
                     </div>
                     </div>
                 </div>
                 <div class="col-md-1 mb-4"/>
             </div>
-            
+            <script type="text/javascript" src="ssp_apply_for_program/static/src/js/form_action.js"></script>  
             <div class="row">
 
             </div>

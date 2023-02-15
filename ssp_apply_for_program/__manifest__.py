@@ -18,7 +18,8 @@
         "views/landing_view.xml",
         "views/submitted_view.xml",
         "views/ref.xml",
-        "views/sample_form.xml"
+        "views/sample_form.xml",
+        "views/website_page.xml"
         # "views/form_submit_button.xml"
     ],
     "css": [
@@ -29,14 +30,12 @@
             ('prepend', 'ssp_apply_for_program/static/src/css/style.css'),
         ],
         'web.assets_backend': [
-             'ssp_apply_for_program/static/src/css/style.css',
-        #     'ssp_apply_for_program/static/src/js/popup.js',
-        #     'ssp_apply_for_program/static/stc/js/form_validation.js'
+            'ssp_apply_for_program/static/src/css/style.css',
+            'ssp_apply_for_program/static/src/js/form_action.js'
         ],
         'web.assets_frontend': [
             'ssp_apply_for_program/static/src/css/style.css',
-        #     'ssp_apply_for_program/static/src/js/popup.js',
-        #     'ssp_apply_for_program/static/stc/js/form_validation.js'
+            'ssp_apply_for_program/static/src/js/form_action.js'
         ],
     },
     "demo": [],

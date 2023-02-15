@@ -16,7 +16,7 @@ class Website(http.Controller):
         views = request.env['ir.ui.view'].browse(14912)
         print("------------------- current view ------------------")
         print(views.name)
-        return request.render("ssp_apply_for_program.custom_main",{'value': value_to_pass, 'view': views})
+        return request.render("ssp_apply_for_program.custom_main",{'value': value_to_pass})
 
     @http.route("/apply_for_program", type="http", website=True, auth="public")
     def program_controller(self, **kw):
@@ -25,8 +25,6 @@ class Website(http.Controller):
 
     @http.route("/submit", type="http", website=True, auth="public")
     def apply_to_program(self, **kw):
-        print("--------submit----------------------------")
-        print(kw)
         return request.redirect("/")
 
 
