@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <template id="form_submitted" name="Form Submitted">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty"/>
+       
+           <main>
+            <h5 class="details">Program Details</h5>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-md-1"/>
+                <div class="col-md-7 mb-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="mb-0">Application Form</h5>
+                            <p>Covid-19 relief scheme</p>
+                            <p><t t-esc="value" /></p>
+                            <hr/>
+                            <!-- <form id="formId" action="/submit" method="POST" role="form">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            </form> -->
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-4">
+                    <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
+                        <hr/>
+                        <p>Application ID</p>
+                        <b><p id="application_id"></p></b>
+
+                        <p>Submitted On</p>
+                        <b><p id="date"></p></b>
+
+                        <hr/>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">
+                            View My Programs
+                        </button>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-1 mb-4"/>
+            </div>
+            
+            <div class="row">
+
+            </div>
+           </main>
+        </t>
+      
+   </template>
+</odoo>
+
+

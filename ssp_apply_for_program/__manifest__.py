@@ -19,7 +19,8 @@
         "views/submitted_view.xml",
         "views/ref.xml",
         "views/sample_form.xml",
-        "views/website_page.xml"
+        "views/website_page.xml",
+        "views/form_submitted.xml"
         # "views/form_submit_button.xml"
     ],
     "css": [

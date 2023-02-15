@@ -23,9 +23,32 @@ class Website(http.Controller):
         value_to_pass = "4Ps"
         return request.render("ssp_apply_for_program.example_body",{'value': value_to_pass})
 
-    @http.route("/submit", type="http", website=True, auth="public")
+
+    @http.route("/website/form", type="http", website=True, auth="public")
     def apply_to_program(self, **kw):
-        return request.redirect("/")
+
+        # Adding Additional data to the res.partner model
+        form_data = {}
+        
+        current_user = request.env.user
+        form_data['address'] = json.dumps(kw)
+        form_data['additional_info'] = json.dumps(kw)
+
+        request.env['res.partner'].sudo().search([("name", "=", current_user.name)]).write(form_data)
+
+        # Enrolling user to Program
+        program_name = "4Ps"
+        program_id = request.env['g2p.program'].sudo().search([('name', '=', program_name),]).id
+    
+
+        apply_to_program = {
+            'partner_id': current_user.partner_id.id,
+            'program_id': program_id
+        }
+
+        request.env['g2p.program_membership'].sudo().create(apply_to_program)
+
+        return request.render("ssp_apply_for_program.form_submitted",{})
 
 
 
