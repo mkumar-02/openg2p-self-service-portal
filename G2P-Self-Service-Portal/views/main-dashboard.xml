@@ -47,18 +47,36 @@
                                                 <td>
                                                 </td>
                                                 <td>
-                                                    <a href="/program/" >
+                                                    <a href="/program/" class="program-name">
                                                         <t t-esc="program['name']" />
                                                     </a>
                                                 </td>
                                                 <td class='table-data'>
                                                     <span>Applied</span>
                                                 </td>
-                                                <td class='table-data'>
-                                                    <a href="#">
-                                                        <t t-esc="program['status']" />
-                                                    </a>
-                                                </td>
+                                                <t
+                                                    t-if="program['has_applied']">
+
+                                                    <t
+                                                        t-if="program['status']=='Submitted'">
+                                                        <td>
+                                                            <button string="Apply" type="object"
+                                                                class='submit-button'>
+                                                                <t t-esc="program['status']" />
+                                                            </button>
+                                                        </td>
+                                                    </t>
+                                                    <t t-elif="program['status']=='Enrolled'">
+                                                        <td>
+                                                            <button string="Apply" type="object"
+                                                                class='enroll-button'>
+                                                                <t t-esc="program['status']" />
+                                                            </button>
+                                                        </td>
+                                                    </t>
+
+
+                                                </t>
                                                 <td class='table-data'>
                                                     <t t-esc="program['enrollment_date']" />
                                                 </td>
@@ -112,9 +130,9 @@
 
 
                                 </ul>
-                                <div class='viewprograms'>
+                                <div>
                                     <a href="/allprograms"
-                                        class='justify-content-center'>View more</a>
+                                        class='justify-content-center viewprograms'>View All</a>
                                 </div>
 
                             </div>
@@ -152,9 +170,9 @@
 
 
                                 </ul>
-                                <div class='viewprograms'>
+                                <div>
                                     <a href="/otherservices"
-                                        class='justify-content-center'>View more</a>
+                                        class='justify-content-center viewprograms'>View All</a>
                                 </div>
 
                             </div>

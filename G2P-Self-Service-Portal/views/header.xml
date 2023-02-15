@@ -28,10 +28,9 @@
                                     loading="lazy" />
                                 <span class="align-middle lang-text dropdown-toggle">English</span>
                             </button>
-                            <ul role="menu" class="dropdown-menu lang-block hide"
-                                x-placement="top-start">
-                                <li><a href="/en/"
-                                    class="dropdown-item js_change_lang active"
+                            <ul role="menu" class="dropdown-menu lang-block">                               
+                                <li class='link'><a href="/en/"
+                                    class="dropdown-item"
                                     data-url_code="en">
                                     <img class="flag" data-oe-model="ir.ui.view"
                                         data-oe-id="1359" data-oe-field="arch"
@@ -40,8 +39,8 @@
                                         loading="lazy" style="" />
                                     <span>English</span>
                                 </a></li>
-                                <li><a href="/en/"
-                                    class="dropdown-item js_change_lang active"
+                                <li class='link'><a href="/en/"
+                                    class="dropdown-item"
                                     data-url_code="en">
                                     <img class="flag" data-oe-model="ir.ui.view"
                                         src="/base/static/img/country_flags/us.png?height=25"
@@ -55,10 +54,7 @@
                             <a class="nav-link py-0 text-white d-inline-block dropdown-toggle"
                                 href="#"
                                 data-toggle="dropdown">
-                                <span
-                                    class="d-inline-block rounded-circle border border-grey text-secondary py-2 px-2">
-                                    <t t-esc="request.env.user.name[0:3]" />
-                                </span>
+                                <img src="http://localhost:8069/web/image?model=res.users&amp;field=avatar_128&amp;id=2" alt="User" class="rounded-circle o_user_avatar user-image"/>
                             </a>
                             <div class="dropdown-menu">
                                 <!-- Existing user menu content here -->
@@ -66,7 +62,7 @@
                                     <li><a href='/user' class="link">user Profile</a></li>
    
                                     <li><a href="/web/session/logout?redirect=/web" class="link">Menu Item</a></li>
-                     
+                                    <hr/>
                                     <li><a href="/web/session/logout?redirect=/web" class="link">Logout</a></li>
 
                                 </ul>

@@ -61,6 +61,7 @@ body {
 }
 .search-text {
   border: none;
+  margin-left: 10px;
 }
 .nav-user {
   display: flex;
@@ -129,7 +130,20 @@ body {
   /* UI Properties */
 
   background: #ffffff 0% 0% no-repeat padding-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid #757373;
+  opacity: 1;
+}
+.user-image {
+  top: 20px;
+  width: 40px;
+  height: 40px;
+
+  /* UI Properties */
+
+  background: transparent url("img/profile.png") 0% 0% no-repeat padding-box;
   opacity: 1;
 }
 .user-block {
@@ -144,12 +158,16 @@ body {
   border: 1px solid #d8d8d8;
   opacity: 1;
 }
+.dropdown ul {
+  list-style: none;
+}
 
 .link {
   top: 92px;
   left: 1051px;
   width: 57px;
   height: 15px;
+  margin: 10px;
   /* UI Properties */
 
   text-align: left;
@@ -157,7 +175,6 @@ body {
   letter-spacing: 0px;
   color: #4d4c4c;
   opacity: 1;
-  list-style: none;
 }
 
 /* main body */
@@ -245,6 +262,7 @@ th[scope="row"] {
   left: 0;
   z-index: 1;
 }
+
 td {
   box-shadow: 0px 2px 2px #0000000d;
   height: 39px;
@@ -342,7 +360,8 @@ td {
   width: 22px;
   height: 22px;
   float: right;
-  margin-top: -10px;
+  margin-top: -15px;
+  margin-left: -20px;
   position: relative;
 
   /* UI Properties */
@@ -374,9 +393,17 @@ li div p {
   opacity: 1;
 }
 .viewprograms {
-  margin-top: 0px;
-  display: flex;
-  justify-content: center;
+  top: 801px;
+  width: 54px;
+  height: 17px;
+
+  /* UI Properties */
+
+  text-align: center;
+  font: normal normal 600 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #494daf;
+  opacity: 1;
 }
 
 .all-programs-container {
@@ -389,14 +416,8 @@ li div p {
   top: 201px;
   left: 139px;
   width: 1088px;
-
-
-  /* UI Properties */
-
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 5px #0000001a;
-  border-radius: 10px;
   opacity: 1;
+  /* UI Properties */
 }
 .breadcrumb {
   background-color: transparent;
@@ -437,9 +458,6 @@ th {
   opacity: 1;
 }
 
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
 .view-button {
   top: 336px;
   left: 1110px;
@@ -466,6 +484,7 @@ tr:nth-child(even) {
   height: 30px;
 
   /* UI Properties */
+  border: none;
 
   background: #494daf 0% 0% no-repeat padding-box;
   border-radius: 4px;
@@ -511,4 +530,63 @@ tr:nth-child(even) {
 .css-serial td:first-child:before {
   counter-increment: serial-number; /* Increment the serial number counter */
   content: counter(serial-number); /* Display the counter */
+}
+
+.notapplied-button {
+  left: 811px;
+  width: 90px;
+  height: 25px;
+
+  /* UI Properties */
+
+  background: #dce3e8 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  border-collapse: collapse;
+
+  /* UI Properties */
+
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #3e5463;
+  border: none;
+
+  opacity: 1;
+}
+.submit-button {
+  left: 811px;
+  width: 90px;
+  height: 25px;
+
+  /* UI Properties */
+
+  background: #faf6cf 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  border-collapse: collapse;
+  /* UI Properties */
+
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #075e45;
+  border: none;
+  opacity: 1;
+}
+.enroll-button {
+  left: 811px;
+  height: 25px;
+  width: 90px;
+  /* UI Properties */
+
+  background: #c7ebd1 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  border-collapse: collapse;
+  /* UI Properties */
+
+  text-align: center;
+  font: normal normal medium 12px/15px Inter;
+  letter-spacing: 0px;
+  color: #075e45;
+  border: none;
+  opacity: 1;
 }

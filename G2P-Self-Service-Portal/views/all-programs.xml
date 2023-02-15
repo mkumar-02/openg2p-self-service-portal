@@ -6,21 +6,21 @@
 
                 <div class="main-container">
                     <h5 class='all-title'>All Programs</h5>
-                       
-                        <ol class="breadcrumb  breadcrumb-list bg-transparent">
-                            
-                            <br/>
-                            <li class="breadcrumb-item">
-                                <a href="/">Home</a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">All Programs</li>
-                        </ol>
+
+                    <ol class="breadcrumb  breadcrumb-list bg-transparent">
+
+                        <br />
+                        <li class="breadcrumb-item">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">All Programs</li>
+                    </ol>
 
 
                     <div class="table-container">
                         <div class="table-all-container">
                             <p class='table-title'>All Programs</p>
-                            <form class="form-inline my-2 my-lg-0">
+                            <form class="form-inline my-2 my-lg-0" action='/allprograms'>
                                 <div class="search-box">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                         height="16"
@@ -36,32 +36,37 @@
                                 </div>
                             </form>
                         </div>
-                        <div>
-                            <table class='css-serial'>
-                                <thead>
+
+                        <table class='css-serial'>
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Program Name</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="programs" t-as="program">
+
                                     <tr>
-                                        <th>Sl.No</th>
-                                        <th>Program Name</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <t t-foreach="programs" t-as="program">
-                                        
-                                        <tr>
-                                            <td>
-                                               
-                                            </td>
-                                            <td>
-                                                <a href='#' class='program-name'>
-                                                    <t t-esc="program['name']" />
-                                                </a>
-                                            </td>
+                                        <td>
+
+                                        </td>
+                                        <td>
+                                            <a href='#' class='program-name'>
+                                                <t t-esc="program['name']" />
+                                            </a>
+                                        </td>
+                                        <t
+                                            t-if="program['has_applied']">
+
                                             <t
-                                                t-if="program['has_applied']">
+                                                t-if="program['status']=='Submitted'">
                                                 <td>
-                                                    <span><t t-esc="program['status']" /></span>
+                                                    <button string="Apply" type="object"
+                                                        class='submit-button'>
+                                                        <t t-esc="program['status']" /></button>
                                                 </td>
                                                 <td>
                                                     <a href="#">
@@ -71,29 +76,46 @@
                                                     </a>
                                                 </td>
                                             </t>
-                                            <t t-else=''>
+                                            <t t-elif="program['status']=='Enrolled'">
                                                 <td>
-                                                    <span>Not Applied</span>
+                                                    <button string="Apply" type="object"
+                                                        class='enroll-button'>
+                                                        <t t-esc="program['status']" /></button>
                                                 </td>
                                                 <td>
                                                     <a href="#">
-                                                        <button string="Apply" type="object" class='apply-button'>
-                                                            Apply</button>
+                                                        <button string="View" type="object"
+                                                            class="view-button">
+                                                            View</button>
                                                     </a>
                                                 </td>
                                             </t>
+                                                                           
+                                          
+                                        </t>
+                                        <t t-else=''>
+                                            <td>
 
-                                        </tr>
-                                    </t>
-                                </tbody>
-                                <div>
+                                                <button string="Apply" type="object"
+                                                    class='notapplied-button'>
+                                                    Not Applied</button>
 
-                                </div>
-                            </table>
-                            <div t-if="pager" class="o_portal_pager text-center">
-                                <t t-call="portal.pager"/>
-                            </div>
-                        </div>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    <button string="Apply" type="object"
+                                                        class='apply-button'>
+                                                        Apply</button>
+                                                </a>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
                     </div>
                 </div>
 
