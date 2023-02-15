@@ -1,13 +1,15 @@
 from datetime import datetime
 from odoo import http
 from odoo.http import Controller, request, route
-
+from odoo.addons.portal.controllers.portal import CustomerPortal,pager
 
 class Dashboard(Controller):
-    @route(['/allprograms'], website=True, auth="public")
-    def AllPrograms(self, **kw):
+    @route(['/allprograms','/allprograms/page/<int:page>'], website=True, auth="public")
+    def AllPrograms(self, page=1,**kw):
         programs = request.env["g2p.program"].sudo().search([]).sorted('id')
-        # total = programs.sudo().search_count([])
+        total = programs.sudo().search_count([])
+        page_info = pager('/allprograms',total=total,page=page,step=5)
+        programs_page= programs.search([],limit=5,offset=page_info['offset'])
         # programs = request.env["g2p.program"].sudo().search(
         #     [], offset=(page) * 10, limit=10).sorted('id')
 
@@ -21,22 +23,23 @@ class Dashboard(Controller):
         states = {'draft': 'Submitted', 'enrolled': 'Enrolled'}
 
         values = []
-        for program in programs:
+        for program in programs_page:
             membership = request.env["g2p.program_membership"].sudo().search(
                 [('partner_id', '=', partner_id.id), ('program_id', '=', program.id)])
             values.append({
                 'id': program.id,
                 'name': program.name,
                 'has_applied': len(membership) > 0,
-                'status': states.get(membership.state, 'Error')
-
+                'status': states.get(membership.state, 'Error'),
+               
             })
 
         return request.render(
             "G2P-Self-Service-Portal.allprograms",
             {
                 'programs': values,
-                # 'pager': pager,
+                'pager':page_info
+
             }
         )
 

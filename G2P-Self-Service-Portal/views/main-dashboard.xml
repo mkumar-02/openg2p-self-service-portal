@@ -130,7 +130,7 @@
 
 
                                 </ul>
-                                <div>
+                                <div class='card-foot'>
                                     <a href="/allprograms"
                                         class='justify-content-center viewprograms'>View All</a>
                                 </div>
@@ -170,7 +170,7 @@
 
 
                                 </ul>
-                                <div>
+                                <div class='card-foot'>
                                     <a href="/otherservices"
                                         class='justify-content-center viewprograms'>View All</a>
                                 </div>

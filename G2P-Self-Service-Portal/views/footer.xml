@@ -13,13 +13,13 @@
                 <a class="nav-link active" aria-current="page" href="#">About Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">ContactUs</a>
+                <a class="nav-link" href="#">Contact Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">StaticPage</a>
+                <a class="nav-link" href="#">Static Page</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">ErrorPage</a>
+                <a class="nav-link" href="#">Error Page</a>
               </li>
             </ul>
 
