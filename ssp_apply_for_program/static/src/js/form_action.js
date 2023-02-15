@@ -1,4 +1,4 @@
-function func(){
+function submit_action(){
   var test = $('.s_website_form')
   var form = test.find('form')
 

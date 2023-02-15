@@ -1,3 +1,198 @@
 .o_default_snippet_text{
     display: none !important;
 }
+
+body{
+    background-color: #F5F9FC;
+}
+
+.details{
+    /* Layout Properties */
+    top: 118px;
+    left: 139px;
+    width: 169px;
+    height: 26px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal 600 22px/26px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}
+
+.breadcrumb{
+    background-color: #F5F9FC;
+}
+
+.breadcrumb-item{
+    font-size: 14px;
+    color: #494DAF;
+}
+
+.active .breadcrumb-item{
+    color: #848484;
+}
+
+.container-left{
+    /* Layout Properties */
+    /* top: 201px;
+    left: 139px;
+    width: 720px;
+    height: 508px; */
+    /* UI Properties */
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001A;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.container-right{
+    /* Layout Properties */
+    /* top: 201px;
+    left: 875px;
+    width: 352px;
+    height: 310px; */
+    /* UI Properties */
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001A;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.form-heading{
+    /* Layout Properties */
+    top: 219px;
+    left: 159px;
+    width: 131px;
+    height: 20px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal 600 16px/20px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}
+
+.form-description{
+    /* Layout Properties */
+    top: 242px;
+    left: 159px;
+    width: 147px;
+    height: 16px;
+    /* UI Properties */
+    font-size: 13px;
+    text-align: left;
+    font: normal normal medium 13px/16px Inter;
+    letter-spacing: 0px;
+    color: #959595;
+    opacity: 1;
+}
+
+.form-line{
+    /* Layout Properties */
+    top: 276px;
+    left: 139px;
+    width: 720px;
+    height: 0px;
+    /* UI Properties */
+    border: 1px solid #707070;
+    opacity: 0.2;
+}
+
+.s_website_form_label_content{
+    /* UI Properties */
+    text-align: left;
+    font: normal normal medium 14px/17px Inter;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000000;
+}
+
+.s_website_form_input{
+    /* UI Properties */
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #494DAF;
+    font-size: 14px;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.s_website_form_field{
+    font-size: 14px;
+}
+
+.action-heading{
+    /* Layout Properties */
+    top: 226px;
+    left: 895px;
+    width: 179px;
+    height: 20px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal 600 16px/20px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}
+
+.action-description{
+    /* Layout Properties */
+    top: 264px;
+    left: 895px;
+    width: 312px;
+    height: 51px;
+    /* UI Properties */
+    text-align: left;
+    font: normal normal normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}
+
+.action-line{
+    /* Layout Properties */
+    top: 349px;
+    left: 875px;
+    width: 352px;
+    height: 0px;
+    /* UI Properties */
+    border: 1px solid #707070;
+    opacity: 0.2;
+}
+
+.form_submit_action{
+    /* Layout Properties */
+    top: 369px;
+    left: 895px;
+    width: 312px;
+    height: 54px;
+    /* UI Properties */
+    background: #494DAF 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.form_cancel_action{
+    /* Layout Properties */
+    top: 437px;
+    left: 895px;
+    width: 312px;
+    height: 54px;
+    /* UI Properties */
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    color: #494DAF;
+    border: 1px solid #494DAF;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.form_cancel_action:hover{
+    color: #494DAF;
+    background-color: #FFFFFF;
+    border-color: #494DAF;
+}
+
+.form_submit_action:hover{
+    color: #FFFFFE;
+    background-color: #494DAF;
+}

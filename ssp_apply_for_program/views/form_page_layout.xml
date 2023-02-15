@@ -20,12 +20,11 @@
             <div class="row">
                 <div class="col-md-1"/>
                 <div class="col-md-7 mb-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4 container-left">
                         <div class="card-body">
-                            <h5 class="mb-0">Application Form</h5>
-                            <p>Covid-19 relief scheme</p>
-                            <p><t t-esc="value" /></p>
-                            <hr/>
+                            <h5 class="mb-0 form-heading">Application Form</h5>
+                            <p class="form-description">Covid-19 relief scheme</p>
+                            <hr class="form-line"/>
                             <!-- <form id="formId" action="/submit" method="POST" role="form">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             </form> -->
@@ -38,15 +37,15 @@
                 </div>
 
                 <div class="col-md-3 mb-4">
-                    <div class="card mb-4">
+                    <div class="card mb-4 container-right">
                     <div class="card-body">
-                        <h5 class="mb-0">Covid-19 relief scheme</h5><br/>
-                        <p>This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
-                        <hr/>
-                        <button onclick="func()" type="submit" class="btn btn-primary btn-lg btn-block form_action">
+                        <h5 class="mb-0 action-heading">Covid-19 relief scheme</h5><br/>
+                        <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
+                        <hr class="action-line" />
+                        <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
                         Submit
                         </button>
-                        <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block">
+                        <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block form_cancel_action">
                         Cancel
                         </button>
                     </div>
