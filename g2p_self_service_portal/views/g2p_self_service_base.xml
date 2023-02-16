@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- TODO: Remove all hardcoding -->
+    <template
+        id="base"
+        name="G2P Self Service Portal Base"
+        inherit_id="web.frontend_layout"
+        priority="900"
+        primary="True"
+    >
+        <xpath expr="//header" position="replace">
+            <header t-if="not no_header" id="top" data-anchor="true">
+                <div class="nav-container">
+                    <div class='nav'>
+                        <a href='/selfservice'>
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                        </a>
+                        <div class='nav-user'>
+                            <div class="search-box">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-search search-icon"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                                    />
+                                </svg>
+                                <input placeholder="Search here" class="search-text" />
+
+                            </div>
+                            <div class="dropdown language-box">
+                                <button type="button" data-toggle="dropdown" class="button">
+                                    <img
+                                        class="flag"
+                                        data-oe-model="ir.ui.view"
+                                        data-oe-id="1359"
+                                        data-oe-field="arch"
+                                        data-oe-xpath="/t[1]/img[1]"
+                                        src="/base/static/img/country_flags/us.png?height=25"
+                                        loading="lazy"
+                                    />
+                                    <span class="align-middle lang-text dropdown-toggle">English</span>
+                                </button>
+                                <ul role="menu" class="dropdown-menu lang-block">
+                                    <li class='link'>
+                                        <a href="en/" class="dropdown-item" data-url_code="en">
+                                            <img
+                                                class="flag"
+                                                data-oe-model="ir.ui.view"
+                                                data-oe-id="1359"
+                                                data-oe-field="arch"
+                                                data-oe-xpath="/t[1]/img[1]"
+                                                src="/base/static/img/country_flags/us.png?height=25"
+                                                loading="lazy"
+                                                style=""
+                                            />
+                                            <span>English</span>
+                                        </a>
+                                    </li>
+                                    <li class='link'>
+                                        <a href="en/" class="dropdown-item" data-url_code="en">
+                                            <img
+                                                class="flag"
+                                                data-oe-model="ir.ui.view"
+                                                src="/base/static/img/country_flags/us.png?height=25"
+                                                loading="lazy"
+                                                style=""
+                                            />
+                                            <span>English</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <div class="dropdown user">
+                                <a
+                                    class="nav-link py-0 text-white d-inline-block dropdown-toggle"
+                                    href="#"
+                                    data-toggle="dropdown"
+                                >
+                                    <img
+                                        t-attf-src="/web/image?model=res.users&amp;field=avatar_128&amp;id={{request.env.uid}}"
+                                        alt="User"
+                                        class="rounded-circle o_user_avatar user-image"
+                                    />
+                                </a>
+                                <div class="dropdown-menu">
+                                    <!-- Existing user menu content here -->
+                                    <ul>
+                                        <li>
+                                            <a href='/user' class="link">user Profile</a>
+                                        </li>
+
+                                        <li>
+                                            <a
+                                                href="/web/session/logout?redirect=/web"
+                                                class="link"
+                                            >Menu Item</a>
+                                        </li>
+                                        <hr />
+                                        <li>
+                                            <a
+                                                href="/web/session/logout?redirect=/web"
+                                                class="link"
+                                            >Logout</a>
+                                        </li>
+
+                                    </ul>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </xpath>
+        <xpath expr="//footer" position="replace">
+            <footer t-if="not no_footer" id="bottom" data-anchor="true" t-attf-class="bg-light o_footer">
+                <div class="nav-footer">
+                    <div class='nav'>
+                        <a href='/selfservice'>
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                        </a>
+                        <ul class='list-container'>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Contact Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Static Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Error Page</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div class='copyright'>
+                        <p>© 2023 National Social Benefits Portal. All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </xpath>
+    </template>
+</odoo>
