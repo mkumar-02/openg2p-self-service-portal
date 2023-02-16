@@ -5,11 +5,11 @@
            <header>
                <div class='container-fluid'>
                    <div class='row'>
-                       <div class='col-4 col-lg-12'>
+                       <div class='col-4 col-lg-12 header-div'>
                            <nav class="navbar navbar-expand-lg navbar-light">
                                <a class="navbar-brand ml-5 " href="/">
                                    <img class="d-none d-md-block"
-                                       src="ssp_apply_for_program/static/src/img/logo.png"
+                                       src="/ssp_apply_for_program/static/src/img/logo.png"
                                        alt="Large Logo" style="width:250px;" />
                                    <img class="d-block d-md-none"
                                        src="ssp_apply_for_program/static/src/img/logo.png"

@@ -14,14 +14,8 @@
         "views/header_template.xml",
         "views/form_page_layout.xml",
         "views/footer_template.xml",
-        "views/detail.xml",
-        "views/landing_view.xml",
-        "views/submitted_view.xml",
-        "views/ref.xml",
-        "views/sample_form.xml",
         "views/website_page.xml",
         "views/form_submitted.xml"
-        # "views/form_submit_button.xml"
     ],
     "css": [
         'static/src/css/tyles.css',

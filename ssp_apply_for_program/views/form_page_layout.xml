@@ -8,23 +8,33 @@
     >
        <xpath expr="//main" position="replace">
            <main>
-            <h5 class="details">Program Details</h5>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
-                </ol>
-            </nav>
+           <div class="row">
+                <div class="col-md-1"/>
+                <div class="col-md-11">
+                    <div class="details">Program Details</div>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb form-layout-breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        
 
             <div class="row">
                 <div class="col-md-1"/>
-                <div class="col-md-7 mb-4">
-                    <div class="card mb-4 container-left">
-                        <div class="card-body">
+                <div class="col-md-7">
+                    <div class="card container-left">
+                        <div class="card-header form-card-header">
                             <h5 class="mb-0 form-heading">Application Form</h5>
                             <p class="form-description">Covid-19 relief scheme</p>
-                            <hr class="form-line"/>
+                        </div>
+                        <div class="card-body">
+                            <div class="note">
+                                <p>Fields marked with “*“ are mandatory</p>
+                            </div>
                             <!-- <form id="formId" action="/submit" method="POST" role="form">
                                 <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                             </form> -->
@@ -36,22 +46,27 @@
                     </div>
                 </div>
 
-                <div class="col-md-3 mb-4">
-                    <div class="card mb-4 container-right">
-                    <div class="card-body">
-                        <h5 class="mb-0 action-heading">Covid-19 relief scheme</h5><br/>
-                        <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
-                        <hr class="action-line" />
-                        <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
-                        Submit
-                        </button>
-                        <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block form_cancel_action">
-                        Cancel
-                        </button>
-                    </div>
+                <div class="col-md-3">
+                    <div class="card container-right">
+                        <div class="card-header">
+                             <h5 class="action-heading">Covid-19 relief scheme</h5><br/>
+                            <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
+                        </div>
+                        
+                        <div class="card-body">
+                            <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
+                            Submit
+                            </button>
+                            <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block form_cancel_action">
+                            Cancel
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-1 mb-4"/>
+                <div class="col-md-1"/>
+            </div>
+            <div class="contact-us">
+                <a href="#"><img src="/ssp_apply_for_program/static/src/img/Chat_Icon.svg" /></a>
             </div>
             <script type="text/javascript" src="ssp_apply_for_program/static/src/js/form_action.js"></script>  
             <div class="row">
