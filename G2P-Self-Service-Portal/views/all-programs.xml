@@ -41,12 +41,7 @@
                             <thead>
                                 <tr>
                                     <th>Sl.No</th>
-                                    <th>Program Name <svg xmlns="http://www.w3.org/2000/svg"
-                                            width="16" height="16" fill="currentColor"
-                                            class="bi bi-caret-up" viewBox="0 0 16 16">
-                                            <path
-                                                d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
-                                        </svg></th>
+                                    <th class='dropup '>Program Name </th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -121,14 +116,43 @@
                                 </t>
                             </tbody>
                         </table>
-                        <div class="products_pager form-inline justify-content-center mt-3 ">
-                            <t t-call="website.pager">
-                                <t t-set="_classes">mt-2 ml-md-2 bg-primary</t>
-                            </t>
-                        </div>
-                    </div>
+                        <!-- <div class=" form-inline justify-content-center mt-3 ">
+                        <t t-call="website.pager">
 
-                    <div>
+                        </t>
+
+                    </div> -->
+
+                        <ul class="pagination m-0 ">
+                            <!-- <li class="page-item ">
+                                <a data-oe-model="ir.ui.view" data-oe-id="538" data-oe-field="arch"
+                                    data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]" href="/allprograms"
+                                    class="page-link ">Prev</a>
+                            </li> -->
+                            <t t-foreach="range(1,pager['total']+1)" t-as="i">
+                                <t t-if="i==pager['sel']">
+                                    <li class="page-item active">
+                                        <a href="/allprograms?page={{i}}" class="page-link "><t t-esc="i"/></a>
+                                    </li>
+                                </t>
+                         
+                                <t t-else="">
+                                    <li class="page-item">
+                                        <a t-attf-href="/allprograms?page={{i}}" class="page-link "><t t-esc="i"/></a>
+                                    </li>
+                                </t>
+                               
+                                
+                                
+                            </t>
+                      
+             
+                            <!-- <li class="page-item disabled">
+                                <a data-oe-model="ir.ui.view" data-oe-id="538" data-oe-field="arch"
+                                    data-oe-xpath="/t[1]/ul[1]/li[2]/a[1]" class="page-link ">Next</a>
+                            </li> -->
+                        </ul>
+
                     </div>
                 </div>
 

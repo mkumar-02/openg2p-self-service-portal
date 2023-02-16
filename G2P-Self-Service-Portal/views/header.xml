@@ -5,7 +5,7 @@
             <div class="nav-container">
                 <div class='nav'>
                     <a href='/'>
-                        <img src="G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
+                        <img src="/G2P-Self-Service-Portal/static/src/img/logo@2x.png" class="logo" />
                     </a>
                     <div class='nav-user'>
                         <div class="search-box">
@@ -18,7 +18,7 @@
                             <input placeholder="Search here" class="search-text" />
 
                         </div>
-                        <div class="js_language_selector dropdown show language-box">
+                        <div class="dropdown language-box">
                             <button type="button" data-toggle="dropdown"
                                 class="button">
                                 <img class="flag" data-oe-model="ir.ui.view"
@@ -54,7 +54,7 @@
                             <a class="nav-link py-0 text-white d-inline-block dropdown-toggle"
                                 href="#"
                                 data-toggle="dropdown">
-                                <img src="http://localhost:8069/web/image?model=res.users&amp;field=avatar_128&amp;id=2" alt="User" class="rounded-circle o_user_avatar user-image"/>
+                                <img t-attf-src="/web/image?model=res.users&amp;field=avatar_128&amp;id={{request.env.uid}}" alt="User" class="rounded-circle o_user_avatar user-image"/>
                             </a>
                             <div class="dropdown-menu">
                                 <!-- Existing user menu content here -->
