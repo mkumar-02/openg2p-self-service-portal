@@ -123,21 +123,21 @@
 
                     </div> -->
 
-                        <ul class="pagination m-0 ">
-                            <!-- <li class="page-item ">
+                        <ul class="pagination justify-content-center mt-2">
+                            <li class="page-item ">
                                 <a data-oe-model="ir.ui.view" data-oe-id="538" data-oe-field="arch"
                                     data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]" href="/allprograms"
-                                    class="page-link ">Prev</a>
-                            </li> -->
+                                    class="page-link ">&lt;</a>
+                            </li>
                             <t t-foreach="range(1,pager['total']+1)" t-as="i">
                                 <t t-if="i==pager['sel']">
-                                    <li class="page-item active">
+                                    <li class="pager-item active">
                                         <a href="/allprograms?page={{i}}" class="page-link "><t t-esc="i"/></a>
                                     </li>
                                 </t>
                          
                                 <t t-else="">
-                                    <li class="page-item">
+                                    <li class="pager-item">
                                         <a t-attf-href="/allprograms?page={{i}}" class="page-link "><t t-esc="i"/></a>
                                     </li>
                                 </t>
@@ -147,10 +147,10 @@
                             </t>
                       
              
-                            <!-- <li class="page-item disabled">
+                            <li class="page-item">
                                 <a data-oe-model="ir.ui.view" data-oe-id="538" data-oe-field="arch"
-                                    data-oe-xpath="/t[1]/ul[1]/li[2]/a[1]" class="page-link ">Next</a>
-                            </li> -->
+                                    data-oe-xpath="/t[1]/ul[1]/li[2]/a[1]" class="page-link ">&gt;</a>
+                            </li>
                         </ul>
 
                     </div>
