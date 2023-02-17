@@ -1,9 +1,15 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- TODO: Remove all hardcoding -->
     <template id="dashboard" name="G2P Self Service Dashboard">
         <t t-call="g2p_self_service_portal.base">
             <div class="main-container">
+                <div class="alert">
+                    <h6 class="welcome-title">Welcome to the National Social Benefits
+                        Portal</h6>
+                    <span class="closebtn"
+                        onclick="this.parentElement.style.display='none';">X</span>
+                </div>
                 <div class="table-container">
                     <div class="table-head-container">
                         <p class='table-title'>My Programs</p>
@@ -52,11 +58,12 @@
                                         </td>
                                         <td>
                                             <a href="/program/" class="program-name">
-                                                <t t-esc="program['name']" />
-                                            </a>
+                                                <t t-esc="program['name']" /></a>
+    
                                         </td>
                                         <td class='table-data'>
-                                            <span>Applied</span>
+                                            <span>Application id</span>
+                                            <!-- <t t-esc="program['application_id']" /> -->
                                         </td>
                                         <t t-if="program['has_applied']">
 
@@ -92,7 +99,7 @@
                                             <t t-esc="program['issued']" />
                                         </td>
                                         <td class='table-data'>
-                                            <span>Amount Received</span>
+                                            <t t-esc="program['paid']" />
                                         </td>
                                     </tr>
 
@@ -114,9 +121,9 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                                Healthcare </a>
+                                        Healthcare </a>
                                     <p>30+ Schemes
-                                                available</p>
+                                        available</p>
                                 </div>
 
                             </li>
@@ -128,7 +135,7 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                                Education </a>
+                                        Education </a>
                                     <p>55+ Schemes available</p>
                                 </div>
 
@@ -156,7 +163,7 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                                KYC </a>
+                                        KYC </a>
                                     <p>Tap to know more</p>
                                 </div>
 
@@ -170,7 +177,7 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                                Housing </a>
+                                        Housing </a>
                                     <p>Tap to know more</p>
                                 </div>
 
@@ -180,7 +187,7 @@
                         </ul>
                         <div class='card-foot'>
                             <a
-                                href="/selfservice/otherservices"
+                                href="#"
                                 class='justify-content-center viewprograms'
                             >View All</a>
                         </div>
