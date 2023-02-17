@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+   <template id="self_service_form_submitted" name="Form Submitted">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty"/>
+       
+           <main>
+                <div class="row">
+                    <div class="col-md-1"/>
+                    <div class="col-md-11">
+                        <div class="details">Program Details</div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb form-layout-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item" aria-current="page"><a href="#">All Programs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+
+            <div class="row">
+                <div class="col-md-1"/>
+                <div class="col-md-7">
+                    <div class="card container-left">
+                        <div class="card-header form-card-header">
+                            <h5 class="mb-0 form-heading">Application Form</h5>
+                            <p class="form-description">Covid-19 relief scheme</p>
+                        </div>
+                        <div class="card-body">
+                            <!-- <form id="formId" action="/submit" method="POST" role="form">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            </form> -->
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card container-right">
+                        <div class="card-header">
+                             <h5 class="action-heading">Covid-19 relief scheme</h5><br/>
+                        </div>
+            
+                        <div class="card-body">
+                            <p>Application ID</p>
+                            <b><t t-esc="application_id" /></b>
+
+                            <p>Submitted On</p>
+                            <b><t t-esc="submission_date" /></b>
+
+                            <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+                                View My Programs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1 mb-4"/>
+            </div>
+            <script type="text/javascript" src="ssp_apply_for_program/static/src/js/self_service_form_action.js"></script>
+            <div class="row">
+
+            </div>
+           </main>
+        </t>
+      
+   </template>
+</odoo>
+
+

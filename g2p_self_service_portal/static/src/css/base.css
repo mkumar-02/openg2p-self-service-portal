@@ -331,6 +331,7 @@ td a:hover {
   opacity: 1;
 }
 
+
 .card-container {
   display: flex;
   justify-content: space-between;
@@ -345,18 +346,21 @@ td a:hover {
   display: flex;
   flex-direction: column;
 
-  background: #ffffff 0% 0% no-repeat padding-box;
-  box-shadow: 0px 2px 5px #0000001a;
-  border-radius: 10px;
-  opacity: 1;
-  padding: 10px;
+
+    
+    display: flex;
+    flex-direction: column;
+
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+    padding: 10px;
+
 }
 
 .card-heading {
   height: 20px;
-
-  /* UI Properties */
-
   text-align: left;
   font: normal normal 600 16px/20px Inter;
   letter-spacing: 0px;
@@ -376,7 +380,6 @@ td a:hover {
 .card-block li {
   width: 312px;
   height: 78px;
-
   /* UI Properties */
   list-style: none;
   background: #ffffff1a 0% 0% no-repeat padding-box;
@@ -388,6 +391,7 @@ td a:hover {
   align-items: center;
   margin-bottom: 10px;
 }
+
 
 .icon-image {
   padding: 30px;
@@ -730,4 +734,189 @@ th {
   letter-spacing: 0px;
   color: #2c2c2c;
   opacity: 1;
+}
+
+
+
+
+
+
+
+/* ------------------------------------------- */
+
+.o_default_snippet_text{
+    display: none !important;
+}
+
+body{
+    background-color: #F5F9FC;
+}
+
+.header-div{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.footer-div{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.row{
+    margin-bottom: 20px;
+}
+
+.details{
+    text-align: left;
+    font: normal normal 600 22px/26px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+    margin-top: 20px;
+}
+
+.form-layout-breadcrumb{
+    background-color: #F5F9FC;
+    padding-left: 0px;
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.breadcrumb-item{
+    font-size: 14px;
+}
+
+.breadcrumb-item a{
+    color: #494DAF;
+}
+
+.active{
+    color: #848484;
+}
+
+.container-left{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001A;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.container-right{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001A;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.card-header{
+    background-color: #FFFFFF;
+}
+
+.form-card-header{
+    padding-left: 0px;
+}
+
+.form-heading{
+    text-align: left;
+    font: normal normal 600 16px/20px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+    padding-left: 37.5px;
+    font-size: 16px;
+}
+
+.form-description{
+    font-size: 13px;
+    text-align: left;
+    font: normal normal medium 13px/16px Inter;
+    letter-spacing: 0px;
+    color: #959595;
+    opacity: 1;
+    margin-bottom: 0px;
+    padding-left: 37.5px;
+    font-size: 13px;
+}
+
+.s_website_form{
+    padding: 0px !important;
+}
+
+.note{
+    background: #FAF6CF 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    opacity: 1;
+    font-size: 13px;
+    color: #585211;
+}
+
+.s_website_form_label_content{
+    text-align: left;
+    font: normal normal medium 14px/17px Inter;
+    font-size: 14px;
+    letter-spacing: 0px;
+    color: #000000;
+}
+
+.s_website_form_input{
+    font-size: 14px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #E3E3E3;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+
+.s_website_form_field{
+    font-size: 14px;
+}
+
+.s_website_form_mark{
+    color: #D32D2D;
+}
+
+.action-heading{
+    text-align: left;
+    font: normal normal 600 16px/20px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+    margin-bottom: -15px;
+}
+
+.action-description{
+    text-align: left;
+    font: normal normal normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #484848;
+    opacity: 1;
+}
+
+.form_submit_action{
+    background: #494DAF 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+    font-size: 14px;
+    height: 54px;
+}
+
+.form_cancel_action{
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    color: #494DAF;
+    border: 1px solid #494DAF;
+    border-radius: 6px;
+    opacity: 1;
+    font-size: 14px;
+    height: 54px;
+}
+
+.form_cancel_action:hover{
+    color: #494DAF;
+    background-color: #FFFFFF;
+    border-color: #494DAF;
+}
+
+.form_submit_action:hover{
+    color: #FFFFFE;
+    background-color: #494DAF;
 }
