@@ -11,12 +11,18 @@
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_programs",
+        "website"
     ],
     "data": [
+        "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
         "views/g2p_self_service_login.xml",
         "views/g2p_self_service_dashboard.xml",
         "views/g2p_self_service_allprograms.xml",
+        "views/g2p_self_service_form_page_template.xml",
+        "views/g2p_self_service_default_form.xml",
+        "views/g2p_self_service_submitted_form.xml",
+        "views/g2p_self_service_website_page.xml",
         "views/auth_oauth_provider.xml",
         "views/res_config_settings.xml",
     ],
@@ -25,6 +31,7 @@
         "web.assets_qweb": [],
         "web.assets_frontend": [
             "g2p_self_service_portal/static/src/css/base.css",
+            "g2p_self_service_portal/static/src/js/self_service_form_action.js"
         ],
     },
     "demo": [],
