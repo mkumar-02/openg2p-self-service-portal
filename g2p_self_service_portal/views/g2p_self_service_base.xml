@@ -10,7 +10,7 @@
     >
         <xpath expr="//header" position="replace">
             <header t-if="not no_header" id="top" data-anchor="true">
-                <div class="nav-container">
+                <div class="header-container">
                     <div class='nav'>
                         <a href='/selfservice'>
                             <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
@@ -33,47 +33,44 @@
 
                             </div>
                             <div class="dropdown language-box">
-                                <button type="button" data-toggle="dropdown" class="button">
-                                    <img
-                                        class="flag"
-                                        data-oe-model="ir.ui.view"
-                                        data-oe-id="1359"
-                                        data-oe-field="arch"
+                                <button type="button" data-toggle="dropdown"
+                                    class="button">
+                                    <img class="flag" data-oe-model="ir.ui.view"
+                                        data-oe-id="1359" data-oe-field="arch"
                                         data-oe-xpath="/t[1]/img[1]"
                                         src="/base/static/img/country_flags/us.png?height=25"
-                                        loading="lazy"
-                                    />
+                                        loading="lazy" />
                                     <span class="align-middle lang-text dropdown-toggle">English</span>
                                 </button>
-                                <ul role="menu" class="dropdown-menu lang-block">
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                data-oe-id="1359"
-                                                data-oe-field="arch"
-                                                data-oe-xpath="/t[1]/img[1]"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-
+                                <ul role="menu" class="dropdown-menu lang-block">                               
+                                    <li class='link'><a href="/en/"
+                                        class="dropdown-item"
+                                        data-url_code="en">
+                                        <img class="flag" data-oe-model="ir.ui.view"
+                                            data-oe-id="1359" data-oe-field="arch"
+                                            data-oe-xpath="/t[1]/img[1]"
+                                            src="/base/static/img/country_flags/us.png?height=25"
+                                            loading="lazy" style="" />
+                                        <span>English</span>
+                                    </a></li>
+                                    <li class='link'><a href="/en/"
+                                        class="dropdown-item"
+                                        data-url_code="en">
+                                        <img class="flag" data-oe-model="ir.ui.view"
+                                            src="/base/static/img/country_flags/hk.png?height=25"
+                                            loading="lazy" style="" />
+                                        <span>中国人</span>
+                                    </a></li>
+                                    <li class='link'><a href="/en/"
+                                        class="dropdown-item"
+                                        data-url_code="en">
+                                        <img class="flag" data-oe-model="ir.ui.view"
+                                            src="/base/static/img/country_flags/hk.png?height=25"
+                                            loading="lazy" style="" />
+                                        <span>Filipino</span>
+                                    </a></li>
+    
+    
                                 </ul>
                             </div>
                             <div class="dropdown user">
@@ -92,7 +89,7 @@
                                     <!-- Existing user menu content here -->
                                     <ul>
                                         <li>
-                                            <a href='/user' class="link">user Profile</a>
+                                            <a href='/selfservice/myprofile' class="link">My Profile</a>
                                         </li>
 
                                         <li>
