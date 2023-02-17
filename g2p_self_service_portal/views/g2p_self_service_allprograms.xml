@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- TODO: Remove all hardcoding -->
+    <template id="allprograms" name="G2P Self Service All Programs">
+        <t t-call="g2p_self_service_portal.base">
+            <t t-set="title">All Programs | Self Service Portal</t>
+            <div class="main-container">
+                <h5 class='all-title'>All Programs</h5>
+
+                <ol class="breadcrumb  breadcrumb-list bg-transparent">
+
+                    <br />
+                    <li class="breadcrumb-item">
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">All Programs</li>
+                </ol>
+
+
+                <div class="table-container">
+                    <div class="table-all-container">
+                        <p class='table-title'>All Programs</p>
+                        <form class="form-inline my-2 my-lg-0" action="/selfservice/allprograms">
+                            <div class="search-box">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    class="bi bi-search search-icon"
+                                    viewBox="0 0 16 16"
+                                >
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                                    />
+                                </svg>
+
+                                <input
+                                    placeholder="Search by program name"
+                                    class="search-text"
+                                    aria-controls="myprogramstable"
+                                />
+
+                            </div>
+                        </form>
+                    </div>
+
+                    <table class='css-serial'>
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th class='dropup '>Program Name </th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="programs" t-as="program">
+
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <a href='#' class='program-name'>
+                                            <t t-esc="program['name']" />
+
+                                        </a>
+                                    </td>
+                                    <t t-if="program['has_applied']">
+
+                                        <t t-if="program['status']=='Submitted'">
+                                            <td>
+                                                <button string="Apply" type="object" class='submit-button'>
+                                                    <t t-esc="program['status']" />
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    <button string="View" type="object" class="view-button">
+                                                            View</button>
+                                                </a>
+                                            </td>
+                                        </t>
+                                        <t t-elif="program['status']=='Enrolled'">
+                                            <td>
+                                                <button string="Apply" type="object" class='enroll-button'>
+                                                    <t t-esc="program['status']" />
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <a href="#">
+                                                    <button string="View" type="object" class="view-button">
+                                                            View</button>
+                                                </a>
+                                            </td>
+                                        </t>
+
+
+                                    </t>
+                                    <t t-else=''>
+                                        <td>
+
+                                            <button string="Apply" type="object" class='notapplied-button'>
+                                                    Not Applied</button>
+
+                                        </td>
+                                        <td>
+                                            <a href="#">
+                                                <button string="Apply" type="object" class='apply-button'>
+                                                        Apply</button>
+                                            </a>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <!-- <div class=" form-inline justify-content-center mt-3 ">
+                        <t t-call="website.pager">
+
+                        </t>
+
+                    </div> -->
+
+                    <ul class="pagination justify-content-center mt-2">
+                        <li class="page-item ">
+                            <a
+                                data-oe-model="ir.ui.view"
+                                data-oe-id="538"
+                                data-oe-field="arch"
+                                data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]"
+                                href="/selfservice/allprograms"
+                                class="page-link "
+                            >&lt;</a>
+                        </li>
+                        <t t-foreach="range(1,pager['total']+1)" t-as="i">
+                            <t t-if="i==pager['sel']">
+                                <li class="pager-item active">
+                                    <a href="/selfservice/allprograms?page={{i}}" class="page-link ">
+                                        <t t-esc="i" />
+                                    </a>
+                                </li>
+                            </t>
+
+                            <t t-else="">
+                                <li class="pager-item">
+                                    <a t-attf-href="/selfservice/allprograms?page={{i}}" class="page-link ">
+                                        <t t-esc="i" />
+                                    </a>
+                                </li>
+                            </t>
+
+
+
+                        </t>
+
+
+                        <li class="page-item">
+                            <a
+                                data-oe-model="ir.ui.view"
+                                data-oe-id="538"
+                                data-oe-field="arch"
+                                data-oe-xpath="/t[1]/ul[1]/li[2]/a[1]"
+                                class="page-link "
+                            >&gt;</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
