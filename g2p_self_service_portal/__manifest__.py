@@ -12,6 +12,7 @@
         "g2p_registry_individual",
         "g2p_programs",
         "website"
+        ],
      "data": [
         "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
