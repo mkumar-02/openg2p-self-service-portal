@@ -3,19 +3,21 @@ import datetime
 import random
 from odoo import http
 from odoo.http import request
+from math import ceil
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
 
+
 class SelfServiceContorller(http.Controller):
-    @http.route(["/selfservice"], type="http", auth="public")
+    @http.route(["/selfservice"], type="http", auth="public", website=True)
     def self_service_root(self, **kwargs):
         if request.session and request.session.uid:
             return request.redirect("/selfservice/home")
         else:
             return request.redirect("/selfservice/login")
 
-    @http.route(["/selfservice/login"], type="http", auth="public")
+    @http.route(["/selfservice/login"], type="http", auth="public",website=True)
     def self_service_login(self, **kwargs):
         if request.session and request.session.uid:
             return request.redirect("/selfservice/home")
@@ -33,7 +35,7 @@ class SelfServiceContorller(http.Controller):
         )
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
 
-    @http.route(["/selfservice/logo"], type="http", auth="public")
+    @http.route(["/selfservice/logo"], type="http", auth="public",website=True)
     def self_service_logo(self, **kwargs):
         config = request.env["ir.config_parameter"].sudo()
         attachment_id = config.get_param(
@@ -41,12 +43,19 @@ class SelfServiceContorller(http.Controller):
         )
         return request.redirect("/web/content/%s" % attachment_id)
 
-    @http.route(["/selfservice/home"], type="http", auth="user", website=True)
+
+    @http.route(["/selfservice/myprofile"], type="http", auth="public",website=True)
+    def self_service_profile(self, **kwargs):
+        if request.session and request.session.uid:
+            return request.render("g2p_self_service_portal.profile_page")
+
+    @http.route(["/selfservice/home"], type="http", auth="user",website=True)
     def self_service_home(self, **kwargs):
         programs = request.env["g2p.program"].sudo().search([]).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
-
+        ammount_issued=0
+        amount_received=0
         values = []
         for program in programs:
             membership = (
@@ -61,13 +70,24 @@ class SelfServiceContorller(http.Controller):
             )
             # date = datetime.strptime(membership['enrollment_date'], '%Y-%m-%d')
             # output_date = date.strftime('%d-%b-%Y')
-            ammount_issued = sum(
+            amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
                 .sudo()
                 .search(
                     [
-                        ("partner_id", "=", request.session.uid),
+                        ("partner_id", "=", partner_id.id),
+                        ("program_id", "=", program.id),
+                    ]
+                )
+            )
+            amount_received = sum(
+                ent.amount_paid
+                for ent in request.env["g2p.payment"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "=", partner_id.id),
                         ("program_id", "=", program.id),
                     ]
                 )
@@ -78,22 +98,49 @@ class SelfServiceContorller(http.Controller):
                     "name": program.name,
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
-                    "issued": ammount_issued,
+                    "issued": amount_issued,
+                    "paid":amount_received,
                     "enrollment_date": membership.enrollment_date.strftime("%d-%b-%Y")
                     if membership.enrollment_date
                     else None,
+                    "application_id":membership.enrollment_date.strftime("%Y%m%d")[2:]+ str(program['id']).zfill(6) if membership.enrollment_date
+                    else None,
                 }
             )
-
+        
+        entitlement = sum(
+                ent.amount_issued
+                for ent in request.env["g2p.payment"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "=", partner_id.id)
+             
+                    ]
+                )
+            )
+        received = sum(
+                ent.amount_paid
+                for ent in request.env["g2p.payment"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "=", partner_id.id),
+                         ]
+                )
+            )
+        pending = entitlement - received
         return request.render(
             "g2p_self_service_portal.dashboard",
             {
                 "programs": values,
-                "ammount_issued": ammount_issued,
+                "received":received,
+                "pending":pending
             },
         )
 
-    @http.route(["/selfservice/allprograms"], type="http", auth="user", website=True)
+
+    @http.route(["/selfservice/allprograms"], type="http", auth="user",website=True)
     def self_service_all_programs(self, page="1", limit="5", search="", **kwargs):
         limit = int(limit)
         page = int(page)
@@ -107,8 +154,8 @@ class SelfServiceContorller(http.Controller):
             .search([], limit=limit, offset=(page - 1) * limit, order="id")
         )
 
-        total = request.env["g2p.program"].sudo().search_count([]) / limit
-        total = total.__ceil__()
+        total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
+     
         # page_info = pager('/selfservice/allprograms',total=total,page=page,step=5)
 
         partner_id = request.env.user.partner_id
@@ -146,9 +193,9 @@ class SelfServiceContorller(http.Controller):
             },
         )
 
-    @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
+
+    @http.route(["/selfservice/apply"], type="http", auth="user",website=True)
     def self_service_apply_programs(self, **kwargs):
-        print("----------- program name ----------")
         
         progam = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
         print(progam)
