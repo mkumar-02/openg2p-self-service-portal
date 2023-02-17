@@ -43,7 +43,7 @@ class SelfServiceContorller(http.Controller):
         programs = request.env["g2p.program"].sudo().search([]).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
-
+        ammount_issued = 0
         values = []
         for program in programs:
             membership = (

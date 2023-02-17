@@ -3,8 +3,8 @@
     <!-- TODO: Remove all hardcoding -->
     <template id="login_page" name="G2P Self Service Login">
         <t t-call="g2p_self_service_portal.base">
-            <t t-set="no_header" t-value="0" />
-            <t t-set="no_footer" t-value="0" />
+            <t t-set="no_header" t-value="1" />
+            <t t-set="no_footer" t-value="1" />
             <t t-set="body_classname" t-value="'bg-100'" />
             <div class="container py-5">
                 <div t-attf-class="card border-0 mx-auto bg-100" style="max-width: 300px;">
