@@ -18,8 +18,6 @@ function submit_action(){
   form[0].action = '/selfservice'
 
   form[0].action = form[0].action.concat('/submitted?id='+ param)
-
-  console.log(form[0].action)
   form.submit()
 }
 
