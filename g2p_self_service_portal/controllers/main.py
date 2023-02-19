@@ -197,11 +197,11 @@ class SelfServiceContorller(http.Controller):
     @http.route(["/selfservice/apply"], type="http", auth="user",website=True)
     def self_service_apply_programs(self, **kwargs):
 
-        progam = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
+        program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
 
         return request.render(
             "g2p_self_service_portal.self_service_default_form",
-            {"program": progam},
+            {"program": program},
         )
 
 
