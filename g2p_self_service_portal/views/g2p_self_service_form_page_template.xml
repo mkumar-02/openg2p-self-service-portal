@@ -152,9 +152,8 @@
                                 <!-- <form id="formId" action="/submit" method="POST" role="form">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                 </form> -->
-
+    
                                 <t t-out="0" />
-                                
                             </div>
                         </div>
                     </div>
