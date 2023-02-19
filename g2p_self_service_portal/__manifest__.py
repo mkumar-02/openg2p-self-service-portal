@@ -12,6 +12,7 @@
         "g2p_registry_individual",
         "g2p_programs",
         "website"
+        ],
      "data": [
         "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
@@ -33,7 +34,6 @@
         
         ],
         "web.assets_common": [
-            "g2p_self_service_portal/static/src/css/base.css",
             "g2p_self_service_portal/static/src/js/self_service_form_action.js"
         ],
     },
