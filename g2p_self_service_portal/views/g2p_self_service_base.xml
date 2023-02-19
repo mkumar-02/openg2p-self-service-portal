@@ -10,6 +10,9 @@
     >
         <xpath expr="//header" position="replace">
             <header t-if="not no_header" id="top" data-anchor="true">
+                <xpath expr="//header" position="inside">
+                    <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css"/>
+                </xpath>
                 <div class="header-container">
                     <div class='nav'>
                         <a href='/selfservice'>
