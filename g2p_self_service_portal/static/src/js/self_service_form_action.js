@@ -50,7 +50,9 @@ function submit_action(){
     var required_input_field= required_field.find($('.s_website_form_input'))[i]
 
     if(required_input_field.value == ''){
-      alert("Please update all mandantory fields")
+      alert("Please update all mandantory fields");
+      required_input_field.style.borderColor= '#D32D2D'
+      required_input_field.reportValidity();
       count = 1;
       break;
     }
