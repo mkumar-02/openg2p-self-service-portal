@@ -1,3 +1,5 @@
+import json
+import random
 from datetime import date, datetime
 from odoo import http
 from odoo.http import request
