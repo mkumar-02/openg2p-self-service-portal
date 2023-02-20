@@ -1,12 +1,13 @@
 import json
 import random
 from datetime import date, datetime
+import logging
 import json
 import random
 from odoo import http
 from odoo.http import request
 from math import ceil
-
+_logger = logging.getLogger(__name__)
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
 
@@ -211,6 +212,20 @@ class SelfServiceContorller(http.Controller):
             {"program": program},
         )
 
+    @http.route(["/"], type="http", auth="user", website=True)
+    def self_service_apply_programs(self, **kwargs):
+        # Implement applying for programs
+        _logger.debug("HOMEUser")
+        _logger.debug(request.env.user)
+        return request.redirect("/selfservice/home")
+    
+    @http.route(["/my"], type="http", auth="user", website=True)
+    def self_service_apply_programs(self, **kwargs):
+        # Implement applying for programs
+        _logger.debug("HOMEUser")
+        _logger.debug(request.env.user)
+        return request.redirect("/selfservice/home")
+    
     @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
     def self_service_form_details(self, **kwargs):
 
