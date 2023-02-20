@@ -193,5 +193,60 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
     def self_service_apply_programs(self, **kwargs):
-        # Implement applying for programs
-        return request.redirect("/selfservice/home")
+        program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
+
+        return request.render(
+            "g2p_self_service_portal.self_service_default_form",
+            {"program": program},
+        )
+
+
+    @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
+    def self_service_form_details(self, **kwargs):
+
+        form_data = {}
+        current_user = request.env.user
+        form_data['address'] = json.dumps(kwargs)
+        form_data['additional_info'] = json.dumps(kwargs)
+
+        request.env['res.partner'].sudo().search([("name", "=", current_user.name)]).write(form_data)
+
+        program_id = kwargs['id']
+    
+        today_date = datetime.date.today().strftime("%d-%b-%Y")
+
+        d = datetime.date.today().strftime("%d")
+        m = datetime.date.today().strftime("%m")
+        y = datetime.date.today().strftime("%y")
+
+        random_number= str(random.randint(1,100000))
+
+        def random_number_length(n):
+            n = str(n)
+            l = len(n)
+            if (l<5):
+                while l>5:
+                    n = '0'+ n
+                    l = l+1
+                return '0'+n
+        
+            return n
+
+        application_id = int(d+ m+ y+ random_number_length(random_number))
+
+        apply_to_program = {
+            'partner_id': current_user.partner_id.id,
+            'program_id': program_id,
+            'application_id': application_id
+        }
+
+        request.env['g2p.program_membership'].sudo().create(apply_to_program)
+
+        return request.render(
+            "g2p_self_service_portal.self_service_form_submitted",
+            {
+                "submission_date": today_date, 
+                "application_id": application_id
+            },
+        )
+
