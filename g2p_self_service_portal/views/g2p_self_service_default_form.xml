@@ -172,11 +172,29 @@
                             
                             <div class="card-body" style="padding: 20px;">
                                 <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
-                                Submit
+                                    Submit
                                 </button>
-                                <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block form_cancel_action">
-                                Cancel
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Cancel
                                 </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Discard applicaton?</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>The entered data will not be saved. Are you sure you want to discard the form?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary modal-discard-button" data-dismiss="modal">Discard</button>
+                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" onclick="location.href = '/selfservice/home';">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

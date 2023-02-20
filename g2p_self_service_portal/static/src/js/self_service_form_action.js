@@ -61,11 +61,4 @@ function submit_action(){
 
 }
 
-function cancel_action(){
-  let msg = confirm("The entered data will not be saved. Are you sure you want to discard the form?")
-  if(msg){
-    location.href = ("/selfservice/home")
-  }
-}
-
 
