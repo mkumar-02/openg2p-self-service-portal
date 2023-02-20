@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- TODO: Remove all hardcoding -->
     <template id="allprograms" name="G2P Self Service All Programs">
@@ -44,8 +44,8 @@
                             </div>
                         </form>
                     </div>
-
-                    <table class='css-serial'>
+                    <div class='tables-values-container'>
+                    <table>
                         <thead>
                             <tr>
                                 <th>Sl.No</th>
@@ -59,39 +59,55 @@
 
                                 <tr>
                                     <td>
-
+                                        <t t-esc="program['id']" />
                                     </td>
                                     <td>
-                                        <a href='#' class='program-name'>
-                                            <t t-esc="program['name']" />
+                                        <t t-if="program['is_latest']">
+                                            <a href="/program/" class="program-name">
+                                                <t t-esc="program['name']" />
+                                                <span class="badge badge-primary">New</span>
+                                            </a>
+                                        </t>
 
-                                        </a>
+                                        <t t-else="">
+                                            <a href="/program/" class="program-name">
+                                                <t t-esc="program['name']" />
+
+                                            </a>
+
+                                        </t>
+
                                     </td>
+              
                                     <t t-if="program['has_applied']">
 
                                         <t t-if="program['status']=='Submitted'">
                                             <td>
-                                                <button string="Apply" type="object" class='submit-button'>
+                                                <button string="Apply" type="object"
+                                                    class='submit-button'>
                                                     <t t-esc="program['status']" />
                                                 </button>
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <button string="View" type="object" class="view-button">
-                                                            View</button>
+                                                    <button string="View" type="object"
+                                                        class="view-button">
+                                                        View</button>
                                                 </a>
                                             </td>
                                         </t>
                                         <t t-elif="program['status']=='Enrolled'">
                                             <td>
-                                                <button string="Apply" type="object" class='enroll-button'>
+                                                <button string="Apply" type="object"
+                                                    class='enroll-button'>
                                                     <t t-esc="program['status']" />
                                                 </button>
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <button string="View" type="object" class="view-button">
-                                                            View</button>
+                                                    <button string="View" type="object"
+                                                        class="view-button">
+                                                        View</button>
                                                 </a>
                                             </td>
                                         </t>
@@ -101,15 +117,16 @@
                                     <t t-else=''>
                                         <td>
 
-                                            <button string="Apply" type="object" class='notapplied-button'>
-                                                    Not Applied</button>
+                                            <button string="Apply" type="object"
+                                                class='notapplied-button'>
+                                                Not Applied</button>
 
                                         </td>
                                         <td>
-                                            <t t-set= "program_id" t-value= "program['id']" />
-                                            <a t-attf-href="/selfservice/apply?id={{program_id}}">
-                                                <button string="Apply" type="object" class='apply-button'>
-                                                        Apply</button>
+                                            <a href="#">
+                                                <button string="Apply" type="object"
+                                                    class='apply-button'>
+                                                    Apply</button>
                                             </a>
                                         </td>
                                     </t>
@@ -117,15 +134,9 @@
                             </t>
                         </tbody>
                     </table>
-                    <!-- <div class=" form-inline justify-content-center mt-3 ">
-                        <t t-call="website.pager">
-
-                        </t>
-
-                    </div> -->
-
-                    <ul class="pagination justify-content-center mt-2">
-                        <li class="page-item ">
+                </div>
+                    <ul class="pagination justify-content-center">
+                        <li class="pager-item ">
                             <a
                                 data-oe-model="ir.ui.view"
                                 data-oe-id="538"
@@ -133,38 +144,46 @@
                                 data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]"
                                 href="/selfservice/allprograms"
                                 class="page-link "
-                            >&lt;</a>
+                            >
+                                <i class="fa fa-angle-left"></i>
+                            </a>
                         </li>
                         <t t-foreach="range(1,pager['total']+1)" t-as="i">
                             <t t-if="i==pager['sel']">
-                                <li class="pager-item active">
+                                <li class="page-item active">
                                     <a href="/selfservice/allprograms?page={{i}}" class="page-link ">
-                                        <t t-esc="i" />
+                                        <span>
+                                            <t t-esc="i" />
+                                        </span>
                                     </a>
                                 </li>
                             </t>
 
                             <t t-else="">
-                                <li class="pager-item">
-                                    <a t-attf-href="/selfservice/allprograms?page={{i}}" class="page-link ">
-                                        <t t-esc="i" />
+                                <li class="page-item">
+                                    <a t-attf-href="/selfservice/allprograms?page={{i}}"
+                                        class="page-link ">
+                                        <span>
+                                            <t t-esc="i" />
+                                        </span>
                                     </a>
                                 </li>
                             </t>
 
 
-
                         </t>
 
 
-                        <li class="page-item">
+                        <li class="pager-item">
                             <a
                                 data-oe-model="ir.ui.view"
                                 data-oe-id="538"
                                 data-oe-field="arch"
-                                data-oe-xpath="/t[1]/ul[1]/li[2]/a[1]"
+                                data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]"
                                 class="page-link "
-                            >&gt;</a>
+                            >
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         </li>
                     </ul>
 
