@@ -15,7 +15,7 @@
                 <div class="table-container">
                     <div class="table-head-container">
                         <p class='table-title'>My Programs</p>
-                        <form class="form-inline my-2 my-lg-0">
+                        <form class="form-inline my-2 my-lg-0" action="/selfservice/home">
                             <div class="search-box">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -32,8 +32,7 @@
 
                                 <input
                                     placeholder="Search by program name"
-                                    class="search-text"
-                                    aria-controls="myprogramstable"
+                                    class="search-text" name="q"
                                 />
 
                             </div>
