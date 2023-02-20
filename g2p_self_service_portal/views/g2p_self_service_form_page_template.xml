@@ -121,16 +121,16 @@
         </xpath>
 
         <xpath expr="//main" position="replace">
-            <main>
+            <main class="form-template">
                 <div class="row">
                         <div class="col-md-1"/>
                         <div class="col-md-11">
-                            <div class="details">Program Details</div>
+                            <div class="details">Application Form</div>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb form-layout-breadcrumb">
                                     <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
                                     <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/allprograms">All Programs</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Application Form</li>
                                 </ol>
                             </nav>
                     </div>
