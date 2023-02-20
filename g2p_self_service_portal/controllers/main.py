@@ -1,8 +1,9 @@
 from datetime import date, datetime
+import logging
 from odoo import http
 from odoo.http import request
 from math import ceil
-
+_logger = logging.getLogger(__name__)
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
 
@@ -194,4 +195,19 @@ class SelfServiceContorller(http.Controller):
     @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
     def self_service_apply_programs(self, **kwargs):
         # Implement applying for programs
+        return request.redirect("/selfservice/home")
+    
+
+    @http.route(["/"], type="http", auth="user", website=True)
+    def self_service_apply_programs(self, **kwargs):
+        # Implement applying for programs
+        _logger.debug("HOMEUser")
+        _logger.debug(request.env.user)
+        return request.redirect("/selfservice/home")
+    
+    @http.route(["/my"], type="http", auth="user", website=True)
+    def self_service_apply_programs(self, **kwargs):
+        # Implement applying for programs
+        _logger.debug("HOMEUser")
+        _logger.debug(request.env.user)
         return request.redirect("/selfservice/home")
