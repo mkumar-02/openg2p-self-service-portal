@@ -1067,12 +1067,31 @@ body{
 
 .form_cancel_action:hover{
     color: #494DAF;
-    background-color: #FFFFFF;
-    border-color: #494DAF;
+    background: #FCFCFF 0% 0% no-repeat padding-box;
+    border: 1px solid #6C70CB;
+    border-radius: 6px;
+    opacity: 1;
 }
 
 .form_submit_action:hover{
     color: #FFFFFE;
-    background-color: #494DAF;
+    background: #6569C7 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.form_cancel_action:active{
+  color: #494DAF !important;
+  background: #FCFCFF 0% 0% no-repeat padding-box !important;
+  border: 1px solid #6C70CB !important;
+  border-radius: 6px !important;
+  opacity: 1 !important;
+}
+
+.form_submit_action:active{
+  color: #FFFFFE !important;
+  background: #6569C7 0% 0% no-repeat padding-box !important;
+  border-radius: 6px !important;
+  opacity: 1 !important;
 }
 
