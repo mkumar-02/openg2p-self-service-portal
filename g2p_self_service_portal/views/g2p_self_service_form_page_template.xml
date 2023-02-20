@@ -141,13 +141,13 @@
                     <div class="col-md-1"/>
                     <div class="col-md-7">
                         <div class="card container-left">
-                            <div class="card-header form-card-header">
+                            <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
                                 <p class="form-description">Covid-19 relief scheme</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="padding: 0px;">
                                 <div class="note">
-                                    <p>Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
                                 </div>
                                 <!-- <form id="formId" action="/submit" method="POST" role="form">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
@@ -160,12 +160,12 @@
 
                     <div class="col-md-3">
                         <div class="card container-right">
-                            <div class="card-header">
-                                <h5 class="action-heading">Covid-19 relief scheme</h5><br/>
+                            <div class="card-header" style="padding: 0px;">
+                                <h5 class="action-heading">Covid-19 relief scheme</h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
-                            <div class="card-body">
+                            <div class="card-body" style="padding: 20px;">
                                 <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
                                 Submit
                                 </button>

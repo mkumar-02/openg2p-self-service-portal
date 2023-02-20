@@ -40,7 +40,7 @@ function submit_action(){
 
   form[0].action = form[0].action.concat('/submitted?id='+ param)
 
-  ///////////////////
+  ///
 
   count = 0;
 
