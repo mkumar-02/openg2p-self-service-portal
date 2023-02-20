@@ -20,6 +20,7 @@
         "views/g2p_self_service_myprofile.xml",
         "views/auth_oauth_provider.xml",
         "views/res_config_settings.xml",
+        "views/g2p_self_service_program_view.xml"
     ],
     "assets": {
         "web.assets_backend": [],

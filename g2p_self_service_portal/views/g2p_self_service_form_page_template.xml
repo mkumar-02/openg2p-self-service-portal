@@ -121,16 +121,16 @@
         </xpath>
 
         <xpath expr="//main" position="replace">
-            <main>
+            <main class="form-template">
                 <div class="row">
                         <div class="col-md-1"/>
                         <div class="col-md-11">
-                            <div class="details">Program Details</div>
+                            <div class="details">Application Form</div>
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb form-layout-breadcrumb">
                                     <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
                                     <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/allprograms">All Programs</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                                    <li class="breadcrumb-item active" aria-current="page">Application Form</li>
                                 </ol>
                             </nav>
                     </div>
@@ -141,38 +141,55 @@
                     <div class="col-md-1"/>
                     <div class="col-md-7">
                         <div class="card container-left">
-                            <div class="card-header form-card-header">
+                            <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
                                 <p class="form-description">Covid-19 relief scheme</p>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" style="padding: 0px;">
                                 <div class="note">
-                                    <p>Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
                                 </div>
                                 <!-- <form id="formId" action="/submit" method="POST" role="form">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                 </form> -->
-
+    
                                 <t t-out="0" />
-                                
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-3">
                         <div class="card container-right">
-                            <div class="card-header">
-                                <h5 class="action-heading">Covid-19 relief scheme</h5><br/>
+                            <div class="card-header" style="padding: 0px;">
+                                <h5 class="action-heading">Covid-19 relief scheme</h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
-                            <div class="card-body">
+                            <div class="card-body" style="padding: 20px;">
                                 <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
-                                Submit
+                                    Submit
                                 </button>
-                                <button onclick="cancel_action()" type="submit" class="btn btn-outline-primary btn-lg btn-block form_cancel_action">
-                                Cancel
+                                <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Cancel
                                 </button>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Discard applicaton?</h5>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>The entered data will not be saved. Are you sure you want to discard the form?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-primary modal-discard-button" data-dismiss="modal">Discard</button>
+                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" onclick="location.href = '/selfservice/home';">Cancel</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
