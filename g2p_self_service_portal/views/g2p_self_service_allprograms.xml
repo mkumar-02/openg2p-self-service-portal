@@ -37,8 +37,7 @@
 
                                 <input
                                     placeholder="Search by program name"
-                                    class="search-text"
-                                    aria-controls="myprogramstable"
+                                    class="search-text" name="q"
                                 />
 
                             </div>
