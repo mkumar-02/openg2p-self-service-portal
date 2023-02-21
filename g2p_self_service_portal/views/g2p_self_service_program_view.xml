@@ -10,6 +10,7 @@
                 <page string="Map Portal Form">
                     <group>
                         <field name="self_service_portal_form" />
+                        <button name="update_template" type="object" string="Apply" class="btn btn-primary" states="active"/>
                     </group>
                 </page>
             </xpath>

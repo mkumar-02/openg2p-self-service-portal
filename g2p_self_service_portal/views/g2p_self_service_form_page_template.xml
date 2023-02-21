@@ -8,6 +8,10 @@
     >
 
         <xpath expr="//header" position="replace">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/base.css" />
+                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
+            </xpath>
             <header t-if="not no_header" id="top" data-anchor="true">
                 <div class="nav-container">
                     <div class='nav'>
@@ -107,10 +111,7 @@
                                                 class="link"
                                             >Logout</a>
                                         </li>
-
                                     </ul>
-
-
                                 </div>
                             </div>
 
@@ -135,38 +136,35 @@
                             </nav>
                     </div>
                 </div>
-        
-
+                    
                 <div class="row">
                     <div class="col-md-1"/>
                     <div class="col-md-7">
-                        <div class="card container-left">
+                        <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description">Covid-19 relief scheme</p>
+                                <p class="form-description"><t t-esc="request.params.get('program_name', '')"/></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <div class="note">
-                                    <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    <div class="container">
+                                        <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    </div>
                                 </div>
-                                <!-- <form id="formId" action="/submit" method="POST" role="form">
-                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                </form> -->
-    
                                 <t t-out="0" />
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-3">
-                        <div class="card container-right">
+                        <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading">Covid-19 relief scheme</h5>
+                                <h5 class="action-heading"><t t-esc="request.params.get('program_name', '')"/></h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
                             <div class="card-body" style="padding: 20px;">
-                                <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
+                                <button onclick="form_submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
                                     Submit
                                 </button>
                                 <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
@@ -184,8 +182,8 @@
                                                 <p>The entered data will not be saved. Are you sure you want to discard the form?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary modal-discard-button" data-dismiss="modal">Discard</button>
-                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" onclick="location.href = '/selfservice/home';">Cancel</button>
+                                                <button type="button" class="btn btn-primary modal-discard-button" onclick="location.href = '/selfservice/home';">Discard</button>
+                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" data-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
                                     </div>

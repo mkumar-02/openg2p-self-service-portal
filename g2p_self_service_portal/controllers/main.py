@@ -1,9 +1,10 @@
 import json
 import random
-from datetime import date, datetime
+from datetime import datetime
 import logging
-import json
-import random
+from urllib.parse import urlencode
+
+import werkzeug
 from odoo import http
 from odoo.http import request
 from math import ceil
@@ -206,25 +207,35 @@ class SelfServiceContorller(http.Controller):
     @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
     def self_service_apply_programs(self, **kwargs):
         program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
+        form_id = program["self_service_portal_form"].id
+        form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
-        return request.render(
-            "g2p_self_service_portal.self_service_default_form",
-            {"program": program},
-        )
+     
+        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/'+str(form_id))})
+        form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
-    @http.route(["/"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, **kwargs):
-        # Implement applying for programs
-        _logger.debug("HOMEUser")
-        _logger.debug(request.env.user)
-        return request.redirect("/selfservice/home")
+        data = {
+            'program_name': program['name']
+        }
+
+        params = urlencode(data)
+        redirect_url = form_url+ '?' + params
+        return werkzeug.utils.redirect(redirect_url)
+            
+
+    # @http.route(["/"], type="http", auth="user", website=True)
+    # def self_service_apply_programs(self, **kwargs):
+    #     # Implement applying for programs
+    #     _logger.debug("HOMEUser")
+    #     _logger.debug(request.env.user)
+    #     return request.redirect("/selfservice/home")
     
-    @http.route(["/my"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, **kwargs):
-        # Implement applying for programs
-        _logger.debug("HOMEUser")
-        _logger.debug(request.env.user)
-        return request.redirect("/selfservice/home")
+    # @http.route(["/my"], type="http", auth="user", website=True)
+    # def self_service_apply_programs(self, **kwargs):
+    #     # Implement applying for programs
+    #     _logger.debug("HOMEUser")
+    #     _logger.debug(request.env.user)
+    #     return request.redirect("/selfservice/home")
     
     @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
     def self_service_form_details(self, **kwargs):
@@ -237,13 +248,14 @@ class SelfServiceContorller(http.Controller):
         request.env['res.partner'].sudo().search(
             [("name", "=", current_user.name)]).write(form_data)
 
-        program_id = kwargs['id']
+        program_name = kwargs['program_name']
+        program_id = request.env['g2p.program'].sudo().search([("name", "=", program_name)]).id
+        
+        today_date = datetime.today().strftime("%d-%b-%Y")
 
-        today_date = datetime.date.today().strftime("%d-%b-%Y")
-
-        d = datetime.date.today().strftime("%d")
-        m = datetime.date.today().strftime("%m")
-        y = datetime.date.today().strftime("%y")
+        d = datetime.today().strftime("%d")
+        m = datetime.today().strftime("%m")
+        y = datetime.today().strftime("%y")
 
         random_number = str(random.randint(1, 100000))
 
