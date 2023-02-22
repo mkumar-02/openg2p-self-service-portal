@@ -885,18 +885,13 @@ body{
     background-color: #F5F9FC;
 }
 
-
-.form-template .row{
-    margin-bottom: 20px;
-}
-
 .form-template .details{
     text-align: left;
     font: normal normal 600 22px/26px Inter;
     letter-spacing: 0px;
     color: #484848;
     opacity: 1;
-    margin-top: 20px;
+    margin-top: 28px;
 }
 
 .form-template .form-layout-breadcrumb{
@@ -928,11 +923,50 @@ body{
     color: #848484;
 }
 
+.form-template #toast-container {
+  display: none;
+  position: absolute;
+  top: 110px;
+  right: 30px;
+  width: 304px;
+  height: 48px;
+}
+
+.form-template #toast-message {
+  background-color: #DE514C;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-left: 20px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+}
+
+.form-template #toast-close-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  outline: none ;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 0px;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.form-template #toast-close-btn img{
+  width: 11px;
+  height: 11px;
+}
+
 .form-template .container-left{
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 5px #0000001A;
-    border-radius: 10px;
-    opacity: 1;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 5px #0000001A;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 .form-template .container-right{
@@ -982,7 +1016,7 @@ body{
 }
 
 .form-template .note{
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 .form-template .note .container{
@@ -1012,7 +1046,7 @@ body{
 }
 
 .form-template .s_website_form_rows{
-  margin-bottom: 11px;
+  margin-bottom: 6px;
 }
 
 .form-template .s_website_form_label{
@@ -1032,7 +1066,8 @@ body{
     font-size: 14px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 21px !important;
+    padding-top: 16px !important;
+    padding-bottom: 14px !important;
 }
 
 .form-template .s_website_form_mark{
@@ -1045,6 +1080,11 @@ body{
 
 .form-template .s_website_form_submit{
   display: none;
+}
+
+.form-template .input-field-error-message {
+  color: #D52929;
+  font-size: 13px;
 }
 
 .form-template .action-heading{

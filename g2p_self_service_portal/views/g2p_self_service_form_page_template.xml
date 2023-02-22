@@ -136,6 +136,11 @@
                             </nav>
                     </div>
                 </div>
+
+                <div id="toast-container">
+                    <div id="toast-message"></div>
+                    <button id="toast-close-btn" onclick="hide_toast()"><img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" /></button>
+                </div>
                     
                 <div class="row">
                     <div class="col-md-1"/>
