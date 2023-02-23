@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- TODO: Remove all hardcoding -->
+    <template id="error_page" name="G2P Self Service My Profile">
+        <t t-call="g2p_self_service_portal.base">
+            <t t-set="title"> Error| Self Service Portal</t>
+            <div class="main-container">
+                <h5 class='all-title'>My Profile</h5>
+
+                <ol class="breadcrumb  breadcrumb-list bg-transparent">
+
+                    <br />
+                    <li class="breadcrumb-item">
+                        <a href="/selfservice">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+                </ol>
+
+
+                <div class="profile-container">
+                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png"/>
+                    <div>
+                        <h1>Page Under Construction!</h1>
+                        <p>Our experts are working hard to make this page available. Meanwhile, we request you to please visit after some time.</p>
+                    </div>
+
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

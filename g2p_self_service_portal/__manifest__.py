@@ -14,18 +14,21 @@
         "website"
         ],
     "data": [
-        "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
         "views/g2p_self_service_login.xml",
         "views/g2p_self_service_dashboard.xml",
         "views/g2p_self_service_allprograms.xml",
         "views/g2p_self_service_myprofile.xml",
+        "views/g2p_self_service_aboutus.xml",
+        "views/g2p_self_service_staticpage.xml",
+        "views/g2p_self_service_errorpage.xml",
+        "views/g2p_self_service_contactus.xml",
         "views/auth_oauth_provider.xml",
-        "views/res_config_settings.xml",
-        "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_form_page_template.xml",
-        "views/g2p_self_service_default_form.xml",
-        "views/g2p_self_service_submitted_form.xml"
+        "views/g2p_self_service_program_view.xml",
+        "views/g2p_self_service_website_page.xml",
+        "views/res_config_settings.xml",
+
     ],
     "assets": {
         "web.assets_backend": [],
