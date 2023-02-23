@@ -8,10 +8,13 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
-                    <group>
-                        <field name="self_service_portal_form" />
-                        <button name="update_template" type="object" string="Apply" class="btn btn-primary" states="active"/>
-                    </group>
+                    <form>
+                        <group>
+                            <field name="self_service_portal_form" />
+                            <button name="update_template" type="object" string="Save" class="btn btn-primary" states="active"/>
+                            <button string="Cancel" class="btn btn-primary" states="active"/>        
+                        </group>
+                    </form>
                 </page>
             </xpath>
         </field>

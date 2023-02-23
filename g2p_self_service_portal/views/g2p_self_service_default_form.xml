@@ -201,9 +201,9 @@
                     </div>
                     <div class="col-md-1"/>
                 </div>
-                <!-- <div class="contact-us">
-                    <a href="#"><img src="/ssp_apply_for_program/static/src/img/Chat_Icon.svg" /></a>
-                </div> -->
+                <div class="chat-assist">
+                    <a href="#"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
+                </div>
            </main>
         </t>
     </template>

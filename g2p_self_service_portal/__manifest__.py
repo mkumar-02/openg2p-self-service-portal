@@ -25,7 +25,7 @@
         "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_form_page_template.xml",
         "views/g2p_self_service_default_form.xml",
-        "views/g2p_self_service_submitted_form.xml"
+        "views/g2p_self_service_submitted_forms.xml"
     ],
     "assets": {
         "web.assets_backend": [],

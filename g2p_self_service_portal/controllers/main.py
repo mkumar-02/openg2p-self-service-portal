@@ -214,8 +214,10 @@ class SelfServiceContorller(http.Controller):
         request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/'+str(form_id))})
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
+        current_user = request.env.user
         data = {
-            'program_name': program['name']
+            'program_name': program['name'],
+            'current_user_name': current_user.name.split(' ')[0].replace(',', '')
         }
 
         params = urlencode(data)
