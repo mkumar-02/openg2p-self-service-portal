@@ -213,7 +213,7 @@ class SelfServiceContorller(http.Controller):
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
      
-        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/'+str(form_id))})
+        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/' + str(form_id))})
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
         current_user = request.env.user
