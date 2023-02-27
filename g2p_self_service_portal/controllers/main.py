@@ -208,6 +208,8 @@ class SelfServiceContorller(http.Controller):
     def self_service_apply_programs(self, **kwargs):
         program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
         form_id = program["self_service_portal_form"].id
+        if form_id == False:
+            return "No form mapped with the program"
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
      
@@ -244,7 +246,6 @@ class SelfServiceContorller(http.Controller):
 
         form_data = {}
         current_user = request.env.user
-        form_data['address'] = json.dumps(kwargs)
         form_data['additional_info'] = json.dumps(kwargs)
 
         request.env['res.partner'].sudo().search(
@@ -269,7 +270,6 @@ class SelfServiceContorller(http.Controller):
                     n = '0' + n
                     l = l + 1
                 return '0' + n
-
             return n
 
         application_id = int(d + m + y + random_number_length(random_number))
