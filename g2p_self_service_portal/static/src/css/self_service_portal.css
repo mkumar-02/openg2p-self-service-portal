@@ -1089,17 +1089,22 @@ body{
 }
 
 .form-template .s_website_form_multiple div .form-check{
-  padding-left: 20px;
+  padding: 0px;
 }
 
 .form-template .form-check .form-check-input{
-  margin-top: 0px;
+  margin: 0px;
   height: 19px;
   width: 19px;
+  accent-color: #494DAF;
+}
+
+.form-template .form-check .form-check-input:focus-visible{
+  outline: none;
 }
 
 .form-template .s_website_form_check_label{
-  padding-left: 6px;
+  padding-left: 25px;
 }
 
 

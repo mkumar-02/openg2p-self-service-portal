@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-   <template id="self_service_form_submitted" name="Form Submitted">
+   <template id="self_service_form_submitted" name="G2P Self Service Form Submitted">
         <t t-call="g2p_self_service_portal.base">
             <div id="wrap" class="oe_structure oe_empty"/>
             <main class="form-template">

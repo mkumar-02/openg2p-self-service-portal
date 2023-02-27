@@ -13,10 +13,11 @@
                 <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
             </xpath>
             <header t-if="not no_header" id="top" data-anchor="true">
-                <div class="nav-container">
+                <div class="header-container">
                     <div class='nav'>
                         <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
+                                class="logo" />
                         </a>
                         <div class='nav-user'>
                             <div class="search-box">
@@ -35,50 +36,28 @@
                                 <input placeholder="Search here" class="search-text" />
 
                             </div>
-                            <div class="dropdown language-box">
-                                <button type="button" data-toggle="dropdown" class="button">
-                                    <img
-                                        class="flag"
-                                        data-oe-model="ir.ui.view"
-                                        data-oe-id="1359"
-                                        data-oe-field="arch"
-                                        data-oe-xpath="/t[1]/img[1]"
-                                        src="/base/static/img/country_flags/us.png?height=25"
-                                        loading="lazy"
-                                    />
-                                    <span class="align-middle lang-text dropdown-toggle">English</span>
+                            
+                            <div class="language-dropdown language-box">
+                                <button class="dropdown-toggle button" type="button" id="language-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/> English
                                 </button>
-                                <ul role="menu" class="dropdown-menu lang-block">
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                data-oe-id="1359"
-                                                data-oe-field="arch"
-                                                data-oe-xpath="/t[1]/img[1]"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
+                                <div class="dropdown-menu" aria-labelledby="language-dropdown-button lang-block">
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/>
+                                    <span>English</span>
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_hk.png" alt="中国人"/>
+                                    <span>中国人</span>
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_ph.png" alt="Filipino"/>
+                                    <span>Filipino</span>
+                                  </a>
+                                  
+                                </div>
+                              </div>
+                              
                             <div class="dropdown user">
                                 <a
                                     class="nav-link py-0 text-white d-inline-block dropdown-toggle"
@@ -95,7 +74,7 @@
                                     <!-- Existing user menu content here -->
                                     <ul>
                                         <li>
-                                            <a href='/user' class="link">user Profile</a>
+                                            <a href='/selfservice/myprofile' class="link">My Profile</a>
                                         </li>
 
                                         <li>
@@ -207,15 +186,17 @@
                         <a href="#" onclick="toggle_chat_bot()"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
                     </div>
                 </div>
-           </main>
-       </xpath>
+            </main>
+        </xpath>
 
         <xpath expr="//footer" position="replace">
-            <footer t-if="not no_footer" id="bottom" data-anchor="true" t-attf-class="bg-light o_footer">
+            <footer t-if="not no_footer" id="bottom" data-anchor="true"
+                t-attf-class="bg-light o_footer">
                 <div class="nav-footer">
                     <div class='nav'>
                         <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
+                                class="logo" />
                         </a>
                         <ul class='list-container'>
                             <li class="nav-item">
@@ -239,8 +220,7 @@
                 </div>
             </footer>
         </xpath>
-
-   </template>
+    </template>
 </odoo>
 
 
