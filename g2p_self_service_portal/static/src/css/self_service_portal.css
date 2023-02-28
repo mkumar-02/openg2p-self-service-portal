@@ -885,18 +885,13 @@ body{
     background-color: #F5F9FC;
 }
 
-
-.form-template .row{
-    margin-bottom: 20px;
-}
-
 .form-template .details{
     text-align: left;
     font: normal normal 600 22px/26px Inter;
     letter-spacing: 0px;
     color: #484848;
     opacity: 1;
-    margin-top: 20px;
+    margin-top: 28px;
 }
 
 .form-template .form-layout-breadcrumb{
@@ -928,11 +923,50 @@ body{
     color: #848484;
 }
 
+.form-template #toast-container {
+  display: none;
+  position: absolute;
+  top: 110px;
+  right: 30px;
+  width: 304px;
+  height: 48px;
+}
+
+.form-template #toast-message {
+  background-color: #DE514C;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding-left: 20px;
+  padding-top: 16px;
+  padding-bottom: 17px;
+}
+
+.form-template #toast-close-btn {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  outline: none ;
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 0px;
+  padding-right: 20px;
+  padding-top: 10px;
+}
+
+.form-template #toast-close-btn img{
+  width: 11px;
+  height: 11px;
+}
+
 .form-template .container-left{
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 5px #0000001A;
-    border-radius: 10px;
-    opacity: 1;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 0px 2px 5px #0000001A;
+  border-radius: 10px;
+  opacity: 1;
 }
 
 .form-template .container-right{
@@ -982,7 +1016,7 @@ body{
 }
 
 .form-template .note{
-  padding-top: 20px;
+  padding-top: 15px;
 }
 
 .form-template .note .container{
@@ -1012,7 +1046,7 @@ body{
 }
 
 .form-template .s_website_form_rows{
-  margin-bottom: 11px;
+  margin-bottom: 6px;
 }
 
 .form-template .s_website_form_label{
@@ -1026,25 +1060,61 @@ body{
     border-radius: 6px;
     opacity: 1;
     height: 48px;
+    box-shadow: none;
+    padding-left: 11px;
+    padding-top: 16px;
+    padding-bottom: 15px;
+    padding-right: 11px;
 }
 
 .form-template .s_website_form_field{
     font-size: 14px;
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 21px !important;
+    padding-top: 16px !important;
+    padding-bottom: 14px !important;
 }
 
 .form-template .s_website_form_mark{
     color: #D32D2D;
 }
 
-.form-template .s_website_form_check_label{
-  padding-top: 20px;
+.form-template .s_website_form_multiple{
+  height: 48px;
 }
+
+.form-template .s_website_form_multiple div {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.form-template .s_website_form_multiple div .form-check{
+  padding: 0px;
+}
+
+.form-template .form-check .form-check-input{
+  margin: 0px;
+  height: 19px;
+  width: 19px;
+  accent-color: #494DAF;
+}
+
+.form-template .form-check .form-check-input:focus-visible{
+  outline: none;
+}
+
+.form-template .s_website_form_check_label{
+  padding-left: 25px;
+}
+
 
 .form-template .s_website_form_submit{
   display: none;
+}
+
+.form-template .input-field-error-message, .input-field-validation-message {
+  color: #D52929;
+  font-size: 13px;
 }
 
 .form-template .action-heading{
@@ -1089,6 +1159,14 @@ body{
     font-size: 14px;
     height: 54px;
     margin-top: 14px;
+}
+
+.form-template .form_submit_action:focus{
+  box-shadow: none !important;
+}
+
+.form-template .form_cancel_action:focus{
+  box-shadow: none !important;
 }
 
 .form-template .form_cancel_action:hover{
@@ -1200,6 +1278,14 @@ body{
   margin-left: 5px !important;
 }
 
+.container-right .modal-discard-button:focus{
+  box-shadow: none !important;
+}
+
+.container-right .modal-cancel-button:focus{
+  box-shadow: none !important;
+}
+
 .container-right .modal-discard-button:hover{
   background: #6569C7 0% 0% no-repeat padding-box;
   border-radius: 6px;
@@ -1233,4 +1319,65 @@ body{
   font: normal normal 600 14px/17px Inter !important;
   letter-spacing: 0px !important;
   color: #494DAF !important;
+}
+
+.form-template .ssp-contact-us{
+  width: 352px;
+  height: 93px;
+  top: 630px;
+  float: right;
+  position: fixed;
+  right: 45px;
+}
+
+.ssp-contact-us .contact-us-message {
+  width: 271px;
+  height: 92px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: -5px 6px 10px #0000000D;
+  border: 1px solid #D8D8D8;
+  opacity: 1;
+  display: none;
+  border-radius: 6px;
+}
+
+.ssp-contact-us .contact-us-message h5{
+  font-size: 14px;
+  padding-left: 15px;
+  padding-top: 18px;
+  padding-bottom: 6px;
+  padding-right: 15px;
+  font: normal normal medium 14px/17px Inter;
+  letter-spacing: 0px;
+  color: #000000;
+  opacity: 1;
+  margin: 0px;
+}
+
+.ssp-contact-us .contact-us-message p{
+  font-size: 13px;
+  font: normal normal normal 13px/16px Inter;
+  letter-spacing: 0px;
+  color: #606060;
+  opacity: 1;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.ssp-contact-us .chat-assist-icon{
+  width: 66px;
+  height: 66px;
+  background: #494DAF 0% 0% no-repeat padding-box;
+  opacity: 1;
+  border-radius: 50%;
+  position: fixed;
+  float: right;
+  top: 652px;
+  right: 50px;
+}
+
+.ssp-contact-us .chat-assist-icon a img{
+  width: 27px;
+  height: 27px;
+  margin: 19.34px;
 }

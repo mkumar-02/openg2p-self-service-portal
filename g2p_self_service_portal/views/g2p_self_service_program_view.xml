@@ -9,19 +9,19 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
                     <group>
-                        <field name="self_service_portal_form" />
+                        <field name="self_service_portal_form" attrs="{'readonly': [('have_members', '==', True)]}"/>
                     </group>
                 </page>
             </xpath>
         </field>
     </record>    
 
-    <!-- <record id="self_service_create_wizard_form" model="ir.ui.view">
+    <record id="self_service_create_wizard_form" model="ir.ui.view">
         <field name="name">self.service.create.wizard.form</field>
-        <field name="model">g2p.program</field>
+        <field name="model">g2p.program.create.wizard</field>
         <field name="inherit_id" ref="g2p_programs.create_program_wizard_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//page" position="after">
+            <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
                     <group>
                         <field name="self_service_portal_form" />
@@ -29,6 +29,6 @@
                 </page>
             </xpath>
         </field>
-    </record> -->
+    </record>
 
 </odoo>
