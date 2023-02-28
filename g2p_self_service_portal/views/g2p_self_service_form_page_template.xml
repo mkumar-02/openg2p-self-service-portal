@@ -8,11 +8,16 @@
     >
 
         <xpath expr="//header" position="replace">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/base.css" />
+                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
+            </xpath>
             <header t-if="not no_header" id="top" data-anchor="true">
-                <div class="nav-container">
+                <div class="header-container">
                     <div class='nav'>
                         <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
+                                class="logo" />
                         </a>
                         <div class='nav-user'>
                             <div class="search-box">
@@ -31,50 +36,28 @@
                                 <input placeholder="Search here" class="search-text" />
 
                             </div>
-                            <div class="dropdown language-box">
-                                <button type="button" data-toggle="dropdown" class="button">
-                                    <img
-                                        class="flag"
-                                        data-oe-model="ir.ui.view"
-                                        data-oe-id="1359"
-                                        data-oe-field="arch"
-                                        data-oe-xpath="/t[1]/img[1]"
-                                        src="/base/static/img/country_flags/us.png?height=25"
-                                        loading="lazy"
-                                    />
-                                    <span class="align-middle lang-text dropdown-toggle">English</span>
+                            
+                            <div class="language-dropdown language-box">
+                                <button class="dropdown-toggle button" type="button" id="language-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/> English
                                 </button>
-                                <ul role="menu" class="dropdown-menu lang-block">
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                data-oe-id="1359"
-                                                data-oe-field="arch"
-                                                data-oe-xpath="/t[1]/img[1]"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-                                    <li class='link'>
-                                        <a href="en/" class="dropdown-item" data-url_code="en">
-                                            <img
-                                                class="flag"
-                                                data-oe-model="ir.ui.view"
-                                                src="/base/static/img/country_flags/us.png?height=25"
-                                                loading="lazy"
-                                                style=""
-                                            />
-                                            <span>English</span>
-                                        </a>
-                                    </li>
-
-                                </ul>
-                            </div>
+                                <div class="dropdown-menu" aria-labelledby="language-dropdown-button lang-block">
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/>
+                                    <span>English</span>
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_hk.png" alt="中国人"/>
+                                    <span>中国人</span>
+                                  </a>
+                                  <a class="dropdown-item" href="#">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_ph.png" alt="Filipino"/>
+                                    <span>Filipino</span>
+                                  </a>
+                                  
+                                </div>
+                              </div>
+                              
                             <div class="dropdown user">
                                 <a
                                     class="nav-link py-0 text-white d-inline-block dropdown-toggle"
@@ -91,7 +74,7 @@
                                     <!-- Existing user menu content here -->
                                     <ul>
                                         <li>
-                                            <a href='/user' class="link">user Profile</a>
+                                            <a href='/selfservice/myprofile' class="link">My Profile</a>
                                         </li>
 
                                         <li>
@@ -107,10 +90,7 @@
                                                 class="link"
                                             >Logout</a>
                                         </li>
-
                                     </ul>
-
-
                                 </div>
                             </div>
 
@@ -135,38 +115,40 @@
                             </nav>
                     </div>
                 </div>
-        
 
+                <div id="toast-container">
+                    <div id="toast-message"></div>
+                    <button id="toast-close-btn" onclick="hide_toast()"><img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" /></button>
+                </div>
+                    
                 <div class="row">
                     <div class="col-md-1"/>
                     <div class="col-md-7">
-                        <div class="card container-left">
+                        <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description">Covid-19 relief scheme</p>
+                                <p class="form-description"><t t-esc="request.params.get('program_name', '')"/></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <div class="note">
-                                    <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    <div class="container">
+                                        <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                    </div>
                                 </div>
-                                <!-- <form id="formId" action="/submit" method="POST" role="form">
-                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                </form> -->
-    
                                 <t t-out="0" />
                             </div>
                         </div>
                     </div>
 
                     <div class="col-md-3">
-                        <div class="card container-right">
+                        <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading">Covid-19 relief scheme</h5>
+                                <h5 class="action-heading"><t t-esc="request.params.get('program_name', '')"/></h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
                             <div class="card-body" style="padding: 20px;">
-                                <button onclick="submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
+                                <button onclick="form_submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
                                     Submit
                                 </button>
                                 <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
@@ -184,8 +166,8 @@
                                                 <p>The entered data will not be saved. Are you sure you want to discard the form?</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary modal-discard-button" data-dismiss="modal">Discard</button>
-                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" onclick="location.href = '/selfservice/home';">Cancel</button>
+                                                <button type="button" class="btn btn-primary modal-discard-button" onclick="location.href = '/selfservice/home';">Discard</button>
+                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" data-dismiss="modal">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
@@ -195,18 +177,26 @@
                     </div>
                     <div class="col-md-1"/>
                 </div>
-                <div class="contact-us">
-                    <a href="#"><img src="/ssp_apply_for_program/static/src/img/Chat_Icon.svg" /></a>
+                <div class="ssp-contact-us">
+                    <div id="chat-bot" class="contact-us-message">
+                        <h5>Hi <t t-esc="request.params.get('current_user_name', '')"/>, how are you doing?</h5>
+                        <p>I am here to assist you. Take a few minutes and lets connect!</p>
+                    </div>
+                    <div class="chat-assist-icon">
+                        <a href="#" onclick="toggle_chat_bot()"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
+                    </div>
                 </div>
-           </main>
-       </xpath>
+            </main>
+        </xpath>
 
         <xpath expr="//footer" position="replace">
-            <footer t-if="not no_footer" id="bottom" data-anchor="true" t-attf-class="bg-light o_footer">
+            <footer t-if="not no_footer" id="bottom" data-anchor="true"
+                t-attf-class="bg-light o_footer">
                 <div class="nav-footer">
                     <div class='nav'>
                         <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
+                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
+                                class="logo" />
                         </a>
                         <ul class='list-container'>
                             <li class="nav-item">
@@ -230,8 +220,7 @@
                 </div>
             </footer>
         </xpath>
-
-   </template>
+    </template>
 </odoo>
 
 
