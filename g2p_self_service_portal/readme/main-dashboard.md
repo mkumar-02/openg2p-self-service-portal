@@ -2,7 +2,7 @@
 
 ## Target
 
-- For logged user, We have to display
+- For logged user, He/She can access
   1. User registered programs
   2. All services, programs available links
   3. Data pie chart which display Entitlements particulars as pending,receiving amount for respective user
@@ -30,14 +30,14 @@
 ### Header
 
 - Logo with portal name is clickable and go to main
-- Search bar is placed in header. As of now no functionality added
-- Language selection option provided. As of now, its static
+- Search bar is placed in header. As of now no functionality is added
+- Language selection option provided. As of now, it is static
 - User icon is placed with dropdown feature of user profile and logout options
 
 ### Myprograms
 
-- Write logic in controllers and bring data to table which is designed in block of myprograms
-- Search and sort options are in progress
+- Write a logic in controllers and bring data to table which is shown in myprograms
+- Search and sort functionalities are added
 
 ### Cards
 
@@ -45,6 +45,6 @@
 
 ### Footer
 
-- Logo with portal name is clickable and go to main
+- Logo with portal name is clickable and goes to main
 - Nav links added to link to other pages
 - Copyright link also added

@@ -1,14 +1,11 @@
-from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
-import json
-import random
 from datetime import date, datetime
-import logging
 import json
 import random
 from odoo import http
 from odoo.http import request
 from math import ceil
-_logger = logging.getLogger(__name__)
+
+from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
 
 class SelfServiceContorller(http.Controller):
@@ -70,14 +67,14 @@ class SelfServiceContorller(http.Controller):
     def self_service_home(self, **kwargs):
         query = request.params.get('query')
         domain = [('name', 'ilike', query)]
-   
+
         programs = request.env["g2p.program"].sudo().search(
             domain).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
         ammount_issued = 0
         amount_received = 0
-        values = []
+        myprograms = []
         for program in programs:
             membership = (
                 request.env["g2p.program_membership"]
@@ -113,7 +110,7 @@ class SelfServiceContorller(http.Controller):
                     ]
                 )
             )
-            values.append(
+            myprograms.append(
                 {
                     "id": program.id,
                     "name": program.name,
@@ -152,12 +149,17 @@ class SelfServiceContorller(http.Controller):
             )
         )
         pending = entitlement - received
+        labels = ["Received","Pending"]
+        values = [received,pending]
+        data = json.dumps({"labels": labels,
+                "values": values})
+
         return request.render(
             "g2p_self_service_portal.dashboard",
             {
-                "programs": values,
-                "received": str(received),
-                "pending": str(pending)
+                "programs": myprograms,
+                "data":data
+
             },
         )
 
@@ -217,7 +219,6 @@ class SelfServiceContorller(http.Controller):
             },
         )
 
-     
     @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
     def self_service_apply_programs(self, **kwargs):
         program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
@@ -227,20 +228,6 @@ class SelfServiceContorller(http.Controller):
             {"program": program},
         )
 
-    @http.route(["/"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, **kwargs):
-        # Implement applying for programs
-        _logger.debug("HOMEUser")
-        _logger.debug(request.env.user)
-        return request.redirect("/selfservice/home")
-    
-    @http.route(["/my"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, **kwargs):
-        # Implement applying for programs
-        _logger.debug("HOMEUser")
-        _logger.debug(request.env.user)
-        return request.redirect("/selfservice/home")
-    
     @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
     def self_service_form_details(self, **kwargs):
 

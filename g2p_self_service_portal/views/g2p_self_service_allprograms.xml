@@ -5,13 +5,13 @@
         <t t-call="g2p_self_service_portal.base">
             <t t-set="title">All Programs | Self Service Portal</t>
             <div class="main-container">
-                    <h5 class='all-title'>All Programs</h5>
-                    <ol class="breadcrumb  breadcrumb-list bg-transparent">
-                        <li class="breadcrumb-item">
-                            <a href="/selfservice">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">All Programs</li>
-                    </ol>
+                <h5 class='all-title'>All Programs</h5>
+                <ol class="breadcrumb  breadcrumb-list bg-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/selfservice">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">All Programs</li>
+                </ol>
 
                 <div class="table-container">
                     <div class="table-head-container">
@@ -33,19 +33,21 @@
 
                                 <input
                                     placeholder="Search by program name"
-                                    class="search-text" name="q"
+                                    class="search-text" name="q" id="search-text"
                                 />
-
+                                <span id="search-text-clear">
+                                    <i class="fa fa-times"></i>
+                                </span>
                             </div>
                         </form>
                     </div>
                     <div class='tables-values-container'>
-                        <table>
+                        <table id='allprograms'>
                             <thead>
                                 <tr>
                                     <th>No.</th>
-                                    <th>Program Name </th>
-                                    <th>Status</th>
+                                    <th>Program Name <i class="fa fa-sort"></i></th>
+                                    <th>Status <i class="fa fa-sort"></i></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -60,7 +62,8 @@
                                             <t t-if="program['is_latest']">
                                                 <a href="/program/" class="program-name">
                                                     <t t-esc="program['name']" />
-                                                    <button class="badge badge-button"><span>NEW</span>
+                                                    <button class="badge badge-button">
+                                                        <span>NEW</span>
                                                     </button>
                                                 </a>
                                             </t>
@@ -132,18 +135,21 @@
                         </table>
                     </div>
                     <ul class="pagination justify-content-center">
-                        <li class="pager-item ">
-                            <a
-                                data-oe-model="ir.ui.view"
-                                data-oe-id="538"
-                                data-oe-field="arch"
-                                data-oe-xpath="/t[1]/ul[1]/li[1]/a[1]"
-                                href="/selfservice/programs"
-                                class="page-link "
-                            >
+                        <t t-if="pager['sel'] &gt; 1">
+                            <li class="pager-item">
+                                
+                                <a t-attf-href="/selfservice/programs?page={{pager['sel']-1}}" class="page-link">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                            </li>
+                            
+                        </t>
+                        <t t-else="">
+                            <a t-attf-href="#" class="page-link">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        </li>
+                        </t>
+                       
                         <t t-foreach="range(1,pager['total']+1)" t-as="i">
                             <t t-if="i==pager['sel']">
                                 <li class="page-item active">
@@ -165,26 +171,27 @@
                                     </a>
                                 </li>
                             </t>
-
-
                         </t>
-
-
-                        <li class="pager-item">
-                            <a
-                                data-oe-model="ir.ui.view"
-                                data-oe-id="538"
-                                data-oe-field="arch"
-                                data-oe-xpath="/t[1]/ul[1]/li[3]/a[1]"
-                                class="page-link"
-                            >
+                        <t t-if="pager['sel'] &lt; pager['total']">
+                            <li class="pager-item">
+                                
+                                <a t-attf-href="/selfservice/programs?page={{pager['sel']+1}}" class="page-link">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            
+                        </t>
+                        <t t-else="">
+                            <a t-attf-href="#" class="page-link">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        </li>
+                        </t>
+                       
                     </ul>
-
-                </div>
+              <script type="text/javascript" src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"/>
             </div>
+            </div>
+
         </t>
     </template>
 </odoo>

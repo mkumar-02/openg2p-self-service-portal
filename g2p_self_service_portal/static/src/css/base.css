@@ -60,6 +60,38 @@
   outline: none;
 }
 
+.alert {
+  position: absolute;
+  top: 90px;
+  margin-left: 0px;
+  width: 1366px;
+  height: 55px;
+  padding-top: 18px;
+  padding-bottom:18px;
+  display: flex;
+  background: #494daf 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 6px #0000000d;
+  opacity: 1;
+}
+.closebtn {
+  margin-left:740px;
+  width: 14px;
+  height: 14px;
+  margin-right: 110px;
+  color: #ffffff;
+  opacity: 1;
+  }
+
+
+.welcome-title {
+  margin-left: 120px;
+  height: 19px;
+  text-align: left;
+  font: normal 15px/19px Inter;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+}
 ::-webkit-input-placeholder {
   /* Edge */
   color: #b9b9b9;
@@ -124,6 +156,7 @@
 
 .nav-user .user .user-block {
   top: 73px;
+  text-align: left;
   width: 184px;
   height: 116px;
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -281,64 +314,72 @@ a:hover {
 .tables-values-container {
   top: 247px;
   left: 149px;
-  width: 1068px;
+  width: 1088px;
+  
   mix-blend-mode: normal;
   opacity: 1;
   width: 100%;
- 
+  overflow-y: auto;
+  overflow-x: auto;
 }
 .tables-values-container table {
   width: 100%;
-
+  
+  
 }
 
-.tables-values-container table thead {
+.tables-values-container table thead{
   top: 190px;
   left: 139px;
   height: 52px;
+  width: 100%;
+  padding-right: 43px;
+  padding-left: 20px;
   background: #f8f8f8 0% 0% no-repeat padding-box;
   opacity: 1;
-  text-align: left;
 }
 
-.tables-values-container table thead th {
-  text-align: left;
+.tables-values-container table tbody{
   padding-left: 20px;
-  padding-right: 10px;
+  padding-right: 36px;
+}
+
+.tables-values-container table thead tr th {
   font: normal 600 13px/16px inter;
   background: #f8f8f8 0% 0% no-repeat padding-box;
+  text-align: left;
+  padding-left: 20px;
   letter-spacing: 0px;
   color: #535353;
   opacity: 1;
 }
-.tables-values-container table td {
+.tables-values-container table tbody tr td {
   height: 16px;
-  padding-left: 20px;
-  text-align: left;
   font: normal 13px/16px Inter;
   letter-spacing: 0px;
+  border-bottom: 1px solid #ddd;
+  padding-left: 20px;
   color: #535353;
   opacity: 1;
   height: 55px;
 }
-.tables-values-container table tr {
-  box-shadow: 0px 2px 5px #0000001a;
-  opacity: 1;
-}
+
 table tr th {
   cursor: pointer;
 }
 
-table th::after {
-  content: "\25b4";
+/* table th::after {
+  content: "\25b4,\25be";
 }
-
+/* 
 table th::after {
   content: "\25be";
-}
-
-td.right-align {
+} */
+td.right-align{
   text-align: right;
+  padding-right: 30px;
+
+ 
 }
 td .program-name {
   width: 202px;
@@ -454,7 +495,7 @@ td .program-name {
 }
 .card {
   width: 352px;
-  
+
   background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0px 2px 5px #0000001a;
   border-radius: 10px;
@@ -595,12 +636,22 @@ li div p {
   color: #494daf;
   opacity: 1;
 }
-
+.invisible {
+  display: none;
+}
+#chartContainer{
+  width: 220px;
+  height: 220px;
+  margin: auto;
+  
+}
 .breadcrumb-item + .breadcrumb-item::before {
   content: " \003E ";
   color: #000000 0% 0% no-repeat padding-box;
 }
-
+.pagination{
+  margin-top: 22px;
+}
 .pager-item {
   background: #ffffff 0% 0% no-repeat padding-box;
   border: 1px solid #d9d9d9;
@@ -649,17 +700,17 @@ li div p {
   opacity: 1;
 }
 
-#myprograms tbody{
-
-  overflow-y: auto;
-  overflow-x: auto;
+#search-clear {
+  display: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding-right: 25px;
+}
+#seacrh-text-clear {
+  display: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding-right: 25px;
 }
 
-#myprograms tbody td{
-  padding-right: 20px;
-}
 
-#allprograms table thead tr{
-  display: flex ;
-  justify-content: space-between;
-}
