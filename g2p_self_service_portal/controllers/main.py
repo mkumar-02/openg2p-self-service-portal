@@ -227,38 +227,26 @@ class SelfServiceContorller(http.Controller):
     def self_service_apply_programs(self, **kwargs):
         program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
         form_id = program["self_service_portal_form"].id
+
         if form_id == False:
-            return "No form mapped with the program"
+            return "No form mapped with this program"
+        
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
-     
-        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/' + str(form_id))})
+        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply-' + str(form_id))})
         form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
 
         current_user = request.env.user
         data = {
-            'program_name': program['name'],
-            'current_user_name': current_user.name.split(' ')[0].replace(',', '')
+            'program': program['name'],
+            'user': current_user.name.split(' ')[0].replace(',', '')
         }
 
         params = urlencode(data)
         redirect_url = form_url+ '?' + params
-        return werkzeug.utils.redirect(redirect_url)
-            
 
-    # @http.route(["/"], type="http", auth="user", website=True)
-    # def self_service_apply_programs(self, **kwargs):
-    #     # Implement applying for programs
-    #     _logger.debug("HOMEUser")
-    #     _logger.debug(request.env.user)
-    #     return request.redirect("/selfservice/home")
-    
-    # @http.route(["/my"], type="http", auth="user", website=True)
-    # def self_service_apply_programs(self, **kwargs):
-    #     # Implement applying for programs
-    #     _logger.debug("HOMEUser")
-    #     _logger.debug(request.env.user)
-    #     return request.redirect("/selfservice/home")
+        return werkzeug.utils.redirect(redirect_url)
+     
     
     @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
     def self_service_form_details(self, **kwargs):
@@ -270,8 +258,8 @@ class SelfServiceContorller(http.Controller):
         request.env['res.partner'].sudo().search(
             [("name", "=", current_user.name)]).write(form_data)
 
-        program_name = kwargs['program_name']
-        program_id = request.env['g2p.program'].sudo().search([("name", "=", program_name)]).id
+        program = kwargs['program']
+        program_id = request.env['g2p.program'].sudo().search([("name", "=", program)]).id
         
         today_date = datetime.today().strftime("%d-%b-%Y")
 
@@ -304,7 +292,9 @@ class SelfServiceContorller(http.Controller):
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
+                "program": kwargs['program'],
                 "submission_date": today_date,
-                "application_id": application_id
+                "application_id": application_id,
+                'user': current_user.name.split(' ')[0].replace(',', '')
             },
         )

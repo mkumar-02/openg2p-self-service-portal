@@ -43,10 +43,9 @@ function form_submit_action(){
   var form = test.find('form')
   var url = form[0].baseURI
   
-  param = get_query_params(url)['program_name'].split('#')[0]
+  param = get_query_params(url)['program'].split('#')[0]
 
-  form[0].action = '/selfservice'
-  form[0].action = form[0].action.concat('/submitted?program_name='+ param)
+  form[0].action = '/selfservice/submitted?program='+ param;
 
 
   // Validation's //

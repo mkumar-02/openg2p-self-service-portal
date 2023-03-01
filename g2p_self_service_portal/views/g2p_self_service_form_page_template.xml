@@ -17,14 +17,14 @@
                     <div class='nav'>
                         <a href='/selfservice'>
                             <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
-                                class="logo" />
+                                class="main-logo" />
                         </a>
                         <div class='nav-user'>
                             <div class="search-box">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
+                                    width="13.6"
+                                    height="13.6"
                                     fill="currentColor"
                                     class="bi bi-search search-icon"
                                     viewBox="0 0 16 16"
@@ -36,31 +36,38 @@
                                 <input placeholder="Search here" class="search-text" />
 
                             </div>
-                            
                             <div class="language-dropdown language-box">
-                                <button class="dropdown-toggle button" type="button" id="language-dropdown-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                  <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/> English
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="language-dropdown-button lang-block">
-                                  <a class="dropdown-item" href="#">
-                                    <img src="/g2p_self_service_portal/static/src/img/flag_en.png" alt="English"/>
-                                    <span>English</span>
-                                  </a>
-                                  <a class="dropdown-item" href="#">
-                                    <img src="/g2p_self_service_portal/static/src/img/flag_hk.png" alt="中国人"/>
-                                    <span>中国人</span>
-                                  </a>
-                                  <a class="dropdown-item" href="#">
-                                    <img src="/g2p_self_service_portal/static/src/img/flag_ph.png" alt="Filipino"/>
-                                    <span>Filipino</span>
-                                  </a>
-                                  
+                                <button class="dropdown-toggle button" type="button"
+                                    id="language-dropdown-button" data-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <img src="/g2p_self_service_portal/static/src/img/flag_en.png"
+                                        alt="English" class='flag' /> <span>English</span></button>
+                                <div class="dropdown-menu"
+                                    aria-labelledby="language-dropdown-button">
+                                    <a class="dropdown-item" href="#">
+                                        <img
+                                            src="/g2p_self_service_portal/static/src/img/flag_en.png"
+                                            alt="English" class='flag' />
+                                        <span>English</span>
+                                    </a>
+                                    <a class="dropdown-item" href="#" >
+                                        <img
+                                            src="/g2p_self_service_portal/static/src/img/flag_hk.png"
+                                            alt="中国人"  class='flag'/>
+                                        <span>中国人</span>
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <img
+                                            src="/g2p_self_service_portal/static/src/img/flag_ph.png"
+                                            alt="Filipino" class='flag' />
+                                        <span>Filipino</span>
+                                    </a>
+
                                 </div>
-                              </div>
-                              
+                            </div>
                             <div class="dropdown user">
                                 <a
-                                    class="nav-link py-0 text-white d-inline-block dropdown-toggle"
+                                    class="nav-link py-0 text-dark d-inline-block dropdown-toggle"
                                     href="#"
                                     data-toggle="dropdown"
                                 >
@@ -70,8 +77,7 @@
                                         class="rounded-circle o_user_avatar user-image"
                                     />
                                 </a>
-                                <div class="dropdown-menu">
-                                    <!-- Existing user menu content here -->
+                                <div class="dropdown-menu user-block">
                                     <ul>
                                         <li>
                                             <a href='/selfservice/myprofile' class="link">My Profile</a>
@@ -79,21 +85,23 @@
 
                                         <li>
                                             <a
-                                                href="/web/session/logout?redirect=/web"
+                                                href="#"
                                                 class="link"
                                             >Menu Item</a>
                                         </li>
                                         <hr />
                                         <li>
                                             <a
-                                                href="/web/session/logout?redirect=/web"
+                                                href="/selfservice/login"
                                                 class="link"
                                             >Logout</a>
                                         </li>
+
                                     </ul>
+
+
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -109,7 +117,7 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb form-layout-breadcrumb">
                                     <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
-                                    <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/allprograms">All Programs</a></li>
+                                    <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/programs">All Programs</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Application Form</li>
                                 </ol>
                             </nav>
@@ -127,7 +135,7 @@
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description"><t t-esc="request.params.get('program_name', '')"/></p>
+                                <p class="form-description"><t t-esc="request.params.get('program', '')"/></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <div class="note">
@@ -143,7 +151,7 @@
                     <div class="col-md-3">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading"><t t-esc="request.params.get('program_name', '')"/></h5>
+                                <h5 class="action-heading"><t t-esc="request.params.get('program', '')"/></h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
@@ -179,7 +187,7 @@
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
-                        <h5>Hi <t t-esc="request.params.get('current_user_name', '')"/>, how are you doing?</h5>
+                        <h5>Hi <t t-esc="request.params.get('user', '')"/>, how are you doing?</h5>
                         <p>I am here to assist you. Take a few minutes and lets connect!</p>
                     </div>
                     <div class="chat-assist-icon">
@@ -192,31 +200,33 @@
         <xpath expr="//footer" position="replace">
             <footer t-if="not no_footer" id="bottom" data-anchor="true"
                 t-attf-class="bg-light o_footer">
-                <div class="nav-footer">
+                <div class="footer-container">
                     <div class='nav'>
                         <a href='/selfservice'>
                             <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
-                                class="logo" />
+                                class="main-logo" />
                         </a>
                         <ul class='list-container'>
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                                <a class="nav-link link" aria-current="page" href="/selfservice/aboutus">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact Us</a>
+                                <a class="nav-link link" href="/selfservice/contactus">Contact Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Static Page</a>
+                                <a class="nav-link link" href="/selfservice/staticpage">Static Page</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Error Page</a>
+                                <a class="nav-link link" href="errorpage">Error Page</a>
                             </li>
                         </ul>
+                       
                     </div>
                     <hr />
                     <div class='copyright'>
                         <p>© 2023 National Social Benefits Portal. All rights reserved.</p>
                     </div>
+
                 </div>
             </footer>
         </xpath>
