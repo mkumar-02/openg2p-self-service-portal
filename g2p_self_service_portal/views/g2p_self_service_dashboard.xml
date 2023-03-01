@@ -2,16 +2,19 @@
 <odoo>
     <!-- TODO: Remove all hardcoding -->
     <template id="dashboard" name="G2P Self Service Dashboard">
+        <script type="text/javascript"
+            src="/g2p_self_service_portal/static/src/js/self_service_pie_chart.js"></script>
+
         <t t-call="g2p_self_service_portal.base">
             <div class="main-container">
-                <!-- <div class="alert">
+                <div class="alert" id="alertbox">
                     <h6 class="welcome-title">Welcome to the National Social Benefits
                         Portal</h6>
                     <span class="closebtn"
                         onclick="this.parentElement.style.display='none';">
                         <i class="fa fa-close"></i>
                     </span>
-                </div> -->
+                </div>
                 <div class="table-container">
                     <div class="table-head-container">
                         <p class='table-title'>My Programs</p>
@@ -19,8 +22,8 @@
                             <div class="search-box">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
+                                    width="13.6"
+                                    height="13.6"
                                     fill="currentColor"
                                     class="bi bi-search search-icon"
                                     viewBox="0 0 16 16"
@@ -29,31 +32,38 @@
                                         d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
                                     />
                                 </svg>
-
                                 <input
                                     placeholder="Search by program name"
-                                    class="search-text" name="q"
+                                    class="search-text" name="q" id="search-input"
                                 />
+                                <span id="search-clear">
+                                    <i class="fa fa-times"></i>
+                                </span>
 
                             </div>
                         </form>
                     </div>
                     <div class="tables-values-container">
-                        <table class='css-serial'  id="sortTable">
+
+                        <table class='css-serial' id="myprograms">
                             <thead>
                                 <tr>
-                                    <th>Sl.No</th>
-                                    <th>Program Name
-                       
-
+                                    <th>No.</th>
+                                    <th>Program Name <i class="fa fa-sort"></i>
                                     </th>
-                                    <th>Application ID</th>
-                                    <th>Status</th>
-                                    <th>Submission Date</th>
-                                    <th>Entitlement(USD)</th>
-                                    <th>Amount Received(USD)</th>
+                                    <th>Application ID <i class="fa fa-sort"></i></th>
+                                    <th>Status <i class="fa fa-sort"></i></th>
+                                    <th>Submitted On <i class="fa fa-sort"></i>
+                                    </th>
+                                    <th class="right-align">Entitlement (in USD) <i
+                                            class="fa fa-sort"></i>
+                                    </th>
+                                    <th class="right-align">Amount Received (in USD) <i
+                                            class="fa fa-sort"></i>
+                                    </th>
                                 </tr>
                             </thead>
+
                             <t t-foreach="programs" t-as="program">
                                 <t t-if="program['has_applied']">
                                     <tr>
@@ -61,24 +71,25 @@
                                         </td>
                                         <td>
                                             <t t-if="program['is_latest']">
-                                                <a href="/program/" class="program-name">
+                                                <a href="#" class="program-name">
                                                     <t t-esc="program['name']" />
-                                                    <span class="badge badge-primary">New</span>
+                                                    <button class="badge badge-button">
+                                                        <span>NEW</span>
+                                                    </button>
                                                 </a>
                                             </t>
 
                                             <t t-else="">
-                                                <a href="/program/" class="program-name">
+                                                <a href="#" class="program-name">
                                                     <t t-esc="program['name']" />
-                                                   
+
                                                 </a>
 
                                             </t>
 
                                         </td>
-                                        <td class='table-data'>
-                                            <span>Application id</span>
-                                            <!-- <t t-esc="program['application_id']" /> -->
+                                        <td>
+                                            <t t-esc="program['application_id']" />
                                         </td>
 
 
@@ -106,13 +117,15 @@
                                         </t>
 
 
-                                        <td class='table-data'>
+                                        <td>
                                             <t t-esc="program['enrollment_date']" />
                                         </td>
-                                        <td class='table-data'>
-                                            <t t-esc="program['issued']" />
+                                        <td class="right-align">
+                                            <span>
+                                                <t t-esc="program['issued']" />
+                                            </span>
                                         </td>
-                                        <td class='table-data'>
+                                        <td class="right-align">
                                             <t t-esc="program['paid']" />
                                         </td>
                                     </tr>
@@ -129,43 +142,48 @@
                         <h5 class="card-heading">All Programs</h5>
                         <hr />
                         <ul class="card-block">
-                            <li>
-                                <div class="icon-image">
-                                    <img src="/g2p_self_service_portal/static/src/img/medical.png" />
-                                </div>
-                                <div>
-                                    <a href="#">
-                                        Healthcare </a>
-                                    <p>30+ Schemes
-                                        available</p>
-                                </div>
+                            <a href="#">
+                                <li>
 
-                            </li>
-                            <li>
-                                <div class="icon-image">
-                                    <img
-                                        src="/g2p_self_service_portal/static/src/img/school_FILL0_wght400_GRAD0_opsz48.png"
-                                    />
-                                </div>
-                                <div>
-                                    <a href="#">
-                                        Education </a>
-                                    <p>55+ Schemes available</p>
-                                </div>
+                                    <div class="icon-image">
+                                        <img
+                                            src="/g2p_self_service_portal/static/src/img/medical.png" />
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            Healthcare </a>
+                                        <p>30+ Schemes
+                                            available</p>
+                                    </div>
 
-                            </li>
+                                </li>
+                            </a>
+                            <a href="#">
+                                <li>
+                                    <div class="icon-image">
+                                        <img
+                                            src="/g2p_self_service_portal/static/src/img/school_FILL0_wght400_GRAD0_opsz48.png"
+                                        />
+                                    </div>
+                                    <div>
+                                        <a href="#">
+                                            Education </a>
+                                        <p>55+ Schemes available</p>
+                                    </div>
+                                </li>
+                            </a>
 
 
                         </ul>
                         <div class='card-foot'>
                             <a
-                                href="/selfservice/allprograms"
+                                href="/selfservice/programs"
                                 class='justify-content-center viewprograms'
                             >View All</a>
                         </div>
 
                     </div>
-                    <div class='card'>
+                    <div class='card middle-card'>
                         <h5 class="card-heading">Other Services</h5>
                         <hr />
                         <ul class="card-block">
@@ -178,8 +196,8 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                        KYC </a>
-                                    <p>Tap to know more</p>
+                                        Help </a>
+                                    <p>Tap here for assistance</p>
                                 </div>
 
                             </li>
@@ -192,7 +210,7 @@
                                 </div>
                                 <div>
                                     <a href="#">
-                                        Housing </a>
+                                        FAQ </a>
                                     <p>Tap to know more</p>
                                 </div>
 
@@ -211,22 +229,20 @@
                     <div class="card">
                         <h5 class="card-heading">Entitlements</h5>
                         <hr />
-                        <div
-                            class="s_chart"
-                            data-type="doughnut"
-                            data-legend-position="bottom"
-                            data-tooltip-display="true"
-                            data-stacked="false"
-                            data-border-width="2"
-                            data-data="{&quot;labels&quot;:[&quot;Pending&quot;,&quot;Received&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;&quot;,&quot;data&quot;:[&quot;400&quot;,&quot;1500&quot;],&quot;backgroundColor&quot;:[&quot;#00FFFF&quot;,&quot;#0000FF&quot;],&quot;borderColor&quot;:[&quot;o-color-4&quot;,&quot;&quot;]}]}"
-                            data-snippet="s_chart"
-                            data-name="Chart"
-                        >
-                            <h2 class="o_default_snippet_text">
-                                <br />
-                            </h2>
-                            <canvas style="" width="500" />
+                            <div id="pie_data"
+                            invisible="1"
+                            class="invisible">
+                            <t t-esc="data" />
                         </div>
+                        <div id="chartContainer">
+
+                        </div>
+                        <script type="text/javascript"
+                            src="/g2p_self_service_portal/static/src/js/self-service_search_sort.js" />
+                        <script type="text/javascript"
+                            src="/g2p_self_service_portal/static/src/js/self_service_pie_chart.js" />
+                        <script type="text/javascript"
+                            src="/g2p_self_service_portal/static/src/js/self_service_welcome_alert.js" />
                     </div>
                 </div>
             </div>

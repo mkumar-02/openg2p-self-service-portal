@@ -11,27 +11,39 @@
         "g2p_registry_base",
         "g2p_registry_individual",
         "g2p_programs",
-        "website"
-        ],
+        "website",
+        "web"
+          ],
     "data": [
-        "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
         "views/g2p_self_service_login.xml",
         "views/g2p_self_service_dashboard.xml",
         "views/g2p_self_service_allprograms.xml",
         "views/g2p_self_service_myprofile.xml",
+        "views/g2p_self_service_aboutus.xml",
+        "views/g2p_self_service_staticpage.xml",
+        "views/g2p_self_service_errorpage.xml",
+        "views/g2p_self_service_contactus.xml",
         "views/auth_oauth_provider.xml",
-        "views/res_config_settings.xml",
-        "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_form_page_template.xml",
+        "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_default_form.xml",
-        "views/g2p_self_service_submitted_forms.xml"
+        "views/g2p_self_service_submitted_forms.xml",  
+        "views/res_config_settings.xml",
+
     ],
     "assets": {
         "web.assets_backend": [],
-        "web.assets_qweb": [],
+        "web.assets_qweb": [
+            #   "views/g2p_self_service_portal.doughnut_chart.xml",
+        ],
         "web.assets_frontend": [
-            "g2p_self_service_portal/static/src/js/self_service_form_action.js"
+            "g2p_self_service_portal/static/src/js/self_service_form_action.js",
+            # # "g2p_self_service_portal/static/src/js/self_service_pie_chart.js",
+            # "g2p_self_service_portal/static/src/js/self-service_search_sort.js",
+            # "g2p_self_service_portal/static/src/js/self-service_search_sort_all.js",
+            # "g2p_self_service_portal/static/src/js/self_service_welcome_alert.js"
+            
         ],
         "web.assets_common": [
             # "g2p_self_service_portal/static/src/css/base.css",
