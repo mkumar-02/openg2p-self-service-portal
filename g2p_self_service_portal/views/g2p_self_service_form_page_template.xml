@@ -135,7 +135,7 @@
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description"><t t-esc="request.params.get('program', '')"/></p>
+                                <p class="form-description"><t t-esc="program"/></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <div class="note">
@@ -151,12 +151,15 @@
                     <div class="col-md-3">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading"><t t-esc="request.params.get('program', '')"/></h5>
+                                <h5 class="action-heading"><t t-esc="program"/></h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
                             
                             <div class="card-body" style="padding: 20px;">
-                                <button onclick="form_submit_action()" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
+                                <!-- <div id="program_id" invisible="1" class="invisible">
+                                    <t t-esc="program_id" />
+                                </div> -->
+                                <button onclick="form_submit_action()" t-att-program="program_id" id="program_submit_id" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
                                     Submit
                                 </button>
                                 <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
@@ -187,7 +190,7 @@
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
-                        <h5>Hi <t t-esc="request.params.get('user', '')"/>, how are you doing?</h5>
+                        <h5>Hi <t t-esc="user"/>, how are you doing?</h5>
                         <p>I am here to assist you. Take a few minutes and lets connect!</p>
                     </div>
                     <div class="chat-assist-icon">

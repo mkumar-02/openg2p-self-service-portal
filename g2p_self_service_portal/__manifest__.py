@@ -10,6 +10,7 @@
     "depends": [
         "g2p_registry_base",
         "g2p_registry_individual",
+        "g2p_registry_addl_info",
         "g2p_programs",
         "website",
         "web"

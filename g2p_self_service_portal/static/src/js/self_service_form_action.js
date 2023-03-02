@@ -41,15 +41,14 @@ function form_submit_action(){
   //URL Change
   var test = $('.s_website_form')
   var form = test.find('form')
-  var url = form[0].baseURI
-  
-  param = get_query_params(url)['program'].split('#')[0]
 
-  form[0].action = '/selfservice/submitted?program='+ param;
+  var program_id = $('#program_submit_id')
+
+  form[0].action = `/selfservice/submitted/${program_id[0].getAttribute('program')}`;
 
 
   // Validation's //
-  isValid = true;
+  var isValid = true;
 
   var required_fields = $('.s_website_form_required')
 
