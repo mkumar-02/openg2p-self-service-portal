@@ -8,10 +8,9 @@
         priority="900"
         primary="True"
     >
-   
+
         <xpath expr="//header" position="replace">
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/base.css" />
                 <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             </xpath>
@@ -133,7 +132,7 @@
                                 <a class="nav-link link" href="errorpage">Error Page</a>
                             </li>
                         </ul>
-                       
+
                     </div>
                     <hr />
                     <div class='copyright'>

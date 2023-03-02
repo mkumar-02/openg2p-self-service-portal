@@ -30,7 +30,7 @@
         "views/g2p_self_service_form_page_template.xml",
         "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_default_form.xml",
-        "views/g2p_self_service_submitted_forms.xml",  
+        "views/g2p_self_service_submitted_forms.xml",
         "views/res_config_settings.xml",
 
     ],
@@ -45,11 +45,9 @@
             # "g2p_self_service_portal/static/src/js/self-service_search_sort.js",
             # "g2p_self_service_portal/static/src/js/self-service_search_sort_all.js",
             # "g2p_self_service_portal/static/src/js/self_service_welcome_alert.js"
-            
+
         ],
-        "web.assets_common": [
-            # "g2p_self_service_portal/static/src/css/base.css",
-        ],
+        "web.assets_common": [],
     },
     "demo": [],
     "images": [],

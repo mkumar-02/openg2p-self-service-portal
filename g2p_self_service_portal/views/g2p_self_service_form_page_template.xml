@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-   <template 
-        id="self_service_form_template" 
-        inherit_id="website.layout" 
-        name="Self Service Form Template"  
-        primary="True" 
+   <template
+        id="self_service_form_template"
+        inherit_id="website.layout"
+        name="Self Service Form Template"
+        primary="True"
     >
 
         <xpath expr="//header" position="replace">
             <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/base.css" />
                 <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
             </xpath>
             <header t-if="not no_header" id="top" data-anchor="true">
@@ -128,7 +127,7 @@
                     <div id="toast-message"></div>
                     <button id="toast-close-btn" onclick="hide_toast()"><img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" /></button>
                 </div>
-                    
+
                 <div class="row">
                     <div class="col-md-1"/>
                     <div class="col-md-7">
@@ -154,7 +153,7 @@
                                 <h5 class="action-heading"><t t-esc="program"/></h5>
                                 <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
                             </div>
-                            
+
                             <div class="card-body" style="padding: 20px;">
                                 <!-- <div id="program_id" invisible="1" class="invisible">
                                     <t t-esc="program_id" />
@@ -223,7 +222,7 @@
                                 <a class="nav-link link" href="errorpage">Error Page</a>
                             </li>
                         </ul>
-                       
+
                     </div>
                     <hr />
                     <div class='copyright'>
