@@ -1,13 +1,9 @@
 import json
-import random
 from datetime import datetime
-import logging
-from urllib.parse import urlencode
+from math import ceil
 
-import werkzeug
 from odoo import http
 from odoo.http import request
-from math import ceil
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
@@ -69,14 +65,12 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
-        query = request.params.get('query')
-        domain = [('name', 'ilike', query)]
+        query = request.params.get("query")
+        domain = [("name", "ilike", query)]
 
-        programs = request.env["g2p.program"].sudo().search(
-            domain).sorted("id")
+        programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
-        ammount_issued = 0
         amount_received = 0
         myprograms = []
         for program in programs:
@@ -126,7 +120,8 @@ class SelfServiceContorller(http.Controller):
                     if membership.enrollment_date
                     else None,
                     "is_latest": (datetime.today() - program.create_date).days < 21,
-                    "application_id": membership.application_id if membership.application_id
+                    "application_id": membership.application_id
+                    if membership.application_id
                     else None,
                 }
             )
@@ -135,12 +130,7 @@ class SelfServiceContorller(http.Controller):
             ent.amount_issued
             for ent in request.env["g2p.payment"]
             .sudo()
-            .search(
-                [
-                    ("partner_id", "=", partner_id.id)
-
-                ]
-            )
+            .search([("partner_id", "=", partner_id.id)])
         )
         received = sum(
             ent.amount_paid
@@ -153,26 +143,21 @@ class SelfServiceContorller(http.Controller):
             )
         )
         pending = entitlement - received
-        labels = ["Received","Pending"]
-        values = [received,pending]
-        data = json.dumps({"labels": labels,
-                "values": values})
+        labels = ["Received", "Pending"]
+        values = [received, pending]
+        data = json.dumps({"labels": labels, "values": values})
 
         return request.render(
             "g2p_self_service_portal.dashboard",
-            {
-                "programs": myprograms,
-                "data":data
-
-            },
+            {"programs": myprograms, "data": data},
         )
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, page="1", limit="7", **kwargs):
         limit = int(limit)
         page = int(page)
-        query = kwargs.get('q', '')
-        domain = [('name', 'ilike', query)]
+        query = kwargs.get("q", "")
+        domain = [("name", "ilike", query)]
 
         if page < 1:
             page = 1
@@ -207,8 +192,7 @@ class SelfServiceContorller(http.Controller):
                     "name": program.name,
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
-                    "is_latest": (datetime.today() - program.create_date).days < 21
-
+                    "is_latest": (datetime.today() - program.create_date).days < 21,
                 }
             )
 
@@ -222,52 +206,77 @@ class SelfServiceContorller(http.Controller):
                 },
             },
         )
-    
-    @http.route(["/selfservice/apply/<int:id>"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, id):
-        program = request.env['g2p.program'].sudo().browse(id)
+
+    @http.route(
+        ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
+    )
+    def self_service_apply_programs(self, _id):
+        program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
-            if mem.program_id.id == id:
-                return request.redirect(f'/selfservice/submitted/{id}')
+            if mem.program_id.id == _id:
+                return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 
-        return request.render(view.id, {
-            'program': program.name,
-            'program_id': program.id,
-            'user': request.env.user.given_name
-            }
+        return request.render(
+            view.id,
+            {
+                "program": program.name,
+                "program_id": program.id,
+                "user": request.env.user.given_name,
+            },
         )
-     
-    
-    @http.route(["/selfservice/submitted/<int:id>"], type="http", auth="user", website=True)
-    def self_service_form_details(self, id, **kwargs):
 
-        program = request.env['g2p.program'].sudo().browse(id)
+    @http.route(
+        ["/selfservice/submitted/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+        csrf=False,
+    )
+    def self_service_form_details(self, _id, **kwargs):
+
+        program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
-        if(request.httprequest.method == "POST"):
+        if request.httprequest.method == "POST":
 
             form_data = kwargs
 
-            additional_info = current_partner.additional_g2p_info if current_partner.additional_g2p_info else {}
+            additional_info = (
+                current_partner.additional_g2p_info
+                if current_partner.additional_g2p_info
+                else {}
+            )
             additional_info.update(form_data)
             current_partner.additional_g2p_info = additional_info
 
             apply_to_program = {
-                'partner_id': current_partner.id,
-                'program_id': program.id
+                "partner_id": current_partner.id,
+                "program_id": program.id,
             }
 
-            program_member = request.env['g2p.program_membership'].sudo().create(apply_to_program)
+            program_member = (
+                request.env["g2p.program_membership"].sudo().create(apply_to_program)
+            )
 
         else:
-            program_member = request.env['g2p.program_membership'].sudo().search([('program_id', '=', program.id), ('partner_id', '=', current_partner.id)], limit = 1)
-            
-            if len(program_member) <1:
-                return request.redirect(f'/selfservice/apply/{id}')
+            program_member = (
+                request.env["g2p.program_membership"]
+                .sudo()
+                .search(
+                    [
+                        ("program_id", "=", program.id),
+                        ("partner_id", "=", current_partner.id),
+                    ],
+                    limit=1,
+                )
+            )
+
+            if len(program_member) < 1:
+                return request.redirect(f"/selfservice/apply/{_id}")
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
@@ -275,6 +284,6 @@ class SelfServiceContorller(http.Controller):
                 "program": program.name,
                 "submission_date": program_member.enrollment_date,
                 "application_id": program_member.application_id,
-                'user': current_partner.given_name
+                "user": current_partner.given_name,
             },
         )

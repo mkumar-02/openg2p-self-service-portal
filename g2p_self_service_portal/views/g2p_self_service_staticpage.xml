@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- TODO: Remove all hardcoding -->
-    <template id="static_page" name="G2P Self Service My Profile">
-        <t t-call="g2p_self_service_portal.base">
-            <t t-set="title"> My Profile| Self Service Portal</t>
+    <template
+        id="static_page_base"
+        name="G2P Self Service Static Page Base"
+        inherit_id="g2p_self_service_portal.base"
+        priority="920"
+        primary="True"
+    >
+        <xpath expr="//t[@t-out='0']" position="replace">
             <div class="main-container">
-                <h5 class='all-title'>My Profile</h5>
-
+                <h5 class="all-title">My Profile</h5>
                 <ol class="breadcrumb  breadcrumb-list bg-transparent">
-
                     <br />
                     <li class="breadcrumb-item">
                         <a href="/selfservice">Home</a>
@@ -16,16 +19,23 @@
                     <li class="breadcrumb-item active" aria-current="page">My Profile</li>
                 </ol>
 
-
                 <div class="profile-container">
-                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png"/>
+                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png" />
                     <div>
                         <h1>Page Under Construction!</h1>
-                        <p>Our experts are working hard to make this page available. Meanwhile, we request you to please visit after some time.</p>
+                        <p>
+                            Our experts are working hard to make this page available.
+                            Meanwhile, we request you to please visit after some time.
+                        </p>
                     </div>
-
                 </div>
+                <t t-out="0" />
             </div>
-        </t>
+        </xpath>
+    </template>
+
+    <template id="static_page" name="G2P Self Service Static Page">
+        <t t-set="title">Static Page| Self Service Portal</t>
+        <t t-call="g2p_self_service_portal.static_page_base" />
     </template>
 </odoo>

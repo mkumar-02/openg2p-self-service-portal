@@ -1,31 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- TODO: Remove all hardcoding -->
     <template id="aboutus_page" name="G2P Self Service About Us">
-        <t t-call="g2p_self_service_portal.base">
-            <t t-set="title">About Us| Self Service Portal</t>
-            <div class="main-container">
-                <h5 class='all-title'>About Us</h5>
-
-                <ol class="breadcrumb  breadcrumb-list bg-transparent">
-
-                    <br />
-                    <li class="breadcrumb-item">
-                        <a href="/selfservice">Home</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
-                </ol>
-
-
-                <div class="aboutus-container">
-                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png"/>
-                    <div>
-                        <h1>Page Under Construction!</h1>
-                        <p>Our experts are working hard to make this page available. Meanwhile, we request you to please visit after some time.</p>
-                    </div>
-
-                </div>
-            </div>
-        </t>
+        <t t-set="title">About Us| Self Service Portal</t>
+        <t t-call="g2p_self_service_portal.static_page_base" />
     </template>
 </odoo>

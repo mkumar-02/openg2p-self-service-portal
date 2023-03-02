@@ -1,184 +1,133 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-   <template 
-        id="self_service_form_template" 
-        inherit_id="website.layout" 
-        name="Self Service Form Template"  
-        primary="True" 
+    <template
+        id="self_service_form_template"
+        inherit_id="g2p_self_service_portal.base"
+        name="Self Service Form Template"
+        priority="930"
+        primary="True"
     >
-
-        <xpath expr="//header" position="replace">
-            <xpath expr="." position="inside">
-                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/base.css" />
-                <link rel="stylesheet" href="/g2p_self_service_portal/static/src/css/self_service_portal.css" />
-            </xpath>
-            <header t-if="not no_header" id="top" data-anchor="true">
-                <div class="header-container">
-                    <div class='nav'>
-                        <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
-                                class="main-logo" />
-                        </a>
-                        <div class='nav-user'>
-                            <div class="search-box">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="13.6"
-                                    height="13.6"
-                                    fill="currentColor"
-                                    class="bi bi-search search-icon"
-                                    viewBox="0 0 16 16"
-                                >
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                                    />
-                                </svg>
-                                <input placeholder="Search here" class="search-text" />
-
-                            </div>
-                            <div class="language-dropdown language-box">
-                                <button class="dropdown-toggle button" type="button"
-                                    id="language-dropdown-button" data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                    <img src="/g2p_self_service_portal/static/src/img/flag_en.png"
-                                        alt="English" class='flag' /> <span>English</span></button>
-                                <div class="dropdown-menu"
-                                    aria-labelledby="language-dropdown-button">
-                                    <a class="dropdown-item" href="#">
-                                        <img
-                                            src="/g2p_self_service_portal/static/src/img/flag_en.png"
-                                            alt="English" class='flag' />
-                                        <span>English</span>
-                                    </a>
-                                    <a class="dropdown-item" href="#" >
-                                        <img
-                                            src="/g2p_self_service_portal/static/src/img/flag_hk.png"
-                                            alt="中国人"  class='flag'/>
-                                        <span>中国人</span>
-                                    </a>
-                                    <a class="dropdown-item" href="#">
-                                        <img
-                                            src="/g2p_self_service_portal/static/src/img/flag_ph.png"
-                                            alt="Filipino" class='flag' />
-                                        <span>Filipino</span>
-                                    </a>
-
-                                </div>
-                            </div>
-                            <div class="dropdown user">
-                                <a
-                                    class="nav-link py-0 text-dark d-inline-block dropdown-toggle"
-                                    href="#"
-                                    data-toggle="dropdown"
-                                >
-                                    <img
-                                        t-attf-src="/web/image?model=res.users&amp;field=avatar_128&amp;id={{request.env.uid}}"
-                                        alt="User"
-                                        class="rounded-circle o_user_avatar user-image"
-                                    />
-                                </a>
-                                <div class="dropdown-menu user-block">
-                                    <ul>
-                                        <li>
-                                            <a href='/selfservice/myprofile' class="link">My Profile</a>
-                                        </li>
-
-                                        <li>
-                                            <a
-                                                href="#"
-                                                class="link"
-                                            >Menu Item</a>
-                                        </li>
-                                        <hr />
-                                        <li>
-                                            <a
-                                                href="/selfservice/login"
-                                                class="link"
-                                            >Logout</a>
-                                        </li>
-
-                                    </ul>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </xpath>
-
-        <xpath expr="//main" position="replace">
-            <main class="form-template">
+        <xpath expr="//t[@t-out='0']" position="replace">
+            <div class="form-template">
                 <div class="row">
-                        <div class="col-md-1"/>
-                        <div class="col-md-11">
-                            <div class="details">Application Form</div>
-                            <nav aria-label="breadcrumb">
-                                <ol class="breadcrumb form-layout-breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
-                                    <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/programs">All Programs</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Application Form</li>
-                                </ol>
-                            </nav>
+                    <div class="col-md-1" />
+                    <div class="col-md-11">
+                        <div class="details">Application Form</div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb form-layout-breadcrumb">
+                                <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    <a href="/selfservice/programs">
+                                        All Programs
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    Application Form
+                                </li>
+                            </ol>
+                        </nav>
                     </div>
                 </div>
 
                 <div id="toast-container">
-                    <div id="toast-message"></div>
-                    <button id="toast-close-btn" onclick="hide_toast()"><img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" /></button>
+                    <div id="toast-message" />
+                    <button id="toast-close-btn" onclick="hide_toast()">
+                        <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
+                    </button>
                 </div>
-                    
+
                 <div class="row">
-                    <div class="col-md-1"/>
+                    <div class="col-md-1" />
                     <div class="col-md-7">
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description"><t t-esc="program"/></p>
+                                <p class="form-description"><t t-esc="program" /></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <div class="note">
                                     <div class="container">
-                                        <p class="mandatory-fields-note">Fields marked with "<span class="s_website_form_mark">*</span>" are mandatory</p>
+                                        <p class="mandatory-fields-note">
+                                            Fields marked with
+                                            "<span class="s_website_form_mark">*</span>"
+                                            are mandatory
+                                        </p>
                                     </div>
                                 </div>
-                                <t t-out="0" />
                             </div>
+                            <t t-out="0" />
                         </div>
                     </div>
-
                     <div class="col-md-3">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading"><t t-esc="program"/></h5>
-                                <p class="action-description">This scheme is available till 31st March, 2023. Eligible members can avail the benefits by applying to this scheme.</p>
+                                <h5 class="action-heading"><t t-esc="program" /></h5>
+                                <p class="action-description">
+                                    This scheme is available till 31st March, 2023.
+                                    Eligible members can avail the benefits by applying to this scheme.
+                                </p>
                             </div>
-                            
+
                             <div class="card-body" style="padding: 20px;">
                                 <!-- <div id="program_id" invisible="1" class="invisible">
                                     <t t-esc="program_id" />
                                 </div> -->
-                                <button onclick="form_submit_action()" t-att-program="program_id" id="program_submit_id" type="submit" class="btn btn-primary btn-lg btn-block form_submit_action">
+                                <button
+                                    onclick="form_submit_action()"
+                                    t-att-program="program_id"
+                                    id="program_submit_id"
+                                    type="submit"
+                                    class="btn btn-primary btn-lg btn-block form_submit_action"
+                                >
                                     Submit
                                 </button>
-                                <button type="button" class="btn btn-outline-primary btn-lg btn-block form_cancel_action" data-toggle="modal" data-target="#exampleModalCenter">
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary btn-lg btn-block form_cancel_action"
+                                    data-toggle="modal"
+                                    data-target="#exampleModalCenter"
+                                >
                                     Cancel
                                 </button>
 
                                 <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div
+                                    class="modal fade"
+                                    id="exampleModalCenter"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle"
+                                    aria-hidden="true"
+                                >
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Discard applicaton?</h5>
+                                                <h5
+                                                    class="modal-title"
+                                                    id="exampleModalLongTitle"
+                                                >Discard applicaton?</h5>
                                             </div>
                                             <div class="modal-body">
-                                                <p>The entered data will not be saved. Are you sure you want to discard the form?</p>
+                                                <p>
+                                                    The entered data will not be saved.
+                                                    Are you sure you want to discard the form?
+                                                </p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary modal-discard-button" onclick="location.href = '/selfservice/home';">Discard</button>
-                                                <button type="button" class="btn btn-outline-primary modal-cancel-button" data-dismiss="modal">Cancel</button>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-primary modal-discard-button"
+                                                    onclick="location.href = '/selfservice/home';"
+                                                >
+                                                    Discard
+                                                </button>
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-outline-primary modal-cancel-button"
+                                                    data-dismiss="modal"
+                                                >
+                                                    Cancel
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -186,54 +135,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1"/>
+                    <div class="col-md-1" />
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
-                        <h5>Hi <t t-esc="user"/>, how are you doing?</h5>
+                        <h5>Hi <t t-esc="user" />, how are you doing?</h5>
                         <p>I am here to assist you. Take a few minutes and lets connect!</p>
                     </div>
                     <div class="chat-assist-icon">
-                        <a href="#" onclick="toggle_chat_bot()"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
-                    </div>
-                </div>
-            </main>
-        </xpath>
-
-        <xpath expr="//footer" position="replace">
-            <footer t-if="not no_footer" id="bottom" data-anchor="true"
-                t-attf-class="bg-light o_footer">
-                <div class="footer-container">
-                    <div class='nav'>
-                        <a href='/selfservice'>
-                            <img src="/g2p_self_service_portal/static/src/img/logo@2x.png"
-                                class="main-logo" />
+                        <a href="#" onclick="toggle_chat_bot()">
+                            <img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" />
                         </a>
-                        <ul class='list-container'>
-                            <li class="nav-item">
-                                <a class="nav-link link" aria-current="page" href="/selfservice/aboutus">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="/selfservice/contactus">Contact Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="/selfservice/staticpage">Static Page</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="errorpage">Error Page</a>
-                            </li>
-                        </ul>
-                       
                     </div>
-                    <hr />
-                    <div class='copyright'>
-                        <p>© 2023 National Social Benefits Portal. All rights reserved.</p>
-                    </div>
-
                 </div>
-            </footer>
+            </div>
         </xpath>
     </template>
 </odoo>
-
-
