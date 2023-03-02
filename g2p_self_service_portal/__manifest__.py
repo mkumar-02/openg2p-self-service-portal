@@ -13,8 +13,8 @@
         "g2p_registry_addl_info",
         "g2p_programs",
         "website",
-        "web"
-          ],
+        "web",
+    ],
     "data": [
         "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
@@ -32,7 +32,6 @@
         "views/g2p_self_service_default_form.xml",
         "views/g2p_self_service_submitted_forms.xml",
         "views/res_config_settings.xml",
-
     ],
     "assets": {
         "web.assets_backend": [],
@@ -45,7 +44,6 @@
             # "g2p_self_service_portal/static/src/js/self-service_search_sort.js",
             # "g2p_self_service_portal/static/src/js/self-service_search_sort_all.js",
             # "g2p_self_service_portal/static/src/js/self_service_welcome_alert.js"
-
         ],
         "web.assets_common": [],
     },
