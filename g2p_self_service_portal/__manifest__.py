@@ -14,6 +14,7 @@
         "g2p_programs",
         "website",
         "web",
+        "auth_oidc",
     ],
     "data": [
         "data/g2p_self_service_form_action_data.xml",
