@@ -1321,6 +1321,62 @@ body{
   color: #494DAF !important;
 }
 
+.form-template .container-right .card-header .form-status{
+  padding-left: 20px;
+  padding-bottom: 20px;
+  margin-top: -12px;
+}
+
+.form-template .container-right .card-header .form-status button{
+  background: #FAF6CF 0% 0% no-repeat padding-box;
+  border-radius: 4px;
+  color: #3C5160;
+  font-size: 12px;
+  height: 25px;
+  border: none;
+  padding-left: 13px;
+  padding-right: 11px;
+}
+
+.form-template .container-right .card-header .form-status button:focus, .form-template .container-right .card-header .form-status button:focus-visible{
+  outline: none !important;
+}
+
+.form-template .container-right .form-application-id{
+  margin-bottom: 20px;
+}
+
+.form-template .container-right p{
+  margin: 0px;
+  color: #777777;
+  font-size: 13px;
+}
+
+.form-template .container-right b{
+  font-size: 14px;
+}
+
+.form-template .container-right .card-footer, .form-template .container-right .card-footer a:hover{
+  background: none;
+}
+
+.form-template .container-right .card-footer a, .form-template .container-right .card-footer a:active{
+  border: 1px solid #494DAF !important;
+  color: #494DAF !important;
+  font-size: 14px !important;
+  height: 54px !important;
+  background: none !important;
+  padding: 15px;
+}
+
+.form-template .container-right .card-footer a:focus{
+  box-shadow: none !important;
+}
+
+.form-template .container-right .card-footer a:focus-visible{
+  outline: none !important;
+}
+
 .form-template .ssp-contact-us{
   width: 352px;
   height: 93px;
@@ -1381,3 +1437,4 @@ body{
   height: 27px;
   margin: 19.34px;
 }
+

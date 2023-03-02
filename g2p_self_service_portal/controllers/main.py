@@ -222,89 +222,59 @@ class SelfServiceContorller(http.Controller):
                 },
             },
         )
+    
+    @http.route(["/selfservice/apply/<int:id>"], type="http", auth="user", website=True)
+    def self_service_apply_programs(self, id):
+        program = request.env['g2p.program'].sudo().browse(id)
+        current_partner = request.env.user.partner_id
 
-    @http.route(["/selfservice/apply"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, **kwargs):
-        program = request.env['g2p.program'].sudo().search([("id", "=", kwargs['id'])])
-        form_id = program["self_service_portal_form"].id
-        if form_id == False:
-            return "No form mapped with the program"
-        form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
+        for mem in current_partner.program_membership_ids:
+            if mem.program_id.id == id:
+                return request.redirect(f'/selfservice/submitted/{id}')
 
+        view = program.self_service_portal_form.view_id
+
+        return request.render(view.id, {
+            'program': program.name,
+            'program_id': program.id,
+            'user': request.env.user.given_name
+            }
+        )
      
-        request.env['website.page'].sudo().search([("id", "=", form_id)]).write({'url': form_url.replace(form_url, '/selfservice/apply/' + str(form_id))})
-        form_url = request.env['website.page'].sudo().search([("id", "=", form_id)])['url']
+    
+    @http.route(["/selfservice/submitted/<int:id>"], type="http", auth="user", website=True)
+    def self_service_form_details(self, id, **kwargs):
 
-        current_user = request.env.user
-        data = {
-            'program_name': program['name'],
-            'current_user_name': current_user.name.split(' ')[0].replace(',', '')
-        }
+        program = request.env['g2p.program'].sudo().browse(id)
+        current_partner = request.env.user.partner_id
 
-        params = urlencode(data)
-        redirect_url = form_url+ '?' + params
-        return werkzeug.utils.redirect(redirect_url)
+        if(request.httprequest.method == "POST"):
+
+            form_data = kwargs
+
+            additional_info = current_partner.additional_g2p_info if current_partner.additional_g2p_info else {}
+            additional_info.update(form_data)
+            current_partner.additional_g2p_info = additional_info
+
+            apply_to_program = {
+                'partner_id': current_partner.id,
+                'program_id': program.id
+            }
+
+            program_member = request.env['g2p.program_membership'].sudo().create(apply_to_program)
+
+        else:
+            program_member = request.env['g2p.program_membership'].sudo().search([('program_id', '=', program.id), ('partner_id', '=', current_partner.id)], limit = 1)
             
-
-    # @http.route(["/"], type="http", auth="user", website=True)
-    # def self_service_apply_programs(self, **kwargs):
-    #     # Implement applying for programs
-    #     _logger.debug("HOMEUser")
-    #     _logger.debug(request.env.user)
-    #     return request.redirect("/selfservice/home")
-    
-    # @http.route(["/my"], type="http", auth="user", website=True)
-    # def self_service_apply_programs(self, **kwargs):
-    #     # Implement applying for programs
-    #     _logger.debug("HOMEUser")
-    #     _logger.debug(request.env.user)
-    #     return request.redirect("/selfservice/home")
-    
-    @http.route(["/selfservice/submitted"], type="http", auth="user", website=True)
-    def self_service_form_details(self, **kwargs):
-
-        form_data = {}
-        current_user = request.env.user
-        form_data['additional_info'] = json.dumps(kwargs)
-
-        request.env['res.partner'].sudo().search(
-            [("name", "=", current_user.name)]).write(form_data)
-
-        program_name = kwargs['program_name']
-        program_id = request.env['g2p.program'].sudo().search([("name", "=", program_name)]).id
-        
-        today_date = datetime.today().strftime("%d-%b-%Y")
-
-        d = datetime.today().strftime("%d")
-        m = datetime.today().strftime("%m")
-        y = datetime.today().strftime("%y")
-
-        random_number = str(random.randint(1, 100000))
-
-        def random_number_length(n):
-            n = str(n)
-            l = len(n)
-            if (l < 5):
-                while l > 5:
-                    n = '0' + n
-                    l = l + 1
-                return '0' + n
-            return n
-
-        application_id = int(d + m + y + random_number_length(random_number))
-
-        apply_to_program = {
-            'partner_id': current_user.partner_id.id,
-            'program_id': program_id,
-            'application_id': application_id
-        }
-
-        request.env['g2p.program_membership'].sudo().create(apply_to_program)
+            if len(program_member) <1:
+                return request.redirect(f'/selfservice/apply/{id}')
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
-                "submission_date": today_date,
-                "application_id": application_id
+                "program": program.name,
+                "submission_date": program_member.enrollment_date,
+                "application_id": program_member.application_id,
+                'user': current_partner.given_name
             },
         )

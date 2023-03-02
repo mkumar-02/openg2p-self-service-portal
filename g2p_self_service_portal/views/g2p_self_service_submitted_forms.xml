@@ -7,12 +7,12 @@
                 <div class="row">
                     <div class="col-md-1"/>
                     <div class="col-md-11">
-                        <div class="details">Program Details</div>
+                        <div class="details">Submitted Application Form</div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb form-layout-breadcrumb">
                                 <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/allprograms">All Programs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Program Details</li>
+                                <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/programs">All Programs</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Submitted Application Form</li>
                             </ol>
                         </nav>
                     </div>
@@ -23,8 +23,8 @@
                     <div class="col-md-7">
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
-                                <h5 class="mb-0 form-heading">Application Form</h5>
-                                <p class="form-description">Covid-19 relief scheme</p>
+                                <h5 class="mb-0 form-heading">Submitted Application Form</h5>
+                                <p class="form-description"><t t-esc="program" /></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
                                 <!-- <form id="formId" action="/submit" method="POST" role="form">
@@ -38,21 +38,39 @@
                     <div class="col-md-3">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
-                                <h5 class="action-heading">Covid-19 relief scheme</h5><br/>
+                                <h5 class="action-heading"><t t-esc="program" /></h5>
+                                <div class="form-status">
+                                    <button>Submitted</button>
+                                </div>
                             </div>
                             <div class="card-body" style="padding: 20px;">
-                                <p>Application ID</p>
-                                <b><t t-esc="application_id" /></b>
-                                <p>Submitted On</p>
-                                <b><t t-esc="submission_date" /></b>
-                                <button type="submit" class="btn btn-outline-primary btn-lg btn-block">
+                                <div class="form-application-id">
+                                    <p>Application ID</p>
+                                    <b><t t-esc="application_id" /></b>
+                                </div>
+                                <div>
+                                    <p>Submitted On</p>
+                                    <b><t t-esc="submission_date" /></b>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="padding: 20px;">
+                                <a href="/selfservice/home" class="btn btn-outline-primary btn-lg btn-block">
                                     View My Programs
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-1"/>
                 </div>
-                <div class="col-md-1 mb-4"/>
+                <div class="ssp-contact-us">
+                    <div id="chat-bot" class="contact-us-message">
+                        <h5>Hi <t t-esc="user"/>, how are you doing?</h5>
+                        <p>I am here to assist you. Take a few minutes and lets connect!</p>
+                    </div>
+                    <div class="chat-assist-icon">
+                        <a href="#" onclick="toggle_chat_bot()"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
+                    </div>
+                </div>
            </main>
         </t>
    </template>

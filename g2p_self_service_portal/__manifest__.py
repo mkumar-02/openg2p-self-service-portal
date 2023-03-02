@@ -10,11 +10,13 @@
     "depends": [
         "g2p_registry_base",
         "g2p_registry_individual",
+        "g2p_registry_addl_info",
         "g2p_programs",
         "website",
         "web"
           ],
     "data": [
+        "data/g2p_self_service_form_action_data.xml",
         "views/g2p_self_service_base.xml",
         "views/g2p_self_service_login.xml",
         "views/g2p_self_service_dashboard.xml",

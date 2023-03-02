@@ -9,7 +9,7 @@
             <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
                     <group>
-                        <field name="self_service_portal_form" attrs="{'readonly': [('have_members', '==', True)]}"/>
+                        <field name="self_service_portal_form"/>
                     </group>
                 </page>
             </xpath>
