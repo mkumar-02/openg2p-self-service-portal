@@ -2,10 +2,12 @@ const alertBox = document.getElementById("alertbox");
 const closeBtn = alertBox.querySelector(".closebtn");
 
 if (sessionStorage.getItem("alertShown") === "false") {
-    alertBox.style.display = "block"; // Show the box
+    // Show the box
+    alertBox.style.display = "block";
 }
 
 closeBtn.addEventListener("click", function () {
     sessionStorage.setItem("alertShown", "true");
-    alertBox.style.display = "none"; // Hide the box when close button is clicked
+    // Hide the box when close button is clicked
+    alertBox.style.display = "none";
 });

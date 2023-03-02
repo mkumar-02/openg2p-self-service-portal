@@ -4,6 +4,7 @@
         id="self_service_form_template"
         inherit_id="g2p_self_service_portal.base"
         name="Self Service Form Template"
+        priority="930"
         primary="True"
     >
         <xpath expr="//t[@t-out='0']" position="replace">
@@ -20,10 +21,7 @@
                                         All Programs
                                     </a>
                                 </li>
-                                <li
-                                    class="breadcrumb-item active"
-                                    aria-current="page"
-                                >
+                                <li class="breadcrumb-item active" aria-current="page">
                                     Application Form
                                 </li>
                             </ol>

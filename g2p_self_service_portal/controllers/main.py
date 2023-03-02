@@ -207,14 +207,16 @@ class SelfServiceContorller(http.Controller):
             },
         )
 
-    @http.route(["/selfservice/apply/<int:id>"], type="http", auth="user", website=True)
-    def self_service_apply_programs(self, id):
-        program = request.env["g2p.program"].sudo().browse(id)
+    @http.route(
+        ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
+    )
+    def self_service_apply_programs(self, _id):
+        program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
-            if mem.program_id.id == id:
-                return request.redirect(f"/selfservice/submitted/{id}")
+            if mem.program_id.id == _id:
+                return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 
@@ -228,11 +230,11 @@ class SelfServiceContorller(http.Controller):
         )
 
     @http.route(
-        ["/selfservice/submitted/<int:id>"], type="http", auth="user", website=True
+        ["/selfservice/submitted/<int:_id>"], type="http", auth="user", website=True
     )
-    def self_service_form_details(self, id, **kwargs):
+    def self_service_form_details(self, _id, **kwargs):
 
-        program = request.env["g2p.program"].sudo().browse(id)
+        program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
         if request.httprequest.method == "POST":
@@ -270,7 +272,7 @@ class SelfServiceContorller(http.Controller):
             )
 
             if len(program_member) < 1:
-                return request.redirect(f"/selfservice/apply/{id}")
+                return request.redirect(f"/selfservice/apply/{_id}")
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",

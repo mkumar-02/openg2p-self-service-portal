@@ -15,7 +15,7 @@ controller along with the program_id as query parameter, where the following tas
   url.
 - At last we will pass the program_name and current_user_name as query parameter to the above url.
 
-****Note****: If form is not mapped with the program. Refer this repo [Form mapping with Program]() for
+**\*\*Note\*\***: If form is not mapped with the program. Refer this repo [Form mapping with Program]() for
 mapping form to program.
 
 So, this controller will be redirected to the application form of the program and you can fill out the form
@@ -49,7 +49,7 @@ Along with the required fields it will also check for the valid data type.
         3. data type is tel
              validaton message: Please enter a valid telephone number
 
-****Note****: Both the error message and validation message will not be displayed simultaneously.
+**\*\*Note\*\***: Both the error message and validation message will not be displayed simultaneously.
 
 When all the required field and valid data type is entered the submit button will go to
 `/selfservice/submitted` controller. In this controller following task will be executed:

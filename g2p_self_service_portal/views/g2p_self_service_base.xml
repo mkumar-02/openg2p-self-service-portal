@@ -134,11 +134,7 @@
                         </a>
                         <ul class="list-container">
                             <li class="nav-item">
-                                <a
-                                    class="nav-link link"
-                                    aria-current="page"
-                                    href="/selfservice/aboutus"
-                                >
+                                <a class="nav-link link" aria-current="page" href="/selfservice/aboutus">
                                     About Us
                                 </a>
                             </li>

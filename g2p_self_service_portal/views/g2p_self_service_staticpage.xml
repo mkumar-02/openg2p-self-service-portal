@@ -5,6 +5,7 @@
         id="static_page_base"
         name="G2P Self Service Static Page Base"
         inherit_id="g2p_self_service_portal.base"
+        priority="920"
         primary="True"
     >
         <xpath expr="//t[@t-out='0']" position="replace">

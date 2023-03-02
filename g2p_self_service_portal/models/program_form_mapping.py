@@ -17,7 +17,13 @@ class G2PProgram(models.Model):
         )
 
         index = form_view_template.find("</form>")
-        csrf_generate_token_text = '<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>'
+        csrf_generate_token_text = """
+            <input
+                type="hidden"
+                name="csrf_token"
+                t-att-value="request.csrf_token()"
+            />
+            """
 
         if index != -1:
             if csrf_generate_token_text not in form_view_template:

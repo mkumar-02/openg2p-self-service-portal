@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("chartContainer").innerHTML =
         '<canvas id="myChart" width="150" height="150"></canvas>';
     var ctx = document.getElementById("myChart").getContext("2d");
+    // eslint-disable-next-line no-unused-vars,no-undef
     var myChart = new Chart(ctx, {
         type: "doughnut",
         data: {

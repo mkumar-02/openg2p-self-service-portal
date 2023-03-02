@@ -1,7 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 function get_query_params(url) {
     const paramArr = url.slice(url.indexOf("?") + 1).split("&");
     const params = {};
-    paramArr.map((param) => {
+    paramArr.array.forEach((param) => {
         const [key, val] = param.split("=");
         params[key] = decodeURIComponent(val);
     });
@@ -15,6 +16,7 @@ function show_toast(message) {
     toast_container.style.display = "block";
 }
 
+// eslint-disable-next-line no-unused-vars
 function hide_toast() {
     const toast_container = document.querySelector("#toast-container");
     toast_container.style.display = "none";
@@ -36,6 +38,7 @@ function isValidTelNumber(input_str) {
     return re.test(input_str);
 }
 
+// eslint-disable-next-line no-unused-vars,complexity
 function form_submit_action() {
     // URL Change
     var test = $(".s_website_form");
@@ -56,52 +59,52 @@ function form_submit_action() {
         var error_message = '<div class="input-field-error-message">Please enter ' + field_name + "</div>";
 
         // Null value
-        if (required_input_field.value == "") {
+        if (required_input_field.value === "") {
             required_input_field.style.borderColor = "#D32D2D";
             isValid = false;
             show_toast("Please update all mandatory fields");
 
-            if (required_input_field.type == "radio" || required_input_field.type == "checkbox") {
-            } else if (required_fields[i].getElementsByClassName("input-field-error-message").length == 0) {
-                    required_fields[i].insertAdjacentHTML("beforeend", error_message);
-                } else {
-                    if (
-                        required_fields[i].getElementsByClassName("input-field-validation-message").length !=
-                        0
-                    ) {
-                        required_fields[i].getElementsByClassName(
-                            "input-field-validation-message"
-                        )[0].style.display = "none";
-                    }
-                    required_fields[i].getElementsByClassName("input-field-error-message")[0].style.display =
-                        "block";
+            if (required_input_field.type === "radio" || required_input_field.type === "checkbox") {
+                // Pass
+            } else if (required_fields[i].getElementsByClassName("input-field-error-message").length === 0) {
+                required_fields[i].insertAdjacentHTML("beforeend", error_message);
+            } else {
+                if (
+                    required_fields[i].getElementsByClassName("input-field-validation-message").length !== 0
+                ) {
+                    required_fields[i].getElementsByClassName(
+                        "input-field-validation-message"
+                    )[0].style.display = "none";
                 }
+                required_fields[i].getElementsByClassName("input-field-error-message")[0].style.display =
+                    "block";
+            }
         }
 
         // Checking valid value
         else {
             required_input_field.style.borderColor = "#E3E3E3";
             // Removing the error message of not filling the input field
-            if (required_fields[i].getElementsByClassName("input-field-error-message").length != 0) {
+            if (required_fields[i].getElementsByClassName("input-field-error-message").length !== 0) {
                 required_fields[i].getElementsByClassName("input-field-error-message")[0].style.display =
                     "none";
             }
 
-            if (required_fields[i].getElementsByClassName("input-field-validation-message").length != 0) {
+            if (required_fields[i].getElementsByClassName("input-field-validation-message").length !== 0) {
                 required_fields[i].getElementsByClassName("input-field-validation-message")[0].style.display =
                     "none";
             }
 
-            if (required_input_field.type == "email") {
-                if (isValidEmail(required_input_field.value) == false) {
+            if (required_input_field.type === "email") {
+                if (isValidEmail(required_input_field.value) === false) {
                     isValid = false;
-                    validation_message =
+                    const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid email address</div>';
                     required_input_field.style.borderColor = "#D32D2D";
                     show_toast("Please update all mandatory fields");
 
                     if (
-                        required_fields[i].getElementsByClassName("input-field-validation-message").length ==
+                        required_fields[i].getElementsByClassName("input-field-validation-message").length ===
                         0
                     ) {
                         required_fields[i].insertAdjacentHTML("beforeend", validation_message);
@@ -111,16 +114,16 @@ function form_submit_action() {
                         )[0].style.display = "block";
                     }
                 }
-            } else if (required_input_field.type == "url") {
-                if (isValidURL(required_input_field.value) == false) {
+            } else if (required_input_field.type === "url") {
+                if (isValidURL(required_input_field.value) === false) {
                     isValid = false;
-                    validation_message =
+                    const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid url</div>';
                     show_toast("Please update all mandatory fields");
                     required_input_field.style.borderColor = "#D32D2D";
 
                     if (
-                        required_fields[i].getElementsByClassName("input-field-validation-message").length ==
+                        required_fields[i].getElementsByClassName("input-field-validation-message").length ===
                         0
                     ) {
                         required_fields[i].insertAdjacentHTML("beforeend", validation_message);
@@ -130,16 +133,16 @@ function form_submit_action() {
                         )[0].style.display = "block";
                     }
                 }
-            } else if (required_input_field.type == "tel") {
-                if (isValidTelNumber(required_input_field.value) == false) {
+            } else if (required_input_field.type === "tel") {
+                if (isValidTelNumber(required_input_field.value) === false) {
                     isValid = false;
-                    validation_message =
+                    const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid telephone number</div>';
                     show_toast("Please update all mandatory fields");
                     required_input_field.style.borderColor = "#D32D2D";
 
                     if (
-                        required_fields[i].getElementsByClassName("input-field-validation-message").length ==
+                        required_fields[i].getElementsByClassName("input-field-validation-message").length ===
                         0
                     ) {
                         required_fields[i].insertAdjacentHTML("beforeend", validation_message);
@@ -149,7 +152,7 @@ function form_submit_action() {
                         )[0].style.display = "block";
                     }
                 }
-            } else if (required_input_field.type == "radio" || required_input_field.type == "checkbox") {
+            } else if (required_input_field.type === "radio" || required_input_field.type === "checkbox") {
                 var options = required_fields[i].getElementsByClassName("form-check-input");
                 var isChecked = false;
 
@@ -161,13 +164,15 @@ function form_submit_action() {
                     }
                 }
 
-                if (isChecked == false) {
+                if (isChecked === false) {
                     isValid = false;
-                    var field_name = required_input_field.name.toLowerCase();
+                    var field_name_checked = required_input_field.name.toLowerCase();
                     var select_error_message =
-                        '<div class="input-field-error-message">Please select ' + field_name + "</div>";
+                        '<div class="input-field-error-message">Please select ' +
+                        field_name_checked +
+                        "</div>";
 
-                    if (required_fields[i].getElementsByClassName("input-field-error-message").length == 0) {
+                    if (required_fields[i].getElementsByClassName("input-field-error-message").length === 0) {
                         required_fields[i].insertAdjacentHTML("beforeend", select_error_message);
                     } else {
                         required_fields[i].getElementsByClassName(
@@ -188,6 +193,7 @@ function form_submit_action() {
     }
 }
 
+// eslint-disable-next-line no-unused-vars
 function toggle_chat_bot() {
     var box = document.getElementById("chat-bot");
     if (box.style.display === "none") {

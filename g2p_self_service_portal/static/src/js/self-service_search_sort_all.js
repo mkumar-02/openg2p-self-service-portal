@@ -2,7 +2,8 @@ const alltable = document.getElementById("allprograms");
 const allheadercells = alltable.querySelectorAll("th");
 
 allheadercells.forEach(function (th) {
-    let sortOrder = "asc"; // Default sort order
+    // Default sort order
+    let sortOrder = "asc";
 
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
