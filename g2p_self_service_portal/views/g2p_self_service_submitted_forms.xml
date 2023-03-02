@@ -1,25 +1,34 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
    <template id="self_service_form_submitted" name="G2P Self Service Form Submitted">
         <t t-call="g2p_self_service_portal.base">
-            <div id="wrap" class="oe_structure oe_empty"/>
+            <div id="wrap" class="oe_structure oe_empty" />
             <main class="form-template">
                 <div class="row">
-                    <div class="col-md-1"/>
+                    <div class="col-md-1" />
                     <div class="col-md-11">
                         <div class="details">Submitted Application Form</div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb form-layout-breadcrumb">
                                 <li class="breadcrumb-item"><a href="/selfservice/home">Home</a></li>
-                                <li class="breadcrumb-item" aria-current="page"><a href="/selfservice/programs">All Programs</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Submitted Application Form</li>
+                                <li class="breadcrumb-item" aria-current="page">
+                                    <a href="/selfservice/programs">
+                                        All Programs
+                                    </a>
+                                </li>
+                                <li
+                                    class="breadcrumb-item active"
+                                    aria-current="page"
+                                >
+                                    Submitted Application Form
+                                </li>
                             </ol>
                         </nav>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1"/>
+                    <div class="col-md-1" />
                     <div class="col-md-7">
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
@@ -30,7 +39,6 @@
                                 <!-- <form id="formId" action="/submit" method="POST" role="form">
                                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
                                 </form> -->
-                                
                             </div>
                         </div>
                     </div>
@@ -60,15 +68,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1"/>
+                    <div class="col-md-1" />
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
-                        <h5>Hi <t t-esc="user"/>, how are you doing?</h5>
+                        <h5>Hi <t t-esc="user" />, how are you doing?</h5>
                         <p>I am here to assist you. Take a few minutes and lets connect!</p>
                     </div>
                     <div class="chat-assist-icon">
-                        <a href="#" onclick="toggle_chat_bot()"><img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" /></a>
+                        <a href="#" onclick="toggle_chat_bot()">
+                            <img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" />
+                        </a>
                     </div>
                 </div>
            </main>
