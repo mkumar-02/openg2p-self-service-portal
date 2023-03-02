@@ -230,7 +230,11 @@ class SelfServiceContorller(http.Controller):
         )
 
     @http.route(
-        ["/selfservice/submitted/<int:_id>"], type="http", auth="user", website=True
+        ["/selfservice/submitted/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+        csrf=False,
     )
     def self_service_form_details(self, _id, **kwargs):
 
