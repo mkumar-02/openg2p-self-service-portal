@@ -108,23 +108,26 @@ class SelfServiceContorller(http.Controller):
                     ]
                 )
             )
-            myprograms.append(
-                {
-                    "id": program.id,
-                    "name": program.name,
-                    "has_applied": len(membership) > 0,
-                    "status": states.get(membership.state, "Error"),
-                    "issued": "{:,.2f}".format(amount_issued),
-                    "paid": "{:,.2f}".format(amount_received),
-                    "enrollment_date": membership.enrollment_date.strftime("%d-%b-%Y")
-                    if membership.enrollment_date
-                    else None,
-                    "is_latest": (datetime.today() - program.create_date).days < 21,
-                    "application_id": membership.application_id
-                    if membership.application_id
-                    else None,
-                }
-            )
+            if len(membership) > 0:
+                myprograms.append(
+                    {
+                        "id": program.id,
+                        "name": program.name,
+                        "has_applied": len(membership) > 0,
+                        "status": states.get(membership.state, "Error"),
+                        "issued": "{:,.2f}".format(amount_issued),
+                        "paid": "{:,.2f}".format(amount_received),
+                        "enrollment_date": membership.enrollment_date.strftime(
+                            "%d-%b-%Y"
+                        )
+                        if membership.enrollment_date
+                        else None,
+                        "is_latest": (datetime.today() - program.create_date).days < 21,
+                        "application_id": membership.application_id
+                        if membership.application_id
+                        else None,
+                    }
+                )
 
         entitlement = sum(
             ent.amount_issued
