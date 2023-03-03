@@ -5,7 +5,7 @@
         <t t-call="g2p_self_service_portal.base">
             <t t-set="title">All Programs | Self Service Portal</t>
             <div class="main-container">
-            <div class="container-adjuster"> 
+            <div class="container-adjuster">
                 <h5 class="all-title">All Programs</h5>
                 <ol class="breadcrumb  breadcrumb-list bg-transparent">
                     <li class="breadcrumb-item">
@@ -20,24 +20,24 @@
                         <form class="form-inline my-2 my-lg-0" action="/selfservice/programs">
                             <div class="search-box">
                                 <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="16"
-                                    height="16"
-                                    fill="currentColor"
-                                    class="bi bi-search search-icon"
-                                    viewBox="0 0 16 16"
-                                >
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="16"
+                                        height="16"
+                                        fill="currentColor"
+                                        class="bi bi-search search-icon"
+                                        viewBox="0 0 16 16"
+                                    >
                                     <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-                                    />
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                                        />
                                 </svg>
 
                                 <input
-                                    placeholder="Search by program name"
-                                    class="search-text"
-                                    name="q"
-                                    id="search-text"
-                                />
+                                        placeholder="Search by program name"
+                                        class="search-text"
+                                        name="q"
+                                        id="search-text"
+                                    />
                                 <span id="search-text-clear">
                                     <i class="fa fa-times" />
                                 </span>
@@ -82,20 +82,20 @@
                                             <t t-if="program['status']=='Submitted'">
                                                 <td>
                                                     <button
-                                                        string="Apply"
-                                                        type="object"
-                                                        class="submit-button"
-                                                    >
+                                                            string="Apply"
+                                                            type="object"
+                                                            class="submit-button"
+                                                        >
                                                         <t t-esc="program['status']" />
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <a t-attf-href="/selfservice/apply/{{program['id']}}">
                                                         <button
-                                                            string="View"
-                                                            type="object"
-                                                            class="view-button"
-                                                        >
+                                                                string="View"
+                                                                type="object"
+                                                                class="view-button"
+                                                            >
                                                             View
                                                         </button>
                                                     </a>
@@ -104,20 +104,20 @@
                                             <t t-elif="program['status']=='Enrolled'">
                                                 <td>
                                                     <button
-                                                        string="Apply"
-                                                        type="object"
-                                                        class="enroll-button"
-                                                    >
+                                                            string="Apply"
+                                                            type="object"
+                                                            class="enroll-button"
+                                                        >
                                                         <t t-esc="program['status']" />
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <a t-attf-href="/selfservice/apply/{{program['id']}}">
                                                         <button
-                                                            string="View"
-                                                            type="object"
-                                                            class="view-button"
-                                                        >
+                                                                string="View"
+                                                                type="object"
+                                                                class="view-button"
+                                                            >
                                                             View
                                                         </button>
                                                     </a>
@@ -127,10 +127,10 @@
                                         <t t-else="">
                                             <td>
                                                 <button
-                                                    string="Apply"
-                                                    type="object"
-                                                    class="notapplied-button"
-                                                >
+                                                        string="Apply"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                    >
                                                     Not Applied
                                                 </button>
                                             </td>
@@ -151,9 +151,9 @@
                         <t t-if="pager['sel'] &gt; 1">
                             <li class="pager-item">
                                 <a
-                                    t-attf-href="/selfservice/programs?page={{pager['sel']-1}}"
-                                    class="page-link"
-                                >
+                                        t-attf-href="/selfservice/programs?page={{pager['sel']-1}}"
+                                        class="page-link"
+                                    >
                                     <i class="fa fa-angle-left" />
                                 </a>
                             </li>
@@ -188,9 +188,9 @@
                         <t t-if="pager['sel'] &lt; pager['total']">
                             <li class="pager-item">
                                 <a
-                                    t-attf-href="/selfservice/programs?page={{pager['sel']+1}}"
-                                    class="page-link"
-                                >
+                                        t-attf-href="/selfservice/programs?page={{pager['sel']+1}}"
+                                        class="page-link"
+                                    >
                                     <i class="fa fa-angle-right" />
                                 </a>
                             </li>
@@ -204,9 +204,9 @@
 
                     </ul>
                     <script
-                        type="text/javascript"
-                        src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"
-                    />
+                            type="text/javascript"
+                            src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"
+                        />
                 </div>
             </div>
             </div>

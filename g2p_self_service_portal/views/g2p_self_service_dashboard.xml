@@ -10,7 +10,7 @@
         <t t-call="g2p_self_service_portal.base">
 
             <div class="main-container">
-                <div class="container-adjuster"> 
+                <div class="container-adjuster">
                     <div class="alert" id="alertbox">
                         <h6 class="welcome-title">Welcome to the National Social Benefits
                             Portal</h6>
@@ -62,7 +62,9 @@
                                         </th>
                                         <th class="right-align">Entitlement (in USD) <i class="fa fa-sort" />
                                         </th>
-                                        <th class="right-align">Amount Received (in USD) <i class="fa fa-sort" />
+                                        <th class="right-align">Amount Received (in USD) <i
+                                                class="fa fa-sort"
+                                            />
                                         </th>
                                     </tr>
                                 </thead>
@@ -98,14 +100,22 @@
 
                                             <t t-if="program['status']=='Submitted'">
                                                 <td>
-                                                    <button string="Apply" type="object" class="submit-button">
+                                                    <button
+                                                        string="Apply"
+                                                        type="object"
+                                                        class="submit-button"
+                                                    >
                                                         <t t-esc="program['status']" />
                                                     </button>
                                                 </td>
                                             </t>
                                             <t t-elif="program['status']=='Enrolled'">
                                                 <td>
-                                                    <button string="Apply" type="object" class="enroll-button">
+                                                    <button
+                                                        string="Apply"
+                                                        type="object"
+                                                        class="enroll-button"
+                                                    >
                                                         <t t-esc="program['status']" />
                                                     </button>
                                                 </td>
@@ -126,16 +136,20 @@
                                         </tr>
 
                                     </t>
-                                    
-                                    
+
+
                                 </t>
-                                    
-                                <t t-if="not program"> 
+
+                                <t t-if="not program">
                                     <tr>
-                                        <td colspan="7"  class="no-programs"> 
+                                        <td colspan="7" class="no-programs">
                                             <div class="no-programs-container">
-                                                <div class="no-program-text">You haven’t enrolled into any programs yet, please tap on the below link to view all programs.</div>
-                                                <div class="no-program-text"><a href="#">View All Programs</a></div>
+                                                <div
+                                                    class="no-program-text"
+                                                >You haven’t enrolled into any programs yet, please tap on the below link to view all programs.</div>
+                                                <div class="no-program-text"><a
+                                                        href="#"
+                                                    >View All Programs</a></div>
                                             </div>
                                         </td>
                                     </tr>

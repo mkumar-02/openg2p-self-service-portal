@@ -1,10 +1,10 @@
 const alertBox = document.getElementById("alertbox");
 const closeBtn = alertBox.querySelector(".closebtn");
 
-if(!sessionStorage.getItem("alertShown") ) {
-    sessionStorage.setItem("alertShown", "false")
+if (!sessionStorage.getItem("alertShown")) {
+    sessionStorage.setItem("alertShown", "false");
 }
-console.log(closeBtn)
+console.log(closeBtn);
 
 if (sessionStorage.getItem("alertShown") == "false") {
     alertBox.style.display = "block";
