@@ -91,7 +91,7 @@
                                     href="#"
                                     data-toggle="dropdown"
                                 >
-                                            <img
+                                        <img
                                         t-attf-src="/web/image?model=res.users&amp;field=avatar_128&amp;id={{request.env.uid}}"
                                         alt="User"
                                         class="rounded-circle o_user_avatar user-image"
@@ -105,13 +105,12 @@
                                                 class="link"
                                             >My Profile</a>
                                                 </li>
-
-                                                <li>
-                                                    <a href="#" class="link">Menu Item</a>
-                                                </li>
                                                 <hr />
                                                 <li>
-                                                    <a href="/selfservice/login" class="link">Logout</a>
+                                                    <a
+                                                href="/web/session/logout?redirect=/selfservice/login"
+                                                class="link"
+                                            >Logout</a>
                                                 </li>
 
                                             </ul>

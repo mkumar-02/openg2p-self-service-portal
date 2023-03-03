@@ -669,11 +669,16 @@ td .program-name {
     /* counter-increment: serial-number; Increment the serial number counter */
     content: none; /* Display the counter */
 }
-
+.tables-values-container {
+    min-height: 150px;
+}
 .no-programs {
     height: 150px !important;
     vertical-align: middle;
     border-bottom: none !important;
+}
+#allprograms {
+    border-top: 1px solid #ddd;
 }
 .no-program-text {
     width: 100%;

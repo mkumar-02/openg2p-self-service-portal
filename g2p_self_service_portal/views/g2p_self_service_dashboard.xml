@@ -139,8 +139,9 @@
 
 
                                 </t>
-
-                                <t t-if="not program">
+                                <!-- <t>
+                                <tr><td colspan="7"> <div class="no-program-text"> <t t-esc="len(myprograms)" /></div></td></tr></t> -->
+                                <t t-if="not programs">
                                     <tr>
                                         <td colspan="7" class="no-programs">
                                             <div class="no-programs-container">
