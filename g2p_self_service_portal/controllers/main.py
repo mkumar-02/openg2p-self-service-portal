@@ -247,15 +247,15 @@ class SelfServiceContorller(http.Controller):
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
-        if request.httprequest.method == "POST":
+        additional_info = (
+            current_partner.additional_g2p_info
+            if current_partner.additional_g2p_info
+            else []
+        )
 
+        if request.httprequest.method == "POST":
             form_data = kwargs
 
-            additional_info = (
-                current_partner.additional_g2p_info
-                if current_partner.additional_g2p_info
-                else []
-            )
             if isinstance(additional_info, list):
                 already_present = False
                 for element in additional_info:
