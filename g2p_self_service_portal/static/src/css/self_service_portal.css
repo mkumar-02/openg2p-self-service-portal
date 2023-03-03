@@ -1,3 +1,87 @@
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Regular.woff") format("woff");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Bold.woff") format("woff");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-BoldItalic.woff") format("woff");
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Italic.woff") format("woff");
+    font-style: italic;
+    font-weight: 400;
+}
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-Medium.woff") format("woff");
+    font-style: medium;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url("fonts/Inter-SemiBold.woff") format("woff");
+    font-style: bolder;
+    font-weight: 600;
+}
+
+header#top {
+    width: 100%;
+    margin: auto;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 4px 5px #0000000d;
+    opacity: 1;
+}
+
+header#top .header-container {
+    /* width: auto; */
+    margin: auto;
+}
+
+.header-container .nav {
+    margin: auto;
+    /* width: auto; */
+}
+
+main {
+    width: 100%;
+    margin: auto;
+}
+
+.container-adjuster {
+    width: 1088px;
+    margin: auto;
+}
+
+footer#bottom {
+    width: 100%;
+    margin: auto;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 4px 5px #0000000d;
+    opacity: 1;
+}
+footer#bottom .footer-container {
+    /* width: auto; */
+    margin: auto;
+}
+
+footer#bottom .footer-container .nav {
+    /* width: auto; */
+    margin: auto;
+}
+
 .ssp-login-body {
     background: transparent linear-gradient(0deg, #f5f7ff 0%, #f2f7ff 100%) 0% 0% no-repeat padding-box;
     opacity: 1;
@@ -9,11 +93,12 @@
     font-size: 14px;
     font-weight: 400;
     font-family: Inter;
+    overflow-y: auto;
 }
 
 .ssp-login-box {
     margin: auto;
-    top: 100px;
+    top: 75px;
     /*left: 461px; */
     width: 444px;
     /* height: 573px; */
@@ -39,7 +124,7 @@
 
 .login-bottom-text {
     margin: auto;
-    top: 100px;
+    top: 90px;
     /*left: 461px; */
     width: 444px;
     /* height: 573px; */
@@ -47,7 +132,7 @@
     /* box-shadow: 0px 3px 15px #0000000D; */
     /* border-radius: 20px; */
     /* opacity: 1; */
-    padding: 30px;
+    padding: 10px;
     position: relative;
     text-align: center;
 }
@@ -59,14 +144,20 @@
     align-items: center;
 }
 .ssp-login-box .logo {
-    width: 70%;
-    height: 70%;
+    width: 67%;
+    height: 67%;
 
     /* UI Properties */
     opacity: 1;
     margin-left: 15%;
     margin-right: 15%;
     margin-top: 20px;
+}
+
+.ssp-login-box .field-login label,
+.ssp-login-box .field-password label {
+    font-weight: bolder;
+    font-family: Inter;
 }
 
 .ssp-login-box .btn-primary {
@@ -117,7 +208,7 @@
 }
 .ssp-login-box .list-group-item {
     border: none;
-    font-weight: bolder;
+    font-weight: 600;
     color: #000000;
 }
 .ssp-login-box .oauth-link {
@@ -139,18 +230,18 @@
 .header-container {
     top: 0px;
     left: 0px;
-    width: 1366px;
+    /* width: 1366px; */
     height: 90px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 4px 5px #0000000d;
+    /* background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 4px 5px #0000000d; */
     opacity: 1;
 }
 .header-container .nav {
     /* Layout Properties */
     top: 0px;
     left: 0px;
-    margin-left: 139px;
-    margin-right: 152px;
+    /* margin-left: 139px;
+    margin-right: 152px; */
     width: 1083px;
     height: 90px;
     border: none;
@@ -197,7 +288,7 @@
     outline: none;
 }
 
-.alert {
+.main-container .alert {
     position: absolute;
     top: 90px;
     margin-left: 0px;
@@ -390,18 +481,19 @@ a:hover {
 /* Main content styles */
 .main-container {
     background: #f5f9fc 0% 0% no-repeat padding-box;
-    width: 1366px;
+    /* width: 1366px; */
     height: 100%;
     display: block;
     padding-top: 30px;
+    padding-bottom: 30px;
     opacity: 1;
 }
 
 .table-container {
     top: 120px;
-    margin-left: 139px;
+    /* margin-left: 139px; */
     width: 1088px;
-    margin-right: 139px;
+    /* margin-right: 139px; */
     margin-bottom: 33px;
     padding-bottom: 10px;
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -498,6 +590,10 @@ a:hover {
     height: 55px;
 }
 
+.tables-values-container .fa-sort {
+    font-size: 10px;
+    color: #a2a2a2;
+}
 table tr th {
     cursor: pointer;
 }
@@ -561,6 +657,7 @@ td .program-name {
 
 .css-serial {
     counter-reset: serial-number; /* Set the serial number counter to 0 */
+    border-top: 1px solid #ddd;
 }
 
 .css-serial td:first-child:before {
@@ -568,6 +665,31 @@ td .program-name {
     content: counter(serial-number); /* Display the counter */
 }
 
+.css-serial .no-programs:first-child:before {
+    /* counter-increment: serial-number; Increment the serial number counter */
+    content: none; /* Display the counter */
+}
+
+.no-programs {
+    height: 150px !important;
+    vertical-align: middle;
+    border-bottom: none !important;
+}
+.no-program-text {
+    width: 100%;
+    text-align: center;
+    color: #888888;
+    padding: 5px;
+}
+/* .no-programs-container{
+    min-height: 70px;
+    vertical-align:middle; */
+/* } */
+.no-program-text a {
+    padding: 10px;
+    font-weight: 600;
+    color: #494daf;
+}
 .notapplied-button {
     left: 811px;
     width: 84px;
@@ -620,9 +742,9 @@ td .program-name {
 .card-container {
     display: flex;
     justify-content: space-between;
-    margin-left: 139px;
+    /* margin-left: 139px; */
     width: 1088px;
-    margin-right: 139px;
+    /* margin-right: 139px; */
     margin-bottom: 33px;
 }
 .card {
@@ -741,7 +863,7 @@ li div p {
 
 /* All programs page*/
 .all-title {
-    margin-left: 10%;
+    /* margin-left: 10%; */
     margin-bottom: 0px;
     height: 26px;
     text-align: left;
@@ -751,12 +873,13 @@ li div p {
     opacity: 1;
 }
 .breadcrumb-list {
-    margin-left: 9%;
+    /* margin-left: 9%; */
     margin-right: 10%;
     margin-bottom: 33px;
     left: 139px;
     height: 17px;
     opacity: 1;
+    padding-left: 0px;
 }
 .breadcrumb-list .breadcrumb-item a {
     width: 40px;

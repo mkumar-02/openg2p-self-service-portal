@@ -8,10 +8,11 @@
         primary="True"
     >
         <xpath expr="//t[@t-out='0']" position="replace">
+            <div class="main-container">
+            <div class="container-adjuster">
             <div class="form-template">
                 <div class="row">
-                    <div class="col-md-1" />
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                         <div class="details">Application Form</div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb form-layout-breadcrumb">
@@ -37,8 +38,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1" />
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
@@ -58,7 +58,7 @@
                             <t t-out="0" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
                                 <h5 class="action-heading"><t t-esc="program" /></h5>
@@ -73,39 +73,39 @@
                                     <t t-esc="program_id" />
                                 </div> -->
                                 <button
-                                    onclick="form_submit_action()"
-                                    t-att-program="program_id"
-                                    id="program_submit_id"
-                                    type="submit"
-                                    class="btn btn-primary btn-lg btn-block form_submit_action"
-                                >
+                                            onclick="form_submit_action()"
+                                            t-att-program="program_id"
+                                            id="program_submit_id"
+                                            type="submit"
+                                            class="btn btn-primary btn-lg btn-block form_submit_action"
+                                        >
                                     Submit
                                 </button>
                                 <button
-                                    type="button"
-                                    class="btn btn-outline-primary btn-lg btn-block form_cancel_action"
-                                    data-toggle="modal"
-                                    data-target="#exampleModalCenter"
-                                >
+                                            type="button"
+                                            class="btn btn-outline-primary btn-lg btn-block form_cancel_action"
+                                            data-toggle="modal"
+                                            data-target="#exampleModalCenter"
+                                        >
                                     Cancel
                                 </button>
 
                                 <!-- Modal -->
                                 <div
-                                    class="modal fade"
-                                    id="exampleModalCenter"
-                                    tabindex="-1"
-                                    role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle"
-                                    aria-hidden="true"
-                                >
+                                            class="modal fade"
+                                            id="exampleModalCenter"
+                                            tabindex="-1"
+                                            role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle"
+                                            aria-hidden="true"
+                                        >
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5
-                                                    class="modal-title"
-                                                    id="exampleModalLongTitle"
-                                                >Discard applicaton?</h5>
+                                                            class="modal-title"
+                                                            id="exampleModalLongTitle"
+                                                        >Discard applicaton?</h5>
                                             </div>
                                             <div class="modal-body">
                                                 <p>
@@ -115,17 +115,17 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button
-                                                    type="button"
-                                                    class="btn btn-primary modal-discard-button"
-                                                    onclick="location.href = '/selfservice/home';"
-                                                >
+                                                            type="button"
+                                                            class="btn btn-primary modal-discard-button"
+                                                            onclick="location.href = '/selfservice/home';"
+                                                        >
                                                     Discard
                                                 </button>
                                                 <button
-                                                    type="button"
-                                                    class="btn btn-outline-primary modal-cancel-button"
-                                                    data-dismiss="modal"
-                                                >
+                                                            type="button"
+                                                            class="btn btn-outline-primary modal-cancel-button"
+                                                            data-dismiss="modal"
+                                                        >
                                                     Cancel
                                                 </button>
                                             </div>
@@ -135,7 +135,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1" />
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
@@ -148,6 +147,8 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            </div>
             </div>
         </xpath>
     </template>
