@@ -27,8 +27,8 @@
 
                 <div id="toast-container" class="toast-success-container">
                     <div id="toast-message" class="toast-success-message">
-                        Thank you. Your application has been submitted successfully. 
-                        Please note your application ID for future reference - 
+                        Thank you. Your application has been submitted successfully.
+                        Please note your application ID for future reference -
                         <t t-esc="application_id" />
                     </div>
                     <button id="toast-close-btn" onclick="hide_toast_success_msg()">

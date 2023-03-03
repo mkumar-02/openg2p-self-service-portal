@@ -255,13 +255,15 @@ class SelfServiceContorller(http.Controller):
             )
 
             current_additional_info_data = {
-                'id': _id,
-                'name': program.name,
-                'data': form_data
+                "id": _id,
+                "name": program.name,
+                "data": form_data,
             }
 
             if not previous_additional_info_data:
-                current_partner.additional_g2p_info = [current_additional_info_data,]
+                current_partner.additional_g2p_info = [
+                    current_additional_info_data,
+                ]
 
             else:
                 previous_additional_info_data.append(current_additional_info_data)

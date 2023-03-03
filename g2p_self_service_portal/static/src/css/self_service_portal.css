@@ -1057,12 +1057,12 @@ body {
     height: 11px;
 }
 
-.form-template .toast-success-container{
+.form-template .toast-success-container {
     display: block !important;
 }
 
-.form-template .toast-success-message{
-    background-color: #66AD5A !important;
+.form-template .toast-success-message {
+    background-color: #66ad5a !important;
     height: 93px !important;
     padding-right: 41px !important;
     line-height: 15px;
