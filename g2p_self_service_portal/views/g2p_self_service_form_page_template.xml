@@ -8,10 +8,11 @@
         primary="True"
     >
         <xpath expr="//t[@t-out='0']" position="replace">
+            <div class="main-container">
+            <div class="container-adjuster"> 
             <div class="form-template">
                 <div class="row">
-                    <div class="col-md-1" />
-                    <div class="col-md-11">
+                    <div class="col-md-12">
                         <div class="details">Application Form</div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb form-layout-breadcrumb">
@@ -37,8 +38,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-1" />
-                    <div class="col-md-7">
+                    <div class="col-md-8">
                         <div class="card container-left" style="width: auto; padding: 0px;">
                             <div class="card-header form-card-header" style="padding: 0px;">
                                 <h5 class="mb-0 form-heading">Application Form</h5>
@@ -58,7 +58,7 @@
                             <t t-out="0" />
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card container-right" style="width: auto; padding: 0px;">
                             <div class="card-header" style="padding: 0px;">
                                 <h5 class="action-heading"><t t-esc="program" /></h5>
@@ -135,7 +135,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-1" />
                 </div>
                 <div class="ssp-contact-us">
                     <div id="chat-bot" class="contact-us-message">
@@ -148,6 +147,8 @@
                         </a>
                     </div>
                 </div>
+            </div>
+            </div>
             </div>
         </xpath>
     </template>
