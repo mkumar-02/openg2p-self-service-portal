@@ -303,7 +303,7 @@ class SelfServiceContorller(http.Controller):
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
-                "submission_date": program_member.enrollment_date,
+                "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
                 "application_id": program_member.application_id,
                 "user": current_partner.given_name,
             },

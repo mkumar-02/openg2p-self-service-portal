@@ -1,14 +1,4 @@
 // eslint-disable-next-line no-unused-vars
-function get_query_params(url) {
-    const paramArr = url.slice(url.indexOf("?") + 1).split("&");
-    const params = {};
-    paramArr.array.forEach((param) => {
-        const [key, val] = param.split("=");
-        params[key] = decodeURIComponent(val);
-    });
-    return params;
-}
-
 function show_toast(message) {
     const toast_message = document.querySelector("#toast-message");
     toast_message.textContent = message;
@@ -22,17 +12,23 @@ function hide_toast() {
     toast_container.style.display = "none";
 }
 
-function isValidEmail(email) {
+// eslint-disable-next-line no-unused-vars
+function hide_toast_success_msg() {
+    const toast_msg = $(".toast-success-message")[0];
+    toast_msg.style.display = "none";
+}
+
+function is_valid_email(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
 
-function isValidURL(url) {
+function is_valid_url(url) {
     const urlPattern = /^(https?:\/\/)?[a-z0-9-]+\.[a-z]{2,}(\.[a-z]{2,})?$/i;
     return urlPattern.test(url);
 }
 
-function isValidTelNumber(input_str) {
+function is_valid_tel_number(input_str) {
     var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
     return re.test(input_str);
@@ -96,7 +92,7 @@ function form_submit_action() {
             }
 
             if (required_input_field.type === "email") {
-                if (isValidEmail(required_input_field.value) === false) {
+                if (is_valid_email(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid email address</div>';
@@ -115,7 +111,7 @@ function form_submit_action() {
                     }
                 }
             } else if (required_input_field.type === "url") {
-                if (isValidURL(required_input_field.value) === false) {
+                if (is_valid_url(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid url</div>';
@@ -134,7 +130,7 @@ function form_submit_action() {
                     }
                 }
             } else if (required_input_field.type === "tel") {
-                if (isValidTelNumber(required_input_field.value) === false) {
+                if (is_valid_tel_number(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid telephone number</div>';
