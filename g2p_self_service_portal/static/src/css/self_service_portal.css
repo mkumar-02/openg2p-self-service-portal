@@ -225,7 +225,31 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
-
+#alertbox{
+    width: 100%;
+    left: 0px;
+    /* margin: ; */
+}
+.alertbox-adjuster{
+    width: 1088px;
+    margin: auto;
+}
+.alertbox-message{
+    width: 50%;
+    float: left;
+}
+.alertbox-message .welcome-title{
+    margin: 0px;
+}
+.alertbox-button{
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+.alertbox-button .closebtn {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 /* Header Styles */
 .header-container {
     top: 0px;
