@@ -8,10 +8,28 @@ headercells.forEach(function (th) {
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
         const rows = Array.from(table.rows).slice(1);
+        // Determine the data type for this column
+        let dataType = "text";
+        const firstRow = rows[0];
+        const firstCell = firstRow.cells[columnIndex];
+        const cellContent = firstCell.innerText.trim();
+        if (/^\d+$/.test(cellContent)) {
+            dataType = "number";
+        } else if (Date.parse(cellContent)) {
+            dataType = "date";
+        }
 
         rows.sort(function (a, b) {
-            const aCellValue = a.cells[columnIndex].innerText;
-            const bCellValue = b.cells[columnIndex].innerText;
+            let aCellValue = a.cells[columnIndex].innerText.trim();
+            let bCellValue = b.cells[columnIndex].innerText.trim();
+
+            if (dataType === "number") {
+                aCellValue = parseFloat(aCellValue);
+                bCellValue = parseFloat(bCellValue);
+            } else if (dataType === "date") {
+                aCellValue = new Date(aCellValue);
+                bCellValue = new Date(bCellValue);
+            }
 
             let comparison = 0;
             if (aCellValue > bCellValue) {
@@ -43,42 +61,26 @@ searchInput.addEventListener("input", function (event) {
     for (let i = 1; i < table.rows.length; i++) {
         const row = table.rows[i];
         const cells = row.cells;
+        const cell = cells[1];
 
-        let rowMatch = false;
-
-        for (let j = 0; j < cells.length; j++) {
-            const cell = cells[j];
-
-            if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
-                rowMatch = true;
-                break;
-            }
-        }
-
-        if (rowMatch) {
+        if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
             row.style.display = "";
         } else {
             row.style.display = "none";
         }
     }
 
-    if (searchValue && searchInput === document.activeElement) {
+    if (searchValue || searchInput === document.activeElement) {
         searchClear.style.display = "block";
     } else {
         searchClear.style.display = "none";
     }
 });
 
-searchInput.addEventListener("focus", function () {
-    if (searchInput.value && searchInput === document.activeElement) {
-        searchClear.style.display = "block";
-    }
-});
-
-searchInput.addEventListener("blur", function () {
-    setTimeout(function () {
+searchInput.addEventListener("focusout", function () {
+    if (!searchInput.value) {
         searchClear.style.display = "none";
-    }, 200);
+    }
 });
 
 searchClear.addEventListener("click", function () {
@@ -92,6 +94,6 @@ searchClear.addEventListener("click", function () {
 
 document.addEventListener("click", function (event) {
     if (event.target !== searchInput && event.target !== searchClear) {
-        searchClear.style.display = "none";
+        searchClear.style.display = searchInput.value ? "block" : "none";
     }
 });

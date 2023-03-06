@@ -1,7 +1,88 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <!-- TODO: Remove all hardcoding -->
     <template id="aboutus_page" name="G2P Self Service About Us">
-        <t t-set="title">About Us| Self Service Portal</t>
-        <t t-call="g2p_self_service_portal.static_page_base" />
+        <t t-call="g2p_self_service_portal.base">
+            <t t-set="title">About Us| Self Service Portal</t>
+            <div class="main-container">
+                <div class="container-adjuster">
+                <h5 class='all-title'>About Us</h5>
+                <ol class="breadcrumb  breadcrumb-list bg-transparent">
+                    <li class="breadcrumb-item">
+                        <a href="/selfservice">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                </ol>
+                <div class="aboutus-container">
+                    <div class="aboutus-header">
+                        <img
+                                src="/g2p_self_service_portal/static/src/img/aboutus/Group 57470.png"
+                                class="logo1"
+                            />
+                        <img
+                                src="/g2p_self_service_portal/static/src/img/aboutus/Image 6.png"
+                                class="logo2"
+                            />
+                    </div>
+
+                    <div class="header-section">
+                        <h1>Section Based Approach | Centre</h1>
+                        <p>The OpenG2P ERP, built on the excellent Odoo opensource ERP, is an
+                            opensource web-based enterprise resource planning (ERP) solution for
+                            managing many facets of large scale relief program. It can both be as a
+                            standalone solution and as the administrative interface to the rest of
+                            the OpenG2P stack.</p>
+                    </div>
+                    <div class="section1">
+                        <h1>Section Based Approach | Left</h1>
+                        <p>Bootstrapped by DSTI and the Government of Sierra Leone,The Mifos
+                            Initiative and Fynarfin, “OpenG2P” aims to provide a confluence for and
+                            solutions to effectively digitize government to person, and large-scale
+                            social protection transfers. It is a set of digital building blocks
+                            helping SPs digitize key cogs &amp; address gaps in the delivery chain
+                            of targeting &amp; enrollment, list management, payment digitization,
+                            &amp; recourse. <br /> <br />OpenG2P comprises of several projects
+                            (blocks), each addressing a single key pain point in the delivery chain.
+                            These can be used independently of the other blocks depending on a
+                            program’s gaps or as a package seamlessly integrated to provide an
+                            end-to-end solution kit. <br /> <br />OpenG2P is under active
+                            development. If you need help, would like to contribute, or simply want
+                            to talk about the project with like-minded individuals, we have a number
+                            of open channels for communication.</p>
+                    </div>
+                    <div class="section2">
+                        <div>
+                            <h1>Section Based Approach | Left + Image</h1>
+                            <p>More than 3 million people are already using DALL·E to extend their
+                                creativity and speed up their workflows, generating over 4 million
+                                images a day. Get started with this same technology in a matter of
+                                minutes.</p>
+                        </div>
+                        <img
+                                src="/g2p_self_service_portal/static/src/img/aboutus/Image 6@2x.png"
+                                class="logo3"
+                            />
+
+                    </div>
+                    <div class="section2">
+                        <img
+                                src="/g2p_self_service_portal/static/src/img/aboutus/Image 6@2x.png"
+                                class="logo3"
+                            />
+
+                        <div>
+                            <h1>Section Based Approach | Right + Image</h1>
+                            <p>More than 3 million people are already using DALL·E to extend their
+                                creativity and speed up their workflows, generating over 4 million
+                                images a day. Get started with this same technology in a matter of
+                                minutes.</p>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </t>
     </template>
 </odoo>

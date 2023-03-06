@@ -209,20 +209,22 @@
                             <h5 class="card-heading">Other Services</h5>
                             <hr />
                             <ul class="card-block">
+                                <a href="/selfservice/help">
                                 <li>
                                     <div class="icon-image">
                                         <img
-                                            src="/g2p_self_service_portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.png"
-                                            class="img"
-                                        />
+                                                src="/g2p_self_service_portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.png"
+                                                class="img"
+                                            />
                                     </div>
+
                                     <div>
                                         <a href="#">
                                             Help </a>
                                         <p>Tap here for assistance</p>
                                     </div>
-
                                 </li>
+                            </a>
                                 <li>
 
                                     <div class="icon-image">

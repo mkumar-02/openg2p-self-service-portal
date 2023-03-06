@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <!-- TODO: Remove all hardcoding -->
     <template id="profile_page" name="G2P Self Service My Profile">
-        <t t-set="title">My Profile| Self Service Portal</t>
-        <t t-call="g2p_self_service_portal.static_page_base" />
+        <t t-call="g2p_self_service_portal.base">
+            <t t-set="title"> My Profile| Self Service Portal</t>
+            <div class="main-container">
+                <h5 class='all-title'>My Profile</h5>
+                <div class="breadcrumbs">
+                    <a href="/selfservice">Home</a>
+                    <i class="fa fa-angle-right" />
+                    <a href="#" class="active">My Profile</a>
+                </div>
+
+                <div class="profile-container">
+                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png" />
+                    <div>
+                        <h1>Page Under Construction!</h1>
+                        <p
+                        >Our experts are working hard to make this page available. Meanwhile, we request you to please visit after some time.</p>
+                    </div>
+
+                </div>
+            </div>
+        </t>
     </template>
 </odoo>
