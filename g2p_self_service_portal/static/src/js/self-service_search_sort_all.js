@@ -112,7 +112,7 @@ function renderPageButtons() {
         const buttons = pageButtonsContainer.querySelectorAll("button");
         buttons.forEach((button) => {
             button.classList.remove("active");
-            if (parseInt(button.textContent) === currentPage) {
+            if (Number(button.textContent) === currentPage) {
                 button.classList.add("active");
             }
         });
@@ -121,6 +121,7 @@ function renderPageButtons() {
             prevButton.disabled = true;
         }
         // Enable next button when prev button is clicked
+
         nextButton.disabled = false;
     });
     pageButtonsContainer.appendChild(prevButton);
@@ -140,7 +141,7 @@ function renderPageButtons() {
             const buttons = pageButtonsContainer.querySelectorAll("button");
             buttons.forEach((button) => {
                 button.classList.remove("active");
-                if (parseInt(button.textContent) === currentPage) {
+                if (button.textContent === currentPage) {
                     button.classList.add("active");
                 }
             });

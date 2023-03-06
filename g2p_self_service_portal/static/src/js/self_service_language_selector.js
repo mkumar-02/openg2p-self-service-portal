@@ -35,7 +35,6 @@ dropdownItems.forEach(function (item) {
 // Check if a language has already been selected and update the button text and image accordingly
 if (localStorage.getItem("selectedLanguage")) {
     const selectedLanguage = localStorage.getItem("selectedLanguage");
-    const dropdownItems = document.querySelectorAll(".dropdown-item");
 
     dropdownItems.forEach(function (item) {
         console.log(item.querySelector("span").textContent);
