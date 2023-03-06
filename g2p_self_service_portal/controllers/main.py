@@ -1,10 +1,13 @@
 import json
+import logging
 from datetime import datetime
 
 from odoo import http
 from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
+
+_logger = logging.getLogger(__name__)
 
 
 class SelfServiceContorller(http.Controller):
@@ -241,30 +244,32 @@ class SelfServiceContorller(http.Controller):
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
-        if request.httprequest.method == "POST":
+        additional_info = (
+            current_partner.additional_g2p_info
+            if current_partner.additional_g2p_info
+            else []
+        )
 
+        if request.httprequest.method == "POST":
             form_data = kwargs
 
-            previous_additional_info_data = (
-                current_partner.additional_g2p_info
-                if current_partner.additional_g2p_info
-                else {}
-            )
-
-            current_additional_info_data = {
-                "id": _id,
-                "name": program.name,
-                "data": form_data,
-            }
-
-            if not previous_additional_info_data:
-                current_partner.additional_g2p_info = [
-                    current_additional_info_data,
-                ]
-
+            if isinstance(additional_info, list):
+                already_present = False
+                for element in additional_info:
+                    if element["id"] == _id:
+                        already_present = True
+                        element["data"].update(form_data)
+                        break
+                if not already_present:
+                    additional_info.append(
+                        {"id": _id, "name": program.name, "data": form_data}
+                    )
+            elif isinstance(additional_info, dict):
+                additional_info.update(form_data)
             else:
-                previous_additional_info_data.append(current_additional_info_data)
-                current_partner.additional_g2p_info = previous_additional_info_data
+                _logger.error("Found Bad Additional G2P Info")
+
+            current_partner.additional_g2p_info = additional_info
 
             apply_to_program = {
                 "partner_id": current_partner.id,
