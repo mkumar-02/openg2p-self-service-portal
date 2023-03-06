@@ -6,9 +6,9 @@ if (!sessionStorage.getItem("alertShown")) {
 }
 console.log(closeBtn);
 
-if (sessionStorage.getItem("alertShown") == "false") {
+if (sessionStorage.getItem("alertShown") === "false") {
     alertBox.style.display = "block";
-} else if (sessionStorage.getItem("alertShown") == "true") {
+} else if (sessionStorage.getItem("alertShown") === "true") {
     alertBox.style.display = "none";
 }
 
