@@ -650,7 +650,6 @@ td .program-name {
     left: 1110px;
     width: 84px;
     height: 30px;
-
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #494daf;
     border-radius: 4px;
@@ -1770,14 +1769,12 @@ body {
     opacity: 1;
 }
 
-.prev-button,
+
 .next-button {
     border: 1px solid black;
     padding: 5px 10px;
 }
-button:not(.prev-button):not(.next-button) {
-    border: none;
-}
+
 
 .no-payments-text {
     margin-top: 35px;

@@ -135,7 +135,7 @@ function renderPageButtons() {
         }
 
         button.addEventListener("click", function () {
-            currentPage = i;
+            currentPage = String(i);
             showPage(currentPage);
             // Update active class for buttons
             const buttons = pageButtonsContainer.querySelectorAll("button");

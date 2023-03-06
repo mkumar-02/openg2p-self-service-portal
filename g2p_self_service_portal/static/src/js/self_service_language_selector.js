@@ -21,6 +21,7 @@ const dropdownItems = document.querySelectorAll(".dropdown-item");
 dropdownItems.forEach(function (item) {
     item.addEventListener("click", function () {
         const languageText = this.querySelector("span").textContent;
+        console.log(languageText)
         const languageFlag = this.querySelector("img").src;
         const button = document.querySelector(".language-dropdown button");
         const buttonSpan = button.querySelector("span");
@@ -37,8 +38,8 @@ if (localStorage.getItem("selectedLanguage")) {
     const selectedLanguage = localStorage.getItem("selectedLanguage");
 
     dropdownItems.forEach(function (item) {
-        console.log(item.querySelector("span").textContent);
-        if (item.querySelector("span").textContent === selectedLanguage) {
+        const languageText = item.querySelector("span");
+        if (languageText && languageText.textContent === selectedLanguage) {
             const languageFlag = item.querySelector("img").src;
             const button = document.querySelector(".language-dropdown button");
             const buttonSpan = button.querySelector("span");
