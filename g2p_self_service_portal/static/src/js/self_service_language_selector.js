@@ -21,7 +21,7 @@ const dropdownItems = document.querySelectorAll(".dropdown-item");
 dropdownItems.forEach(function (item) {
     item.addEventListener("click", function () {
         const languageText = this.querySelector("span").textContent;
-        console.log(languageText)
+        console.log(languageText);
         const languageFlag = this.querySelector("img").src;
         const button = document.querySelector(".language-dropdown button");
         const buttonSpan = button.querySelector("span");

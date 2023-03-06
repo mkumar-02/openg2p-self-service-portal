@@ -225,23 +225,23 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
-#alertbox{
+#alertbox {
     width: 100%;
     left: 0px;
     /* margin: ; */
 }
-.alertbox-adjuster{
+.alertbox-adjuster {
     width: 1088px;
     margin: auto;
 }
-.alertbox-message{
+.alertbox-message {
     width: 50%;
     float: left;
 }
-.alertbox-message .welcome-title{
+.alertbox-message .welcome-title {
     margin: 0px;
 }
-.alertbox-button{
+.alertbox-button {
     width: 50%;
     float: left;
     text-align: right;
@@ -1769,12 +1769,10 @@ body {
     opacity: 1;
 }
 
-
 .next-button {
     border: 1px solid black;
     padding: 5px 10px;
 }
-
 
 .no-payments-text {
     margin-top: 35px;

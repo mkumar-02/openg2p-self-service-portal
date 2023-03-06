@@ -5,15 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("chartContainer").innerHTML =
             '<canvas id="myChart" width="500" height="500"></canvas>';
         var ctx = document.getElementById("myChart").getContext("2d");
-        var myChart = new Chart(ctx, {
+        // eslint-disable-next-line no-undef,no-new
+        new Chart(ctx, {
             type: "doughnut",
             data: {
                 labels: mydata.labels,
                 datasets: [
                     {
                         data: mydata.values,
-                        backgroundColor: ["#186ADE","#76D0D9"],
-                        borderColor: ["#186ADE","#76D0D9"],
+                        backgroundColor: ["#186ADE", "#76D0D9"],
+                        borderColor: ["#186ADE", "#76D0D9"],
                         borderWidth: 1,
                     },
                 ],
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             options: {
                 legend: {
                     display: true,
-                    position: 'bottom'
+                    position: "bottom",
                 },
                 animation: {
                     animateScale: true,

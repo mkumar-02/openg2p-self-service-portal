@@ -139,10 +139,10 @@ function renderPageButtons() {
             showPage(currentPage);
             // Update active class for buttons
             const buttons = pageButtonsContainer.querySelectorAll("button");
-            buttons.forEach((button) => {
-                button.classList.remove("active");
-                if (button.textContent === currentPage) {
-                    button.classList.add("active");
+            buttons.forEach((btn) => {
+                btn.classList.remove("active");
+                if (btn.textContent === currentPage) {
+                    btn.classList.add("active");
                 }
             });
             // Enable/disable prev and next buttons based on current page
@@ -174,7 +174,7 @@ function renderPageButtons() {
         const buttons = pageButtonsContainer.querySelectorAll("button");
         buttons.forEach((button) => {
             button.classList.remove("active");
-            if (parseInt(button.textContent) === currentPage) {
+            if (Number(button.textContent) === currentPage) {
                 button.classList.add("active");
             }
         });

@@ -14,9 +14,11 @@
                     <div class="alert" id="alertbox">
                         <div class="alertbox-adjuster">
                             <div class="alertbox-message">
-                                <span class="welcome-title">Welcome to the National Social Benefits Portal</span>
+                                <span
+                                    class="welcome-title"
+                                >Welcome to the National Social Benefits Portal</span>
                             </div>
-                            <div  class="alertbox-button">
+                            <div class="alertbox-button">
                                 <span class="closebtn">
                                     <i class="fa fa-close" />
                                 </span>
