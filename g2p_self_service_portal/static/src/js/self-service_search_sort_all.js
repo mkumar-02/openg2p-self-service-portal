@@ -35,46 +35,6 @@ allheadercells.forEach(function (th) {
     });
 });
 
-const searchInputText = document.getElementById("search-text");
-const searchClearText = document.getElementById("search-text-clear");
-searchClearText.style.display = "none";
-
-searchInputText.addEventListener("input", function (event) {
-    const searchValue = event.target.value.toLowerCase();
-
-    for (let i = 1; i < alltable.rows.length; i++) {
-        const row = alltable.rows[i];
-        const cells = row.cells;
-        const cell = cells[1];
-
-        if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    }
-
-    if (searchValue || searchInputText === document.activeElement) {
-        searchClearText.style.display = "block";
-    } else {
-        searchClearText.style.display = "none";
-    }
-});
-
-searchClearText.addEventListener("click", function () {
-    searchInputText.value = "";
-    allRows.forEach(function (row) {
-        row.style.display = "";
-    });
-    searchClearText.style.display = "none";
-});
-
-document.addEventListener("click", function (event) {
-    if (event.target !== searchInputText && event.target !== searchClearText) {
-        searchClearText.style.display = searchInputText.value ? "block" : "none";
-    }
-});
-
 const itemsPerPage = 7;
 let currentPage = 1;
 const totalPages = Math.ceil(allRows.length / itemsPerPage);
@@ -87,8 +47,10 @@ prevButton.innerHTML = '<i class="fa fa-angle-left"></i>';
 
 const nextButton = document.createElement("button");
 nextButton.innerHTML = '<i class="fa fa-angle-right"></i>';
+const searchInputText = document.getElementById("search-text");
+const searchClearText = document.getElementById("search-text-clear");
+searchClearText.style.display = "none";
 
-// Add Next page button
 function showPage(page) {
     const rows = allRows.slice((page - 1) * itemsPerPage, page * itemsPerPage);
 
@@ -98,7 +60,6 @@ function showPage(page) {
     // Show rows for current page
     rows.forEach((row) => (row.style.display = ""));
 }
-
 function renderPageButtons() {
     // Angle bracket for left arrow
     prevButton.disabled = true;
@@ -170,7 +131,6 @@ function renderPageButtons() {
     nextButton.addEventListener("click", function () {
         currentPage++;
         showPage(currentPage);
-        // Update active class for buttons
         const buttons = pageButtonsContainer.querySelectorAll("button");
         buttons.forEach((button) => {
             button.classList.remove("active");
@@ -178,16 +138,58 @@ function renderPageButtons() {
                 button.classList.add("active");
             }
         });
-        // Disable next button on last page
+
         if (currentPage === totalPages) {
             nextButton.disabled = true;
         }
-        // Enable prev button when next button is clicked
         prevButton.disabled = false;
     });
     pageButtonsContainer.appendChild(nextButton);
 }
-
-// Show first page by default
 showPage(currentPage);
 renderPageButtons();
+searchInputText.addEventListener("input", function (event) {
+    const searchValue = event.target.value.toLowerCase();
+
+    for (let i = 1; i < alltable.rows.length; i++) {
+        const row = alltable.rows[i];
+        const cells = row.cells;
+        const cell = cells[1];
+
+        if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
+            row.style.display = "";
+        } else {
+            row.style.display = "none";
+        }
+    }
+
+    if (searchValue || searchInputText === document.activeElement) {
+        searchClearText.style.display = "block";
+    } else {
+        searchClearText.style.display = "none";
+    }
+});
+
+searchClearText.addEventListener("click", function () {
+    searchInputText.value = "";
+    currentPage = 1;
+    showPage(currentPage);
+    const buttons = pageButtonsContainer.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.classList.remove("active");
+        if (Number(button.textContent) === currentPage) {
+            button.classList.add("active");
+        }
+    });
+    prevButton.disabled = true;
+    // Enable next button when prev button is clicked
+    nextButton.disabled = false;
+    // Hide search clear button
+    searchClearText.style.display = "none";
+});
+
+document.addEventListener("click", function (event) {
+    if (event.target !== searchInputText && event.target !== searchClearText) {
+        searchClearText.style.display = searchInputText.value ? "block" : "none";
+    }
+});
