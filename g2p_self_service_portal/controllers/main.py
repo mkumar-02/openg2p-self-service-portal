@@ -245,13 +245,26 @@ class SelfServiceContorller(http.Controller):
 
             form_data = kwargs
 
-            additional_info = (
+            previous_additional_info_data = (
                 current_partner.additional_g2p_info
                 if current_partner.additional_g2p_info
                 else {}
             )
-            additional_info.update(form_data)
-            current_partner.additional_g2p_info = additional_info
+
+            current_additional_info_data = {
+                "id": _id,
+                "name": program.name,
+                "data": form_data,
+            }
+
+            if not previous_additional_info_data:
+                current_partner.additional_g2p_info = [
+                    current_additional_info_data,
+                ]
+
+            else:
+                previous_additional_info_data.append(current_additional_info_data)
+                current_partner.additional_g2p_info = previous_additional_info_data
 
             apply_to_program = {
                 "partner_id": current_partner.id,
@@ -282,7 +295,7 @@ class SelfServiceContorller(http.Controller):
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
-                "submission_date": program_member.enrollment_date,
+                "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
                 "application_id": program_member.application_id,
                 "user": current_partner.given_name,
             },

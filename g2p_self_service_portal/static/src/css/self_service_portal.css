@@ -225,7 +225,31 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
-
+#alertbox{
+    width: 100%;
+    left: 0px;
+    /* margin: ; */
+}
+.alertbox-adjuster{
+    width: 1088px;
+    margin: auto;
+}
+.alertbox-message{
+    width: 50%;
+    float: left;
+}
+.alertbox-message .welcome-title{
+    margin: 0px;
+}
+.alertbox-button{
+    width: 50%;
+    float: left;
+    text-align: right;
+}
+.alertbox-button .closebtn {
+    margin-left: 0px;
+    margin-right: 0px;
+}
 /* Header Styles */
 .header-container {
     top: 0px;
@@ -1044,6 +1068,17 @@ body {
 .form-template #toast-close-btn img {
     width: 11px;
     height: 11px;
+}
+
+.form-template .toast-success-container {
+    display: block !important;
+}
+
+.form-template .toast-success-message {
+    background-color: #66ad5a !important;
+    height: 93px !important;
+    padding-right: 41px !important;
+    line-height: 15px;
 }
 
 .form-template .container-left {
