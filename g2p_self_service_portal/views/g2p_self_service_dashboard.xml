@@ -12,11 +12,16 @@
             <div class="main-container">
                 <div class="container-adjuster">
                     <div class="alert" id="alertbox">
-                        <h6 class="welcome-title">Welcome to the National Social Benefits
-                            Portal</h6>
-                        <span class="closebtn">
-                            <i class="fa fa-close" />
-                        </span>
+                        <div class="alertbox-adjuster">
+                            <div class="alertbox-message">
+                                <span class="welcome-title">Welcome to the National Social Benefits Portal</span>
+                            </div>
+                            <div  class="alertbox-button">
+                                <span class="closebtn">
+                                    <i class="fa fa-close" />
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="table-container">
                         <div class="table-head-container">
