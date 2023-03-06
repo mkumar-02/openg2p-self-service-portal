@@ -58,7 +58,7 @@
                                             <span>English</span>
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="language-dropdown-button">
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="/en/selfservice/">
                                                 <img
                                             src="/g2p_self_service_portal/static/src/img/flag_en.png"
                                             alt="English"
@@ -66,7 +66,7 @@
                                         />
                                                 <span>English</span>
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="/zh_HK/selfservice/">
                                                 <img
                                             src="/g2p_self_service_portal/static/src/img/flag_hk.png"
                                             alt="中国人"
@@ -74,7 +74,7 @@
                                         />
                                                 <span>中国人</span>
                                             </a>
-                                            <a class="dropdown-item" href="#">
+                                            <a class="dropdown-item" href="/tl/selfservice/">
                                                 <img
                                             src="/g2p_self_service_portal/static/src/img/flag_ph.png"
                                             alt="Filipino"
@@ -82,7 +82,6 @@
                                         />
                                                 <span>Filipino</span>
                                             </a>
-
                                         </div>
                                     </div>
                                     <div class="dropdown user">
@@ -121,6 +120,10 @@
                                 </div>
                             </div>
                         </div>
+                        <script
+                    type="text/javascript"
+                    src="/g2p_self_service_portal/static/src/js/self_service_language_selector.js"
+                />
                     </header>
                 </xpath>
                 <xpath expr="//footer" position="replace">
@@ -138,27 +141,19 @@
                                 class="main-logo"
                             />
                                 </a>
-                                <ul class="list-container">
+                                <ul class='list-container'>
                                     <li class="nav-item">
                                         <a
                                     class="nav-link link"
                                     aria-current="page"
                                     href="/selfservice/aboutus"
-                                >
-                                            About Us
-                                        </a>
+                                >About Us</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link link" href="/selfservice/contactus">Contact Us</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a
-                                    class="nav-link link"
-                                    href="/selfservice/staticpage"
-                                >Static Page</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link link" href="errorpage">Error Page</a>
+                                        <a class="nav-link link" href="/selfservice/otherpage">Others</a>
                                     </li>
                                 </ul>
 

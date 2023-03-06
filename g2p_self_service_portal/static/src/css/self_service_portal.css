@@ -225,23 +225,23 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
-#alertbox{
+#alertbox {
     width: 100%;
     left: 0px;
     /* margin: ; */
 }
-.alertbox-adjuster{
+.alertbox-adjuster {
     width: 1088px;
     margin: auto;
 }
-.alertbox-message{
+.alertbox-message {
     width: 50%;
     float: left;
 }
-.alertbox-message .welcome-title{
+.alertbox-message .welcome-title {
     margin: 0px;
 }
-.alertbox-button{
+.alertbox-button {
     width: 50%;
     float: left;
     text-align: right;
@@ -438,6 +438,7 @@ footer#bottom .footer-container .nav {
     color: #4d4c4c;
     opacity: 1;
 }
+
 .dropdown-menu span {
     text-align: left;
     font: normal 15px inter;
@@ -557,6 +558,7 @@ a:hover {
 }
 .table-head-container .search-box .search-text:focus {
     outline: none;
+    background-color: none;
 }
 .search-clear-icon {
     display: none;
@@ -648,7 +650,6 @@ td .program-name {
     left: 1110px;
     width: 84px;
     height: 30px;
-
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #494daf;
     border-radius: 4px;
@@ -892,7 +893,6 @@ li div p {
 
 /* All programs page*/
 .all-title {
-    /* margin-left: 10%; */
     margin-bottom: 0px;
     height: 26px;
     text-align: left;
@@ -969,18 +969,6 @@ li div p {
     border-radius: 6px;
     background-color: #494daf;
     border-color: #494daf;
-}
-
-.aboutus-container {
-    top: 201px;
-    margin-left: 139px;
-    margin-bottom: 20px;
-    width: 1088px;
-    height: 1141px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 5px #0000001a;
-    border-radius: 10px;
-    opacity: 1;
 }
 
 #search-clear {
@@ -1569,4 +1557,229 @@ body {
     width: 27px;
     height: 27px;
     margin: 19.34px;
+}
+
+.aboutus-container {
+    top: 201px;
+    margin-bottom: 20px;
+    padding: 36px 20px 20px 20px;
+    width: 1088px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.aboutus-container .aboutus-header {
+    display: flex;
+    justify-content: space-between;
+}
+.aboutus-header .logo1 {
+    width: 274px;
+    height: 57px;
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.aboutus-header .logo2 {
+    width: 156px;
+    height: 82px;
+    background: transparent 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    opacity: 1;
+}
+.aboutus-container .header-section {
+    width: 100%;
+    height: 118px;
+    background: #f8f8f8 0% 0% no-repeat padding-box;
+    padding: 25px 22px 29px 22px;
+    border-radius: 10px;
+    margin-bottom: 44px;
+    opacity: 1;
+}
+.header-section h1 {
+    width: 270px;
+    height: 20px;
+    margin-left: 37%;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.header-section p {
+    width: 100%;
+    height: 34px;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.aboutus-container .section1 {
+    width: 100%;
+    height: 183px;
+    margin-bottom: 44px;
+    opacity: 1;
+}
+.section1 h1 {
+    width: 247px;
+    height: 20px;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.section1 p {
+    width: 100%;
+    height: 153px;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+.aboutus-container .section2 {
+    width: 100%;
+    height: 270px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+}
+.section2 div {
+    width: 50%;
+    margin-top: 91px;
+    margin-bottom: 98px;
+}
+
+.section2 div h1 {
+    width: 80%;
+    height: 20px;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.section2 div p {
+    width: 80%;
+    height: 51px;
+    text-align: left;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+.section2 div logo3 {
+    width: 516px;
+    height: 270px;
+    background: transparent 0% 0% no-repeat padding-box;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.profile-container {
+    margin-right: 10%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1088px;
+    height: 528px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+.profile-container div {
+    margin-left: 23%;
+    margin-right: 23%;
+    margin-top: 50px;
+    height: 76px;
+    opacity: 1;
+}
+.profile-container div h1 {
+    margin-left: 23%;
+    margin-right: 23%;
+    height: 29px;
+    text-align: center;
+    font: normal 24px/29px Inter;
+    letter-spacing: 0px;
+    color: #2c2c2c;
+    opacity: 1;
+}
+
+.profile-container div p {
+    height: 37px;
+    text-align: center;
+    font: normal 14px/20px Inter;
+    letter-spacing: 0px;
+    color: #7b7b7b;
+    opacity: 1;
+}
+
+.help-container {
+    top: 201px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 628px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+.help-header {
+    height: 20px;
+    margin-left: 20px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+#page-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+#page-buttons button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+}
+
+#page-buttons button.active {
+    top: 736px;
+    left: 563px;
+    width: 32px;
+    height: 32px;
+    color: #fffffe;
+    background: #494daf 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.next-button {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.no-payments-text {
+    margin-top: 35px;
+    height: 34px;
+    text-align: center;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #888888;
+    opacity: 1;
 }

@@ -1,7 +1,6 @@
 import json
 import logging
 from datetime import datetime
-from math import ceil
 
 from odoo import http
 from odoo.http import request
@@ -58,19 +57,18 @@ class SelfServiceContorller(http.Controller):
     def self_service_contact_us(self, **kwargs):
         return request.render("g2p_self_service_portal.contact_us")
 
-    @http.route(["/selfservice/staticpage"], type="http", auth="public", website=True)
-    def self_service_static_page(self, **kwargs):
-        return request.render("g2p_self_service_portal.static_page")
+    @http.route(["/selfservice/otherpage"], type="http", auth="public", website=True)
+    def self_service_other_page(self, **kwargs):
+        return request.render("g2p_self_service_portal.other_page")
 
-    @http.route(["/selfservice/errorpage"], type="http", auth="public", website=True)
-    def self_service_error_page(self, **kwargs):
-        return request.render("g2p_self_service_portal.error_page")
+    @http.route(["/selfservice/help"], type="http", auth="public", website=True)
+    def self_service_help_page(self, **kwargs):
+        return request.render("g2p_self_service_portal.help_page")
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
         query = request.params.get("query")
         domain = [("name", "ilike", query)]
-
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -159,23 +157,19 @@ class SelfServiceContorller(http.Controller):
         )
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
-    def self_service_all_programs(self, page="1", limit="7", **kwargs):
-        limit = int(limit)
-        page = int(page)
-        query = kwargs.get("q", "")
-        domain = [("name", "ilike", query)]
+    def self_service_all_programs(self, **kwargs):
+        # limit = int(limit)
+        # page = int(page)
+        # query = kwargs.get("q", "")
+        # domain = [("name", "ilike", query)]
 
-        if page < 1:
-            page = 1
-        if limit < 5:
-            limit = 5
-        programs = (
-            request.env["g2p.program"]
-            .sudo()
-            .search(domain, limit=limit, offset=(page - 1) * limit, order="id")
-        )
+        # if page < 1:
+        #     page = 1
+        # if limit < 5:
+        #     limit = 5
+        programs = request.env["g2p.program"].sudo().search([])
 
-        total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
+        # total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
 
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -199,6 +193,9 @@ class SelfServiceContorller(http.Controller):
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
                     "is_latest": (datetime.today() - program.create_date).days < 21,
+                    "is_form_mapped": True
+                    if program.self_service_portal_form
+                    else False,
                 }
             )
 
@@ -206,10 +203,10 @@ class SelfServiceContorller(http.Controller):
             "g2p_self_service_portal.allprograms",
             {
                 "programs": values,
-                "pager": {
-                    "sel": page,
-                    "total": total,
-                },
+                # "pager": {
+                #     "sel": page,
+                #     "total": total,
+                # },
             },
         )
 

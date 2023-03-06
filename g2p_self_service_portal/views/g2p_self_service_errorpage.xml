@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <template id="error_page" name="G2P Self Service My Profile">
-        <t t-set="title">Error| Self Service Portal</t>
-        <t t-call="g2p_self_service_portal.static_page_base" />
-    </template>
-</odoo>
