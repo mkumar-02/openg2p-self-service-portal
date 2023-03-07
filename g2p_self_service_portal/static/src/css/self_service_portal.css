@@ -1177,12 +1177,12 @@ li div p {
     box-shadow: none;
     padding-left: 11px;
     padding-top: 16px;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     padding-right: 11px;
 }
 
 .form-template .s_website_form_field {
-    font-size: 14px;
+    font: normal normal normal 14px/17px Inter;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 16px !important;
@@ -1194,7 +1194,7 @@ li div p {
 }
 
 .form-template .s_website_form_multiple {
-    height: 48px;
+    min-height: 48px;
 }
 
 .form-template .s_website_form_multiple div {
