@@ -66,13 +66,13 @@
                                         />
                                                 <span>English</span>
                                             </a>
-                                            <a class="dropdown-item" href="/zh_HK/selfservice/">
+                                            <a class="dropdown-item" href="/fr/selfservice/">
                                                 <img
-                                            src="/g2p_self_service_portal/static/src/img/flag_hk.png"
-                                            alt="中国人"
+                                            src="/g2p_self_service_portal/static/src/img/FR.png"
+                                            alt="Français"
                                             class="flag"
                                         />
-                                                <span>中国人</span>
+                                                <span>Français</span>
                                             </a>
                                             <a class="dropdown-item" href="/tl/selfservice/">
                                                 <img

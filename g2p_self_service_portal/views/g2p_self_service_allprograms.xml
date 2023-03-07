@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- TODO: Remove all hardcoding -->
     <template id="allprograms" name="G2P Self Service All Programs">
         <t t-call="g2p_self_service_portal.base">
             <t t-set="title">All Programs | Self Service Portal</t>
@@ -88,7 +87,7 @@
                                                             type="object"
                                                             class="submit-button"
                                                         >
-                                                            <t t-esc="program['status']" />
+                                                        Submitted
                                                         </button>
 
                                                     </td>
@@ -115,7 +114,7 @@
                                                             type="object"
                                                             class="enroll-button"
                                                         >
-                                                            <t t-esc="program['status']" />
+                                                        Enrolled
                                                         </button>
 
                                                     </td>
