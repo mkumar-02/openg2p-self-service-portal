@@ -14,8 +14,14 @@
                     <div class="alert" id="alertbox">
                         <div class="alertbox-adjuster">
                             <div class="alertbox-message">
+<<<<<<< HEAD
+                                <span
+                                    class="welcome-title"
+                                >Welcome to the National Social Benefits Portal</span>
+=======
                                 <span class="welcome-title">Welcome to the National Social Benefits
                                     Portal</span>
+>>>>>>> a3f532b14c303e2e2343924c38fc423694a2b691
                             </div>
                             <div class="alertbox-button">
                                 <span class="closebtn">
@@ -156,7 +162,7 @@
                                                     any programs yet, please tap on the below link
                                                     to view all programs.</div>
                                                 <div class="no-program-text">
-                                                    <a href="#">View All Programs</a>
+                                                    <a href="/selfservice/programs">View All Programs</a>
                                                 </div>
                                             </div>
                                         </td>
