@@ -1219,6 +1219,7 @@ li div p {
 
 .form-template .s_website_form_check_label {
     padding-left: 25px;
+    font: normal normal normal 14px/17px Inter;
 }
 
 .form-template .s_website_form_submit {
@@ -1309,6 +1310,10 @@ li div p {
     background: #6569c7 0% 0% no-repeat padding-box !important;
     border-radius: 6px !important;
     opacity: 1 !important;
+}
+
+.container-right .modal-dialog-centered {
+    width: fit-content;
 }
 
 .container-right .modal-content {
