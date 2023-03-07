@@ -1,0 +1,551 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* g2p_self_service_portal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-06 12:42+0000\n"
+"PO-Revision-Date: 2023-03-06 12:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid ", how are you doing?"
+msgstr ", kamusta ka na?"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid ""
+"30+ Schemes\n"
+"                                                available"
+msgstr "30+ Mga programa\nMagagamit"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "55+ Schemes available"
+msgstr "Available ang 55+ na mga scheme"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid ""
+"<span class=\"welcome-title\">Welcome to the National Social Benefits "
+"Portal</span>"
+msgstr ""
+"<span class='welcome-title'>Maligayang pagdating sa Pambansang Portal ng mga Benepisyo sa Panlipunan</span>" 
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "<span>English</span>"
+msgstr ""
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "<span>Filipino</span>"
+msgstr ""
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "<span>Français</span>"
+msgstr ""
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "<span>NEW</span>"
+msgstr "<span>BAGO</span>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.aboutus_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "About Us"
+msgstr "Tungkol sa atin"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.aboutus_page
+msgid "About Us| Self Service Portal"
+msgstr "Tungkol sa Amin| Portal ng Sariling Serbisyo"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+msgid "Actions"
+msgstr "Mga aksyon"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "All Programs"
+msgstr "Lahat ng mga programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+msgid "All Programs | Self Service Portal"
+msgstr "Lahat ng Programa | Portal ng Sariling Serbisyo"
+
+#. module: g2p_self_service_portal
+#: model:ir.model.fields,field_description:g2p_self_service_portal.field_auth_oauth_provider__g2p_self_service_allowed
+msgid "Allowed in Self Service Portal"
+msgstr "Pinapayagan sa Self Service Portal"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Amount Received (in USD) <i class=\"fa fa-sort\"/>"
+msgstr "Halagang Natanggap (sa USD) <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Application Form"
+msgstr "Form ng Aplikasyon"
+
+#. module: g2p_self_service_portal
+#: model:ir.model.fields,field_description:g2p_self_service_portal.field_g2p_program_membership__application_id
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "Application ID"
+msgstr "ID ng aplikasyon"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Application ID <i class=\"fa fa-sort\"/>"
+msgstr "ID ng Application <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Apply"
+msgstr "Mag-apply"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Cancel"
+msgstr "Kanselahin"
+
+#. module: g2p_self_service_portal
+#: model:ir.model,name:g2p_self_service_portal.model_res_config_settings
+msgid "Config Settings"
+msgstr "Mga Setting ng Config"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.contact_us
+msgid "Contact Us"
+msgstr "Makipag-ugnayan sa amin"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.contact_us
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.profile_page
+msgid "Contact Us| Self Service Portal"
+msgstr "Makipag-ugnayan sa Amin| Self Service Portal"
+
+#. module: g2p_self_service_portal
+#: model:ir.model,name:g2p_self_service_portal.model_g2p_program_create_wizard
+msgid "Create a New Program Wizard"
+msgstr "Lumikha ng Bagong Program Wizard"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Discard"
+msgstr "Itapon"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Discard applicaton?"
+msgstr "Itapon ang aplikasyon??"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Education"
+msgstr "Edukasyon"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Email"
+msgstr "Email"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "English"
+msgstr ""
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Enter email address"
+msgstr "Ilagay ang email address"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Enter password"
+msgstr "Ilagay ang password"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Entitlement (in USD) <i class=\"fa fa-sort\"/>"
+msgstr "Karapatan (sa USD) <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Entitlements"
+msgstr "Karapatan"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "FAQ"
+msgstr "Mga Karaniwang Tanong"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Facing any challenges?"
+msgstr "Nahaharap sa anumang hamon?"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid ""
+"Fields marked with\n"
+"                                            \"<span class=\"s_website_form_mark\">*</span>\"\n"
+"                                            are mandatory"
+msgstr ""
+"Mga field na minarkahan ng\n"
+" \"<span class=\"s_website_form_mark\">*</span>\"\n"
+"ay sapilitan"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "Filipino"
+msgstr "Filipino"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "Français"
+msgstr " "
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_res_config_settings_view_form
+msgid "G2P Self Service Settings"
+msgstr "Mga Setting ng Pansariling Serbisyo ng G2P"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Healthcare"
+msgstr "Pangangalaga sa kalusugan"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.help_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Help"
+msgstr "Tulong"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.help_page
+msgid "Help Main Topic Three"
+msgstr "Tulong Pangunahing Paksa Ikatlong"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.help_page
+msgid "Help| Self Service Portal"
+msgstr "Tulong| Portal ng Sariling Serbisyo"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Hi"
+msgstr "Kumusta"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.aboutus_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.contact_us
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.help_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.other_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.profile_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Home"
+msgstr "Bahay"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "I am here to assist you. Take a few minutes and lets connect!"
+msgstr "Nandito ako para tulungan ka. Maglaan ng ilang minuto at kumonekta tayo!"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Login"
+msgstr "Mag-login"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "Logout"
+msgstr "Mag-logout"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_create_wizard_form
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_portal_form
+msgid "Map Portal Form"
+msgstr "Form ng Portal ng Mapa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.profile_page
+msgid "My Profile"
+msgstr "Aking Profile"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "My Programs"
+msgstr "Aking Mga Programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "No."
+msgstr "Numero."
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+msgid "Not Applied"
+msgstr "Hindi Inilapat"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "Submitted"
+msgstr "Naisumite"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "Enrolled"
+msgstr "Naka-enroll"
+
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Received"
+msgstr "Naisumite"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Pending"
+msgstr "Naisumite"
+
+
+#. module: g2p_self_service_portal
+#: model:ir.model,name:g2p_self_service_portal.model_auth_oauth_provider
+msgid "OAuth2 provider"
+msgstr "provider ng OAuth2"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "OR"
+msgstr "o"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.other_page
+msgid "Other"
+msgstr "Iba pa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Other Services"
+msgstr "Iba pang Serbisyo"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "Others"
+msgstr "iba pang"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.other_page
+msgid "Other| Self Service Portal"
+msgstr "Iba pa| Portal ng Sariling Serbisyo"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.aboutus_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.contact_us
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.other_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.profile_page
+msgid ""
+"Our experts are working hard to make this page available. Meanwhile, we "
+"request you to please visit after some time."
+msgstr ""
+"Ang aming mga eksperto ay nagtatrabaho nang mabuti upang magagamit ang pahinang ito. Samantala, hinihiling namin sa inyo na bumisita lamang muli sa ibang pagkakataon."
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.aboutus_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.contact_us
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.other_page
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.profile_page
+msgid "Page Under Construction!"
+msgstr "Isinasagawa ang Pahina!"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Password"
+msgstr "Pagbabago ng Password"
+
+#. module: g2p_self_service_portal
+#: model:ir.model,name:g2p_self_service_portal.model_g2p_program
+msgid "Program"
+msgstr "Programa"
+
+#. module: g2p_self_service_portal
+#: model:ir.model.fields,field_description:g2p_self_service_portal.field_g2p_program_create_wizard__self_service_portal_form
+msgid "Program Form"
+msgstr "Form ng Programa"
+
+#. module: g2p_self_service_portal
+#: model:ir.model,name:g2p_self_service_portal.model_g2p_program_membership
+msgid "Program Membership"
+msgstr "Membership ng Programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Program Name <i class=\"fa fa-sort\"/>"
+msgstr "Pangalan ng Programa <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.login_page
+msgid "Reset Password"
+msgstr "I-reset ang Password"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Search by program name"
+msgstr "Maghanap ayon sa pangalan ng programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "Search here"
+msgstr "Maghanap dito"
+
+#. module: g2p_self_service_portal
+#: model:ir.model.fields,field_description:g2p_self_service_portal.field_res_config_settings__self_service_logo
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_res_config_settings_view_form
+msgid "Self Service Logo"
+msgstr "Logo ng Self Service"
+
+#. module: g2p_self_service_portal
+#: model:ir.model.fields,field_description:g2p_self_service_portal.field_g2p_program__self_service_portal_form
+msgid "Self Service Portal Form"
+msgstr "Form ng Self Service Portal"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Status <i class=\"fa fa-sort\"/>"
+msgstr "Katayuan <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "Submit"
+msgstr "Ipasa"
+
+
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "Submitted Application Form"
+msgstr "Nagsumite ng Application Form"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "Submitted On"
+msgstr "Naisumite Sa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Submitted On <i class=\"fa fa-sort\"/>"
+msgstr "Naisumite Sa <i class=\"fa fa-sort\"/>"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Tap here for assistance"
+msgstr "Mag-tap dito para sa tulong"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "Tap to know more"
+msgstr "I-tap para malaman pa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid ""
+"Thank you. Your application has been submitted successfully.\n"
+"                        Please note your application ID for future reference -"
+msgstr ""
+"Salamat. Matagumpay na naisumite ang iyong aplikasyon.\n"
+" Pakitandaan ang iyong application ID para sa sanggunian sa hinaharap -"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid ""
+"The entered data will not be saved.\n"
+"                                                    Are you sure you want to discard the form?"
+msgstr ""
+"Hindi mase-save ang inilagay na data.\n"
+"Sigurado ka bang gusto mong i-discard ang form?"
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid ""
+"This scheme is available till 31st March, 2023.\n"
+"                                    Eligible members can avail the benefits by applying to this scheme."
+msgstr ""
+"Available ang scheme na ito hanggang ika-31 ng Marso, 2023.\n"
+"Maaaring makuha ng mga kwalipikadong miyembro ang mga benepisyo sa pamamagitan ng pag-apply sa scheme na ito."
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "User"
+msgstr "Gumagamit"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.allprograms
+msgid "View"
+msgstr "Tingnan"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "View All"
+msgstr "Tingnan lahat"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "View All Programs"
+msgstr "Tingnan ang Lahat ng Programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+msgid "View My Programs"
+msgstr "Tingnan ang Aking Mga Programa"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid ""
+"You haven’t enrolled into any programs yet, please tap on the below link to "
+"view all programs."
+msgstr "Hindi ka pa nakakapag-enroll sa kahit anong programa. Paki-tap ang link sa ibaba upang makita ang lahat ng mga programa." 
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
+msgid "breadcrumb"
+msgstr "mumo ng tinapay"
+
+#. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.base
+msgid "© 2023 National Social Benefits Portal. All rights reserved."
+msgstr "© 2023 National Social Benefits Portal. Lahat ng karapatan ay nakalaan.
+
+"

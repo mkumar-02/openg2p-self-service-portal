@@ -1,11 +1,13 @@
 import json
+import logging
 from datetime import datetime
-from math import ceil
 
 from odoo import http
 from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
+
+_logger = logging.getLogger(__name__)
 
 
 class SelfServiceContorller(http.Controller):
@@ -55,19 +57,18 @@ class SelfServiceContorller(http.Controller):
     def self_service_contact_us(self, **kwargs):
         return request.render("g2p_self_service_portal.contact_us")
 
-    @http.route(["/selfservice/staticpage"], type="http", auth="public", website=True)
-    def self_service_static_page(self, **kwargs):
-        return request.render("g2p_self_service_portal.static_page")
+    @http.route(["/selfservice/otherpage"], type="http", auth="public", website=True)
+    def self_service_other_page(self, **kwargs):
+        return request.render("g2p_self_service_portal.other_page")
 
-    @http.route(["/selfservice/errorpage"], type="http", auth="public", website=True)
-    def self_service_error_page(self, **kwargs):
-        return request.render("g2p_self_service_portal.error_page")
+    @http.route(["/selfservice/help"], type="http", auth="public", website=True)
+    def self_service_help_page(self, **kwargs):
+        return request.render("g2p_self_service_portal.help_page")
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
         query = request.params.get("query")
         domain = [("name", "ilike", query)]
-
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -156,23 +157,19 @@ class SelfServiceContorller(http.Controller):
         )
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
-    def self_service_all_programs(self, page="1", limit="7", **kwargs):
-        limit = int(limit)
-        page = int(page)
-        query = kwargs.get("q", "")
-        domain = [("name", "ilike", query)]
+    def self_service_all_programs(self, **kwargs):
+        # limit = int(limit)
+        # page = int(page)
+        # query = kwargs.get("q", "")
+        # domain = [("name", "ilike", query)]
 
-        if page < 1:
-            page = 1
-        if limit < 5:
-            limit = 5
-        programs = (
-            request.env["g2p.program"]
-            .sudo()
-            .search(domain, limit=limit, offset=(page - 1) * limit, order="id")
-        )
+        # if page < 1:
+        #     page = 1
+        # if limit < 5:
+        #     limit = 5
+        programs = request.env["g2p.program"].sudo().search([])
 
-        total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
+        # total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
 
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -196,6 +193,9 @@ class SelfServiceContorller(http.Controller):
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
                     "is_latest": (datetime.today() - program.create_date).days < 21,
+                    "is_form_mapped": True
+                    if program.self_service_portal_form
+                    else False,
                 }
             )
 
@@ -203,10 +203,10 @@ class SelfServiceContorller(http.Controller):
             "g2p_self_service_portal.allprograms",
             {
                 "programs": values,
-                "pager": {
-                    "sel": page,
-                    "total": total,
-                },
+                # "pager": {
+                #     "sel": page,
+                #     "total": total,
+                # },
             },
         )
 
@@ -244,16 +244,31 @@ class SelfServiceContorller(http.Controller):
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
-        if request.httprequest.method == "POST":
+        additional_info = (
+            current_partner.additional_g2p_info
+            if current_partner.additional_g2p_info
+            else []
+        )
 
+        if request.httprequest.method == "POST":
             form_data = kwargs
 
-            additional_info = (
-                current_partner.additional_g2p_info
-                if current_partner.additional_g2p_info
-                else {}
-            )
-            additional_info.update(form_data)
+            if isinstance(additional_info, list):
+                already_present = False
+                for element in additional_info:
+                    if element["id"] == _id:
+                        already_present = True
+                        element["data"].update(form_data)
+                        break
+                if not already_present:
+                    additional_info.append(
+                        {"id": _id, "name": program.name, "data": form_data}
+                    )
+            elif isinstance(additional_info, dict):
+                additional_info.update(form_data)
+            else:
+                _logger.error("Found Bad Additional G2P Info")
+
             current_partner.additional_g2p_info = additional_info
 
             apply_to_program = {
@@ -285,7 +300,7 @@ class SelfServiceContorller(http.Controller):
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
-                "submission_date": program_member.enrollment_date,
+                "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
                 "application_id": program_member.application_id,
                 "user": current_partner.given_name,
             },

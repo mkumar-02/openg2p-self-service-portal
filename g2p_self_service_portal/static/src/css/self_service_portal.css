@@ -438,6 +438,7 @@ footer#bottom .footer-container .nav {
     color: #4d4c4c;
     opacity: 1;
 }
+
 .dropdown-menu span {
     text-align: left;
     font: normal 15px inter;
@@ -557,6 +558,7 @@ a:hover {
 }
 .table-head-container .search-box .search-text:focus {
     outline: none;
+    background-color: none;
 }
 .search-clear-icon {
     display: none;
@@ -648,7 +650,6 @@ td .program-name {
     left: 1110px;
     width: 84px;
     height: 30px;
-
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #494daf;
     border-radius: 4px;
@@ -890,7 +891,6 @@ li div p {
 
 /* All programs page*/
 .all-title {
-    /* margin-left: 10%; */
     margin-bottom: 0px;
     height: 26px;
     text-align: left;
@@ -969,18 +969,6 @@ li div p {
     border-color: #494daf;
 }
 
-.aboutus-container {
-    top: 201px;
-    margin-left: 139px;
-    margin-bottom: 20px;
-    width: 1088px;
-    height: 1141px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 2px 5px #0000001a;
-    border-radius: 10px;
-    opacity: 1;
-}
-
 #search-clear {
     display: none;
     cursor: pointer;
@@ -996,10 +984,6 @@ li div p {
 
 .form-template .o_default_snippet_text {
     display: none !important;
-}
-
-body {
-    background-color: #f5f9fc;
 }
 
 .form-template .details {
@@ -1020,7 +1004,7 @@ body {
 }
 
 .form-template .breadcrumb-item {
-    font-size: 14px;
+    font: normal normal 600 14px/17px Inter;
 }
 
 .form-template .breadcrumb-item + .breadcrumb-item::before {
@@ -1034,10 +1018,12 @@ body {
 
 .form-template .breadcrumb-item a {
     color: #494daf;
+    font: normal normal 600 14px/17px Inter;
 }
 
 .form-template .active {
     color: #848484;
+    font: normal normal 600 14px/17px Inter;
 }
 
 .form-template #toast-container {
@@ -1054,10 +1040,10 @@ body {
     color: #ffffff;
     padding: 10px;
     border-radius: 5px;
-    font-size: 12px;
     padding-left: 20px;
     padding-top: 16px;
     padding-bottom: 17px;
+    font: normal normal 600 12px/15px Inter;
 }
 
 .form-template #toast-close-btn {
@@ -1077,6 +1063,17 @@ body {
 .form-template #toast-close-btn img {
     width: 11px;
     height: 11px;
+}
+
+.form-template .toast-success-container {
+    display: block !important;
+}
+
+.form-template .toast-success-message {
+    background-color: #66ad5a !important;
+    height: 93px !important;
+    padding-right: 41px !important;
+    line-height: 15px;
 }
 
 .form-template .container-left {
@@ -1115,9 +1112,8 @@ body {
 }
 
 .form-template .form-description {
-    font-size: 13px;
     text-align: left;
-    font: normal normal medium 13px/16px Inter;
+    font: normal normal 500 13px/16px Inter;
     letter-spacing: 0px;
     color: #959595;
     opacity: 1;
@@ -1145,7 +1141,7 @@ body {
     background: #faf6cf 0% 0% no-repeat padding-box;
     border-radius: 4px;
     opacity: 1;
-    font-size: 13px;
+    font: normal normal 500 13px/16px Inter;
     color: #585211;
     padding-left: 8px;
     padding-top: 5px;
@@ -1156,8 +1152,7 @@ body {
 
 .form-template .s_website_form_label_content {
     text-align: left;
-    font: normal normal medium 14px/17px Inter;
-    font-size: 14px;
+    font: normal normal 500 14px/17px Inter;
     letter-spacing: 0px;
     color: #000000;
 }
@@ -1171,7 +1166,7 @@ body {
 }
 
 .form-template .s_website_form_input {
-    font-size: 14px;
+    font: normal normal normal 14px/17px Inter;
     background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #e3e3e3;
     border-radius: 6px;
@@ -1231,7 +1226,7 @@ body {
 .form-template .input-field-error-message,
 .input-field-validation-message {
     color: #d52929;
-    font-size: 13px;
+    font: normal normal normal 14px/17px Inter;
 }
 
 .form-template .action-heading {
@@ -1249,9 +1244,7 @@ body {
 
 .form-template .action-description {
     text-align: left;
-    font: normal normal normal 14px/17px Inter;
     letter-spacing: 0px;
-    color: #484848;
     opacity: 1;
     padding-left: 20px;
     padding-bottom: 34px;
@@ -1263,7 +1256,7 @@ body {
     background: #494daf 0% 0% no-repeat padding-box;
     border-radius: 6px;
     opacity: 1;
-    font-size: 14px;
+    font: normal normal 600 14px/17px Inter;
     height: 54px;
 }
 
@@ -1273,7 +1266,7 @@ body {
     border: 1px solid #494daf;
     border-radius: 6px;
     opacity: 1;
-    font-size: 14px;
+    font: normal normal 600 14px/17px Inter;
     height: 54px;
     margin-top: 14px;
 }
@@ -1337,7 +1330,7 @@ body {
 }
 
 .container-right .modal-title {
-    font-size: 16px;
+    font: normal normal 600 16px/20px Inter;
     color: #484848;
 }
 
@@ -1448,11 +1441,11 @@ body {
     background: #faf6cf 0% 0% no-repeat padding-box;
     border-radius: 4px;
     color: #3c5160;
-    font-size: 12px;
     height: 25px;
     border: none;
     padding-left: 13px;
     padding-right: 11px;
+    font: normal normal 500 12px/15px Inter;
 }
 
 .form-template .container-right .card-header .form-status button:focus,
@@ -1467,11 +1460,11 @@ body {
 .form-template .container-right p {
     margin: 0px;
     color: #777777;
-    font-size: 13px;
+    font: normal normal normal 13px/16px Inter;
 }
 
 .form-template .container-right b {
-    font-size: 14px;
+    font: normal normal bold 14px/17px Inter;
 }
 
 .form-template .container-right .card-footer,
@@ -1483,7 +1476,7 @@ body {
 .form-template .container-right .card-footer a:active {
     border: 1px solid #494daf !important;
     color: #494daf !important;
-    font-size: 14px !important;
+    font: normal normal 600 14px/17px Inter !important;
     height: 54px !important;
     background: none !important;
     padding: 15px;
@@ -1518,12 +1511,11 @@ body {
 }
 
 .ssp-contact-us .contact-us-message h5 {
-    font-size: 14px;
     padding-left: 15px;
     padding-top: 18px;
     padding-bottom: 6px;
     padding-right: 15px;
-    font: normal normal medium 14px/17px Inter;
+    font: normal normal 500 14px/17px Inter;
     letter-spacing: 0px;
     color: #000000;
     opacity: 1;
@@ -1531,7 +1523,6 @@ body {
 }
 
 .ssp-contact-us .contact-us-message p {
-    font-size: 13px;
     font: normal normal normal 13px/16px Inter;
     letter-spacing: 0px;
     color: #606060;
@@ -1556,4 +1547,229 @@ body {
     width: 27px;
     height: 27px;
     margin: 19.34px;
+}
+
+.aboutus-container {
+    top: 201px;
+    margin-bottom: 20px;
+    padding: 36px 20px 20px 20px;
+    width: 1088px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.aboutus-container .aboutus-header {
+    display: flex;
+    justify-content: space-between;
+}
+.aboutus-header .logo1 {
+    width: 274px;
+    height: 57px;
+    background: transparent 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+.aboutus-header .logo2 {
+    width: 156px;
+    height: 82px;
+    background: transparent 0% 0% no-repeat padding-box;
+    border-radius: 10px;
+    opacity: 1;
+}
+.aboutus-container .header-section {
+    width: 100%;
+    height: 118px;
+    background: #f8f8f8 0% 0% no-repeat padding-box;
+    padding: 25px 22px 29px 22px;
+    border-radius: 10px;
+    margin-bottom: 44px;
+    opacity: 1;
+}
+.header-section h1 {
+    width: 270px;
+    height: 20px;
+    margin-left: 37%;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.header-section p {
+    width: 100%;
+    height: 34px;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.aboutus-container .section1 {
+    width: 100%;
+    height: 183px;
+    margin-bottom: 44px;
+    opacity: 1;
+}
+.section1 h1 {
+    width: 247px;
+    height: 20px;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.section1 p {
+    width: 100%;
+    height: 153px;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+.aboutus-container .section2 {
+    width: 100%;
+    height: 270px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 1;
+}
+.section2 div {
+    width: 50%;
+    margin-top: 91px;
+    margin-bottom: 98px;
+}
+
+.section2 div h1 {
+    width: 80%;
+    height: 20px;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+.section2 div p {
+    width: 80%;
+    height: 51px;
+    text-align: left;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+.section2 div logo3 {
+    width: 516px;
+    height: 270px;
+    background: transparent 0% 0% no-repeat padding-box;
+    border: 1px solid #e3e3e3;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.profile-container {
+    margin-right: 10%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1088px;
+    height: 528px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+.profile-container div {
+    margin-left: 23%;
+    margin-right: 23%;
+    margin-top: 50px;
+    height: 76px;
+    opacity: 1;
+}
+.profile-container div h1 {
+    margin-left: 23%;
+    margin-right: 23%;
+    height: 29px;
+    text-align: center;
+    font: normal 24px/29px Inter;
+    letter-spacing: 0px;
+    color: #2c2c2c;
+    opacity: 1;
+}
+
+.profile-container div p {
+    height: 37px;
+    text-align: center;
+    font: normal 14px/20px Inter;
+    letter-spacing: 0px;
+    color: #7b7b7b;
+    opacity: 1;
+}
+
+.help-container {
+    top: 201px;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    width: 80%;
+    height: 628px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    opacity: 1;
+}
+.help-header {
+    height: 20px;
+    margin-left: 20px;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    text-align: left;
+    font: normal 17px/20px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+}
+
+#page-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+}
+
+#page-buttons button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    padding: 5px;
+}
+
+#page-buttons button.active {
+    top: 736px;
+    left: 563px;
+    width: 32px;
+    height: 32px;
+    color: #fffffe;
+    background: #494daf 0% 0% no-repeat padding-box;
+    border-radius: 6px;
+    opacity: 1;
+}
+
+.next-button {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.no-payments-text {
+    margin-top: 35px;
+    height: 34px;
+    text-align: center;
+    font: normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #888888;
+    opacity: 1;
 }
