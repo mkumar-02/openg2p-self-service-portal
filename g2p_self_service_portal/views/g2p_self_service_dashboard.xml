@@ -154,7 +154,7 @@
                                                     class="no-program-text"
                                                 >You haven’t enrolled into any programs yet, please tap on the below link to view all programs.</div>
                                                 <div class="no-program-text"><a
-                                                        href="/selfservice/programs"
+                                                        href="#"
                                                     >View All Programs</a></div>
                                             </div>
                                         </td>
