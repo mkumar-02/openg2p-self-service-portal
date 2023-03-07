@@ -225,23 +225,23 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
-#alertbox{
+#alertbox {
     width: 100%;
     left: 0px;
     /* margin: ; */
 }
-.alertbox-adjuster{
+.alertbox-adjuster {
     width: 1088px;
     margin: auto;
 }
-.alertbox-message{
+.alertbox-message {
     width: 50%;
     float: left;
 }
-.alertbox-message .welcome-title{
+.alertbox-message .welcome-title {
     margin: 0px;
 }
-.alertbox-button{
+.alertbox-button {
     width: 50%;
     float: left;
     text-align: right;
@@ -693,9 +693,7 @@ td .program-name {
     /* counter-increment: serial-number; Increment the serial number counter */
     content: none; /* Display the counter */
 }
-.tables-values-container {
-    min-height: 150px;
-}
+
 .no-programs {
     height: 150px !important;
     vertical-align: middle;
