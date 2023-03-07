@@ -44,9 +44,8 @@
                                 <p class="form-description"><t t-esc="program" /></p>
                             </div>
                             <div class="card-body" style="padding: 0px;">
-                                <!-- <form id="formId" action="/submit" method="POST" role="form">
-                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                                </form> -->
+
+
                             </div>
                         </div>
                     </div>

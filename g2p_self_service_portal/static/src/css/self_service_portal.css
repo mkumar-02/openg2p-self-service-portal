@@ -1175,12 +1175,12 @@ li div p {
     box-shadow: none;
     padding-left: 11px;
     padding-top: 16px;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     padding-right: 11px;
 }
 
 .form-template .s_website_form_field {
-    font-size: 14px;
+    font: normal normal normal 14px/17px Inter;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 16px !important;
@@ -1192,7 +1192,7 @@ li div p {
 }
 
 .form-template .s_website_form_multiple {
-    height: 48px;
+    min-height: 48px;
 }
 
 .form-template .s_website_form_multiple div {
@@ -1217,6 +1217,7 @@ li div p {
 
 .form-template .s_website_form_check_label {
     padding-left: 25px;
+    font: normal normal normal 14px/17px Inter;
 }
 
 .form-template .s_website_form_submit {
@@ -1307,6 +1308,10 @@ li div p {
     background: #6569c7 0% 0% no-repeat padding-box !important;
     border-radius: 6px !important;
     opacity: 1 !important;
+}
+
+.container-right .modal-dialog-centered {
+    width: fit-content;
 }
 
 .container-right .modal-content {
