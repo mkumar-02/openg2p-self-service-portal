@@ -1,15 +1,13 @@
 const alltable = document.getElementById("allprograms");
 const allheadercells = alltable.querySelectorAll("th");
-const allRows = Array.from(alltable.tBodies[0].rows);
+const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
 
 console.log(allRows);
 allheadercells.forEach(function (th) {
     // Default sort order
     let sortOrder = "asc";
-
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
-
         allRows.sort(function (a, b) {
             const aCellValue = a.cells[columnIndex].innerText;
             const bCellValue = b.cells[columnIndex].innerText;
@@ -24,13 +22,14 @@ allheadercells.forEach(function (th) {
             if (sortOrder === "desc") {
                 comparison *= -1;
             }
-
+            console.log(comparison);
             return comparison;
         });
 
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
         allRows.forEach(function (row) {
             alltable.tBodies[0].appendChild(row);
+            console.log(alltable);
         });
     });
 });
@@ -148,6 +147,7 @@ function renderPageButtons() {
 }
 showPage(currentPage);
 renderPageButtons();
+
 searchInputText.addEventListener("input", function (event) {
     const searchValue = event.target.value.toLowerCase();
 

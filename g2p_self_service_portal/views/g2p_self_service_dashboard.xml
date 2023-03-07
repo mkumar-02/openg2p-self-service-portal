@@ -14,9 +14,8 @@
                     <div class="alert" id="alertbox">
                         <div class="alertbox-adjuster">
                             <div class="alertbox-message">
-                                <span
-                                    class="welcome-title"
-                                >Welcome to the National Social Benefits Portal</span>
+                                <span class="welcome-title">Welcome to the National Social Benefits
+                                    Portal</span>
                             </div>
                             <div class="alertbox-button">
                                 <span class="closebtn">
@@ -112,7 +111,7 @@
                                                         type="object"
                                                         class="submit-button"
                                                     >
-                                                        <t t-esc="program['status']" />
+                                                    Submitted
                                                     </button>
                                                 </td>
                                             </t>
@@ -123,7 +122,7 @@
                                                         type="object"
                                                         class="enroll-button"
                                                     >
-                                                        <t t-esc="program['status']" />
+                                                    Enrolled
                                                     </button>
                                                 </td>
                                             </t>
@@ -147,17 +146,18 @@
 
                                 </t>
                                 <!-- <t>
-                                <tr><td colspan="7"> <div class="no-program-text"> <t t-esc="len(myprograms)" /></div></td></tr></t> -->
+                                <tr><td colspan="7"> <div class="no-program-text"> <t t-esc="len(myprograms)"
+                                /></div></td></tr></t> -->
                                 <t t-if="not programs">
                                     <tr>
                                         <td colspan="7" class="no-programs">
                                             <div class="no-programs-container">
-                                                <div
-                                                    class="no-program-text"
-                                                >You haven’t enrolled into any programs yet, please tap on the below link to view all programs.</div>
-                                                <div class="no-program-text"><a
-                                                        href="#"
-                                                    >View All Programs</a></div>
+                                                <div class="no-program-text">You haven’t enrolled into
+                                                    any programs yet, please tap on the below link
+                                                    to view all programs.</div>
+                                                <div class="no-program-text">
+                                                    <a href="#">View All Programs</a>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
@@ -217,21 +217,21 @@
                             <hr />
                             <ul class="card-block">
                                 <a href="/selfservice/help">
-                                <li>
-                                    <div class="icon-image">
-                                        <img
+                                    <li>
+                                        <div class="icon-image">
+                                            <img
                                                 src="/g2p_self_service_portal/static/src/img/person_filled_FILL0_wght400_GRAD0_opsz48.png"
                                                 class="img"
                                             />
-                                    </div>
+                                        </div>
 
-                                    <div>
-                                        <a href="#">
-                                            Help </a>
-                                        <p>Tap here for assistance</p>
-                                    </div>
-                                </li>
-                            </a>
+                                        <div>
+                                            <a href="#">
+                                                Help </a>
+                                            <p>Tap here for assistance</p>
+                                        </div>
+                                    </li>
+                                </a>
                                 <li>
 
                                     <div class="icon-image">
@@ -257,7 +257,7 @@
                         <div class="card">
                             <h5 class="card-heading">Entitlements</h5>
                             <hr />
-                                <div id="pie_data" invisible="1" class="invisible">
+                            <div id="pie_data" invisible="1" class="invisible">
                                 <t t-esc="data" />
                             </div>
                             <div id="chartContainer">
