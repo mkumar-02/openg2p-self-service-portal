@@ -138,6 +138,21 @@
                 />
                     </header>
                 </xpath>
+
+                <xpath expr="//main" position="inside">
+                    <div class="ssp-contact-us">
+                        <div id="chat-bot" class="contact-us-message">
+                            <h5>Hi <t t-esc="request.env.user.given_name" />, how are you doing?</h5>
+                            <p>I am here to assist you. Take a few minutes and lets connect!</p>
+                        </div>
+                        <div class="chat-assist-icon">
+                            <a href="#" onclick="toggle_chat_bot()">
+                                <img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" />
+                            </a>
+                        </div>
+                    </div>
+                </xpath>
+
                 <xpath expr="//footer" position="replace">
                     <footer
                 t-if="not no_footer"
