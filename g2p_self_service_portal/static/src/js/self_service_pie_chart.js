@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var mydata = JSON.parse(document.getElementById("pie_data").textContent);
-    console.log(mydata)
+    console.log(mydata);
     if (mydata.values[0] > 0 || mydata.values[1] > 0) {
         document.getElementById("chartContainer").innerHTML = "&nbsp;";
         document.getElementById("chartContainer").innerHTML =
