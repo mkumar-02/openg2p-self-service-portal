@@ -694,9 +694,7 @@ td .program-name {
     /* counter-increment: serial-number; Increment the serial number counter */
     content: none; /* Display the counter */
 }
-.tables-values-container {
-    min-height: 150px;
-}
+
 .no-programs {
     height: 150px !important;
     vertical-align: middle;
@@ -1177,12 +1175,12 @@ li div p {
     box-shadow: none;
     padding-left: 11px;
     padding-top: 16px;
-    padding-bottom: 15px;
+    padding-bottom: 12px;
     padding-right: 11px;
 }
 
 .form-template .s_website_form_field {
-    font-size: 14px;
+    font: normal normal normal 14px/17px Inter;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 16px !important;
@@ -1194,7 +1192,7 @@ li div p {
 }
 
 .form-template .s_website_form_multiple {
-    height: 48px;
+    min-height: 48px;
 }
 
 .form-template .s_website_form_multiple div {
@@ -1219,6 +1217,7 @@ li div p {
 
 .form-template .s_website_form_check_label {
     padding-left: 25px;
+    font: normal normal normal 14px/17px Inter;
 }
 
 .form-template .s_website_form_submit {
@@ -1309,6 +1308,10 @@ li div p {
     background: #6569c7 0% 0% no-repeat padding-box !important;
     border-radius: 6px !important;
     opacity: 1 !important;
+}
+
+.container-right .modal-dialog-centered {
+    width: fit-content;
 }
 
 .container-right .modal-content {
@@ -1481,7 +1484,7 @@ li div p {
     font: normal normal 600 14px/17px Inter !important;
     height: 54px !important;
     background: none !important;
-    padding: 15px;
+    padding-top: 19px;
 }
 
 .form-template .container-right .card-footer a:focus {
@@ -1492,7 +1495,20 @@ li div p {
     outline: none !important;
 }
 
-.form-template .ssp-contact-us {
+.form-template .container-left .user-name {
+    font: normal normal 500 17px/20px Inter;
+    color: #333333;
+}
+
+.form-template .container-left .thank-you-msg {
+    font: normal normal normal 15px/23px Inter;
+    letter-spacing: 0px;
+    color: #333333;
+    opacity: 1;
+    margin: 0px;
+}
+
+.ssp-contact-us {
     width: 352px;
     height: 93px;
     top: 630px;

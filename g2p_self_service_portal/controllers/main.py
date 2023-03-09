@@ -253,6 +253,39 @@ class SelfServiceContorller(http.Controller):
         if request.httprequest.method == "POST":
             form_data = kwargs
 
+            account_num = kwargs.get("Account Number", None)
+
+            if account_num:
+                acc_id_type = (
+                    request.env["g2p.id.type"]
+                    .sudo()
+                    .search([("name", "=", "ACCOUNT_ID")], limit=1)
+                )
+
+                if len(acc_id_type) > 0:
+
+                    acc_reg_id = (
+                        request.env["g2p.reg.id"]
+                        .sudo()
+                        .search(
+                            [
+                                ("partner_id", "=", current_partner.id),
+                                ("id_type", "=", acc_id_type.id),
+                            ]
+                        )
+                    )
+                    if len(acc_reg_id) > 0:
+                        acc_reg_id.update({"value": account_num})
+
+                    else:
+                        request.env["g2p.reg.id"].sudo().create(
+                            {
+                                "partner_id": current_partner.id,
+                                "id_type": acc_id_type.id,
+                                "value": account_num,
+                            }
+                        )
+
             if isinstance(additional_info, list):
                 already_present = False
                 for element in additional_info:
@@ -302,6 +335,6 @@ class SelfServiceContorller(http.Controller):
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
                 "application_id": program_member.application_id,
-                "user": current_partner.given_name,
+                "user": current_partner.given_name.capitalize(),
             },
         )
