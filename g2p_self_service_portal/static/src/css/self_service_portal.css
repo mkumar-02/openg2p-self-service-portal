@@ -720,7 +720,7 @@ td .program-name {
 }
 .notapplied-button {
     left: 811px;
-    width: 84px;
+    min-width: 84px;
     height: 25px;
     background: #dce3e8 0% 0% no-repeat padding-box;
     border-radius: 4px;
