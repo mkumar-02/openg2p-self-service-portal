@@ -253,7 +253,7 @@ class SelfServiceContorller(http.Controller):
         if request.httprequest.method == "POST":
             form_data = kwargs
 
-            account_num = kwargs.get("Account Number", None)
+            account_num = kwargs.get("Account number", None)
 
             if account_num:
                 acc_id_type = (
