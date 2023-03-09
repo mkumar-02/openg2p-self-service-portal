@@ -1,9 +1,6 @@
-# My Programs
+# Multi Language Support
 
 ## Introduction:
-
-    In Main Dashboard,
-    All Programs which are Submitted/Enrolled by logged user are visible and he/she can check status, Application Number,payments received and pending status
 
 ## Technologies Used:
 
@@ -17,12 +14,12 @@ Following technologies have used:
 
 ## Functionality:
 
-1. My Programs: All Programs which are Submitted/Enrolled by logged user have shown
+1. All Programs: All Programs list is visible
 2. Search by program name is added
 3. Column wise sorting of my programs have added
-4. Program submission date, application id, received and pending payments particulars have added
+4. User can redirect to view his/her application form/apply for program page
+5. Pagination is added
 
 ## Conclusion:
 
-- Logged User related all programs list is displayed with payment particulars,search and sorting functionality
-  added.
+All programs list is available with search and sorting functionality. User can redirect to apply/view page.

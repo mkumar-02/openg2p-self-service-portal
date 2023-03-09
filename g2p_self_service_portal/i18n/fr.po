@@ -557,6 +557,12 @@ msgstr ""
 "voir tous les programmes."
 
 #. module: g2p_self_service_portal
+#: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.dashboard
+msgid "In order to see the entitlements, please enroll into a program."
+msgstr "Afin de voir les droits, veuillez vous inscrire à un programme."
+
+
+#. module: g2p_self_service_portal
 #: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_submitted
 #: model_terms:ir.ui.view,arch_db:g2p_self_service_portal.self_service_form_template
 msgid "breadcrumb"
