@@ -1163,6 +1163,7 @@ li div p {
 
 .form-template .s_website_form_label {
     margin-bottom: 7px;
+    width: auto !important;
 }
 
 .form-template .s_website_form_input {
@@ -1510,7 +1511,7 @@ li div p {
 
 .ssp-contact-us {
     width: 352px;
-    height: 93px;
+    min-height: 93px;
     top: 630px;
     float: right;
     position: fixed;
