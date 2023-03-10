@@ -29,7 +29,7 @@
                             <div id="toast-message" class="toast-success-message">
                                 Thank you. Your application has been submitted successfully.
                                 Please note your application ID for future reference -
-                                <t t-esc="application_id" />
+                                <t t-esc="application_id" />.
                             </div>
                             <button id="toast-close-btn" onclick="hide_toast_success_msg()">
                                 <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
@@ -46,7 +46,7 @@
                                                 t-esc="program"
                                             />.
                                             <br />
-                                            Your application number is <b><t t-esc="application_id" /></b>
+                                            Your application number is <b><t t-esc="application_id" /></b>.
                                             <br /><br />
                                             We appreciate your interest in  and we are committed to providing you with the support you need to achieve your goals.
                                             Our team will now review your application and assess your eligibility for the scheme. This process may take some time, and we appreciate your patience while we work to provide you with the best possible service.
