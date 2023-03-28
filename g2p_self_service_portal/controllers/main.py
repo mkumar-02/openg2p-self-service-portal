@@ -156,7 +156,7 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
-        
+
         programs = request.env["g2p.program"].sudo().search([])
 
         partner_id = request.env.user.partner_id
@@ -291,11 +291,10 @@ class SelfServiceContorller(http.Controller):
                 _logger.error("Found Bad Additional G2P Info")
 
             current_partner.additional_g2p_info = additional_info
-            
-            current_partner.program_registrant_info_ids = [(0,0,{
-                "program_registrant_info":form_data,
-                "program":program.id
-            })]
+
+            current_partner.program_registrant_info_ids = [
+                (0, 0, {"program_registrant_info": form_data, "program": program.id})
+            ]
 
             apply_to_program = {
                 "partner_id": current_partner.id,
