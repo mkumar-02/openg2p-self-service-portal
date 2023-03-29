@@ -293,7 +293,7 @@ class SelfServiceContorller(http.Controller):
             current_partner.additional_g2p_info = additional_info
 
             current_partner.program_registrant_info_ids = [
-                (0, 0, {"program_registrant_info": form_data, "program": program.id})
+                (0, 0, {"program_registrant_info": form_data, "program_id": program.id})
             ]
 
             apply_to_program = {
