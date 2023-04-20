@@ -2,7 +2,9 @@ import json
 import logging
 from datetime import datetime
 
-from odoo import http
+from werkzeug.exceptions import Forbidden, Unauthorized
+
+from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
@@ -67,6 +69,7 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
         query = request.params.get("query")
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
@@ -156,6 +159,7 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
 
         programs = request.env["g2p.program"].sudo().search([])
 
@@ -202,6 +206,8 @@ class SelfServiceContorller(http.Controller):
         ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
     )
     def self_service_apply_programs(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
@@ -228,15 +234,10 @@ class SelfServiceContorller(http.Controller):
         csrf=False,
     )
     def self_service_form_details(self, _id, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
-
-        additional_info = (
-            current_partner.additional_g2p_info
-            if current_partner.additional_g2p_info
-            else []
-        )
 
         if request.httprequest.method == "POST":
             form_data = kwargs
@@ -244,66 +245,56 @@ class SelfServiceContorller(http.Controller):
             account_num = kwargs.get("Account Number", None)
 
             if account_num:
-                acc_id_type = (
-                    request.env["g2p.id.type"]
-                    .sudo()
-                    .search([("name", "=", "ACCOUNT_ID")], limit=1)
+                if len(current_partner.bank_ids) > 0:
+                    # TODO: Fixing value of first account number for now, if more than one exists
+                    current_partner.bank_ids[0].acc_number = account_num
+                else:
+                    current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
+
+            program_registrant_info_ids = (
+                request.env["g2p.program.registrant_info"]
+                .sudo()
+                .search(
+                    [
+                        ("program_id", "=", program.id),
+                        ("registrant_id", "=", current_partner.id),
+                        ("status", "=", "active"),
+                    ]
                 )
-
-                if len(acc_id_type) > 0:
-
-                    acc_reg_id = (
-                        request.env["g2p.reg.id"]
-                        .sudo()
-                        .search(
-                            [
-                                ("partner_id", "=", current_partner.id),
-                                ("id_type", "=", acc_id_type.id),
-                            ]
-                        )
-                    )
-                    if len(acc_reg_id) > 0:
-                        acc_reg_id.update({"value": account_num})
-
-                    else:
-                        request.env["g2p.reg.id"].sudo().create(
-                            {
-                                "partner_id": current_partner.id,
-                                "id_type": acc_id_type.id,
-                                "value": account_num,
-                            }
-                        )
-
-            if isinstance(additional_info, list):
-                already_present = False
-                for element in additional_info:
-                    if element["id"] == _id:
-                        already_present = True
-                        element["data"].update(form_data)
-                        break
-                if not already_present:
-                    additional_info.append(
-                        {"id": _id, "name": program.name, "data": form_data}
-                    )
-            elif isinstance(additional_info, dict):
-                additional_info.update(form_data)
-            else:
-                _logger.error("Found Bad Additional G2P Info")
-
-            current_partner.additional_g2p_info = additional_info
-
-            current_partner.program_registrant_info_ids = [
-                (0, 0, {"program_registrant_info": form_data, "program_id": program.id})
-            ]
-
-            apply_to_program = {
-                "partner_id": current_partner.id,
-                "program_id": program.id,
-            }
-
-            program_member = (
-                request.env["g2p.program_membership"].sudo().create(apply_to_program)
             )
+            program_registrant_info_ids.write({"status": "closed"})
+            request.env["g2p.program.registrant_info"].sudo().create(
+                {
+                    "status": "active",
+                    "program_registrant_info": form_data,
+                    "program_id": program.id,
+                    "registrant_id": current_partner.id,
+                }
+            )
+
+            prog_membs = (
+                request.env["g2p.program_membership"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "=", current_partner.id),
+                        ("program_id", "=", program.id),
+                    ]
+                )
+            )
+            if len(prog_membs) == 0:
+                apply_to_program = {
+                    "partner_id": current_partner.id,
+                    "program_id": program.id,
+                }
+
+                program_member = (
+                    request.env["g2p.program_membership"]
+                    .sudo()
+                    .create(apply_to_program)
+                )
+            else:
+                program_member = prog_membs[0]
 
         else:
             program_member = (
@@ -330,3 +321,11 @@ class SelfServiceContorller(http.Controller):
                 "user": current_partner.given_name.capitalize(),
             },
         )
+
+    def self_service_check_roles(self, role_to_check):
+        # And add further role checks and return types
+        if role_to_check == "REGISTRANT":
+            if not request.session or not request.env.user:
+                raise Unauthorized(_("User is not logged in"))
+            if not request.env.user.partner_id.is_registrant:
+                raise Forbidden(_("User is not allowed to access the portal"))
