@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="base"
+        name="G2P Claims Portal Base"
+        inherit_id="g2p_self_service_portal.base"
+        primary="True"
+        priority="920"
+    >
+        <xpath expr="//link[contains(@href, 'self_service_portal.css')]" position="after">
+            <link rel="stylesheet" href="/g2p_claims_portal/static/src/css/claims_portal.css" />
+        </xpath>
+        <xpath expr="//a[@href='/selfservice']" position="replace">
+            <a href="/claims">
+                <img src="/g2p_claims_portal/static/src/img/logo@2x.png" class="main-logo" />
+            </a>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice']" position="replace">
+            <a href="/claims">
+                <img src="/g2p_claims_portal/static/src/img/logo@2x.png" class="main-logo" />
+            </a>
+        </xpath>
+    </template>
+</odoo>
