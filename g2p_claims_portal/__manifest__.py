@@ -4,7 +4,7 @@
     "version": "15.0.1.1.0",
     "sequence": 1,
     "author": "OpenG2P",
-    "website": "https://github.com/OpenG2P/openg2p-self-service-portal",
+    "website": "https://openg2p.org",
     "license": "Other OSI approved licence",
     "development_status": "Alpha",
     "depends": [
@@ -16,11 +16,14 @@
         "views/g2p_claims_dashboard.xml",
         "views/g2p_claims_claims.xml",
         "views/g2p_claims_form_page_template.xml",
+        "views/g2p_claims_form_submitted.xml",
     ],
     "assets": {
         "web.assets_backend": [],
         "web.assets_qweb": [],
-        "web.assets_frontend": [],
+        "web.assets_frontend": [
+            "g2p_claims_portal/static/src/js/claims_form_action.js",
+        ],
         "web.assets_common": [],
     },
     "demo": [],

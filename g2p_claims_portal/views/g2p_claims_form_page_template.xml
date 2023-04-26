@@ -3,7 +3,6 @@
     <template id="claim_submission_form_template" name="G2P Claims Portal New Claim Submission">
         <t t-call="g2p_claims_portal.base">
             <t t-set="title">New Claim Submission | Claims Portal</t>
-            <script type="text/javascript" src="/g2p_claims_portal/static/src/js/claims_form_action.js" />
             <div class="main-container">
                 <div class="container-adjuster">
                     <div class="form-template">
@@ -70,7 +69,7 @@
                                     <div class="card-body" style="padding: 20px;">
                                         <button
                                             id="program_submit_id"
-                                            onclick="form_submit_action()"
+                                            onclick="claim_form_submit_action()"
                                             t-att-program="entitlement_id"
                                             type="submit"
                                             class="btn btn-primary btn-lg btn-block form_submit_action"

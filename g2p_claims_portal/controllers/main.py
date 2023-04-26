@@ -91,6 +91,84 @@ class ServiceProviderContorller(http.Controller):
             },
         )
 
+    @http.route(
+        ["/claims/submitted/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+        csrf=False,
+    )
+    def claims_portal_post_submission(self, _id, **kwargs):
+        self.check_roles("SERVICEPROVIDER")
+
+        current_partner = request.env.user.partner_id
+
+        # TODO: get only issued entitlements
+
+        entitlement = request.env["g2p.entitlement"].sudo().browse(_id)
+        if entitlement.vendor_id.id != current_partner.id:
+            raise Forbidden()
+
+        if request.httprequest.method == "POST":
+            form_data = kwargs
+            # check if already claimed
+            if len(entitlement.claim_entitlement_ids) > 0:
+                return request.redirect(f"/claims/submitted/{_id}")
+            # TODO: allow resubmission
+
+            # TODO: check active cycle in claims program
+            # TODO: Check if beneficiary of claims program
+
+            if not entitlement.code == form_data["Voucher Code"]:
+                # TODO: raise error
+                return
+
+            claims_program = entitlement.program_id.claim_program_id
+            claims_active_cycle = claims_program.default_active_cycle
+
+            supporting_document = form_data["Billing Statement"]
+            supporting_document_ext = "." + supporting_document.filename.split(".")[-1]
+            supporting_document_file = (
+                claims_program.supporting_documents_store.add_file(
+                    supporting_document.stream.read(),
+                    extension=supporting_document_ext,
+                )
+            )
+
+            # TODO: remove following hardcodes
+            claim = (
+                request.env["g2p.entitlement"]
+                .sudo()
+                .create(
+                    {
+                        "cycle_id": claims_active_cycle.id,
+                        "partner_id": current_partner.id,
+                        "initial_amount": form_data["Actual Amount"],
+                        "transfer_fee": 0.0,
+                        "currency_id": claims_program.journal_id.currency_id.id,
+                        "state": "draft",
+                        "is_cash_entitlement": True,
+                        "valid_from": claims_active_cycle.start_date,
+                        "valid_until": claims_active_cycle.end_date,
+                        "supporting_document": supporting_document_file.id,
+                        "claim_original_entitlement_id": entitlement.id,
+                    }
+                )
+            )
+        else:
+            # TODO: search and return currently active claim
+            claim = request.env["g2p.entitlement"].search()
+
+        return request.render(
+            "g2p_claims_portal.claim_form_submitted",
+            {
+                "entitlement": entitlement.id,
+                "submission_date": claim.create_date.strftime("%d-%b-%Y"),
+                "application_id": claim.id,
+                "user": current_partner.name.capitalize(),
+            },
+        )
+
     def check_roles(self, role_to_check):
         # And add further role checks and return types
         if role_to_check == "SERVICEPROVIDER":

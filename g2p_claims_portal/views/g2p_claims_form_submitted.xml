@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template id="claim_form_submitted" name="G2P Claim Form Submitted">
+        <t t-call="g2p_claims_portal.base">
+            <div id="wrap" class="oe_structure oe_empty" />
+            <div class="form-template">
+                <div class="main-container">
+                    <div class="container-adjuster">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="details">Claim Submission</div>
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb form-layout-breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            <a href="/claims/home">
+                                                Home
+                                            </a>
+                                        </li>
+                                        <li class="breadcrumb-item" aria-current="page">
+                                            <a href="/claims/entitlements">
+                                                New Claims
+                                            </a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">
+                                            Claim Submission
+                                        </li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+
+                        <div id="toast-container" class="toast-success-container">
+                            <div id="toast-message" class="toast-success-message">
+                                Thank you. Your application has been submitted successfully.
+                                Please note your application ID for future reference -
+                                <t t-esc="application_id" />
+                            </div>
+                            <button id="toast-close-btn" onclick="hide_toast_success_msg()">
+                                <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
+                            </button>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card container-left" style="width: auto; padding: 0px;">
+                                    <div class="card-body" style="padding: 20px;">
+                                        <h5 class="user-name">Dear <t t-esc="user" />,</h5>
+                                        <p class="thank-you-msg">
+                                            Thank you for submitting for the claim
+                                            <t t-esc="entitlement" />.
+                                            <br />
+                                            Your application number is <b><t t-esc="application_id" /></b>
+                                            <br />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="card container-right" style="width: auto; padding: 0px;">
+                                    <div class="card-header" style="padding: 0px;">
+                                        <h5 class="action-heading">
+                                            Entitlement ID - <t t-esc="entitlement" />
+                                        </h5>
+                                        <div class="form-status">
+                                            <button>Submitted</button>
+                                        </div>
+                                    </div>
+                                    <div class="card-body" style="padding: 20px;">
+                                        <div class="form-application-id">
+                                            <p>Application ID</p>
+                                            <b><t t-esc="application_id" /></b>
+                                        </div>
+                                        <div>
+                                            <p>Submitted On</p>
+                                            <b><t t-esc="submission_date" /></b>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer" style="padding: 20px;">
+                                        <a
+                                            href="/claims/home"
+                                            class="btn btn-outline-primary btn-lg btn-block"
+                                        >
+                                            Dashboard
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+   </template>
+</odoo>

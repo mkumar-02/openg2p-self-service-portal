@@ -1,12 +1,12 @@
 // eslint-disable-next-line no-unused-vars,complexity
-function form_submit_action() {
+function claim_form_submit_action() {
     // URL Change
     var test = $(".s_website_form");
     var form = test.find("form");
 
     var program_id = $("#program_submit_id");
 
-    form[0].action = `/claims/submitted/${program_id}`;
+    form[0].action = `/claims/submitted/${program_id[0].getAttribute("program")}`;
 
     // Validation's //
     var isValid = true;
