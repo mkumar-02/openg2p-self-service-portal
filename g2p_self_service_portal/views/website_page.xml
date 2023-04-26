@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Part of OpenG2P. See LICENSE file for full copyright and licensing details.
+-->
+<odoo>
+    <record id="program_website_page_list_tree" model="ir.ui.view">
+        <field name="name">program_website_page_list_tree</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website_id']" position="after">
+                <field name="is_program_form_page" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="program_website_page_form" model="ir.ui.view">
+        <field name="name">program_website_page_form</field>
+        <field name="model">website.page</field>
+        <field name="inherit_id" ref="website.website_pages_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='track']" position="after">
+                <field name="is_program_form_page" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
