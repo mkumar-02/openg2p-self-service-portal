@@ -6,7 +6,11 @@ from odoo import fields, models
 class G2PCreateProgramWizard(models.TransientModel):
     _inherit = "g2p.program.create.wizard"
 
-    self_service_portal_form = fields.Many2one("website.page", string="Program Form")
+    self_service_portal_form = fields.Many2one(
+        "website.page",
+        string="Program Form",
+        domain="[('is_program_form_page', '=', 'True')]",
+    )
 
     def create_program(self):
         res = super(G2PCreateProgramWizard, self).create_program()
