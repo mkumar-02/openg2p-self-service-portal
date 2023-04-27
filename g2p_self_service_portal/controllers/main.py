@@ -2,6 +2,7 @@ import json
 import logging
 from datetime import datetime
 
+from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
@@ -12,7 +13,7 @@ from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 _logger = logging.getLogger(__name__)
 
 
-class SelfServiceContorller(http.Controller):
+class SelfServiceController(http.Controller):
     @http.route(["/selfservice"], type="http", auth="public", website=True)
     def self_service_root(self, **kwargs):
         if request.session and request.session.uid:
@@ -266,7 +267,9 @@ class SelfServiceContorller(http.Controller):
             request.env["g2p.program.registrant_info"].sudo().create(
                 {
                     "status": "active",
-                    "program_registrant_info": form_data,
+                    "program_registrant_info": self.jsonize_form_data(
+                        form_data, program
+                    ),
                     "program_id": program.id,
                     "registrant_id": current_partner.id,
                 }
@@ -329,3 +332,44 @@ class SelfServiceContorller(http.Controller):
                 raise Unauthorized(_("User is not logged in"))
             if not request.env.user.partner_id.is_registrant:
                 raise Forbidden(_("User is not allowed to access the portal"))
+
+    def jsonize_form_data(self, data, program):
+        for key in data:
+            value = data[key]
+            if isinstance(value, FileStorage):
+                if not program.supporting_documents_store:
+                    _logger.error(
+                        "Supporting Documents Store is not set in Program Configuration"
+                    )
+                    data[key] = None
+                    continue
+
+                data[key] = self.add_file_to_store(
+                    value, program.supporting_documents_store
+                )
+                if not data.get(key, None):
+                    _logger.warning("Empty/No File received for field %s", key)
+                    continue
+
+        return data
+
+    @classmethod
+    def add_file_to_store(cls, file: FileStorage, store):
+        if store and file.filename:
+            if len(file.filename.split(".")) > 1:
+                supporting_document_ext = "." + file.filename.split(".")[-1]
+            else:
+                supporting_document_ext = None
+            document_file = store.add_file(
+                file.stream.read(),
+                extension=supporting_document_ext,
+            )
+            document_uuid = document_file.name.split(".")[0]
+            return {
+                "document_id": document_file.id,
+                "document_uuid": document_uuid,
+                "document_name": document_file.name,
+                "document_slug": document_file.slug,
+                "document_url": document_file.url,
+            }
+        return None
