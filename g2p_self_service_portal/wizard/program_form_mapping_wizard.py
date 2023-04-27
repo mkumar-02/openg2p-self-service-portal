@@ -9,7 +9,7 @@ class G2PCreateProgramWizard(models.TransientModel):
     self_service_portal_form = fields.Many2one(
         "website.page",
         string="Program Form",
-        domain="[('is_program_form_page', '=', 'True')]",
+        domain="[('is_portal_form', '=', 'True')]",
     )
 
     def create_program(self):

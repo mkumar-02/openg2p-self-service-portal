@@ -9,7 +9,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="website.website_pages_tree_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='website_id']" position="after">
-                <field name="is_program_form_page" />
+                <field name="is_portal_form" />
             </xpath>
         </field>
     </record>
@@ -20,7 +20,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
         <field name="inherit_id" ref="website.website_pages_form_view" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='track']" position="after">
-                <field name="is_program_form_page" />
+                <field name="is_portal_form" />
             </xpath>
         </field>
     </record>

@@ -6,4 +6,4 @@ from odoo import fields, models
 class WebsitePage(models.Model):
     _inherit = "website.page"
 
-    is_program_form_page = fields.Boolean("Program Form Page")
+    is_portal_form = fields.Boolean(default=False)
