@@ -233,7 +233,7 @@
                                         </div>
                                     </li>
                                 </a>
-                                <li>
+                                <li id="faq">
 
                                     <div class="icon-image">
                                         <img

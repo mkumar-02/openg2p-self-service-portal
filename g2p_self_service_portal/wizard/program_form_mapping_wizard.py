@@ -16,9 +16,9 @@ class G2PCreateProgramWizard(models.TransientModel):
         res = super(G2PCreateProgramWizard, self).create_program()
 
         program = self.env["g2p.program"].browse(res["res_id"])
-        program_form_id = self.self_service_portal_form.id
+        program_form = self.self_service_portal_form
 
-        if program_form_id:
-            program.update({"self_service_portal_form": program_form_id})
+        if program_form:
+            program.self_service_portal_form = program_form
 
         return res
