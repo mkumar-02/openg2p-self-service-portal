@@ -2,7 +2,10 @@ import json
 import logging
 from datetime import datetime
 
-from odoo import http
+from werkzeug.datastructures import FileStorage
+from werkzeug.exceptions import Forbidden, Unauthorized
+
+from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
@@ -10,7 +13,7 @@ from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 _logger = logging.getLogger(__name__)
 
 
-class SelfServiceContorller(http.Controller):
+class SelfServiceController(http.Controller):
     @http.route(["/selfservice"], type="http", auth="public", website=True)
     def self_service_root(self, **kwargs):
         if request.session and request.session.uid:
@@ -67,6 +70,7 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
         query = request.params.get("query")
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
@@ -85,8 +89,6 @@ class SelfServiceContorller(http.Controller):
                     ]
                 )
             )
-            # date = datetime.strptime(membership['enrollment_date'], '%Y-%m-%d')
-            # output_date = date.strftime('%d-%b-%Y')
             amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
@@ -158,18 +160,9 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
-        # limit = int(limit)
-        # page = int(page)
-        # query = kwargs.get("q", "")
-        # domain = [("name", "ilike", query)]
+        self.self_service_check_roles("REGISTRANT")
 
-        # if page < 1:
-        #     page = 1
-        # if limit < 5:
-        #     limit = 5
         programs = request.env["g2p.program"].sudo().search([])
-
-        # total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
 
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -214,6 +207,8 @@ class SelfServiceContorller(http.Controller):
         ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
     )
     def self_service_apply_programs(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
@@ -240,15 +235,10 @@ class SelfServiceContorller(http.Controller):
         csrf=False,
     )
     def self_service_form_details(self, _id, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
-
-        additional_info = (
-            current_partner.additional_g2p_info
-            if current_partner.additional_g2p_info
-            else []
-        )
 
         if request.httprequest.method == "POST":
             form_data = kwargs
@@ -256,62 +246,58 @@ class SelfServiceContorller(http.Controller):
             account_num = kwargs.get("Account Number", None)
 
             if account_num:
-                acc_id_type = (
-                    request.env["g2p.id.type"]
-                    .sudo()
-                    .search([("name", "=", "ACCOUNT_ID")], limit=1)
+                if len(current_partner.bank_ids) > 0:
+                    # TODO: Fixing value of first account number for now, if more than one exists
+                    current_partner.bank_ids[0].acc_number = account_num
+                else:
+                    current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
+
+            program_registrant_info_ids = (
+                request.env["g2p.program.registrant_info"]
+                .sudo()
+                .search(
+                    [
+                        ("program_id", "=", program.id),
+                        ("registrant_id", "=", current_partner.id),
+                        ("status", "=", "active"),
+                    ]
                 )
-
-                if len(acc_id_type) > 0:
-
-                    acc_reg_id = (
-                        request.env["g2p.reg.id"]
-                        .sudo()
-                        .search(
-                            [
-                                ("partner_id", "=", current_partner.id),
-                                ("id_type", "=", acc_id_type.id),
-                            ]
-                        )
-                    )
-                    if len(acc_reg_id) > 0:
-                        acc_reg_id.update({"value": account_num})
-
-                    else:
-                        request.env["g2p.reg.id"].sudo().create(
-                            {
-                                "partner_id": current_partner.id,
-                                "id_type": acc_id_type.id,
-                                "value": account_num,
-                            }
-                        )
-
-            if isinstance(additional_info, list):
-                already_present = False
-                for element in additional_info:
-                    if element["id"] == _id:
-                        already_present = True
-                        element["data"].update(form_data)
-                        break
-                if not already_present:
-                    additional_info.append(
-                        {"id": _id, "name": program.name, "data": form_data}
-                    )
-            elif isinstance(additional_info, dict):
-                additional_info.update(form_data)
-            else:
-                _logger.error("Found Bad Additional G2P Info")
-
-            current_partner.additional_g2p_info = additional_info
-
-            apply_to_program = {
-                "partner_id": current_partner.id,
-                "program_id": program.id,
-            }
-
-            program_member = (
-                request.env["g2p.program_membership"].sudo().create(apply_to_program)
             )
+            program_registrant_info_ids.write({"status": "closed"})
+            request.env["g2p.program.registrant_info"].sudo().create(
+                {
+                    "status": "active",
+                    "program_registrant_info": self.jsonize_form_data(
+                        form_data, program
+                    ),
+                    "program_id": program.id,
+                    "registrant_id": current_partner.id,
+                }
+            )
+
+            prog_membs = (
+                request.env["g2p.program_membership"]
+                .sudo()
+                .search(
+                    [
+                        ("partner_id", "=", current_partner.id),
+                        ("program_id", "=", program.id),
+                    ]
+                )
+            )
+            if len(prog_membs) == 0:
+                apply_to_program = {
+                    "partner_id": current_partner.id,
+                    "program_id": program.id,
+                }
+
+                program_member = (
+                    request.env["g2p.program_membership"]
+                    .sudo()
+                    .create(apply_to_program)
+                )
+            else:
+                program_member = prog_membs[0]
 
         else:
             program_member = (
@@ -338,3 +324,52 @@ class SelfServiceContorller(http.Controller):
                 "user": current_partner.given_name.capitalize(),
             },
         )
+
+    def self_service_check_roles(self, role_to_check):
+        # And add further role checks and return types
+        if role_to_check == "REGISTRANT":
+            if not request.session or not request.env.user:
+                raise Unauthorized(_("User is not logged in"))
+            if not request.env.user.partner_id.is_registrant:
+                raise Forbidden(_("User is not allowed to access the portal"))
+
+    def jsonize_form_data(self, data, program):
+        for key in data:
+            value = data[key]
+            if isinstance(value, FileStorage):
+                if not program.supporting_documents_store:
+                    _logger.error(
+                        "Supporting Documents Store is not set in Program Configuration"
+                    )
+                    data[key] = None
+                    continue
+
+                data[key] = self.add_file_to_store(
+                    value, program.supporting_documents_store
+                )
+                if not data.get(key, None):
+                    _logger.warning("Empty/No File received for field %s", key)
+                    continue
+
+        return data
+
+    @classmethod
+    def add_file_to_store(cls, file: FileStorage, store):
+        if store and file.filename:
+            if len(file.filename.split(".")) > 1:
+                supporting_document_ext = "." + file.filename.split(".")[-1]
+            else:
+                supporting_document_ext = None
+            document_file = store.add_file(
+                file.stream.read(),
+                extension=supporting_document_ext,
+            )
+            document_uuid = document_file.name.split(".")[0]
+            return {
+                "document_id": document_file.id,
+                "document_uuid": document_uuid,
+                "document_name": document_file.name,
+                "document_slug": document_file.slug,
+                "document_url": document_file.url,
+            }
+        return None
