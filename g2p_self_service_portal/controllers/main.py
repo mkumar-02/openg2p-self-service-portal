@@ -239,12 +239,38 @@ class SelfServiceController(http.Controller):
 
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
+        program_member = None
+
+        prog_membs = (
+            request.env["g2p.program_membership"]
+            .sudo()
+            .search(
+                [
+                    ("partner_id", "=", current_partner.id),
+                    ("program_id", "=", program.id),
+                ]
+            )
+        )
+        if len(prog_membs) > 0:
+            program_member = prog_membs[0]
 
         if request.httprequest.method == "POST":
+            if len(prog_membs) == 0:
+                program_member = (
+                    request.env["g2p.program_membership"]
+                    .sudo()
+                    .create(
+                        {
+                            "partner_id": current_partner.id,
+                            "program_id": program.id,
+                        }
+                    )
+                )
+
             form_data = kwargs
 
-            account_num = kwargs.get("Account Number", None)
-
+            # Hardcoding Account number from form data for now
+            account_num = form_data.get("Account Number", None)
             if account_num:
                 if len(current_partner.bank_ids) > 0:
                     # TODO: Fixing value of first account number for now, if more than one exists
@@ -268,51 +294,15 @@ class SelfServiceController(http.Controller):
                 {
                     "status": "active",
                     "program_registrant_info": self.jsonize_form_data(
-                        form_data, program
+                        form_data, program, membership=program_member
                     ),
                     "program_id": program.id,
                     "registrant_id": current_partner.id,
                 }
             )
 
-            prog_membs = (
-                request.env["g2p.program_membership"]
-                .sudo()
-                .search(
-                    [
-                        ("partner_id", "=", current_partner.id),
-                        ("program_id", "=", program.id),
-                    ]
-                )
-            )
-            if len(prog_membs) == 0:
-                apply_to_program = {
-                    "partner_id": current_partner.id,
-                    "program_id": program.id,
-                }
-
-                program_member = (
-                    request.env["g2p.program_membership"]
-                    .sudo()
-                    .create(apply_to_program)
-                )
-            else:
-                program_member = prog_membs[0]
-
         else:
-            program_member = (
-                request.env["g2p.program_membership"]
-                .sudo()
-                .search(
-                    [
-                        ("program_id", "=", program.id),
-                        ("partner_id", "=", current_partner.id),
-                    ],
-                    limit=1,
-                )
-            )
-
-            if len(program_member) < 1:
+            if not program_member:
                 return request.redirect(f"/selfservice/apply/{_id}")
 
         return request.render(
@@ -333,7 +323,7 @@ class SelfServiceController(http.Controller):
             if not request.env.user.partner_id.is_registrant:
                 raise Forbidden(_("User is not allowed to access the portal"))
 
-    def jsonize_form_data(self, data, program):
+    def jsonize_form_data(self, data, program, membership=None):
         for key in data:
             value = data[key]
             if isinstance(value, FileStorage):
@@ -345,7 +335,9 @@ class SelfServiceController(http.Controller):
                     continue
 
                 data[key] = self.add_file_to_store(
-                    value, program.supporting_documents_store
+                    value,
+                    program.supporting_documents_store,
+                    program_membership=membership,
                 )
                 if not data.get(key, None):
                     _logger.warning("Empty/No File received for field %s", key)
@@ -354,7 +346,7 @@ class SelfServiceController(http.Controller):
         return data
 
     @classmethod
-    def add_file_to_store(cls, file: FileStorage, store):
+    def add_file_to_store(cls, file: FileStorage, store, program_membership=None):
         if store and file.filename:
             if len(file.filename.split(".")) > 1:
                 supporting_document_ext = "." + file.filename.split(".")[-1]
@@ -363,6 +355,7 @@ class SelfServiceController(http.Controller):
             document_file = store.add_file(
                 file.stream.read(),
                 extension=supporting_document_ext,
+                program_membership=program_membership,
             )
             document_uuid = document_file.name.split(".")[0]
             return {

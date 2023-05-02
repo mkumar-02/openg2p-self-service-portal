@@ -154,9 +154,9 @@ class ServiceProviderContorller(http.Controller):
                         "is_cash_entitlement": True,
                         "valid_from": claims_active_cycle.start_date,
                         "valid_until": claims_active_cycle.end_date,
-                        "supporting_document": supporting_document_file.get(
-                            "document_id", None
-                        ),
+                        "supporting_document_ids": [
+                            (4, supporting_document_file.get("document_id", None))
+                        ],
                         "claim_original_entitlement_id": entitlement.id,
                     }
                 )

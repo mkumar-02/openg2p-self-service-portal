@@ -12,6 +12,7 @@
         "g2p_registry_individual",
         "g2p_programs",
         "g2p_program_registrant_info",
+        "g2p_program_documents",
         "website",
         "web",
         "auth_oidc",
