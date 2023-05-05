@@ -6,7 +6,13 @@ from odoo import api, fields, models
 class G2PProgram(models.Model):
     _inherit = "g2p.program"
 
-    self_service_portal_form = fields.Many2one("website.page", string="Program Form")
+    self_service_portal_form = fields.Many2one(
+        "website.page",
+        string="Program Form",
+        domain="[('is_portal_form', '=', 'True')]",
+    )
+
+    multiple_form_submission = fields.Boolean(default=False)
 
     @api.constrains("self_service_portal_form")
     def update_form_template(self):
