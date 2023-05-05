@@ -11,6 +11,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
             <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
                     <group>
+                        <field name="multiple_form_submission" />
                         <field
                             name="self_service_portal_form"
                             options="{'no_create': True, 'no_create_edit':True}"
@@ -29,5 +30,4 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
         sequence="1000"
         groups="g2p_registry_base.group_g2p_admin,g2p_programs.g2p_program_manager"
     />
-
 </odoo>

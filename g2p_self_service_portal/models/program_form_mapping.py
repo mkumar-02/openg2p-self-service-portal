@@ -12,6 +12,8 @@ class G2PProgram(models.Model):
         domain="[('is_portal_form', '=', 'True')]",
     )
 
+    multiple_form_submission = fields.Boolean(default=False)
+
     @api.constrains("self_service_portal_form")
     def update_form_template(self):
         form_view = self.self_service_portal_form.view_id
