@@ -189,6 +189,9 @@ class SelfServiceController(http.Controller):
                     "is_form_mapped": True
                     if program.self_service_portal_form
                     else False,
+                    "is_multiple_form_submission": True
+                    if program.multiple_form_submission
+                    else False,
                 }
             )
 
@@ -210,10 +213,11 @@ class SelfServiceController(http.Controller):
         self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
+        multiple_form_submission = program.multiple_form_submission
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
-            if mem.program_id.id == _id:
+            if mem.program_id.id == _id and not multiple_form_submission:
                 return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id

@@ -33,6 +33,7 @@
         "views/g2p_self_service_program_view.xml",
         "views/g2p_self_service_submitted_forms.xml",
         "views/res_config_settings.xml",
+        "views/website_page.xml",
         "wizard/g2p_self_service_program_view_wizard.xml",
     ],
     "assets": {

@@ -11,7 +11,11 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
             <xpath expr="//notebook" position="inside">
                 <page string="Map Portal Form">
                     <group>
-                        <field name="self_service_portal_form" />
+                        <field name="multiple_form_submission" />
+                        <field
+                            name="self_service_portal_form"
+                            options="{'no_create': True, 'no_create_edit':True}"
+                        />
                     </group>
                 </page>
             </xpath>
