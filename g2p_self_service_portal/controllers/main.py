@@ -219,8 +219,6 @@ class SelfServiceController(http.Controller):
         for mem in current_partner.program_membership_ids:
             if mem.program_id.id == _id and not multiple_form_submission:
                 return request.redirect(f"/selfservice/submitted/{_id}")
-            # elif mem.program_id.id == _id and mem.state == 'enrolled':
-            #     return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 
