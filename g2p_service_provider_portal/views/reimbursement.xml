@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="reimbursements" name="G2P Service Provider Portal ">
+        <t t-call="g2p_service_provider_portal.base">
+            <t t-set="title">Entitlements | Service Provider Portal</t>
+            <div class="main-container">
+                <div class="container-adjuster">
+                    <h5 class="all-title">Entitlements</h5>
+                    <ol class="breadcrumb  breadcrumb-list bg-transparent">
+                        <li class="breadcrumb-item">
+                            <a href="/serviceprovider">Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Entitlements</li>
+                    </ol>
+
+                    <div class="table-container">
+                        <div class="table-head-container">
+                            <p class="table-title">Entitlements</p>
+                        </div>
+                        <div class="tables-values-container">
+                            <table id="newreimbursements">
+                                <thead>
+                                    <tr>
+                                        <th>Entitlement ID</th>
+                                        <th>Program Name <i class="fa fa-sort" /></th>
+                                        <th>Beneficiary Name <i class="fa fa-sort" /></th>
+                                        <th>Initial Amount <i class="fa fa-sort" /></th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="entitlements" t-as="entitlement">
+                                        <tr>
+                                            <td>
+                                                <t t-esc="entitlement['entitlement_id']" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="entitlement['program_name']" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="entitlement['beneficiary_name']" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="entitlement['initial_amount']" />
+                                            </td>
+                                            <td>
+                                                <t t-if="entitlement['is_submitted']">
+                                                    <button string="View" type="object" class="view-button">
+                                                        Submitted
+                                                    </button>
+                                                </t>
+                                                <t t-elif="entitlement['is_form_mapped']">
+                                                    <a
+                                                        t-attf-href="/serviceprovider/entitlement/{{ entitlement['entitlement_id'] }}"
+                                                    >
+                                                        <button
+                                                            string="Apply"
+                                                            type="object"
+                                                            class="submit-button"
+                                                        >
+                                                            Submit
+                                                        </button>
+                                                    </a>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="page-buttons" class="pagination justify-content-center">
+
+                        </div>
+                        <script
+                            type="text/javascript"
+                            src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"
+                        />
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

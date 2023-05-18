@@ -1,0 +1,39 @@
+:root {
+    /*--color-portal-header: #f8f0a6 0% 0% no-repeat padding-box */
+    --color-portal-header: #d2d2cf 0% 0% no-repeat padding-box;
+    --color-portal-body: #f9faee 0% 0% no-repeat padding-box;
+}
+
+header#top {
+    background: var(--color-portal-header);
+}
+
+.header-container .nav {
+    background: var(--color-portal-header);
+}
+
+.main-container {
+    background: var(--color-portal-body);
+}
+
+.footer-container {
+    background: var(--color-portal-header);
+}
+
+.footer-container .nav {
+    background: var(--color-portal-header);
+}
+
+.header-container .nav .main-logo {
+    width: 357px;
+    height: 56px;
+}
+
+.footer-container .nav .main-logo {
+    width: 357px;
+    height: 56px;
+}
+
+.form-template .form-layout-breadcrumb {
+    background-color: var(--color-portal-body);
+}

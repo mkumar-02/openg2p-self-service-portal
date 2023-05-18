@@ -96,13 +96,26 @@
                                                             <a
                                                                 t-attf-href="/selfservice/apply/{{program['id']}}"
                                                             >
-                                                                <button
-                                                                    string="View"
-                                                                    type="object"
-                                                                    class="view-button"
+                                                               <t
+                                                                    t-if="program['is_multiple_form_submission']"
                                                                 >
-                                                                    View
-                                                                </button>
+                                                                    <button
+                                                                        string="Again Apply"
+                                                                        type="object"
+                                                                        class="apply-button"
+                                                                    >
+                                                                        Again Apply
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button
+                                                                        string="View"
+                                                                        type="object"
+                                                                        class="view-button"
+                                                                    >
+                                                                        View
+                                                                    </button>
+                                                                </t>
                                                             </a>
                                                         </t>
                                                     </td>
@@ -123,13 +136,26 @@
                                                             <a
                                                                 t-attf-href="/selfservice/apply/{{program['id']}}"
                                                             >
-                                                                <button
-                                                                    string="View"
-                                                                    type="object"
-                                                                    class="view-button"
+                                                                <t
+                                                                    t-if="program['is_multiple_form_submission']"
                                                                 >
-                                                                    View
-                                                                </button>
+                                                                    <button
+                                                                        string="Again Apply"
+                                                                        type="object"
+                                                                        class="apply-button"
+                                                                    >
+                                                                        Again Apply
+                                                                    </button>
+                                                                </t>
+                                                                <t t-else="">
+                                                                    <button
+                                                                        string="View"
+                                                                        type="object"
+                                                                        class="view-button"
+                                                                    >
+                                                                        View
+                                                                    </button>
+                                                                </t>
                                                             </a>
                                                         </t>
                                                     </td>
