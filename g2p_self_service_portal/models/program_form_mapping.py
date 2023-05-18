@@ -23,6 +23,9 @@ class G2PProgram(models.Model):
                 "arch_db": form_view_template.replace(
                     "website.layout",
                     "g2p_self_service_portal.self_service_form_template",
+                ).replace(
+                    "g2p_service_provider_portal.reimbursement_submission_form_template",
+                    "g2p_self_service_portal.self_service_form_template",
                 )
             }
         )

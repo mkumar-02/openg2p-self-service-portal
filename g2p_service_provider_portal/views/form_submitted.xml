@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-   <template id="claim_form_submitted" name="G2P Claim Form Submitted">
-        <t t-call="g2p_claims_portal.base">
+   <template id="reimbursement_form_submitted" name="G2P Service Provider Form Submitted">
+        <t t-call="g2p_service_provider_portal.base">
             <div id="wrap" class="oe_structure oe_empty" />
             <div class="form-template">
                 <div class="main-container">
                     <div class="container-adjuster">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="details">Claim Submission</div>
+                                <div class="details">Reimbursement Request</div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb form-layout-breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="/claims/home">
+                                            <a href="/serviceprovider/home">
                                                 Home
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item" aria-current="page">
-                                            <a href="/claims/entitlements">
-                                                New Claims
+                                            <a href="/serviceprovider/entitlements">
+                                                Entitlements
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
-                                            Claim Submission
+                                            Reimbursement Request
                                         </li>
                                     </ol>
                                 </nav>
@@ -46,7 +46,7 @@
                                     <div class="card-body" style="padding: 20px;">
                                         <h5 class="user-name">Dear <t t-esc="user" />,</h5>
                                         <p class="thank-you-msg">
-                                            Thank you for submitting for the claim
+                                            Thank you for submitting for the request
                                             <t t-esc="entitlement" />.
                                             <br />
                                             Your application number is <b><t t-esc="application_id" /></b>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="card-footer" style="padding: 20px;">
                                         <a
-                                            href="/claims/home"
+                                            href="/serviceprovider/home"
                                             class="btn btn-outline-primary btn-lg btn-block"
                                         >
                                             Dashboard

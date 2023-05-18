@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="claim_submission_form_template" name="G2P Claims Portal New Claim Submission">
-        <t t-call="g2p_claims_portal.base">
-            <t t-set="title">New Claim Submission | Claims Portal</t>
+    <template
+        id="reimbursement_submission_form_template"
+        name="G2P Service Provider Portal New Reimbursement Request"
+    >
+        <t t-call="g2p_service_provider_portal.base">
+            <t t-set="title">New Reimbursement Request | Service Provider Portal</t>
             <div class="main-container">
                 <div class="container-adjuster">
                     <div class="form-template">
@@ -12,17 +15,17 @@
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb form-layout-breadcrumb">
                                         <li class="breadcrumb-item">
-                                            <a href="/claims/home">
+                                            <a href="/serviceprovider/home">
                                                 Home
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item" aria-current="page">
-                                            <a href="/claims/entitlements">
-                                                New Claims
+                                            <a href="/serviceprovider/entitlements">
+                                                Entitlements
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
-                                            Submission
+                                            New Reimbursement Submission
                                         </li>
                                     </ol>
                                 </nav>
@@ -61,7 +64,7 @@
                                             Entitlement ID - <t t-esc="entitlement_id" />
                                         </h5>
                                         <p class="action-description">
-                                            The claim submission will be made against the above
+                                            The reimbursement request will be made against the above
                                             entitlement id.
                                         </p>
                                     </div>
@@ -69,7 +72,7 @@
                                     <div class="card-body" style="padding: 20px;">
                                         <button
                                             id="program_submit_id"
-                                            onclick="claim_form_submit_action()"
+                                            onclick="reimbursement_form_submit_action()"
                                             t-att-program="entitlement_id"
                                             type="submit"
                                             class="btn btn-primary btn-lg btn-block form_submit_action"
@@ -112,7 +115,7 @@
                                                         <button
                                                             type="button"
                                                             class="btn btn-primary modal-discard-button"
-                                                            onclick="location.href = '/claims/entitlements';"
+                                                            onclick="location.href = '/serviceprovider/entitlements';"
                                                         >
                                                             Discard
                                                         </button>

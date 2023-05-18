@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="claims" name="G2P Claims Portal New Claims">
-        <t t-call="g2p_claims_portal.base">
-            <t t-set="title">Pending Claims | Claims Portal</t>
+    <template id="reimbursements" name="G2P Service Provider Portal ">
+        <t t-call="g2p_service_provider_portal.base">
+            <t t-set="title">Entitlements | Service Provider Portal</t>
             <div class="main-container">
                 <div class="container-adjuster">
-                    <h5 class="all-title">New Claims</h5>
+                    <h5 class="all-title">Entitlements</h5>
                     <ol class="breadcrumb  breadcrumb-list bg-transparent">
                         <li class="breadcrumb-item">
-                            <a href="/claims">Home</a>
+                            <a href="/serviceprovider">Home</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">New Claims</li>
+                        <li class="breadcrumb-item active" aria-current="page">Entitlements</li>
                     </ol>
 
                     <div class="table-container">
                         <div class="table-head-container">
-                            <p class="table-title">New Claims</p>
+                            <p class="table-title">Entitlements</p>
                         </div>
                         <div class="tables-values-container">
-                            <table class="css-serial" id="newclaims">
+                            <table id="newreimbursements">
                                 <thead>
                                     <tr>
                                         <th>Entitlement ID</th>
@@ -51,7 +51,7 @@
                                                 </t>
                                                 <t t-elif="entitlement['is_form_mapped']">
                                                     <a
-                                                        t-attf-href="/claims/entitlement/{{ entitlement['entitlement_id'] }}"
+                                                        t-attf-href="/serviceprovider/entitlement/{{ entitlement['entitlement_id'] }}"
                                                     >
                                                         <button
                                                             string="Apply"

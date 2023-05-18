@@ -1,12 +1,14 @@
+// TODO: The following function is part if selfservice portal module too,
+// reuse from there.
 // eslint-disable-next-line no-unused-vars,complexity
-function claim_form_submit_action() {
+function reimbursement_form_submit_action() {
     // URL Change
     var test = $(".s_website_form");
     var form = test.find("form");
 
     var program_id = $("#program_submit_id");
 
-    form[0].action = `/claims/submitted/${program_id[0].getAttribute("program")}`;
+    form[0].action = `/serviceprovider/claim/${program_id[0].getAttribute("program")}`;
 
     // Validation's //
     var isValid = true;

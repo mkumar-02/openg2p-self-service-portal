@@ -1,5 +1,5 @@
 {
-    "name": "G2P Claims Portal",
+    "name": "G2P Service Provider Portal",
     "category": "G2P",
     "version": "15.0.1.1.0",
     "sequence": 1,
@@ -9,20 +9,20 @@
     "development_status": "Alpha",
     "depends": [
         "g2p_self_service_portal",
-        "g2p_program_claims",
+        "g2p_program_reimbursement",
     ],
     "data": [
-        "views/g2p_claims_base.xml",
-        "views/g2p_claims_dashboard.xml",
-        "views/g2p_claims_claims.xml",
-        "views/g2p_claims_form_page_template.xml",
-        "views/g2p_claims_form_submitted.xml",
+        "views/base.xml",
+        "views/dashboard.xml",
+        "views/reimbursement.xml",
+        "views/form_page_template.xml",
+        "views/form_submitted.xml",
     ],
     "assets": {
         "web.assets_backend": [],
         "web.assets_qweb": [],
         "web.assets_frontend": [
-            "g2p_claims_portal/static/src/js/claims_form_action.js",
+            "g2p_service_provider_portal/static/src/js/form_action.js",
         ],
         "web.assets_common": [],
     },
