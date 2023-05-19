@@ -85,8 +85,6 @@ class SelfServiceContorller(http.Controller):
                     ]
                 )
             )
-            # date = datetime.strptime(membership['enrollment_date'], '%Y-%m-%d')
-            # output_date = date.strftime('%d-%b-%Y')
             amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
@@ -158,18 +156,8 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
-        # limit = int(limit)
-        # page = int(page)
-        # query = kwargs.get("q", "")
-        # domain = [("name", "ilike", query)]
 
-        # if page < 1:
-        #     page = 1
-        # if limit < 5:
-        #     limit = 5
         programs = request.env["g2p.program"].sudo().search([])
-
-        # total = ceil(request.env["g2p.program"].sudo().search_count([]) / limit)
 
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
@@ -303,6 +291,10 @@ class SelfServiceContorller(http.Controller):
                 _logger.error("Found Bad Additional G2P Info")
 
             current_partner.additional_g2p_info = additional_info
+
+            current_partner.program_registrant_info_ids = [
+                (0, 0, {"program_registrant_info": form_data, "program_id": program.id})
+            ]
 
             apply_to_program = {
                 "partner_id": current_partner.id,
