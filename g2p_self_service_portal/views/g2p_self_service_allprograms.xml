@@ -58,7 +58,6 @@
 
                                         <tr>
                                             <td>
-
                                             </td>
                                             <td>
                                                 <t t-if="program['is_latest']">

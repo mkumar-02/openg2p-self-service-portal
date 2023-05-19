@@ -1,39 +1,41 @@
-:root {
-    /*--color-portal-header: #f8f0a6 0% 0% no-repeat padding-box */
-    --color-portal-header: #d2d2cf 0% 0% no-repeat padding-box;
-    --color-portal-body: #f9faee 0% 0% no-repeat padding-box;
+.form-template .breadcrumb-item a {
+    color: #d76c12;
 }
 
-header#top {
-    background: var(--color-portal-header);
+.s_website_form_input {
+    width: 100%;
 }
 
-.header-container .nav {
-    background: var(--color-portal-header);
+.beneficiary-detail-btn {
+    width: 192px;
+    height: 45px;
+    margin-top: 15px;
+    border: 1px solid #dedede;
+    border-radius: 6px;
 }
 
-.main-container {
-    background: var(--color-portal-body);
+.beneficiary-btn-heading {
+    font: normal normal 600 12px/15px Inter;
+    color: #393939;
 }
 
-.footer-container {
-    background: var(--color-portal-header);
+.beneficiary-btn-para {
+    font: normal normal normal 11px/14px Inter;
+    color: #838383;
 }
 
-.footer-container .nav {
-    background: var(--color-portal-header);
+.btn-primary,
+.btn-primary:hover {
+    border-color: #f07b1a;
 }
 
-.header-container .nav .main-logo {
-    width: 357px;
-    height: 56px;
+.form-template .form_submit_action,
+.form-template .form_submit_action:hover {
+    background: #f07b1a 0% 0% no-repeat padding-box;
 }
 
-.footer-container .nav .main-logo {
-    width: 357px;
-    height: 56px;
-}
-
-.form-template .form-layout-breadcrumb {
-    background-color: var(--color-portal-body);
+.form-template .form_cancel_action,
+.form-template .form_cancel_action:hover {
+    border: 1px solid #d76c12;
+    color: #d76c12;
 }

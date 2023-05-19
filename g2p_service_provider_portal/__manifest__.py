@@ -13,9 +13,10 @@
     ],
     "data": [
         "views/base.xml",
+        "views/login.xml",
         "views/dashboard.xml",
         "views/reimbursement.xml",
-        "views/form_page_template.xml",
+        "views/form_page.xml",
         "views/form_submitted.xml",
     ],
     "assets": {

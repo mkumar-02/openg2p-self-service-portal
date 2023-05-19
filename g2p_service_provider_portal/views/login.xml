@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="login_page"
+        name="G2P Service Provider Login"
+        inherit_id="g2p_self_service_portal.login_page"
+        primary="True"
+        priority="920"
+    >
+        <xpath expr="//img[@src='/g2p_self_service_portal/static/src/img/logo@2x.png']" position="replace">
+            <img src="/g2p_service_provider_portal/static/src/img/logo@2x.png" class="main-logo" />
+        </xpath>
+        <xpath expr="//input[@name='redirect'][1]" position="replace">
+            <input type="hidden" name="redirect" value="/serviceprovider/home" />
+        </xpath>
+    </template>
+</odoo>

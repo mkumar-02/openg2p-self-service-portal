@@ -5,26 +5,25 @@
             <t t-set="title">Entitlements | Service Provider Portal</t>
             <div class="main-container">
                 <div class="container-adjuster">
-                    <h5 class="all-title">Entitlements</h5>
+                    <h5 class="all-title">Reimbursements</h5>
                     <ol class="breadcrumb  breadcrumb-list bg-transparent">
-                        <li class="breadcrumb-item">
-                            <a href="/serviceprovider">Home</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">Entitlements</li>
+                        <li class="breadcrumb-item active" aria-current="page">Reimbursements</li>
                     </ol>
 
                     <div class="table-container">
                         <div class="table-head-container">
-                            <p class="table-title">Entitlements</p>
+                            <p class="table-title">Reimbursements</p>
                         </div>
                         <div class="tables-values-container">
                             <table id="newreimbursements">
                                 <thead>
                                     <tr>
-                                        <th>Entitlement ID</th>
-                                        <th>Program Name <i class="fa fa-sort" /></th>
+                                        <th>Sr.No.</th>
+                                        <th>Assistance Type <i class="fa fa-sort" /></th>
+                                        <th>Voucher ID</th>
                                         <th>Beneficiary Name <i class="fa fa-sort" /></th>
-                                        <th>Initial Amount <i class="fa fa-sort" /></th>
+                                        <th>Assistance Amount <i class="fa fa-sort" /></th>
+                                        <th>Status</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -32,10 +31,12 @@
                                     <t t-foreach="entitlements" t-as="entitlement">
                                         <tr>
                                             <td>
-                                                <t t-esc="entitlement['entitlement_id']" />
                                             </td>
                                             <td>
                                                 <t t-esc="entitlement['program_name']" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="entitlement['entitlement_id']" />
                                             </td>
                                             <td>
                                                 <t t-esc="entitlement['beneficiary_name']" />
@@ -45,20 +46,54 @@
                                             </td>
                                             <td>
                                                 <t t-if="entitlement['is_submitted']">
-                                                    <button string="View" type="object" class="view-button">
-                                                        Submitted
+                                                    <t t-if="entitlement['status'] == 'approved'">
+                                                        <button
+                                                            string="Submitted"
+                                                            type="object"
+                                                            class="enroll-button"
+                                                            disabled="1"
+                                                        >
+                                                            Completed
+                                                        </button>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <button
+                                                            string="Submitted"
+                                                            type="object"
+                                                            class="notapplied-button"
+                                                            disabled="1"
+                                                        >
+                                                            Submitted
+                                                        </button>
+                                                    </t>
+                                                </t>
+                                                <t t-else="">
+                                                    <button
+                                                        string="New"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        New
                                                     </button>
                                                 </t>
-                                                <t t-elif="entitlement['is_form_mapped']">
+                                            </td>
+                                            <td>
+                                                <t t-if="entitlement['is_submitted']">
+                                                    <button string="View" type="object" class="view-button">
+                                                        View
+                                                    </button>
+                                                </t>
+                                                <t t-else="">
                                                     <a
-                                                        t-attf-href="/serviceprovider/entitlement/{{ entitlement['entitlement_id'] }}"
+                                                        t-attf-href="/serviceprovider/voucher/{{ entitlement['entitlement_id'] }}"
                                                     >
                                                         <button
                                                             string="Apply"
                                                             type="object"
-                                                            class="submit-button"
+                                                            class="apply-button"
                                                         >
-                                                            Submit
+                                                            Apply
                                                         </button>
                                                     </a>
                                                 </t>

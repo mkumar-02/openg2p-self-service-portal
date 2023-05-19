@@ -8,21 +8,16 @@
                     <div class="container-adjuster">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="details">Reimbursement Request</div>
+                                <div class="details">Claim Submission</div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb form-layout-breadcrumb">
                                         <li class="breadcrumb-item">
                                             <a href="/serviceprovider/home">
-                                                Home
-                                            </a>
-                                        </li>
-                                        <li class="breadcrumb-item" aria-current="page">
-                                            <a href="/serviceprovider/entitlements">
-                                                Entitlements
+                                                Reimbursements
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
-                                            Reimbursement Request
+                                            Submission
                                         </li>
                                     </ol>
                                 </nav>
@@ -46,11 +41,14 @@
                                     <div class="card-body" style="padding: 20px;">
                                         <h5 class="user-name">Dear <t t-esc="user" />,</h5>
                                         <p class="thank-you-msg">
-                                            Thank you for submitting for the request
-                                            <t t-esc="entitlement" />.
+                                            <i class="fa fa-check" style="color: #66ad5a;" />
+                                            Your claim is being processed
                                             <br />
-                                            Your application number is <b><t t-esc="application_id" /></b>
+                                            <i class="fa fa-check" style="color: #66ad5a;" />
+                                            Thank you for submitting against Voucher ID -
                                             <br />
+                                            <i class="fa fa-check" style="color: #66ad5a;" />
+                                            Your Claim Application ID is
                                         </p>
                                     </div>
                                 </div>
@@ -60,7 +58,7 @@
                                 <div class="card container-right" style="width: auto; padding: 0px;">
                                     <div class="card-header" style="padding: 0px;">
                                         <h5 class="action-heading">
-                                            Entitlement ID - <t t-esc="entitlement" />
+                                            Voucher ID - <t t-esc="entitlement" />
                                         </h5>
                                         <div class="form-status">
                                             <button>Submitted</button>
@@ -81,7 +79,7 @@
                                             href="/serviceprovider/home"
                                             class="btn btn-outline-primary btn-lg btn-block"
                                         >
-                                            Dashboard
+                                            Go to Home
                                         </a>
                                     </div>
                                 </div>
