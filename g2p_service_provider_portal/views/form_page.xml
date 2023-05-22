@@ -44,10 +44,25 @@
                                                     type="button"
                                                     class="beneficiary-detail-btn"
                                                 >
-                                                        <h5
-                                                        class="beneficiary-btn-heading"
-                                                    >Beneficiary Details</h5>
-                                                        <p class="beneficiary-btn-para">Tap to know more</p>
+                                                        <div class="row">
+                                                            <div
+                                                            class="col-sm-3"
+                                                            style="display: flex; align-items: center;"
+                                                        >
+                                                                <i
+                                                                class="fa fa-user"
+                                                                style="color: #d76c12;"
+                                                            />
+                                                            </div>
+                                                            <div class="col-sm-9" style="padding-left:0px">
+                                                                <h5 class="beneficiary-btn-heading">
+                                                                    Beneficiary Details
+                                                                </h5>
+                                                                <p class="beneficiary-btn-para">
+                                                                    Tap to know more
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </button>
                                             </div>
                                             <!-- Beneficiary Detail Modal -->
@@ -63,101 +78,222 @@
                                                     class="modal-dialog modal-dialog-centered"
                                                     role="document"
                                                 >
-                                                    <div class="modal-content">
+                                                    <div class="modal-content beneficiary-modal-content">
                                                         <div class="modal-header">
-                                                            <h1
+                                                            <h5
                                                                 class="modal-title"
                                                                 id="exampleModalLongTitle"
-                                                            >Beneficiary Details</h1>
+                                                            >Beneficiary Details</h5>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body" style="overflow:hidden">
                                                             <div class="s_website_form_rows">
-                                                                <div class="s_website_form_field">
-                                                                    <label
-                                                                        class="s_website_form_label"
-                                                                        for="first_name"
-                                                                    >
-                                                                        <span
-                                                                            class="s_website_form_label_content"
-                                                                        >First Name</span>
-                                                                        <span
-                                                                            class="s_website_form_mark"
-                                                                        >*</span>
-                                                                    </label>
-                                                                    <input
-                                                                        class="s_website_form_input"
-                                                                        type="text"
-                                                                        id="first_name"
-                                                                        name="first_name"
-                                                                        t-att-value="first_name"
-                                                                        disabled="1"
-                                                                    />
-                                                                </div>
-                                                                <div class="s_website_form_field">
-                                                                    <label
-                                                                        class="s_website_form_label"
-                                                                        for="last_name"
-                                                                    >
-                                                                        <span
-                                                                            class="s_website_form_label_content"
-                                                                        >Last Name</span>
-                                                                        <span
-                                                                            class="s_website_form_mark"
-                                                                        >*</span>
-                                                                    </label>
-                                                                    <input
-                                                                        class="s_website_form_input"
-                                                                        type="text"
-                                                                        id="last_name"
-                                                                        name="last_name"
-                                                                        t-att-value="last_name"
-                                                                        disabled="1"
-                                                                    />
-                                                                </div>
-                                                                <div class="s_website_form_field">
-                                                                    <label
-                                                                        class="s_website_form_label"
-                                                                        for="email"
-                                                                    >
-                                                                        <span
-                                                                            class="s_website_form_label_content"
-                                                                        >Email Address</span>
-                                                                        <span
-                                                                            class="s_website_form_mark"
-                                                                        >*</span>
-                                                                    </label>
-                                                                    <input
-                                                                        class="s_website_form_input"
-                                                                        type="email"
-                                                                        id="email"
-                                                                        name="email"
-                                                                        t-att-value="email"
-                                                                        disabled="1"
-                                                                    />
-                                                                </div>
-                                                                <div class="s_website_form_field">
-                                                                    <label
-                                                                        class="s_website_form_label"
-                                                                        for="mobile_number"
-                                                                    >
-                                                                        <span
-                                                                            class="s_website_form_label_content"
-                                                                        >Mobile Number</span>
-                                                                        <span
-                                                                            class="s_website_form_mark"
-                                                                        >*</span>
-                                                                    </label>
-                                                                    <input
-                                                                        class="s_website_form_input"
-                                                                        type="tel"
-                                                                        id="mobile_number"
-                                                                        name="mobile_number"
-                                                                        t-att-value="mobile_number"
-                                                                        disabled="1"
-                                                                    />
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="first_name"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >First Name</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <input
+                                                                                class="s_website_form_input"
+                                                                                type="text"
+                                                                                id="first_name"
+                                                                                name="first_name"
+                                                                                t-att-value="first_name"
+                                                                                disabled="1"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="last_name"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >Last Name</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <input
+                                                                                class="s_website_form_input"
+                                                                                type="text"
+                                                                                id="last_name"
+                                                                                name="last_name"
+                                                                                t-att-value="last_name"
+                                                                                disabled="1"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
 
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="email"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >Email Address</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <input
+                                                                                class="s_website_form_input"
+                                                                                type="email"
+                                                                                id="email"
+                                                                                name="email"
+                                                                                t-att-value="email"
+                                                                                disabled="1"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
 
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="mobile_number"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >Mobile Number</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <input
+                                                                                class="s_website_form_input"
+                                                                                type="tel"
+                                                                                id="mobile_number"
+                                                                                name="mobile_number"
+                                                                                t-att-value="mobile_number"
+                                                                                disabled="1"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="gender"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >Gender</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <div
+                                                                                class="row s_website_form_multiple"
+                                                                            >
+                                                                                <div
+                                                                                    class="radio col-12 col-lg-4 col-md-6"
+                                                                                >
+                                                                                    <div class="form-check">
+                                                                                        <input
+                                                                                            type="radio"
+                                                                                            class="s_website_form_input form-check-input"
+                                                                                            id="male"
+                                                                                            name="Gender"
+                                                                                            t-att-value="gender"
+                                                                                            disabled="1"
+                                                                                        />
+                                                                                        <label
+                                                                                            class="form-check-label s_website_form_check_label"
+                                                                                            for="male"
+                                                                                        >
+                                                                                            Male
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="radio col-12 col-lg-4 col-md-6"
+                                                                                >
+                                                                                    <div class="form-check">
+                                                                                        <input
+                                                                                            type="radio"
+                                                                                            class="s_website_form_input form-check-input"
+                                                                                            id="female"
+                                                                                            name="Gender"
+                                                                                            t-att-value="gender"
+                                                                                            disabled="1"
+                                                                                        />
+                                                                                        <label
+                                                                                            class="form-check-label s_website_form_check_label"
+                                                                                            for="female"
+                                                                                        >
+                                                                                            Female
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="radio col-12 col-lg-4 col-md-6"
+                                                                                >
+                                                                                    <div class="form-check">
+                                                                                        <input
+                                                                                            type="radio"
+                                                                                            class="s_website_form_input form-check-input"
+                                                                                            id="others"
+                                                                                            name="Gender"
+                                                                                            t-att-value="gender"
+                                                                                            disabled="1"
+                                                                                        />
+                                                                                        <label
+                                                                                            class="form-check-label s_website_form_check_label"
+                                                                                            for="others"
+                                                                                        >
+                                                                                            Others
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
+                                                                                for="dob"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                >Date of Birth</span>
+                                                                                <span
+                                                                                    class="s_website_form_mark"
+                                                                                >*</span>
+                                                                            </label>
+                                                                            <input
+                                                                                class="s_website_form_input"
+                                                                                type="date"
+                                                                                id="dob"
+                                                                                name="dob"
+                                                                                t-att-value="birthdate"
+                                                                                disabled="1"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
@@ -188,38 +324,53 @@
                                     <!-- <t t-out="0" /> -->
                                     <form id="reimbursement-form" method="post" enctype="multipart/form-data">
                                         <div class="s_website_form_rows">
-                                            <div class="s_website_form_field s_website_form_required">
-                                                <label class="s_website_form_label" for="voucher_code">
-                                                    <span
-                                                        class="s_website_form_label_content"
-                                                    >Voucher Code</span>
-                                                    <span class="s_website_form_mark">*</span>
-                                                </label>
-                                                <br />
-                                                <input
-                                                    class="s_website_form_input"
-                                                    type="text"
-                                                    id="voucher_code"
-                                                    name="voucher_code"
-                                                />
+                                            <div class="row">
+                                                <div class="col-lg-7">
+                                                    <div class="s_website_form_field">
+                                                        <label
+                                                            class="s_website_form_label"
+                                                            for="voucher_code"
+                                                        >
+                                                            <span
+                                                                class="s_website_form_label_content"
+                                                            >Voucher Code</span>
+                                                            <span class="s_website_form_mark">*</span>
+                                                        </label>
+                                                        <br />
+                                                        <input
+                                                            class="s_website_form_input"
+                                                            type="text"
+                                                            id="voucher_code"
+                                                            name="voucher_code"
+                                                            autofocus="autofocus"
+                                                            placeholder="Enter Voucher Code"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="s_website_form_field">
+                                                        <label
+                                                            class="s_website_form_label"
+                                                            for="actual_amount"
+                                                        >
+                                                            <span
+                                                                class="s_website_form_label_content"
+                                                            >Actual Amount</span>
+                                                            <span class="s_website_form_mark">*</span>
+                                                        </label>
+                                                        <input
+                                                            class="s_website_form_input"
+                                                            type="number"
+                                                            id="actual_amount"
+                                                            name="actual_amount"
+                                                            placeholder="Enter Amount"
+                                                            t-att-autofocus="'autofocus' if voucher_code else None"
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="s_website_form_field s_website_form_required">
-                                                <label class="s_website_form_label" for="actual_amount">
-                                                    <span
-                                                        class="s_website_form_label_content"
-                                                    >Actual Amount</span>
-                                                    <span class="s_website_form_mark">*</span>
-                                                </label>
-                                                <br />
-                                                <input
-                                                    class="s_website_form_input"
-                                                    type="number"
-                                                    id="actual_amount"
-                                                    name="actual_amount"
-                                                />
-                                                <br />
-                                            </div>
-                                            <div class="s_website_form_field s_website_form_required">
+
+                                            <div class="s_website_form_field">
                                                 <label
                                                     class="s_website_form_label"
                                                     for="reason_of_assistance"
@@ -234,10 +385,11 @@
                                                     class="s_website_form_input"
                                                     id="reason_of_assistance"
                                                     name="reason_of_assistance"
+                                                    style="min-height:78px"
                                                 />
                                                 <br />
                                             </div>
-                                            <div class="s_website_form_field s_website_form_required">
+                                            <div class="s_website_form_field">
                                                 <label
                                                     class="s_website_form_label"
                                                     for="statement_of_account"
@@ -253,6 +405,7 @@
                                                     type="file"
                                                     id="statement_of_account"
                                                     name="statement_of_account"
+                                                    multiple="1"
                                                 />
                                             </div>
                                         </div>

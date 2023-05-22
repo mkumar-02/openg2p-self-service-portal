@@ -45,10 +45,12 @@
                                             Your claim is being processed
                                             <br />
                                             <i class="fa fa-check" style="color: #66ad5a;" />
-                                            Thank you for submitting against Voucher ID -
+                                            Thank you for submitting against Voucher ID - <t
+                                                t-esc="entitlement"
+                                            />
                                             <br />
                                             <i class="fa fa-check" style="color: #66ad5a;" />
-                                            Your Claim Application ID is
+                                            Your Claim Application ID is <t t-esc="application_id" />
                                         </p>
                                     </div>
                                 </div>

@@ -123,6 +123,8 @@ class ServiceProviderContorller(http.Controller):
                 "last_name": current_partner.family_name,
                 "email": current_partner.email,
                 "mobile_number": current_partner.phone,
+                "birthdate": current_partner.birthdate,
+                "gender": current_partner.gender,
             },
         )
 

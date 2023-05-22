@@ -109,7 +109,7 @@
                                     />
                                         </a>
                                         <div class="dropdown-menu user-block">
-                                            <ul>
+                                            <ul style="padding:0px">
                                                 <li>
                                                     <a
                                                 href="/selfservice/myprofile"

@@ -13,6 +13,32 @@
                     <div class="table-container">
                         <div class="table-head-container">
                             <p class="table-title">Reimbursements</p>
+
+                            <form class="form-inline my-2 my-lg-0" action="/servcieprovider/voucher">
+                                <div class="search-box">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="13.6"
+                                        height="13.6"
+                                        fill="currentColor"
+                                        class="bi bi-search search-icon"
+                                        viewBox="0 0 16 16"
+                                    >
+                                        <path
+                                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+                                        />
+                                    </svg>
+                                    <input
+                                        placeholder="Search by Voucher ID / Beneficia…"
+                                        class="search-text"
+                                        name="q"
+                                        id="search-text"
+                                    />
+                                    <!-- <span id="search-text-clear">
+                                        <i class="fa fa-times" />
+                                    </span> -->
+                                </div>
+                            </form>
                         </div>
                         <div class="tables-values-container">
                             <table id="newreimbursements">
@@ -32,7 +58,9 @@
                                         <tr>
                                             <td>
                                             </td>
-                                            <td>
+                                            <td
+                                                style="color:#704880; font: normal normal 600 13px/16px Inter;"
+                                            >
                                                 <t t-esc="entitlement['program_name']" />
                                             </td>
                                             <td>
@@ -80,9 +108,17 @@
                                             </td>
                                             <td>
                                                 <t t-if="entitlement['is_submitted']">
-                                                    <button string="View" type="object" class="view-button">
-                                                        View
-                                                    </button>
+                                                    <a
+                                                        t-attf-href="/serviceprovider/claim/{{ entitlement['entitlement_id'] }}"
+                                                    >
+                                                        <button
+                                                            string="View"
+                                                            type="object"
+                                                            class="view-button"
+                                                        >
+                                                            View
+                                                        </button>
+                                                    </a>
                                                 </t>
                                                 <t t-else="">
                                                     <a
@@ -104,12 +140,9 @@
                             </table>
                         </div>
                         <div id="page-buttons" class="pagination justify-content-center">
-
+                            <button string="1" />
+                            <button string="2" />
                         </div>
-                        <script
-                            type="text/javascript"
-                            src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"
-                        />
                     </div>
                 </div>
             </div>

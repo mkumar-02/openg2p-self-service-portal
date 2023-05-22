@@ -1,15 +1,51 @@
+.ssp-contact-us {
+    visibility: collapse;
+}
+
+.ssp-login-body a {
+    color: #704880;
+}
+
+.ssp-login-box .btn-primary {
+    background-color: #704880;
+    border-color: #704880;
+}
+
+.table-container .table-head-container .table-title {
+    margin-left: 20px;
+}
+
+.table-head-container .search-box .search-text {
+    font: normal normal normal 14px/17px Inter;
+}
+
+.view-button,
+.view-button:focus-visible {
+    border: 1px solid #704880;
+    color: #704880;
+    outline: none !important;
+}
+
+.apply-button,
+.apply-button:focus-visible {
+    background: #704880 0% 0% no-repeat padding-box;
+    outline: none !important;
+}
+
 .form-template .breadcrumb-item a {
-    color: #d76c12;
+    color: #704880;
 }
 
 .s_website_form_input {
     width: 100%;
 }
 
+.form-template .s_website_form_input:focus-visible {
+    border: 1px solid #704880 !important;
+    outline: none !important;
+}
+
 .beneficiary-detail-btn {
-    width: 192px;
-    height: 45px;
-    margin-top: 15px;
     border: 1px solid #dedede;
     border-radius: 6px;
 }
@@ -24,18 +60,40 @@
     color: #838383;
 }
 
-.btn-primary,
-.btn-primary:hover {
-    border-color: #f07b1a;
+/* beneficiary modal styling -- start */
+
+.beneficiary-modal-content {
+    max-width: 720px;
+    max-height: 555px;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+}
+
+.beneficiary-modal-content .modal-title {
+    font: normal normal 600 16px/20px Inter;
+    color: #484848;
+}
+
+/* beneficiary modal styling -- end */
+
+.container-right .modal-footer {
+    padding: 20px;
+    padding-top: 0px;
+    justify-content: end;
+}
+
+.btn-primary {
+    border-color: #704880 !important;
 }
 
 .form-template .form_submit_action,
 .form-template .form_submit_action:hover {
-    background: #f07b1a 0% 0% no-repeat padding-box;
+    background: #704880 0% 0% no-repeat padding-box;
 }
 
 .form-template .form_cancel_action,
-.form-template .form_cancel_action:hover {
-    border: 1px solid #d76c12;
-    color: #d76c12;
+.form-template .form_cancel_action:hover,
+.form-template .container-right .card-footer a {
+    border: 1px solid #704880 !important;
+    color: #704880 !important;
 }

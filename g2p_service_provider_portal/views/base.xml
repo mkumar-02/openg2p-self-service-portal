@@ -20,5 +20,13 @@
                 <img src="/g2p_service_provider_portal/static/src/img/logo@2x.png" class="main-logo" />
             </a>
         </xpath>
+        <xpath expr="//a[@href='/web/session/logout?redirect=/selfservice/login']" position="replace">
+            <a href="/web/session/logout?redirect=/serviceprovider/login" class="link">Logout</a>
+        </xpath>
+        <xpath expr="//div[@class='search-box']" position="replace">
+            <div class="search-box" style="visibility:hidden" />
+        </xpath>
+        <xpath expr="//div[@class='ssp-contact-us']" position="replace">
+        </xpath>
     </template>
 </odoo>
