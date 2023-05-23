@@ -37,7 +37,7 @@
                                                     Voucher ID - <t t-esc="entitlement_id" />
                                                 </p>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-4" style="display:flex; align-items:center;">
                                                     <button
                                                     data-toggle="modal"
                                                     data-target="#BeneficiaryDetailModal"
@@ -321,7 +321,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <t t-out="0" /> -->
                                     <form id="reimbursement-form" method="post" enctype="multipart/form-data">
                                         <div class="s_website_form_rows">
                                             <div class="row">

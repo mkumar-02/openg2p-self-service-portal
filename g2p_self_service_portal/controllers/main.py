@@ -350,23 +350,26 @@ class SelfServiceController(http.Controller):
         return data
 
     @classmethod
-    def add_file_to_store(cls, file: FileStorage, store, program_membership=None):
-        if store and file.filename:
-            if len(file.filename.split(".")) > 1:
-                supporting_document_ext = "." + file.filename.split(".")[-1]
-            else:
-                supporting_document_ext = None
-            document_file = store.add_file(
-                file.stream.read(),
-                extension=supporting_document_ext,
-                program_membership=program_membership,
-            )
-            document_uuid = document_file.name.split(".")[0]
-            return {
-                "document_id": document_file.id,
-                "document_uuid": document_uuid,
-                "document_name": document_file.name,
-                "document_slug": document_file.slug,
-                "document_url": document_file.url,
-            }
+    def add_file_to_store(cls, files: FileStorage, store, program_membership=None):
+        if isinstance(files, FileStorage):
+            files = [files]
+        for file in files:
+            if store and file.filename:
+                if len(file.filename.split(".")) > 1:
+                    supporting_document_ext = "." + file.filename.split(".")[-1]
+                else:
+                    supporting_document_ext = None
+                document_file = store.add_file(
+                    file.stream.read(),
+                    extension=supporting_document_ext,
+                    program_membership=program_membership,
+                )
+                document_uuid = document_file.name.split(".")[0]
+                return {
+                    "document_id": document_file.id,
+                    "document_uuid": document_uuid,
+                    "document_name": document_file.name,
+                    "document_slug": document_file.slug,
+                    "document_url": document_file.url,
+                }
         return None

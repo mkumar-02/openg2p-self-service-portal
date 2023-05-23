@@ -45,9 +45,23 @@
     outline: none !important;
 }
 
-.beneficiary-detail-btn {
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input#statement_of_account {
+    border: 1px dashed #b5b5b5;
+    height: 115px;
+}
+
+.beneficiary-detail-btn,
+.beneficiary-detail-btn:focus-visible {
+    background: #ffffff 0% 0% no-repeat padding-box;
     border: 1px solid #dedede;
     border-radius: 6px;
+    outline: none !important;
 }
 
 .beneficiary-btn-heading {
@@ -59,8 +73,6 @@
     font: normal normal normal 11px/14px Inter;
     color: #838383;
 }
-
-/* beneficiary modal styling -- start */
 
 .beneficiary-modal-content {
     max-width: 720px;
@@ -74,7 +86,13 @@
     color: #484848;
 }
 
-/* beneficiary modal styling -- end */
+.beneficiary-modal-content .modal-footer .modal-cancel-button,
+.beneficiary-modal-content .modal-footer .modal-cancel-button:active {
+    background: #704880 0% 0% no-repeat padding-box !important;
+    font: normal normal 600 14px/17px Inter;
+    color: #ffffff !important;
+    border-color: #704880 !important;
+}
 
 .container-right .modal-footer {
     padding: 20px;
@@ -89,6 +107,9 @@
 .form-template .form_submit_action,
 .form-template .form_submit_action:hover {
     background: #704880 0% 0% no-repeat padding-box;
+    color: #ffffff;
+    border: #704880;
+    font: normal normal 600 14px/17px Inter;
 }
 
 .form-template .form_cancel_action,

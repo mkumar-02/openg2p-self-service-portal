@@ -165,10 +165,13 @@ class ServiceProviderContorller(http.Controller):
             # TODO: remove all hardcoding in the next lines
             received_code = form_data.get("voucher_code", None)
             actual_amount = form_data.get("actual_amount", None)
-            supporting_document = form_data["statement_of_account"]
-            supporting_document_file = SelfServiceController.add_file_to_store(
-                supporting_document, supporting_documents_store
+            supporting_documents = request.httprequest.files.getlist(
+                "statement_of_account"
             )
+            supporting_document_file = SelfServiceController.add_file_to_store(
+                supporting_documents, supporting_documents_store
+            )
+
             if not supporting_document_file:
                 _logger.warning(
                     "Empty/No File received for field %s", "Billing Statement"
