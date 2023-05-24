@@ -353,6 +353,8 @@ class SelfServiceController(http.Controller):
     def add_file_to_store(cls, files: FileStorage, store, program_membership=None):
         if isinstance(files, FileStorage):
             files = [files]
+
+        file_details = []
         for file in files:
             if store and file.filename:
                 if len(file.filename.split(".")) > 1:
@@ -365,11 +367,13 @@ class SelfServiceController(http.Controller):
                     program_membership=program_membership,
                 )
                 document_uuid = document_file.name.split(".")[0]
-                return {
-                    "document_id": document_file.id,
-                    "document_uuid": document_uuid,
-                    "document_name": document_file.name,
-                    "document_slug": document_file.slug,
-                    "document_url": document_file.url,
-                }
-        return None
+                file_details.append(
+                    {
+                        "document_id": document_file.id,
+                        "document_uuid": document_uuid,
+                        "document_name": document_file.name,
+                        "document_slug": document_file.slug,
+                        "document_url": document_file.url,
+                    }
+                )
+        return file_details

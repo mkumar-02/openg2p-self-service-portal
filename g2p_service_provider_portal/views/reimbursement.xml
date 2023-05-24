@@ -34,9 +34,9 @@
                                         name="q"
                                         id="search-text"
                                     />
-                                    <!-- <span id="search-text-clear">
+                                    <span id="search-text-clear">
                                         <i class="fa fa-times" />
-                                    </span> -->
+                                    </span>
                                 </div>
                             </form>
                         </div>
@@ -140,8 +140,7 @@
                             </table>
                         </div>
                         <div id="page-buttons" class="pagination justify-content-center">
-                            <button string="1" />
-                            <button string="2" />
+
                         </div>
                     </div>
                 </div>

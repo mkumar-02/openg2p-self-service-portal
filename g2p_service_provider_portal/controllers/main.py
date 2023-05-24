@@ -174,19 +174,22 @@ class ServiceProviderContorller(http.Controller):
 
             if not supporting_document_file:
                 _logger.warning(
-                    "Empty/No File received for field %s", "Billing Statement"
+                    "Empty/No File received for field %s", "Statement of Account"
                 )
                 supporting_document_file_id = None
             else:
-                supporting_document_file_id = supporting_document_file.get(
-                    "document_id", None
-                )
+                supporting_document_file_id = []
+
+                # saving the multiple document id
+                for document_id in supporting_document_file:
+                    supporting_document_file_id.append(
+                        document_id.get("document_id", None)
+                    )
+
             reimbursement_claim = entitlement.submit_reimbursement_claim(
                 current_partner,
                 received_code,
-                supporting_document_file_ids=[
-                    supporting_document_file_id,
-                ]
+                supporting_document_file_ids=supporting_document_file_id
                 if supporting_document_file_id
                 else None,
                 amount=actual_amount,

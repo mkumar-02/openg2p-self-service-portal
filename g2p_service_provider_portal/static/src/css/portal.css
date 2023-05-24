@@ -87,6 +87,7 @@ input#statement_of_account {
 }
 
 .beneficiary-modal-content .modal-footer .modal-cancel-button,
+.container-right .modal-discard-button,
 .beneficiary-modal-content .modal-footer .modal-cancel-button:active {
     background: #704880 0% 0% no-repeat padding-box !important;
     font: normal normal 600 14px/17px Inter;
@@ -113,8 +114,17 @@ input#statement_of_account {
 }
 
 .form-template .form_cancel_action,
+.container-right .modal-cancel-button,
 .form-template .form_cancel_action:hover,
 .form-template .container-right .card-footer a {
     border: 1px solid #704880 !important;
     color: #704880 !important;
+}
+
+#page-buttons button.active {
+    background: #704880 0% 0% no-repeat padding-box;
+}
+
+#page-buttons button {
+    color: #704880;
 }

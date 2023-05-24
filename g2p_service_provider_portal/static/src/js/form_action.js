@@ -11,6 +11,18 @@ function reimbursement_form_submit_action() {
 
     // TODO: validations
 
+    var modal = $("#SubmitModal");
+
+    for (let i = 0; i < 4; i++) {
+        form[0][i].style.borderColor = "#E3E3E3";
+        if (form[0][i].value === "") {
+            isValid = false;
+            modal[0].click(close);
+            show_toast("Please update all mandatory fields");
+            form[0][i].style.borderColor = "#DE514C";
+        }
+    }
+
     if (isValid) {
         form.submit();
     }
