@@ -40,6 +40,10 @@
     width: 100%;
 }
 
+.form-template .s_website_form_input {
+    border: 1px solid #868686;
+}
+
 .form-template .s_website_form_input:focus-visible {
     border: 1px solid #704880 !important;
     outline: none !important;
@@ -62,11 +66,15 @@ input#statement_of_account {
     border: 1px solid #dedede;
     border-radius: 6px;
     outline: none !important;
+    width: 192px;
+    height: 45px;
 }
 
 .beneficiary-btn-heading {
     font: normal normal 600 12px/15px Inter;
     color: #393939;
+    margin: 0px;
+    padding-top: 5px;
 }
 
 .beneficiary-btn-para {
@@ -127,4 +135,58 @@ input#statement_of_account {
 
 #page-buttons button {
     color: #704880;
+}
+
+/* input testing */
+
+#multiple-file-upload {
+    position: relative;
+    height: 115px;
+    text-align: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+#multiple-file-upload .upload-icon {
+    padding: 10px;
+}
+
+input#statement_of_account {
+    border: 1px dashed #b5b5b5;
+    height: 115px;
+    position: absolute;
+    content-visibility: hidden;
+    max-width: 672px;
+}
+
+/* ----------- testing -------------- */
+
+.file-block {
+    border-radius: 10px;
+    background-color: rgba(144, 163, 203, 0.2);
+    margin: 5px;
+    color: initial;
+    display: inline-flex;
+    & > span.name {
+        padding-right: 10px;
+        width: max-content;
+        display: inline-flex;
+    }
+}
+.file-delete {
+    display: flex;
+    width: 24px;
+    color: initial;
+    background-color: #6eb4ff00;
+    font-size: large;
+    justify-content: center;
+    margin-right: 3px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(144, 163, 203, 0.2);
+        border-radius: 10px;
+    }
+    & > span {
+        transform: rotate(45deg);
+    }
 }

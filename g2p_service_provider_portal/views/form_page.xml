@@ -54,14 +54,17 @@
                                                         <div class="row">
                                                             <div
                                                             class="col-sm-3"
-                                                            style="display: flex; align-items: center;"
+                                                            style="padding-right: 0px; align-items: center; display: flex; height: 40px;"
                                                         >
                                                                 <i
                                                                 class="fa fa-user"
-                                                                style="color: #d76c12;"
+                                                                style="color: #704880; border: 1px solid; border-radius: 50%; padding: 5px;"
                                                             />
                                                             </div>
-                                                            <div class="col-sm-9" style="padding-left:0px">
+                                                            <div
+                                                            class="col-sm-9"
+                                                            style="padding-left:0px; margin-left: -20px;"
+                                                        >
                                                                 <h5 class="beneficiary-btn-heading">
                                                                     Beneficiary Details
                                                                 </h5>
@@ -220,7 +223,6 @@
                                                                                             class="s_website_form_input form-check-input"
                                                                                             id="male"
                                                                                             name="Gender"
-                                                                                            t-att-value="gender"
                                                                                             disabled="1"
                                                                                         />
                                                                                         <label
@@ -240,7 +242,6 @@
                                                                                             class="s_website_form_input form-check-input"
                                                                                             id="female"
                                                                                             name="Gender"
-                                                                                            t-att-value="gender"
                                                                                             disabled="1"
                                                                                         />
                                                                                         <label
@@ -260,7 +261,6 @@
                                                                                             class="s_website_form_input form-check-input"
                                                                                             id="others"
                                                                                             name="Gender"
-                                                                                            t-att-value="gender"
                                                                                             disabled="1"
                                                                                         />
                                                                                         <label
@@ -392,6 +392,7 @@
                                                     id="reason_of_assistance"
                                                     name="reason_of_assistance"
                                                     style="min-height:78px"
+                                                    placeholder="Medical Assistance"
                                                 />
                                                 <br />
                                             </div>
@@ -406,13 +407,28 @@
                                                     <span class="s_website_form_mark">*</span>
                                                 </label>
                                                 <br />
-                                                <input
+
+                                                    <input
                                                     class="s_website_form_input"
                                                     type="file"
                                                     id="statement_of_account"
                                                     name="statement_of_account"
                                                     multiple="1"
+                                                    onchange="display_uploaded_files()"
                                                 />
+                                                    <div
+                                                    id="multiple-file-upload"
+                                                    onclick="upload_documents()"
+                                                >
+                                                        <i
+                                                        class="fa fa-upload upload-icon"
+                                                        style="color: #704880; font-size: x-large;"
+                                                    />
+                                                        <p
+                                                        style="margin: 0px"
+                                                    >Upload Document or drag and drop your document(s) here</p>
+                                                    </div>
+
                                             </div>
                                         </div>
                                     </form>

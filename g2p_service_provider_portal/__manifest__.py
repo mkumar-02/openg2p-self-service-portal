@@ -26,6 +26,7 @@
             "g2p_service_provider_portal/static/src/js/form_action.js",
             "g2p_service_provider_portal/static/src/js/table_sr_no.js",
             "g2p_service_provider_portal/static/src/js/pagination.js",
+            "g2p_service_provider_portal/static/src/js/multiple_file_upload.js",
         ],
         "web.assets_common": [],
     },
