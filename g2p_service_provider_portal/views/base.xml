@@ -20,8 +20,20 @@
                 <img src="/g2p_service_provider_portal/static/src/img/logo@2x.png" class="main-logo" />
             </a>
         </xpath>
+        <xpath expr="//a[@href='/selfservice/myprofile']" position="replace">
+           <a href="/serviceprovider/myprofile" class="link">My Profile</a>
+        </xpath>
         <xpath expr="//a[@href='/web/session/logout?redirect=/selfservice/login']" position="replace">
             <a href="/web/session/logout?redirect=/serviceprovider/login" class="link">Logout</a>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice/aboutus']" position="replace">
+           <a class="nav-link link" aria-current="page" href="/serviceprovider/aboutus">About Us</a>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice/contactus']" position="replace">
+            <a class="nav-link link" href="/serviceprovider/contactus">Contact Us</a>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice/otherpage']" position="replace">
+            <a class="nav-link link" href="/serviceprovider/otherpage">Others</a>
         </xpath>
         <xpath expr="//div[@class='search-box']" position="replace">
             <div class="search-box" style="visibility:hidden" />

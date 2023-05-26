@@ -12,9 +12,13 @@
         "g2p_program_reimbursement",
     ],
     "data": [
+        "views/aboutus.xml",
         "views/base.xml",
+        "views/contactus.xml",
         "views/login.xml",
         "views/dashboard.xml",
+        "views/myprofile.xml",
+        "views/others.xml",
         "views/reimbursement.xml",
         "views/form_page.xml",
         "views/form_submitted.xml",

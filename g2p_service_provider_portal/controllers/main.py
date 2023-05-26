@@ -45,6 +45,33 @@ class ServiceProviderContorller(http.Controller):
         self.check_roles("SERVICEPROVIDER")
         return request.redirect("/serviceprovider/voucher")
 
+    @http.route(
+        ["/serviceprovider/myprofile"], type="http", auth="public", website=True
+    )
+    def portal_profile(self, **kwargs):
+        if request.session and request.session.uid:
+            return request.render("g2p_service_provider_portal.profile_page")
+
+    @http.route(["/serviceprovider/aboutus"], type="http", auth="public", website=True)
+    def portal_about_us(self, **kwargs):
+        return request.render("g2p_service_provider_portal.aboutus_page")
+
+    @http.route(
+        ["/serviceprovider/contactus"], type="http", auth="public", website=True
+    )
+    def portal_contact_us(self, **kwargs):
+        return request.render("g2p_service_provider_portal.contact_us")
+
+    @http.route(
+        ["/serviceprovider/otherpage"], type="http", auth="public", website=True
+    )
+    def portal_other_page(self, **kwargs):
+        return request.render("g2p_service_provider_portal.other_page")
+
+    @http.route(["/serviceprovider/help"], type="http", auth="public", website=True)
+    def portal_help_page(self, **kwargs):
+        return request.render("g2p_service_provider_portal.help_page")
+
     @http.route(["/serviceprovider/voucher"], type="http", auth="user", website=True)
     def portal_new_entitlements(self, **kwargs):
         self.check_roles("SERVICEPROVIDER")
