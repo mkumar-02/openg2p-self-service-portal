@@ -35,10 +35,11 @@
         <xpath expr="//a[@href='/selfservice/otherpage']" position="replace">
             <a class="nav-link link" href="/serviceprovider/otherpage">Others</a>
         </xpath>
+        <xpath expr="//button[@id='language-dropdown-button']" position="attributes">
+            <attribute name="disabled">1</attribute>
+        </xpath>
         <xpath expr="//div[@class='search-box']" position="replace">
             <div class="search-box" style="visibility:hidden" />
-        </xpath>
-        <xpath expr="//div[@class='ssp-contact-us']" position="replace">
         </xpath>
     </template>
 </odoo>

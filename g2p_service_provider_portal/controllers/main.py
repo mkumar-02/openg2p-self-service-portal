@@ -1,8 +1,9 @@
 import logging
+from argparse import _AppendAction
 
-from werkzeug.exceptions import Forbidden
+from werkzeug.exceptions import Forbidden, Unauthorized
 
-from odoo import http
+from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
@@ -17,7 +18,6 @@ class ServiceProviderContorller(http.Controller):
         if request.session and request.session.uid:
             return request.redirect("/serviceprovider/home")
         else:
-            # TODO: Implement login page for claims portal
             return request.redirect("/serviceprovider/login")
 
     @http.route(["/serviceprovider/login"], type="http", auth="public", website=True)
@@ -138,9 +138,6 @@ class ServiceProviderContorller(http.Controller):
         if len(entitlement.reimbursement_entitlement_ids) > 0:
             return request.redirect(f"/serviceprovider/claim/{_id}")
 
-        # reimbursement_program = entitlement.program_id.reimbursement_program_id
-        # reimbursement_program.self_service_portal_form.view_id
-
         return request.render(
             "g2p_service_provider_portal.reimbursement_submission_form",
             {
@@ -236,15 +233,14 @@ class ServiceProviderContorller(http.Controller):
                 "entitlement": entitlement.id,
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
                 "application_id": reimbursement_claim.id,
-                "user": current_partner.name.capitalize(),
             },
         )
 
     def check_roles(self, role_to_check):
-        # if role_to_check == "SERVICEPROVIDER":
-        #     if not request.session or not request.env.user:
-        #         raise Unauthorized(_("User is not logged in"))
-        #     if not request.env.user.partner_id.supplier_rank > 0:
-        #         raise Forbidden(_("User is not allowed to access the portal"))
-
-        pass
+        if role_to_check == "SERVICEPROVIDER":
+            if not request.session or not request.env.user:
+                raise Unauthorized(_("User is not logged in"))
+            if not request.env.user.partner_id.supplier_rank > 0:
+                raise Forbidden(
+                    _AppendAction("User is not allowed to access the portal")
+                )

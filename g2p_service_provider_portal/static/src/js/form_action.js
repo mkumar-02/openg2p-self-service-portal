@@ -1,5 +1,3 @@
-// TODO: The following function is part if selfservice portal module too,
-// reuse from there.
 // eslint-disable-next-line no-unused-vars,complexity
 function reimbursement_form_submit_action() {
     var form = $("#reimbursement-form");

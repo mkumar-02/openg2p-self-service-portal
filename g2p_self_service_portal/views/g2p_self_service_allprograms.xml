@@ -93,7 +93,7 @@
                                                     <td>
                                                         <t t-if="program['is_form_mapped']">
                                                             <a
-                                                                t-attf-href="/selfservice/apply/{{program['id']}}"
+                                                                t-attf-href="/selfservice/submissions/{{program['id']}}"
                                                             >
                                                                <t
                                                                     t-if="program['is_multiple_form_submission']"
@@ -103,7 +103,7 @@
                                                                         type="object"
                                                                         class="apply-button"
                                                                     >
-                                                                        Again Apply
+                                                                        Reapply
                                                                     </button>
                                                                 </t>
                                                                 <t t-else="">
@@ -133,7 +133,7 @@
                                                     <td>
                                                         <t t-if="program['is_form_mapped']">
                                                             <a
-                                                                t-attf-href="/selfservice/apply/{{program['id']}}"
+                                                                t-attf-href="/selfservice/submissions/{{program['id']}}"
                                                             >
                                                                 <t
                                                                     t-if="program['is_multiple_form_submission']"
@@ -143,7 +143,7 @@
                                                                         type="object"
                                                                         class="apply-button"
                                                                     >
-                                                                        Again Apply
+                                                                        Reapply
                                                                     </button>
                                                                 </t>
                                                                 <t t-else="">
@@ -172,7 +172,9 @@
                                                 </td>
                                                 <td>
                                                     <t t-if="program['is_form_mapped']">
-                                                        <a t-attf-href="/selfservice/apply/{{program['id']}}">
+                                                        <a
+                                                            t-attf-href="/selfservice/submissions/{{program['id']}}"
+                                                        >
                                                             <button
                                                                 string="Apply"
                                                                 type="object"

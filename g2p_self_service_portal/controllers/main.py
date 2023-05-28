@@ -207,6 +207,57 @@ class SelfServiceController(http.Controller):
         )
 
     @http.route(
+        ["/selfservice/submissions/<int:_id>"], type="http", auth="user", website=True
+    )
+    def self_service_all_submissions(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+        program = request.env["g2p.program"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        submission_details = (
+            request.env["g2p.program.registrant_info"]
+            .sudo()
+            .search(
+                [
+                    ("program_id", "=", program.id),
+                    ("registrant_id", "=", current_partner.id),
+                ]
+            )
+        )
+
+        submission_values = []
+
+        membership = (
+            request.env["g2p.program_membership"]
+            .sudo()
+            .search(
+                [
+                    ("program_id", "=", program.id),
+                    ("partner_id", "=", current_partner.id),
+                ]
+            )
+        )
+
+        for detail in submission_details:
+            submission_values.append(
+                {
+                    "program": detail.program_id.name,
+                    "applied_on": detail.create_date.strftime("%d-%b-%Y"),
+                    # "application_id": detail.application_id,
+                    "status": detail.status,
+                }
+            )
+
+        return request.render(
+            "g2p_self_service_portal.program_submission_info",
+            {
+                "program_id": program.id,
+                "application_id": membership.application_id,
+                "submission_values": submission_values,
+            },
+        )
+
+    @http.route(
         ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
     )
     def self_service_apply_programs(self, _id):
@@ -272,6 +323,15 @@ class SelfServiceController(http.Controller):
                 )
 
             form_data = kwargs
+
+            delete_key = []
+            for key in form_data:
+                if key in current_partner:
+                    current_partner[key] = form_data[key]
+                    delete_key.append(key)
+
+            for item in delete_key:
+                del form_data[item]
 
             # Hardcoding Account number from form data for now
             account_num = form_data.get("Account Number", None)

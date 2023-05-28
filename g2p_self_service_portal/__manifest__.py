@@ -31,6 +31,7 @@
         "views/auth_oauth_provider.xml",
         "views/g2p_self_service_form_page_template.xml",
         "views/g2p_self_service_program_view.xml",
+        "views/g2p_self_service_submission_info.xml",
         "views/g2p_self_service_submitted_forms.xml",
         "views/res_config_settings.xml",
         "views/website_page.xml",

@@ -137,8 +137,6 @@ input#statement_of_account {
     color: #704880;
 }
 
-/* input testing */
-
 #multiple-file-upload {
     position: relative;
     height: 115px;
@@ -159,11 +157,8 @@ input#statement_of_account {
     max-width: 672px;
 }
 
-/* ----------- testing -------------- */
-
 .file-block {
     border-radius: 10px;
-    background-color: rgba(144, 163, 203, 0.2);
     margin: 5px;
     color: initial;
     display: inline-flex;
