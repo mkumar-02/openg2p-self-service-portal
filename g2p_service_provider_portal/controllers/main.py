@@ -233,6 +233,7 @@ class ServiceProviderContorller(http.Controller):
                 "entitlement": entitlement.id,
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
                 "application_id": reimbursement_claim.id,
+                "user": current_partner.given_name.capitalize(),
             },
         )
 

@@ -1,30 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <!-- TODO: Remove all hardcoding -->
-    <template id="profile_page" name="G2P Service Provider My Profile">
-        <t t-call="g2p_service_provider_portal.base">
-            <t t-set="title"> Contact Us| Service Provider Portal</t>
-            <div class="main-container">
-                <div class="container-adjuster">
-                <h5 class='all-title'>My Profile</h5>
-                <ol class="breadcrumb  breadcrumb-list bg-transparent">
-                    <li class="breadcrumb-item">
-                        <a href="/serviceprovider">Reimbursements</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">My Profile</li>
-                </ol>
-
-                <div class="profile-container">
-                    <img src="/g2p_self_service_portal/static/src/img/page_under_construction.png" />
-                    <div>
-                        <h1>Page Under Construction!</h1>
-                        <p
-                            >Our experts are working hard to make this page available. Meanwhile, we request you to please visit after some time.</p>
-                    </div>
-
-                </div>
-            </div>
-            </div>
-        </t>
+    <template
+        id="profile_page"
+        name="G2P Service Provider My Profile"
+        inherit_id="g2p_self_service_portal.profile_page"
+        primary="True"
+        priority="920"
+    >
+        <xpath expr="//t[@t-call='g2p_self_service_portal.base']" position="attributes">
+            <attribute name="t-call">g2p_service_provider_portal.base</attribute>
+        </xpath>
+        <xpath expr="//t[@t-set='title']" position="replace">
+            <t t-set="title"> Profile | Service Provider Portal</t>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice']" position="replace">
+            <a href="/serviceprovider">Reimbursements</a>
+        </xpath>
     </template>
 </odoo>
