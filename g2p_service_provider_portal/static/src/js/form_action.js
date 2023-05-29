@@ -16,6 +16,7 @@ function reimbursement_form_submit_action() {
         if (form[0][i].value === "") {
             isValid = false;
             modal[0].click(close);
+            // eslint-disable-next-line no-undef
             show_toast("Please update all mandatory fields");
             form[0][i].style.borderColor = "#DE514C";
         }

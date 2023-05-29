@@ -324,11 +324,7 @@ class SelfServiceController(http.Controller):
 
             form_data = kwargs
 
-            delete_key = []
-            for key in form_data:
-                if key in current_partner:
-                    current_partner[key] = form_data[key]
-                    delete_key.append(key)
+            delete_key = self.get_field_to_exclude(form_data)
 
             for item in delete_key:
                 del form_data[item]
@@ -437,3 +433,13 @@ class SelfServiceController(http.Controller):
                     }
                 )
         return file_details
+
+    def get_field_to_exclude(self, data):
+        current_partner = request.env.user.partner_id
+        keys = []
+        for key in data:
+            if key in current_partner:
+                current_partner[key] = data[key]
+                keys.append(key)
+
+        return keys
