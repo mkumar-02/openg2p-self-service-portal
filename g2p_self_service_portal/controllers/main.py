@@ -164,6 +164,9 @@ class SelfServiceController(http.Controller):
 
         programs = request.env["g2p.program"].sudo().search([])
 
+        if programs.fields_get("is_reimbursement_program"):
+            programs = programs.search([(("is_reimbursement_program", "=", False))])
+
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
 
@@ -214,7 +217,7 @@ class SelfServiceController(http.Controller):
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
 
-        submission_details = (
+        all_submission = (
             request.env["g2p.program.registrant_info"]
             .sudo()
             .search(
@@ -224,8 +227,6 @@ class SelfServiceController(http.Controller):
                 ]
             )
         )
-
-        submission_values = []
 
         membership = (
             request.env["g2p.program_membership"]
@@ -238,22 +239,29 @@ class SelfServiceController(http.Controller):
             )
         )
 
-        for detail in submission_details:
-            submission_values.append(
+        submission_records = []
+        for detail in all_submission:
+            submission_records.append(
                 {
-                    "program": detail.program_id.name,
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
                     # "application_id": detail.application_id,
                     "status": detail.status,
                 }
             )
 
+        active_application = False
+        for rec in submission_records:
+            if rec["status"] == "active":
+                active_application = True
+                break
+
         return request.render(
             "g2p_self_service_portal.program_submission_info",
             {
                 "program_id": program.id,
                 "application_id": membership.application_id,
-                "submission_values": submission_values,
+                "submission_records": submission_records,
+                "active_application": active_application,
             },
         )
 

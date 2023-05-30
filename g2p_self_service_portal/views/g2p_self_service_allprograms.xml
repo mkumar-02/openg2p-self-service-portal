@@ -61,12 +61,12 @@
                                             </td>
                                             <td>
                                                 <t t-if="program['is_latest']">
-                                                    <a href="/program/" class="program-name">
+                                                    <!-- <a href="/program/" class="program-name"> -->
                                                         <t t-esc="program['name']" />
-                                                        <button class="badge badge-button">
+                                                        <button class="badge badge-button" disabled="1">
                                                             <span>NEW</span>
                                                         </button>
-                                                    </a>
+                                                    <!-- </a> -->
                                                 </t>
                                                 <t t-else="">
                                                     <a href="/program/" class="program-name">
@@ -92,21 +92,23 @@
                                                     </td>
                                                     <td>
                                                         <t t-if="program['is_form_mapped']">
-                                                            <a
-                                                                t-attf-href="/selfservice/submissions/{{program['id']}}"
-                                                            >
-                                                               <t
-                                                                    t-if="program['is_multiple_form_submission']"
+                                                            <t t-if="program['is_multiple_form_submission']">
+                                                                <a
+                                                                    t-attf-href="/selfservice/submissions/{{program['id']}}"
                                                                 >
                                                                     <button
-                                                                        string="Again Apply"
+                                                                        string="Reapply"
                                                                         type="object"
                                                                         class="apply-button"
                                                                     >
                                                                         Reapply
                                                                     </button>
-                                                                </t>
-                                                                <t t-else="">
+                                                                </a>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <a
+                                                                    t-attf-href="/selfservice/submitted/{{program['id']}}"
+                                                                >
                                                                     <button
                                                                         string="View"
                                                                         type="object"
@@ -114,8 +116,8 @@
                                                                     >
                                                                         View
                                                                     </button>
-                                                                </t>
-                                                            </a>
+                                                                </a>
+                                                            </t>
                                                         </t>
                                                     </td>
                                                 </t>
@@ -132,21 +134,24 @@
                                                     </td>
                                                     <td>
                                                         <t t-if="program['is_form_mapped']">
-                                                            <a
-                                                                t-attf-href="/selfservice/submissions/{{program['id']}}"
-                                                            >
-                                                                <t
-                                                                    t-if="program['is_multiple_form_submission']"
+                                                            <t t-if="program['is_multiple_form_submission']">
+                                                                <a
+                                                                    t-attf-href="/selfservice/submissions/{{program['id']}}"
                                                                 >
+
                                                                     <button
-                                                                        string="Again Apply"
+                                                                        string="Reapply"
                                                                         type="object"
                                                                         class="apply-button"
                                                                     >
                                                                         Reapply
                                                                     </button>
-                                                                </t>
-                                                                <t t-else="">
+                                                                </a>
+                                                            </t>
+                                                            <t t-else="">
+                                                                <a
+                                                                    t-attf-href="/selfservice/submitted/{{program['id']}}"
+                                                                >
                                                                     <button
                                                                         string="View"
                                                                         type="object"
@@ -154,8 +159,8 @@
                                                                     >
                                                                         View
                                                                     </button>
-                                                                </t>
-                                                            </a>
+                                                                </a>
+                                                            </t>
                                                         </t>
                                                     </td>
                                                 </t>
@@ -172,9 +177,7 @@
                                                 </td>
                                                 <td>
                                                     <t t-if="program['is_form_mapped']">
-                                                        <a
-                                                            t-attf-href="/selfservice/submissions/{{program['id']}}"
-                                                        >
+                                                        <a t-attf-href="/selfservice/apply/{{program['id']}}">
                                                             <button
                                                                 string="Apply"
                                                                 type="object"

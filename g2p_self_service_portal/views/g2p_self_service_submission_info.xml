@@ -28,18 +28,16 @@
                                 <thead>
                                     <tr>
                                         <th>No.</th>
-                                        <th>Program Name <i class="fa fa-sort" /></th>
                                         <th>Application ID</th>
                                         <th>Applied on</th>
                                         <th>Status <i class="fa fa-sort" /></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <t t-foreach="submission_values" t-as="value">
+                                    <t t-foreach="submission_records" t-as="value">
 
                                         <tr>
                                             <td />
-                                            <td><t t-esc="value['program']" /></td>
                                             <td><t t-esc="application_id" /></td>
                                             <td><t t-esc="value['applied_on']" /></td>
                                             <td><t t-esc="value['status']" /></td>
@@ -49,11 +47,13 @@
                             </table>
                         </div>
                         <div id="page-buttons" class="pagination justify-content-center">
-                            <div class="proceed-to-application-btn">
-                                <a t-attf-href="/selfservice/apply/{{program_id}}">
-                                    Proceed to Application
-                                </a>
-                            </div>
+                            <t t-if="not active_application">
+                                <div class="proceed-to-application-btn">
+                                    <a t-attf-href="/selfservice/apply/{{program_id}}">
+                                        Proceed to Application
+                                    </a>
+                                </div>
+                            </t>
                         </div>
                     </div>
                 </div>

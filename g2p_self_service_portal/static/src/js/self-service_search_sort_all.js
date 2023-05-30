@@ -22,14 +22,12 @@ allheadercells.forEach(function (th) {
             if (sortOrder === "desc") {
                 comparison *= -1;
             }
-            console.log(comparison);
             return comparison;
         });
 
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
         allRows.forEach(function (row) {
             alltable.tBodies[0].appendChild(row);
-            console.log(alltable);
         });
     });
 });
