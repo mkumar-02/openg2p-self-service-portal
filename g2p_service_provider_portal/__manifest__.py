@@ -12,6 +12,7 @@
         "g2p_program_reimbursement",
     ],
     "data": [
+        "views/auth_oauth_provider.xml",
         "views/base.xml",
         "views/dashboard.xml",
         "views/reimbursement.xml",
