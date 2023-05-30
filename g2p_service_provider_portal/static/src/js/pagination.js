@@ -1,8 +1,7 @@
-const alltable = document.getElementById("allprograms");
+const alltable = document.getElementById("newreimbursements");
 const allheadercells = alltable.querySelectorAll("th");
 const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
 
-console.log(allRows);
 allheadercells.forEach(function (th) {
     // Default sort order
     let sortOrder = "asc";
@@ -152,7 +151,7 @@ searchInputText.addEventListener("input", function (event) {
     for (let i = 1; i < alltable.rows.length; i++) {
         const row = alltable.rows[i];
         const cells = row.cells;
-        const cell = cells[1];
+        const cell = cells[(2, 3)];
 
         if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
             row.style.display = "";
