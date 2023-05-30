@@ -6,8 +6,7 @@ from werkzeug.exceptions import Forbidden, Unauthorized
 from odoo import _, http
 from odoo.http import request
 
-from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
-from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
+from odoo.addons.g2p_self_service_portal.controllers.main import G2POpenIDLogin, SelfServiceController
 
 _logger = logging.getLogger(__name__)
 
@@ -29,11 +28,9 @@ class ServiceProviderContorller(http.Controller):
 
         context.update(
             dict(
-                providers=[
-                    p
-                    for p in OpenIDLogin().list_providers()
-                    if p.get("g2p_self_service_allowed", False)
-                ]
+                providers=G2POpenIDLogin().list_providers(
+                    domain=[("g2p_service_provider_allowed", "=", True)]
+                )
             )
         )
         return request.render(
