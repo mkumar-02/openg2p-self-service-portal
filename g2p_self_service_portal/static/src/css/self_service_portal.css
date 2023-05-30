@@ -555,6 +555,7 @@ a:hover {
 .table-head-container .search-box .search-text {
     border: none;
     margin-left: 10px;
+    font: normal normal normal 14px/17px Inter;
 }
 .table-head-container .search-box .search-text:focus {
     outline: none;
@@ -992,15 +993,13 @@ li div p {
     letter-spacing: 0px;
     color: #484848;
     opacity: 1;
-    margin-top: 28px;
+    margin-top: 8px;
 }
 
 .form-template .form-layout-breadcrumb {
     background-color: #f5f9fc;
     padding-left: 0px;
     padding-top: 10px;
-    padding-bottom: 0px;
-    margin-bottom: 10px;
 }
 
 .form-template .breadcrumb-item {
@@ -1126,6 +1125,7 @@ li div p {
 
 .form-template .s_website_form {
     padding: 0px !important;
+    margin-bottom: 5px;
 }
 
 .form-template .note {
@@ -1155,10 +1155,6 @@ li div p {
     font: normal normal 500 14px/17px Inter;
     letter-spacing: 0px;
     color: #000000;
-}
-
-.form-template .s_website_form_rows {
-    margin-bottom: 6px;
 }
 
 .form-template .s_website_form_label {
@@ -1790,4 +1786,18 @@ li div p {
     letter-spacing: 0px;
     color: #888888;
     opacity: 1;
+}
+
+.proceed-to-application-btn {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #dedede;
+    border-radius: 6px;
+    padding: 10px;
+    width: 300px;
+    text-align: center;
+}
+
+.proceed-to-application-btn a {
+    color: #494daf;
+    font: normal normal 600 14px/17px Inter;
 }

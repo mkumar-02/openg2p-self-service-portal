@@ -1,10 +1,12 @@
 import logging
+from argparse import _AppendAction
 
 from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
 from odoo.http import request
 
+from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
 
 _logger = logging.getLogger(__name__)
@@ -16,17 +18,61 @@ class ServiceProviderContorller(http.Controller):
         if request.session and request.session.uid:
             return request.redirect("/serviceprovider/home")
         else:
-            # TODO: Implement login page for claims portal
-            return request.redirect("/selfservice/login")
+            return request.redirect("/serviceprovider/login")
+
+    @http.route(["/serviceprovider/login"], type="http", auth="public", website=True)
+    def service_provider_login(self, **kwargs):
+        if request.session and request.session.uid:
+            return request.redirect("/serviceprovider/home")
+        request.params["redirect"] = "/"
+        context = {}
+
+        context.update(
+            dict(
+                providers=[
+                    p
+                    for p in OpenIDLogin().list_providers()
+                    if p.get("g2p_self_service_allowed", False)
+                ]
+            )
+        )
+        return request.render(
+            "g2p_service_provider_portal.login_page", qcontext=context
+        )
 
     @http.route(["/serviceprovider/home"], type="http", auth="user", website=True)
     def portal_home(self, **kwargs):
         self.check_roles("SERVICEPROVIDER")
-        return request.render("g2p_service_provider_portal.dashboard")
+        return request.redirect("/serviceprovider/voucher")
 
     @http.route(
-        ["/serviceprovider/entitlements"], type="http", auth="user", website=True
+        ["/serviceprovider/myprofile"], type="http", auth="public", website=True
     )
+    def portal_profile(self, **kwargs):
+        if request.session and request.session.uid:
+            return request.render("g2p_service_provider_portal.profile_page")
+
+    @http.route(["/serviceprovider/aboutus"], type="http", auth="public", website=True)
+    def portal_about_us(self, **kwargs):
+        return request.render("g2p_service_provider_portal.aboutus_page")
+
+    @http.route(
+        ["/serviceprovider/contactus"], type="http", auth="public", website=True
+    )
+    def portal_contact_us(self, **kwargs):
+        return request.render("g2p_service_provider_portal.contact_us")
+
+    @http.route(
+        ["/serviceprovider/otherpage"], type="http", auth="public", website=True
+    )
+    def portal_other_page(self, **kwargs):
+        return request.render("g2p_service_provider_portal.other_page")
+
+    @http.route(["/serviceprovider/help"], type="http", auth="public", website=True)
+    def portal_help_page(self, **kwargs):
+        return request.render("g2p_service_provider_portal.help_page")
+
+    @http.route(["/serviceprovider/voucher"], type="http", auth="user", website=True)
     def portal_new_entitlements(self, **kwargs):
         self.check_roles("SERVICEPROVIDER")
         partner_id = request.env.user.partner_id
@@ -53,6 +99,9 @@ class ServiceProviderContorller(http.Controller):
                     "beneficiary_name": entitlement.partner_id.name,
                     "initial_amount": entitlement.initial_amount,
                     "is_submitted": is_submitted,
+                    "status": "New"
+                    if not is_submitted
+                    else entitlement.reimbursement_entitlement_ids.state,
                     "is_form_mapped": True
                     if reimbursement_program
                     and reimbursement_program.self_service_portal_form
@@ -68,7 +117,7 @@ class ServiceProviderContorller(http.Controller):
         )
 
     @http.route(
-        ["/serviceprovider/entitlement/<int:_id>"],
+        ["/serviceprovider/voucher/<int:_id>"],
         type="http",
         auth="user",
         website=True,
@@ -89,13 +138,17 @@ class ServiceProviderContorller(http.Controller):
         if len(entitlement.reimbursement_entitlement_ids) > 0:
             return request.redirect(f"/serviceprovider/claim/{_id}")
 
-        reimbursement_program = entitlement.program_id.reimbursement_program_id
-        view = reimbursement_program.self_service_portal_form.view_id
-
         return request.render(
-            view.id,
+            "g2p_service_provider_portal.reimbursement_submission_form",
             {
                 "entitlement_id": _id,
+                "current_user": current_partner,
+                "first_name": current_partner.given_name,
+                "last_name": current_partner.family_name,
+                "email": current_partner.email,
+                "mobile_number": current_partner.phone,
+                "birthdate": current_partner.birthdate,
+                "gender": current_partner.gender,
             },
         )
 
@@ -134,27 +187,33 @@ class ServiceProviderContorller(http.Controller):
             )
 
             # TODO: remove all hardcoding in the next lines
-            received_code = form_data.get("Voucher Code", None)
-            actual_amount = form_data.get("Actual Amount", None)
-            supporting_document = form_data.get("Billing Statement", None)
-            supporting_document_file = SelfServiceController.add_file_to_store(
-                supporting_document, supporting_documents_store
+            received_code = form_data.get("voucher_code", None)
+            actual_amount = form_data.get("actual_amount", None)
+            supporting_documents = request.httprequest.files.getlist(
+                "statement_of_account"
             )
+            supporting_document_file = SelfServiceController.add_file_to_store(
+                supporting_documents, supporting_documents_store
+            )
+
             if not supporting_document_file:
                 _logger.warning(
-                    "Empty/No File received for field %s", "Billing Statement"
+                    "Empty/No File received for field %s", "Statement of Account"
                 )
                 supporting_document_file_id = None
             else:
-                supporting_document_file_id = supporting_document_file.get(
-                    "document_id", None
-                )
+                supporting_document_file_id = []
+
+                # saving the multiple document id
+                for document_id in supporting_document_file:
+                    supporting_document_file_id.append(
+                        document_id.get("document_id", None)
+                    )
+
             reimbursement_claim = entitlement.submit_reimbursement_claim(
                 current_partner,
                 received_code,
-                supporting_document_file_ids=[
-                    supporting_document_file_id,
-                ]
+                supporting_document_file_ids=supporting_document_file_id
                 if supporting_document_file_id
                 else None,
                 amount=actual_amount,
@@ -174,7 +233,7 @@ class ServiceProviderContorller(http.Controller):
                 "entitlement": entitlement.id,
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
                 "application_id": reimbursement_claim.id,
-                "user": current_partner.name.capitalize(),
+                "user": current_partner.given_name.capitalize(),
             },
         )
 
@@ -183,4 +242,6 @@ class ServiceProviderContorller(http.Controller):
             if not request.session or not request.env.user:
                 raise Unauthorized(_("User is not logged in"))
             if not request.env.user.partner_id.supplier_rank > 0:
-                raise Forbidden(_("User is not allowed to access the portal"))
+                raise Forbidden(
+                    _AppendAction("User is not allowed to access the portal")
+                )

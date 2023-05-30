@@ -24,7 +24,7 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
     <menuitem
         id="menu_program_website_page"
-        name="Website Pages"
+        name="Portal Pages"
         action="website.action_website_pages_list"
         parent="g2p_programs.g2p_program_configuration_menu_root"
         sequence="1000"

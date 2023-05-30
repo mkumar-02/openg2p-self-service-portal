@@ -164,6 +164,9 @@ class SelfServiceController(http.Controller):
 
         programs = request.env["g2p.program"].sudo().search([])
 
+        if programs.fields_get("is_reimbursement_program"):
+            programs = programs.search([(("is_reimbursement_program", "=", False))])
+
         partner_id = request.env.user.partner_id
         states = {"draft": "Submitted", "enrolled": "Enrolled"}
 
@@ -203,6 +206,62 @@ class SelfServiceController(http.Controller):
                 #     "sel": page,
                 #     "total": total,
                 # },
+            },
+        )
+
+    @http.route(
+        ["/selfservice/submissions/<int:_id>"], type="http", auth="user", website=True
+    )
+    def self_service_all_submissions(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+        program = request.env["g2p.program"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        all_submission = (
+            request.env["g2p.program.registrant_info"]
+            .sudo()
+            .search(
+                [
+                    ("program_id", "=", program.id),
+                    ("registrant_id", "=", current_partner.id),
+                ]
+            )
+        )
+
+        membership = (
+            request.env["g2p.program_membership"]
+            .sudo()
+            .search(
+                [
+                    ("program_id", "=", program.id),
+                    ("partner_id", "=", current_partner.id),
+                ]
+            )
+        )
+
+        submission_records = []
+        for detail in all_submission:
+            submission_records.append(
+                {
+                    "applied_on": detail.create_date.strftime("%d-%b-%Y"),
+                    # "application_id": detail.application_id,
+                    "status": detail.status,
+                }
+            )
+
+        active_application = False
+        for rec in submission_records:
+            if rec["status"] == "active":
+                active_application = True
+                break
+
+        return request.render(
+            "g2p_self_service_portal.program_submission_info",
+            {
+                "program_id": program.id,
+                "application_id": membership.application_id,
+                "submission_records": submission_records,
+                "active_application": active_application,
             },
         )
 
@@ -272,6 +331,11 @@ class SelfServiceController(http.Controller):
                 )
 
             form_data = kwargs
+
+            delete_key = self.get_field_to_exclude(form_data)
+
+            for item in delete_key:
+                del form_data[item]
 
             # Hardcoding Account number from form data for now
             account_num = form_data.get("Account Number", None)
@@ -350,23 +414,40 @@ class SelfServiceController(http.Controller):
         return data
 
     @classmethod
-    def add_file_to_store(cls, file: FileStorage, store, program_membership=None):
-        if store and file.filename:
-            if len(file.filename.split(".")) > 1:
-                supporting_document_ext = "." + file.filename.split(".")[-1]
-            else:
-                supporting_document_ext = None
-            document_file = store.add_file(
-                file.stream.read(),
-                extension=supporting_document_ext,
-                program_membership=program_membership,
-            )
-            document_uuid = document_file.name.split(".")[0]
-            return {
-                "document_id": document_file.id,
-                "document_uuid": document_uuid,
-                "document_name": document_file.name,
-                "document_slug": document_file.slug,
-                "document_url": document_file.url,
-            }
-        return None
+    def add_file_to_store(cls, files: FileStorage, store, program_membership=None):
+        if isinstance(files, FileStorage):
+            files = [files]
+
+        file_details = []
+        for file in files:
+            if store and file.filename:
+                if len(file.filename.split(".")) > 1:
+                    supporting_document_ext = "." + file.filename.split(".")[-1]
+                else:
+                    supporting_document_ext = None
+                document_file = store.add_file(
+                    file.stream.read(),
+                    extension=supporting_document_ext,
+                    program_membership=program_membership,
+                )
+                document_uuid = document_file.name.split(".")[0]
+                file_details.append(
+                    {
+                        "document_id": document_file.id,
+                        "document_uuid": document_uuid,
+                        "document_name": document_file.name,
+                        "document_slug": document_file.slug,
+                        "document_url": document_file.url,
+                    }
+                )
+        return file_details
+
+    def get_field_to_exclude(self, data):
+        current_partner = request.env.user.partner_id
+        keys = []
+        for key in data:
+            if key in current_partner:
+                current_partner[key] = data[key]
+                keys.append(key)
+
+        return keys
