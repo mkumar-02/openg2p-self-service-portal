@@ -75,7 +75,11 @@ class SelfServiceController(http.Controller):
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        states = {
+            "draft": "Applied",
+            "enrolled": "Enrolled",
+            "not_eligible": "Not Eligible",
+        }
         amount_received = 0
         myprograms = []
         for program in programs:
@@ -89,6 +93,7 @@ class SelfServiceController(http.Controller):
                     ]
                 )
             )
+
             amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
@@ -126,8 +131,12 @@ class SelfServiceController(http.Controller):
                         if membership.enrollment_date
                         else None,
                         "is_latest": (datetime.today() - program.create_date).days < 21,
-                        "application_id": membership.application_id
-                        if membership.application_id
+                        "application_id": membership.program_registrant_info_ids.sorted(
+                            "create_date", reverse=True
+                        )[0].application_id
+                        if membership.program_registrant_info_ids.sorted(
+                            "create_date", reverse=True
+                        )[0].application_id
                         else None,
                     }
                 )
@@ -148,6 +157,7 @@ class SelfServiceController(http.Controller):
                 ]
             )
         )
+
         pending = entitlement - received
         labels = ["Received", "Pending"]
         values = [received, pending]
@@ -168,7 +178,12 @@ class SelfServiceController(http.Controller):
             programs = programs.search([(("is_reimbursement_program", "=", False))])
 
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        states = {
+            "draft": "Applied",
+            "enrolled": "Enrolled",
+            "duplicated": "Not Eligible",
+            "not_eligible": "Not Eligible",
+        }
 
         values = []
         for program in programs:
@@ -228,23 +243,12 @@ class SelfServiceController(http.Controller):
             )
         )
 
-        membership = (
-            request.env["g2p.program_membership"]
-            .sudo()
-            .search(
-                [
-                    ("program_id", "=", program.id),
-                    ("partner_id", "=", current_partner.id),
-                ]
-            )
-        )
-
         submission_records = []
         for detail in all_submission:
             submission_records.append(
                 {
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
-                    # "application_id": detail.application_id,
+                    "application_id": detail.application_id,
                     "status": detail.status,
                 }
             )
@@ -259,7 +263,6 @@ class SelfServiceController(http.Controller):
             "g2p_self_service_portal.program_submission_info",
             {
                 "program_id": program.id,
-                "application_id": membership.application_id,
                 "submission_records": submission_records,
                 "active_application": active_application,
             },
@@ -378,7 +381,9 @@ class SelfServiceController(http.Controller):
             {
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
-                "application_id": program_member.application_id,
+                "application_id": program_member.program_registrant_info_ids.sorted(
+                    "create_date", reverse=True
+                )[0].application_id,
                 "user": current_partner.given_name.capitalize(),
             },
         )

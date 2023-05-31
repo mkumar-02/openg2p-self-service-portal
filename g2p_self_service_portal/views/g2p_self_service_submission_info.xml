@@ -38,7 +38,7 @@
 
                                         <tr>
                                             <td />
-                                            <td><t t-esc="application_id" /></td>
+                                            <td><t t-esc="value['application_id']" /></td>
                                             <td><t t-esc="value['applied_on']" /></td>
                                             <td><t t-esc="value['status']" /></td>
                                         </tr>
