@@ -16,16 +16,16 @@
                     <form
                         class="oe_login_form"
                         role="form"
-                        t-attf-action="/web/otp/authentication"
+                        t-attf-action="/web/authentication/otp"
                         method="post"
-                        onsubmit="this.action = '/web/otp/authentication' + location.hash"
+                        onsubmit="this.action = '/web/authentication/otp' + location.hash"
                     >
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
                         <input type="hidden" name="redirect" value="/selfservice/home" />
                         <div class="form-group field-login">
                             <label for="login">Email</label>
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="Enter email address"
                                 name="login"
                                 t-att-value="login"

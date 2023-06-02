@@ -43,7 +43,7 @@ class SelfServiceAuthSignup(AuthSignupHome):
             raise Forbidden(_("Authentication Failed"))
 
     @http.route(
-        ["/web/otp/authentication"],
+        ["/web/authentication/otp"],
         type="http",
         auth="public",
         website=True,
