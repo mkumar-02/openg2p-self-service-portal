@@ -54,6 +54,7 @@ class SelfServiceAuthSignup(AuthSignupHome):
         self.generate_otp()
         generted_otp = request.session["otp"]
 
+        # TODO: Remove the authorization token from code
         response = requests.post(
             "https://www.fast2sms.com/dev/bulkV2",
             data={
