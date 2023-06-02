@@ -12,6 +12,8 @@ from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from .auth_oidc import G2POpenIDLogin
+
 
 _logger = logging.getLogger(__name__)
 
@@ -109,11 +111,9 @@ class SelfServiceController(http.Controller):
 
         context.update(
             dict(
-                providers=[
-                    p
-                    for p in OpenIDLogin().list_providers()
-                    if p.get("g2p_self_service_allowed", False)
-                ]
+                providers=G2POpenIDLogin().list_providers(
+                    domain=[("g2p_self_service_allowed", "=", True)]
+                )
             )
         )
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
@@ -473,13 +473,12 @@ class SelfServiceController(http.Controller):
         )
 
     def self_service_check_roles(self, role_to_check):
-        # And add further role checks and return types
-        # if role_to_check == "REGISTRANT":
-        #     if not request.session or not request.env.user:
-        #         raise Unauthorized(_("User is not logged in"))
-        #     if not request.env.user.partner_id.is_registrant:
-        #         raise Forbidden(_("User is not allowed to access the portal"))
-        pass
+        And add further role checks and return types
+        if role_to_check == "REGISTRANT":
+            if not request.session or not request.env.user:
+                raise Unauthorized(_("User is not logged in"))
+            if not request.env.user.partner_id.is_registrant:
+                raise Forbidden(_("User is not allowed to access the portal"))
 
     def jsonize_form_data(self, data, program, membership=None):
         for key in data:
