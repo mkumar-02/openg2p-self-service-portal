@@ -279,7 +279,7 @@
                         </div>
                         <script
                             type="text/javascript"
-                            src="/g2p_self_service_portal/static/src/js/self-service_search_sort_all.js"
+                            src="/g2p_self_service_portal/static/src/js/self_service_search_sort_all.js"
                         />
                     </div>
                 </div>
