@@ -1,16 +1,97 @@
 import json
 import logging
+import random
 from datetime import datetime
 
+import requests
 from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
 from odoo.http import request
 
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+
 from .auth_oidc import G2POpenIDLogin
 
 _logger = logging.getLogger(__name__)
+
+
+class SelfServiceAuthSignup(AuthSignupHome):
+    @http.route(
+        "/web/signup",
+        type="http",
+        auth="public",
+        website=True,
+        sitemap=False,
+        csrf=False,
+    )
+    def web_auth_signup(self, *args, **kw):
+        signup_data = kw
+        is_authenticated = self.otp_authentication(signup_data)
+
+        if is_authenticated:
+            res = super().web_auth_signup(*args, **kw)
+
+            current_partner = request.env.user.partner_id.id
+            request.env["res.partner"].sudo().browse(current_partner).write(
+                {"is_registrant": True}
+            )
+            return res
+
+        else:
+            # TODO: authentication failed message
+            raise Forbidden(_("Authentication Failed"))
+
+    @http.route(
+        ["/web/authentication/otp"],
+        type="http",
+        auth="public",
+        website=True,
+        csrf=False,
+    )
+    def web_otp_authentication(self, **kw):
+        self.generate_otp()
+        generted_otp = request.session["otp"]
+
+        # TODO: Remove the authorization token from code
+        response = requests.post(
+            "https://www.fast2sms.com/dev/bulkV2",
+            data={
+                "variables_values": generted_otp,
+                "route": "otp",
+                "numbers": kw["phone"],
+            },
+            headers={
+                "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
+            },
+        )
+
+        if response.status_code == 200:
+            _logger.info(response.json())
+        else:
+            _logger.error(response.status_code)
+
+        return request.render(
+            "g2p_self_service_portal.otp_authentication_page",
+            {
+                "login": kw["login"],
+                "phone": kw["phone"],
+                "name": kw["name"],
+                "password": kw["password"],
+                "confirm_password": kw["confirm_password"],
+            },
+        )
+
+    def otp_authentication(self, data):
+        otp = request.session.get("otp")
+
+        if int(data["otp"]) == otp:
+            return True
+        return False
+
+    def generate_otp(self):
+        request.session["otp"] = random.randint(100000, 999999)
 
 
 class SelfServiceController(http.Controller):
@@ -36,6 +117,11 @@ class SelfServiceController(http.Controller):
             )
         )
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
+
+    @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
+    def self_service_signup(self, **kwargs):
+        # TODO: Check if user already present
+        return request.render("g2p_self_service_portal.signup_page")
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)
     def self_service_logo(self, **kwargs):
@@ -73,7 +159,11 @@ class SelfServiceController(http.Controller):
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        states = {
+            "draft": "Applied",
+            "enrolled": "Enrolled",
+            "not_eligible": "Not Eligible",
+        }
         amount_received = 0
         myprograms = []
         for program in programs:
@@ -87,6 +177,7 @@ class SelfServiceController(http.Controller):
                     ]
                 )
             )
+
             amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
@@ -124,8 +215,12 @@ class SelfServiceController(http.Controller):
                         if membership.enrollment_date
                         else None,
                         "is_latest": (datetime.today() - program.create_date).days < 21,
-                        "application_id": membership.application_id
-                        if membership.application_id
+                        "application_id": membership.program_registrant_info_ids.sorted(
+                            "create_date", reverse=True
+                        )[0].application_id
+                        if membership.program_registrant_info_ids.sorted(
+                            "create_date", reverse=True
+                        )[0].application_id
                         else None,
                     }
                 )
@@ -146,6 +241,7 @@ class SelfServiceController(http.Controller):
                 ]
             )
         )
+
         pending = entitlement - received
         labels = ["Received", "Pending"]
         values = [received, pending]
@@ -166,7 +262,12 @@ class SelfServiceController(http.Controller):
             programs = programs.search([(("is_reimbursement_program", "=", False))])
 
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        states = {
+            "draft": "Applied",
+            "enrolled": "Enrolled",
+            "duplicated": "Not Eligible",
+            "not_eligible": "Not Eligible",
+        }
 
         values = []
         for program in programs:
@@ -226,23 +327,12 @@ class SelfServiceController(http.Controller):
             )
         )
 
-        membership = (
-            request.env["g2p.program_membership"]
-            .sudo()
-            .search(
-                [
-                    ("program_id", "=", program.id),
-                    ("partner_id", "=", current_partner.id),
-                ]
-            )
-        )
-
         submission_records = []
         for detail in all_submission:
             submission_records.append(
                 {
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
-                    # "application_id": detail.application_id,
+                    "application_id": detail.application_id,
                     "status": detail.status,
                 }
             )
@@ -257,7 +347,6 @@ class SelfServiceController(http.Controller):
             "g2p_self_service_portal.program_submission_info",
             {
                 "program_id": program.id,
-                "application_id": membership.application_id,
                 "submission_records": submission_records,
                 "active_application": active_application,
             },
@@ -376,8 +465,10 @@ class SelfServiceController(http.Controller):
             {
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
-                "application_id": program_member.application_id,
-                "user": current_partner.given_name.capitalize(),
+                "application_id": program_member.program_registrant_info_ids.sorted(
+                    "create_date", reverse=True
+                )[0].application_id,
+                # "user": current_partner.given_name.capitalize(),
             },
         )
 

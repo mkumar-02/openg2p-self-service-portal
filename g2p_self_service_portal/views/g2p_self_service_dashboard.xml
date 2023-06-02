@@ -104,30 +104,26 @@
                                                 <t t-esc="program['application_id']" />
                                             </td>
 
-
-                                            <t t-if="program['status']=='Submitted'">
-                                                <td>
-                                                    <button
+                                            <td>
+                                                <t t-if="program['status']=='Applied'">
+                                                        <button
                                                         string="Apply"
                                                         type="object"
                                                         class="submit-button"
                                                     >
-                                                    Submitted
-                                                    </button>
-                                                </td>
-                                            </t>
-                                            <t t-elif="program['status']=='Enrolled'">
-                                                <td>
-                                                    <button
+                                                        Applied
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['status']=='Enrolled'">
+                                                        <button
                                                         string="Apply"
                                                         type="object"
                                                         class="enroll-button"
                                                     >
-                                                    Enrolled
-                                                    </button>
-                                                </td>
-                                            </t>
-
+                                                        Enrolled
+                                                        </button>
+                                                </t>
+                                            </td>
 
                                             <td>
                                                 <t t-esc="program['enrollment_date']" />

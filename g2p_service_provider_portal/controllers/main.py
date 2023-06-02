@@ -6,7 +6,8 @@ from werkzeug.exceptions import Forbidden, Unauthorized
 from odoo import _, http
 from odoo.http import request
 
-from odoo.addons.g2p_self_service_portal.controllers.main import G2POpenIDLogin, SelfServiceController
+from odoo.addons.g2p_self_service_portal.controllers.auth_oidc import G2POpenIDLogin
+from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
 
 _logger = logging.getLogger(__name__)
 

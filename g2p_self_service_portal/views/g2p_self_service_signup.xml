@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- TODO: Remove all hardcoding -->
-    <template id="login_page" name="G2P Self Service Login">
+    <template id="signup_page" name="G2P Self Service Sign up">
 
         <t t-call="g2p_self_service_portal.base">
             <t t-set="no_header" t-value="1" />
@@ -16,16 +16,16 @@
                     <form
                         class="oe_login_form"
                         role="form"
-                        t-attf-action="/web/login"
+                        t-attf-action="/web/authentication/otp"
                         method="post"
-                        onsubmit="this.action = '/web/login' + location.hash"
+                        onsubmit="this.action = '/web/authentication/otp' + location.hash"
                     >
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
                         <input type="hidden" name="redirect" value="/selfservice/home" />
                         <div class="form-group field-login">
                             <label for="login">Email</label>
                             <input
-                                type="text"
+                                type="email"
                                 placeholder="Enter email address"
                                 name="login"
                                 t-att-value="login"
@@ -37,11 +37,36 @@
                             />
                         </div>
 
+                        <div class="form-group field-login">
+                            <label for="phone">Phone</label>
+                            <input
+                                type="tel"
+                                placeholder=""
+                                name="phone"
+                                t-att-value="phone"
+                                id="phone"
+                                t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                                required="required"
+                                autofocus="'autofocus' if login else None"
+                            />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input
+                                type="text"
+                                placeholder="Enter your name"
+                                name="name"
+                                t-att-value="name"
+                                id="name"
+                                t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                                required="required"
+                                autofocus="'autofocus' if phone else None"
+                            />
+                        </div>
+
                         <div class="form-group field-password">
                             <label for="password">Password</label>
-                            <span class="reset-password">
-                                <a href="/web/reset_password">Reset Password</a>
-                            </span>
                             <input
                                 type="password"
                                 placeholder="Enter password"
@@ -50,7 +75,21 @@
                                 t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
                                 required="required"
                                 autocomplete="current-password"
-                                t-att-autofocus="'autofocus' if login else None"
+                                t-att-autofocus="'autofocus' if name else None"
+                                maxlength="4096"
+                            />
+                        </div>
+                        <div class="form-group field-password">
+                            <label for="confirm_password">Confirm Password</label>
+                            <input
+                                type="password"
+                                placeholder="Re Enter password"
+                                name="confirm_password"
+                                id="confirm_password"
+                                t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                                required="required"
+                                autocomplete="current-password"
+                                t-att-autofocus="'autofocus' if password else None"
                                 maxlength="4096"
                             />
                         </div>
@@ -65,55 +104,12 @@
                         <div
                             t-attf-class="clearfix oe_login_buttons text-center mb-1 {{'pt-2' if form_small else 'pt-3'}}"
                         >
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-primary btn-block">Sign up</button>
                             <div class="o_login_auth" />
                         </div>
 
                         <input type="hidden" name="redirect" t-att-value="redirect" />
                     </form>
-                    <div style="width:100%;">
-                        <div style="float:left;width:45%;padding-left:20px">
-                            <hr style="width:100%" />
-                        </div>
-                        <div
-                            style="float:left;color:#676767;padding-left:5px; padding-right:5px;width:10%;text-align:center;padding-top:5px;"
-                        >
-                            OR
-                        </div>
-                        <div style="float:left;width:45%;padding-right:20px">
-                            <hr style="width:100%" />
-                        </div>
-                    </div>
-                    <div class="container py-5">
-                        <div t-attf-class="card border-0 mx-auto bg-100">
-                            <div class="card-body">
-                                <t t-if="len(providers) &gt; 0">
-                                    <div
-                                        class="o_auth_oauth_providers list-group mt-1 mb-1 text-center oauth-link"
-                                        style="padding:5px; 10px"
-                                    >
-                                        <a
-                                            t-foreach="providers"
-                                            t-as="p"
-                                            class="list-group-item list-group-item-action py-2 mosip-logo"
-                                            t-att-href="p['auth_link']"
-                                        >
-                                            <!-- <i t-att-class="p['css_class']" /> -->
-                                            <t t-esc="p['body']" t-att-class="p['css_class']" />
-                                        </a>
-                                    </div>
-                                </t>
-                                <div
-                                    class="o_auth_oauth_providers list-group mt-1 mb-1 text-center oauth-link"
-                                    style="padding:5px; 10px"
-                                >
-                                    <a href="/selfservice/signup">
-                                        Sign up
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="login-bottom-text"> Facing any challenges? <a href="#">Help</a> </div>
             </div>

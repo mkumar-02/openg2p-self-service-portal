@@ -78,15 +78,15 @@
 
                                             <t t-if="program['has_applied']">
 
-                                                <t t-if="program['status']=='Submitted'">
+                                                <t t-if="program['status']=='Applied'">
                                                     <td>
 
                                                         <button
-                                                            string="Apply"
+                                                            string="Applied"
                                                             type="object"
                                                             class="submit-button"
                                                         >
-                                                        Submitted
+                                                            Applied
                                                         </button>
 
                                                     </td>
@@ -124,11 +124,11 @@
                                                 <t t-elif="program['status']=='Enrolled'">
                                                     <td>
                                                         <button
-                                                            string="Apply"
+                                                            string="Enrolled"
                                                             type="object"
                                                             class="enroll-button"
                                                         >
-                                                        Enrolled
+                                                            Enrolled
                                                         </button>
 
                                                     </td>
@@ -162,6 +162,30 @@
                                                                 </a>
                                                             </t>
                                                         </t>
+                                                    </td>
+                                                </t>
+                                                <t t-elif="program['status']=='Not Eligible'">
+                                                    <td>
+                                                        <button
+                                                            string="Not Eligible"
+                                                            type="object"
+                                                            class="submit-button"
+                                                        >
+                                                            Not Eligible
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <a
+                                                            t-attf-href="/selfservice/submitted/{{program['id']}}"
+                                                        >
+                                                            <button
+                                                                string="View"
+                                                                type="object"
+                                                                class="view-button"
+                                                            >
+                                                                View
+                                                            </button>
+                                                        </a>
                                                     </td>
                                                 </t>
                                             </t>
