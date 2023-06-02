@@ -5,15 +5,14 @@ from datetime import datetime
 
 import requests
 from werkzeug.datastructures import FileStorage
-from werkzeug.exceptions import Forbidden
+from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
 from odoo.http import request
 
-from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
-from .auth_oidc import G2POpenIDLogin
 
+from .auth_oidc import G2POpenIDLogin
 
 _logger = logging.getLogger(__name__)
 
@@ -473,7 +472,7 @@ class SelfServiceController(http.Controller):
         )
 
     def self_service_check_roles(self, role_to_check):
-        And add further role checks and return types
+        # And add further role checks and return types
         if role_to_check == "REGISTRANT":
             if not request.session or not request.env.user:
                 raise Unauthorized(_("User is not logged in"))
