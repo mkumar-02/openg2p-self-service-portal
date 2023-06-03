@@ -509,6 +509,14 @@
                                 </div>
                             </div>
                         </div>
+                        <script
+                            type="text/javascript"
+                            src="/g2p_service_provider_portal/static/src/js/form_action.js"
+                        />
+                        <script
+                            type="text/javascript"
+                            src="/g2p_service_provider_portal/static/src/js/multiple_file_upload.js"
+                        />
                     </div>
                 </div>
             </div>

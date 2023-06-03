@@ -11,5 +11,4 @@ function addTableSrNo() {
     }
 }
 
-// TODO: remove the onload method
-Window.onload = addTableSrNo();
+addTableSrNo();
