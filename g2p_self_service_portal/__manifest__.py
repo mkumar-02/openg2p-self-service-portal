@@ -47,8 +47,8 @@
         "web.assets_frontend": [
             "g2p_self_service_portal/static/src/js/self_service_form_action.js",
             # # "g2p_self_service_portal/static/src/js/self_service_pie_chart.js",
-            # "g2p_self_service_portal/static/src/js/self-service_search_sort.js",
-            # "g2p_self_service_portal/static/src/js/self-service_search_sort_all.js",
+            # "g2p_self_service_portal/static/src/js/self_service_search_sort.js",
+            # "g2p_self_service_portal/static/src/js/self_service_search_sort_all.js",
             # "g2p_self_service_portal/static/src/js/self_service_welcome_alert.js"
         ],
         "web.assets_common": [],

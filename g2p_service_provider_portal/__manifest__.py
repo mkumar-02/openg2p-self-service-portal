@@ -26,12 +26,7 @@
     "assets": {
         "web.assets_backend": [],
         "web.assets_qweb": [],
-        "web.assets_frontend": [
-            "g2p_service_provider_portal/static/src/js/form_action.js",
-            "g2p_service_provider_portal/static/src/js/multiple_file_upload.js",
-            "g2p_service_provider_portal/static/src/js/table_sr_no.js",
-            "g2p_service_provider_portal/static/src/js/pagination.js",
-        ],
+        "web.assets_frontend": [],
         "web.assets_common": [],
     },
     "demo": [],

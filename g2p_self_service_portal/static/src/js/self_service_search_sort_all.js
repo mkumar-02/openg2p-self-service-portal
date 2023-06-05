@@ -2,7 +2,6 @@ const alltable = document.getElementById("allprograms");
 const allheadercells = alltable.querySelectorAll("th");
 const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
 
-console.log(allRows);
 allheadercells.forEach(function (th) {
     // Default sort order
     let sortOrder = "asc";

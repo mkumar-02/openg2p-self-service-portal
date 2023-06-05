@@ -218,9 +218,7 @@ class SelfServiceController(http.Controller):
                         "application_id": membership.program_registrant_info_ids.sorted(
                             "create_date", reverse=True
                         )[0].application_id
-                        if membership.program_registrant_info_ids.sorted(
-                            "create_date", reverse=True
-                        )[0].application_id
+                        if membership.program_registrant_info_ids
                         else None,
                     }
                 )
@@ -417,6 +415,10 @@ class SelfServiceController(http.Controller):
                     )
                 )
 
+            for key in kwargs:
+                if isinstance(kwargs[key], FileStorage):
+                    kwargs[key] = request.httprequest.files.getlist(key)
+
             form_data = kwargs
 
             delete_key = self.get_field_to_exclude(form_data)
@@ -445,30 +447,44 @@ class SelfServiceController(http.Controller):
                 )
             )
             program_registrant_info_ids.write({"status": "closed"})
-            request.env["g2p.program.registrant_info"].sudo().create(
-                {
-                    "status": "active",
-                    "program_registrant_info": self.jsonize_form_data(
-                        form_data, program, membership=program_member
-                    ),
-                    "program_id": program.id,
-                    "registrant_id": current_partner.id,
-                }
+            program_reg_info = (
+                request.env["g2p.program.registrant_info"]
+                .sudo()
+                .create(
+                    {
+                        "status": "active",
+                        "program_registrant_info": self.jsonize_form_data(
+                            form_data, program, membership=program_member
+                        ),
+                        "program_id": program.id,
+                        "registrant_id": current_partner.id,
+                    }
+                )
             )
 
         else:
             if not program_member:
                 return request.redirect(f"/selfservice/apply/{_id}")
+            program_reg_info = (
+                program_member.program_registrant_info_ids.sorted(
+                    "create_date", reversed=True
+                )[0]
+                if program_member.program_registrant_info_ids
+                else None
+            )
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
-                "application_id": program_member.program_registrant_info_ids.sorted(
-                    "create_date", reverse=True
-                )[0].application_id,
-                # "user": current_partner.given_name.capitalize(),
+                # TODO: Redirect to different page is application doesn't exist
+                "application_id": program_reg_info.application_id
+                if program_reg_info
+                else None,
+                "user": current_partner.given_name.capitalize()
+                if current_partner.given_name
+                else current_partner.name,
             },
         )
 
@@ -483,30 +499,32 @@ class SelfServiceController(http.Controller):
     def jsonize_form_data(self, data, program, membership=None):
         for key in data:
             value = data[key]
-            if isinstance(value, FileStorage):
-                if not program.supporting_documents_store:
-                    _logger.error(
-                        "Supporting Documents Store is not set in Program Configuration"
-                    )
-                    data[key] = None
-                    continue
+            if isinstance(value, list):
+                if len(value) > 0 and isinstance(value[0], FileStorage):
+                    if not program.supporting_documents_store:
+                        _logger.error(
+                            "Supporting Documents Store is not set in Program Configuration"
+                        )
+                        data[key] = None
+                        continue
 
-                data[key] = self.add_file_to_store(
-                    value,
-                    program.supporting_documents_store,
-                    program_membership=membership,
-                )
-                if not data.get(key, None):
-                    _logger.warning("Empty/No File received for field %s", key)
-                    continue
+                    data[key] = self.add_file_to_store(
+                        value,
+                        program.supporting_documents_store,
+                        program_membership=membership,
+                    )
+                    if not data.get(key, None):
+                        _logger.warning("Empty/No File received for field %s", key)
+                        continue
 
         return data
 
     @classmethod
-    def add_file_to_store(cls, files: FileStorage, store, program_membership=None):
+    def add_file_to_store(cls, files, store, program_membership=None):
         if isinstance(files, FileStorage):
-            files = [files]
-
+            files = [
+                files,
+            ]
         file_details = []
         for file in files:
             if store and file.filename:

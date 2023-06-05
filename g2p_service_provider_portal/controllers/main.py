@@ -190,29 +190,28 @@ class ServiceProviderContorller(http.Controller):
             supporting_documents = request.httprequest.files.getlist(
                 "statement_of_account"
             )
-            supporting_document_file = SelfServiceController.add_file_to_store(
+            supporting_document_files = SelfServiceController.add_file_to_store(
                 supporting_documents, supporting_documents_store
             )
-
-            if not supporting_document_file:
+            if not supporting_document_files:
                 _logger.warning(
                     "Empty/No File received for field %s", "Statement of Account"
                 )
-                supporting_document_file_id = None
+                supporting_document_file_ids = None
             else:
-                supporting_document_file_id = []
+                supporting_document_file_ids = []
 
                 # saving the multiple document id
-                for document_id in supporting_document_file:
-                    supporting_document_file_id.append(
+                for document_id in supporting_document_files:
+                    supporting_document_file_ids.append(
                         document_id.get("document_id", None)
                     )
 
             reimbursement_claim = entitlement.submit_reimbursement_claim(
                 current_partner,
                 received_code,
-                supporting_document_file_ids=supporting_document_file_id
-                if supporting_document_file_id
+                supporting_document_file_ids=supporting_document_file_ids
+                if supporting_document_file_ids
                 else None,
                 amount=actual_amount,
             )
@@ -231,7 +230,9 @@ class ServiceProviderContorller(http.Controller):
                 "entitlement": entitlement.id,
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
                 "application_id": reimbursement_claim.id,
-                "user": current_partner.given_name.capitalize(),
+                "user": current_partner.given_name.capitalize()
+                if current_partner.given_name
+                else current_partner.name,
             },
         )
 
