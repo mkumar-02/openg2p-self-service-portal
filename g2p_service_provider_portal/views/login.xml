@@ -16,12 +16,6 @@
         <xpath expr="//input[@name='redirect'][1]" position="replace">
             <input type="hidden" name="redirect" value="/serviceprovider/home" />
         </xpath>
-        <xpath expr="//div[@class='card-body']//div" position="attributes">
-            <attribute name="style">pointer-events: none; background-color: #d8d8d8; padding:5px;</attribute>
-        </xpath>
-        <xpath expr="//div[@class='card-body']//div//a" position="attributes">
-            <attribute name="style">background-color: #d8d8d8;</attribute>
-        </xpath>
         <xpath expr="//a[@href='/selfservice/signup']//.." position="replace">
             <div />
         </xpath>
