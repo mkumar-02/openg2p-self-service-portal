@@ -3,7 +3,6 @@ import logging
 import random
 from datetime import datetime
 
-import requests
 from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
@@ -27,71 +26,120 @@ class SelfServiceAuthSignup(AuthSignupHome):
         csrf=False,
     )
     def web_auth_signup(self, *args, **kw):
-        signup_data = kw
-        is_authenticated = self.otp_authentication(signup_data)
+        if request.httprequest.method == "POST":
+            stored_otp = request.session.get("otp")
 
-        if is_authenticated:
-            res = super().web_auth_signup(*args, **kw)
+            if stored_otp and int(kw["otp"]) and stored_otp == int(kw["otp"]):
+                request.session.pop("otp")
+                request.session.pop("signup_form_filled")
 
-            current_partner = request.env.user.partner_id.id
-            request.env["res.partner"].sudo().browse(current_partner).write(
-                {"is_registrant": True}
-            )
-            return res
+                # TODO: Check if user already present
+                if request.env["g2p.reg.id"].sudo().search([("value", "=", kw["vid"])]):
+                    # TODO: Display error message
+                    return request.redirect("/selfservice/login")
+
+                request.params["login"] = kw["email"] if kw["email"] else kw["phone"]
+                res = super().web_auth_signup(*args, **kw)
+
+                current_partner = request.env.user.partner_id
+
+                request.env["res.partner"].sudo().browse(current_partner.id).write(
+                    {"is_registrant": True}
+                )
+
+                # Adding data into the res.patner
+                for key in kw:
+                    if key in current_partner:
+                        current_partner[key] = kw[key]
+
+                # Adding VID number
+                reg_id_type = (
+                    request.env["g2p.id.type"].sudo().search([("name", "=", "VID")])
+                )
+                if len(reg_id_type) == 0:
+                    reg_id_type.create({"name": "VID"})
+
+                (
+                    request.env["g2p.reg.id"]
+                    .sudo()
+                    .create(
+                        {
+                            "partner_id": current_partner.id,
+                            "id_type": reg_id_type.id,
+                            "value": kw["vid"],
+                        }
+                    )
+                )
+
+                # Adding phone number
+                request.env["g2p.phone.number"].sudo().create(
+                    {"phone_no": kw["phone"], "partner_id": current_partner.id}
+                )
+
+                return res
+
+            else:
+                return request.render(
+                    "g2p_self_service_portal.otp_authentication_page",
+                    {
+                        "error_message": "Incorrect OTP. Please try again.",
+                        "values": kw,
+                        "name": kw["name"],
+                    },
+                )
 
         else:
-            # TODO: authentication failed message
-            raise Forbidden(_("Authentication Failed"))
+            return request.redirect("/selfservice")
 
     @http.route(
-        ["/web/authentication/otp"],
+        ["/selfservice/signup/otp"],
         type="http",
         auth="public",
         website=True,
         csrf=False,
     )
-    def web_otp_authentication(self, **kw):
-        self.generate_otp()
-        generted_otp = request.session["otp"]
+    def self_service_signup_otp(self, **kw):
 
-        # TODO: Remove the authorization token from code
-        response = requests.post(
-            "https://www.fast2sms.com/dev/bulkV2",
-            data={
-                "variables_values": generted_otp,
-                "route": "otp",
-                "numbers": kw["phone"],
-            },
-            headers={
-                "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
-            },
-        )
+        # TODO: If page is reloaded then display/ redirect again to signup page.
+        if not request.session.get("signup_form_filled"):
+            return request.redirect("/selfservice")
 
-        if response.status_code == 200:
-            _logger.info(response.json())
-        else:
-            _logger.error(response.status_code)
-
-        return request.render(
-            "g2p_self_service_portal.otp_authentication_page",
-            {
-                "login": kw["login"],
-                "phone": kw["phone"],
-                "name": kw["name"],
-                "password": kw["password"],
-                "confirm_password": kw["confirm_password"],
-            },
-        )
-
-    def otp_authentication(self, data):
-        otp = request.session.get("otp")
-
-        if int(data["otp"]) == otp:
-            return True
-        return False
-
-    def generate_otp(self):
         request.session["otp"] = random.randint(100000, 999999)
+
+        _logger.error(request.session["otp"])
+
+        # TODO: Use G2P Notification module to send the otp
+
+        # response = requests.post(
+        #     "https://www.fast2sms.com/dev/bulkV2",
+        #     data={
+        #         "variables_values": generted_otp,
+        #         "route": "otp",
+        #         "numbers": kw["phone"],
+        #     },
+        #     headers={
+        #         "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
+        #     },
+        # )
+
+        # if response.status_code == 200:
+        #     _logger.info(response.json())
+        # else:
+        #     _logger.error(response.status_code)
+
+        if request.httprequest.method == "POST":
+            kw["name"] = (
+                kw["family_name"].title()
+                + ", "
+                + kw["given_name"].title()
+                + " "
+                + kw["addl_name"].title()
+            )
+
+            return request.render(
+                "g2p_self_service_portal.otp_authentication_page",
+                {"values": kw, "name": kw["name"], "error_message": ""},
+            )
 
 
 class SelfServiceController(http.Controller):
@@ -120,7 +168,9 @@ class SelfServiceController(http.Controller):
 
     @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
     def self_service_signup(self, **kwargs):
-        # TODO: Check if user already present
+        if request.session and request.session.uid:
+            return request.redirect("/selfservice/home")
+        request.session["signup_form_filled"] = True
         return request.render("g2p_self_service_portal.signup_page")
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)

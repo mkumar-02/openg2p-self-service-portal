@@ -15,26 +15,20 @@
         </xpath>
         <xpath expr="//ol[@class='breadcrumb form-layout-breadcrumb']" position="replace">
             <ol class="breadcrumb form-layout-breadcrumb">
-                <li class="breadcrumb-item">
+                <!-- <li class="breadcrumb-item">
                     <a href="/serviceprovider/home">
                         Reimbursements
                     </a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                     Submission
-                </li>
+                </li> -->
             </ol>
         </xpath>
         <xpath expr="//p[@class='thank-you-msg']" position="replace">
             <p class="thank-you-msg">
                 <i class="fa fa-check" style="color: #66ad5a;" />
-                Your claim is being processed
-                <br />
-                <i class="fa fa-check" style="color: #66ad5a;" />
-                Thank you for submitting against Voucher ID - <t t-esc="entitlement" />
-                <br />
-                <i class="fa fa-check" style="color: #66ad5a;" />
-                Your Claim Application ID is <t t-esc="application_id" />
+                Thank you for submitting the reimbursement application. Your claim is being processed.
             </p>
         </xpath>
 

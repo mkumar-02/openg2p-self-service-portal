@@ -82,7 +82,8 @@ footer#bottom .footer-container .nav {
     margin: auto;
 }
 
-.ssp-login-body {
+.ssp-login-body,
+.ssp-signup-body {
     background: transparent linear-gradient(0deg, #f5f7ff 0%, #f2f7ff 100%) 0% 0% no-repeat padding-box;
     opacity: 1;
     position: fixed;
@@ -225,6 +226,7 @@ footer#bottom .footer-container .nav {
     margin: 20px;
     max-width: 100%;
 }
+
 #alertbox {
     width: 100%;
     left: 0px;
@@ -1025,16 +1027,17 @@ li div p {
     font: normal normal 600 14px/17px Inter;
 }
 
-.form-template #toast-container {
+#toast-container {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 110px;
     right: 30px;
     width: 304px;
     height: 48px;
+    z-index: 999;
 }
 
-.form-template #toast-message {
+#toast-message {
     background-color: #de514c;
     color: #ffffff;
     padding: 10px;
@@ -1045,7 +1048,7 @@ li div p {
     font: normal normal 600 12px/15px Inter;
 }
 
-.form-template #toast-close-btn {
+#toast-close-btn {
     position: absolute;
     top: 0px;
     right: 0px;
@@ -1059,7 +1062,7 @@ li div p {
     padding-top: 10px;
 }
 
-.form-template #toast-close-btn img {
+#toast-close-btn img {
     width: 11px;
     height: 11px;
 }

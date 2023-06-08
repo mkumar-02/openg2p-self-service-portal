@@ -10,15 +10,17 @@ function reimbursement_form_submit_action() {
     // TODO: validations
 
     var modal = $("#SubmitModal");
+    var requiredFields = $(".s_website_form_required");
+    var inputFields = requiredFields.find("input");
 
-    for (let i = 0; i < 4; i++) {
-        form[0][i].style.borderColor = "#E3E3E3";
-        if (form[0][i].value === "") {
+    for (let i = 0; i < requiredFields.length; i++) {
+        inputFields[i].style.borderColor = "#E3E3E3";
+        if (inputFields[i].value === "") {
             isValid = false;
             modal[0].click(close);
             // eslint-disable-next-line no-undef
             show_toast("Please update all mandatory fields");
-            form[0][i].style.borderColor = "#DE514C";
+            inputFields[i].style.borderColor = "#DE514C";
         }
     }
 

@@ -126,6 +126,8 @@ class ServiceProviderContorller(http.Controller):
         current_partner = request.env.user.partner_id
 
         entitlement = request.env["g2p.entitlement"].sudo().browse(_id)
+        beneficiary = entitlement.partner_id
+
         if (
             entitlement.service_provider_id.id != current_partner.id
             or entitlement.state != "approved"
@@ -140,13 +142,12 @@ class ServiceProviderContorller(http.Controller):
             "g2p_service_provider_portal.reimbursement_submission_form",
             {
                 "entitlement_id": _id,
-                "current_user": current_partner,
-                "first_name": current_partner.given_name,
-                "last_name": current_partner.family_name,
-                "email": current_partner.email,
-                "mobile_number": current_partner.phone,
-                "birthdate": current_partner.birthdate,
-                "gender": current_partner.gender,
+                "current_partner_name": current_partner.given_name.capitalize()
+                + ", "
+                + current_partner.family_name.capitalize()
+                if current_partner.given_name and current_partner.family_name
+                else current_partner.name.capitalize(),
+                "beneficiary": beneficiary,
             },
         )
 
@@ -231,8 +232,10 @@ class ServiceProviderContorller(http.Controller):
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
                 "application_id": reimbursement_claim.id,
                 "user": current_partner.given_name.capitalize()
-                if current_partner.given_name
-                else current_partner.name,
+                + " "
+                + current_partner.family_name.capitalize()
+                if current_partner.given_name and current_partner.family_name
+                else current_partner.name.capitalize(),
             },
         )
 
