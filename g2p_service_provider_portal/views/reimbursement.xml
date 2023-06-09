@@ -7,12 +7,12 @@
                 <div class="container-adjuster">
                     <h5 class="all-title">Reimbursements</h5>
                     <ol class="breadcrumb  breadcrumb-list bg-transparent">
-                        <li class="breadcrumb-item active" aria-current="page">Reimbursements</li>
+                        <!-- <li class="breadcrumb-item active" aria-current="page">Reimbursements</li> -->
                     </ol>
 
                     <div class="table-container">
                         <div class="table-head-container">
-                            <p class="table-title">Reimbursements</p>
+                            <p class="table-title" />
 
                             <form class="form-inline my-2 my-lg-0" action="/servcieprovider/voucher">
                                 <div class="search-box">
@@ -81,7 +81,7 @@
                                                             class="enroll-button"
                                                             disabled="1"
                                                         >
-                                                            Completed
+                                                            Enrolled
                                                         </button>
                                                     </t>
                                                     <t t-else="">

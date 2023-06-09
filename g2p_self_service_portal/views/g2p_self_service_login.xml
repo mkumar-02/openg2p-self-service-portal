@@ -89,8 +89,8 @@
                             <div class="card-body">
                                 <t t-if="len(providers) &gt; 0">
                                     <div
-                                        class="o_auth_oauth_providers list-group mt-1 mb-1 text-center oauth-link"
-                                        style="padding:5px; 10px"
+                                        class="o_auth_oauth_providers list-group mt-1 mb-2 text-center oauth-link"
+                                        style="padding:5px;"
                                     >
                                         <a
                                             t-foreach="providers"
@@ -105,9 +105,9 @@
                                 </t>
                                 <div
                                     class="o_auth_oauth_providers list-group mt-1 mb-1 text-center oauth-link"
-                                    style="padding:5px; 10px"
+                                    style="padding: 10px"
                                 >
-                                    <a href="/selfservice/signup">
+                                    <a href="/selfservice/signup" style="z-index: 100;">
                                         Sign up
                                     </a>
                                 </div>

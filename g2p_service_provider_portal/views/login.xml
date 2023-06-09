@@ -16,5 +16,8 @@
         <xpath expr="//input[@name='redirect'][1]" position="replace">
             <input type="hidden" name="redirect" value="/serviceprovider/home" />
         </xpath>
+        <xpath expr="//a[@href='/selfservice/signup']//.." position="replace">
+            <div />
+        </xpath>
     </template>
 </odoo>

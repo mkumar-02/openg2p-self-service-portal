@@ -85,6 +85,7 @@
                                                             string="Applied"
                                                             type="object"
                                                             class="submit-button"
+                                                            disabled="1"
                                                         >
                                                             Applied
                                                         </button>
@@ -127,6 +128,7 @@
                                                             string="Enrolled"
                                                             type="object"
                                                             class="enroll-button"
+                                                            disabled="1"
                                                         >
                                                             Enrolled
                                                         </button>
@@ -169,7 +171,8 @@
                                                         <button
                                                             string="Not Eligible"
                                                             type="object"
-                                                            class="submit-button"
+                                                            class="notapplied-button"
+                                                            disabled="1"
                                                         >
                                                             Not Eligible
                                                         </button>
@@ -188,6 +191,7 @@
                                                         </a>
                                                     </td>
                                                 </t>
+
                                             </t>
                                             <t t-else="">
                                                 <td>
@@ -195,6 +199,7 @@
                                                         string="Apply"
                                                         type="object"
                                                         class="notapplied-button"
+                                                        disabled="1"
                                                     >
                                                         Not Applied
                                                     </button>
@@ -218,62 +223,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <!-- <ul class="pagination justify-content-center">
-                            <t t-if="pager['sel'] &gt; 1">
-                                <li class="pager-item">
-                                    <a
-                                        t-attf-href="/selfservice/programs?page={{pager['sel']-1}}"
-                                        class="page-link"
-                                    >
-                                        <i class="fa fa-angle-left" />
-                                    </a>
-                                </li>
-
-                            </t>
-                            <t t-else="">
-                                <a t-attf-href="#" class="page-link">
-                                    <i class="fa fa-angle-left" />
-                                </a>
-                            </t>
-                            <t t-foreach="range(1,pager['total']+1)" t-as="i">
-                                <t t-if="i==pager['sel']">
-                                    <li class="page-item active">
-                                        <a href="/selfservice/programs?page={{i}}" class="page-link ">
-                                            <span>
-                                                <t t-esc="i" />
-                                            </span>
-                                        </a>
-                                    </li>
-                                </t>
-
-                                <t t-else="">
-                                    <li class="page-item">
-                                        <a t-attf-href="/selfservice/programs?page={{i}}" class="page-link ">
-                                            <span>
-                                                <t t-esc="i" />
-                                            </span>
-                                        </a>
-                                    </li>
-                                </t>
-                            </t>
-                            <t t-if="pager['sel'] &lt; pager['total']">
-                                <li class="pager-item">
-                                    <a
-                                        t-attf-href="/selfservice/programs?page={{pager['sel']+1}}"
-                                        class="page-link"
-                                    >
-                                        <i class="fa fa-angle-right" />
-                                    </a>
-                                </li>
-
-                            </t>
-                            <t t-else="">
-                                <a t-attf-href="#" class="page-link">
-                                    <i class="fa fa-angle-right" />
-                                </a>
-                            </t>
-
-                        </ul> -->
                         <div id="page-buttons" class="pagination justify-content-center">
 
                         </div>

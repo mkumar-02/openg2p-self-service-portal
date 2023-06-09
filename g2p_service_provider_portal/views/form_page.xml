@@ -8,17 +8,17 @@
                     <div class="form-template">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="details"><t t-esc="first_name" />, <t t-esc="last_name" /></div>
+                                <div class="details"><t t-esc="current_partner_name" /></div>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb form-layout-breadcrumb">
-                                        <li class="breadcrumb-item">
+                                        <!-- <li class="breadcrumb-item">
                                             <a href="/serviceprovider/home">
                                                 Reimbursements
                                             </a>
                                         </li>
                                         <li class="breadcrumb-item active" aria-current="page">
                                             Submission
-                                        </li>
+                                        </li> -->
                                     </ol>
                                 </nav>
                             </div>
@@ -107,16 +107,13 @@
                                                                                 <span
                                                                                     class="s_website_form_label_content"
                                                                                 >First Name</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
                                                                             </label>
                                                                             <input
                                                                                 class="s_website_form_input"
                                                                                 type="text"
                                                                                 id="first_name"
                                                                                 name="first_name"
-                                                                                t-att-value="first_name"
+                                                                                t-att-value="beneficiary['given_name'].capitalize() if beneficiary['given_name'] else None"
                                                                                 disabled="1"
                                                                             />
                                                                         </div>
@@ -131,16 +128,13 @@
                                                                                 <span
                                                                                     class="s_website_form_label_content"
                                                                                 >Last Name</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
                                                                             </label>
                                                                             <input
                                                                                 class="s_website_form_input"
                                                                                 type="text"
                                                                                 id="last_name"
                                                                                 name="last_name"
-                                                                                t-att-value="last_name"
+                                                                                t-att-value="beneficiary['family_name'].capitalize() if beneficiary['family_name'] else None"
                                                                                 disabled="1"
                                                                             />
                                                                         </div>
@@ -157,16 +151,13 @@
                                                                                 <span
                                                                                     class="s_website_form_label_content"
                                                                                 >Email Address</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
                                                                             </label>
                                                                             <input
                                                                                 class="s_website_form_input"
                                                                                 type="email"
                                                                                 id="email"
                                                                                 name="email"
-                                                                                t-att-value="email"
+                                                                                t-att-value="beneficiary['email']"
                                                                                 disabled="1"
                                                                             />
                                                                         </div>
@@ -181,96 +172,66 @@
                                                                                 <span
                                                                                     class="s_website_form_label_content"
                                                                                 >Mobile Number</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
                                                                             </label>
                                                                             <input
                                                                                 class="s_website_form_input"
                                                                                 type="tel"
                                                                                 id="mobile_number"
                                                                                 name="mobile_number"
-                                                                                t-att-value="mobile_number"
+                                                                                t-att-value="beneficiary['phone']"
                                                                                 disabled="1"
                                                                             />
                                                                         </div>
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="row">
-                                                                    <div class="col-lg-6">
-                                                                        <div class="s_website_form_field">
-                                                                            <label
-                                                                                class="s_website_form_label"
-                                                                                for="gender"
-                                                                            >
-                                                                                <span
-                                                                                    class="s_website_form_label_content"
-                                                                                >Gender</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
-                                                                            </label>
-                                                                            <div
-                                                                                class="row s_website_form_multiple"
-                                                                            >
-                                                                                <div
-                                                                                    class="radio col-12 col-lg-4 col-md-6"
+                                                                <div class="s_website_form_field">
+                                                                    <label class="s_website_form_label">
+                                                                        <span
+                                                                            class="s_website_form_label_content"
+                                                                        >Gender</span>
+                                                                    </label>
+                                                                    <div class="row s_website_form_multiple">
+                                                                        <div
+                                                                            class="radio col-12 col-lg-4 col-md-6"
+                                                                        >
+                                                                            <div class="form-check">
+                                                                                <input
+                                                                                    type="radio"
+                                                                                    class="s_website_form_input form-check-input"
+                                                                                    id="Male"
+                                                                                    name="gender"
+                                                                                    disabled="1"
+                                                                                    value="Male"
+                                                                                    t-att-checked="1 if beneficiary['gender'] == 'Male' else 0"
+                                                                                />
+                                                                                <label
+                                                                                    class="form-check-label s_website_form_check_label"
+                                                                                    for="Male"
                                                                                 >
-                                                                                    <div class="form-check">
-                                                                                        <input
-                                                                                            type="radio"
-                                                                                            class="s_website_form_input form-check-input"
-                                                                                            id="male"
-                                                                                            name="Gender"
-                                                                                            disabled="1"
-                                                                                        />
-                                                                                        <label
-                                                                                            class="form-check-label s_website_form_check_label"
-                                                                                            for="male"
-                                                                                        >
-                                                                                            Male
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="radio col-12 col-lg-4 col-md-6"
+                                                                                    Male
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div
+                                                                            class="radio col-12 col-lg-4 col-md-6"
+                                                                        >
+                                                                            <div class="form-check">
+                                                                                <input
+                                                                                    type="radio"
+                                                                                    class="s_website_form_input form-check-input"
+                                                                                    id="Female"
+                                                                                    name="gender"
+                                                                                    disabled="1"
+                                                                                    value="Female"
+                                                                                    t-att-checked="1 if beneficiary['gender'] == 'Female' else 0"
+                                                                                />
+                                                                                <label
+                                                                                    class="form-check-label s_website_form_check_label"
+                                                                                    for="Female"
                                                                                 >
-                                                                                    <div class="form-check">
-                                                                                        <input
-                                                                                            type="radio"
-                                                                                            class="s_website_form_input form-check-input"
-                                                                                            id="female"
-                                                                                            name="Gender"
-                                                                                            disabled="1"
-                                                                                        />
-                                                                                        <label
-                                                                                            class="form-check-label s_website_form_check_label"
-                                                                                            for="female"
-                                                                                        >
-                                                                                            Female
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="radio col-12 col-lg-4 col-md-6"
-                                                                                >
-                                                                                    <div class="form-check">
-                                                                                        <input
-                                                                                            type="radio"
-                                                                                            class="s_website_form_input form-check-input"
-                                                                                            id="others"
-                                                                                            name="Gender"
-                                                                                            disabled="1"
-                                                                                        />
-                                                                                        <label
-                                                                                            class="form-check-label s_website_form_check_label"
-                                                                                            for="others"
-                                                                                        >
-                                                                                            Others
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
+                                                                                    Female
+                                                                                </label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -286,16 +247,13 @@
                                                                                 <span
                                                                                     class="s_website_form_label_content"
                                                                                 >Date of Birth</span>
-                                                                                <span
-                                                                                    class="s_website_form_mark"
-                                                                                >*</span>
                                                                             </label>
                                                                             <input
                                                                                 class="s_website_form_input"
                                                                                 type="date"
                                                                                 id="dob"
                                                                                 name="dob"
-                                                                                t-att-value="birthdate"
+                                                                                t-att-value="beneficiary['birthdate']"
                                                                                 disabled="1"
                                                                             />
                                                                         </div>
@@ -332,7 +290,7 @@
                                         <div class="s_website_form_rows">
                                             <div class="row">
                                                 <div class="col-lg-7">
-                                                    <div class="s_website_form_field">
+                                                    <div class="s_website_form_field s_website_form_required">
                                                         <label
                                                             class="s_website_form_label"
                                                             for="voucher_code"
@@ -354,7 +312,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-5">
-                                                    <div class="s_website_form_field">
+                                                    <div class="s_website_form_field s_website_form_required">
                                                         <label
                                                             class="s_website_form_label"
                                                             for="actual_amount"
@@ -377,26 +335,20 @@
                                             </div>
 
                                             <div class="s_website_form_field">
-                                                <label
-                                                    class="s_website_form_label"
-                                                    for="reason_of_assistance"
-                                                >
-                                                    <span
-                                                        class="s_website_form_label_content"
-                                                    >Reason for assistance</span>
-                                                    <span class="s_website_form_mark">*</span>
+                                                <label class="s_website_form_label" for="comments">
+                                                    <span class="s_website_form_label_content">Comments</span>
                                                 </label>
                                                 <br />
                                                 <textarea
                                                     class="s_website_form_input"
-                                                    id="reason_of_assistance"
-                                                    name="reason_of_assistance"
+                                                    id="comments"
+                                                    name="comments"
                                                     style="min-height:78px"
                                                     placeholder="Medical Assistance"
                                                 />
                                                 <br />
                                             </div>
-                                            <div class="s_website_form_field">
+                                            <div class="s_website_form_field s_website_form_required">
                                                 <label
                                                     class="s_website_form_label"
                                                     for="statement_of_account"

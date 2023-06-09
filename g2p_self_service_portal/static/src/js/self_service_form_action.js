@@ -18,16 +18,19 @@ function hide_toast_success_msg() {
     toast_msg.style.display = "none";
 }
 
+// eslint-disable-next-line no-unused-vars
 function is_valid_email(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
 
+// eslint-disable-next-line no-unused-vars
 function is_valid_url(url) {
     const urlPattern = /^(https?:\/\/)?[a-z0-9-]+\.[a-z]{2,}(\.[a-z]{2,})?$/i;
     return urlPattern.test(url);
 }
 
+// eslint-disable-next-line no-unused-vars
 function is_valid_tel_number(input_str) {
     var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
@@ -37,12 +40,12 @@ function is_valid_tel_number(input_str) {
 // eslint-disable-next-line no-unused-vars,complexity
 function form_submit_action() {
     // URL Change
-    var test = $(".s_website_form");
-    var form = test.find("form");
+    var formContainer = $(".s_website_form");
+    var programForm = formContainer.find("form");
 
     var program_id = $("#program_submit_id");
 
-    form[0].action = `/selfservice/submitted/${program_id[0].getAttribute("program")}`;
+    programForm[0].action = `/selfservice/submitted/${program_id[0].getAttribute("program")}`;
 
     // Validation's //
     var isValid = true;
@@ -185,7 +188,7 @@ function form_submit_action() {
     }
 
     if (isValid) {
-        form.submit();
+        programForm.submit();
     }
 }
 
