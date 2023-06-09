@@ -136,16 +136,6 @@
                                                         Not Eligible
                                                         </button>
                                                 </t>
-                                                <t t-elif="program['program_status']=='Rejected'">
-                                                    <button
-                                                        string="Rejected"
-                                                        type="object"
-                                                        class="notapplied-button"
-                                                        disabled="1"
-                                                    >
-                                                        Rejected
-                                                        </button>
-                                                </t>
                                             </td>
                                             <td>
                                                 <t t-if="program['application_status']=='Applied'">
@@ -178,16 +168,6 @@
                                                         Under Review
                                                         </button>
                                                 </t>
-                                                <t t-elif="program['application_status']=='Approved'">
-                                                        <button
-                                                        string="Approved"
-                                                        type="object"
-                                                        class="enroll-button"
-                                                        disabled="1"
-                                                    >
-                                                        Approved
-                                                        </button>
-                                                </t>
                                                 <t t-elif="program['application_status']=='Completed'">
                                                         <button
                                                         string="Completed"
@@ -206,6 +186,16 @@
                                                         disabled="1"
                                                     >
                                                         Rejected
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Closed'">
+                                                        <button
+                                                        string="Closed"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Closed
                                                         </button>
                                                 </t>
                                             </td>

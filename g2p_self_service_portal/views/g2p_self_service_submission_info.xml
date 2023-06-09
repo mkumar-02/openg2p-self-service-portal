@@ -41,7 +41,7 @@
                                             <td><t t-esc="value['application_id']" /></td>
                                             <td><t t-esc="value['applied_on']" /></td>
                                             <td>
-                                                <t t-if="value['status'] == 'draft'">
+                                                <t t-if="value['status'] == 'active'">
                                                     <button
                                                         string="Applied"
                                                         type="object"
@@ -79,16 +79,6 @@
                                                         disabled="1"
                                                     >
                                                         Under Review
-                                                    </button>
-                                                </t>
-                                                <t t-elif="value['status'] == 'ent_approved'">
-                                                    <button
-                                                        string="Approved"
-                                                        type="object"
-                                                        class="enroll-button"
-                                                        disabled="1"
-                                                    >
-                                                        Approved
                                                     </button>
                                                 </t>
                                                 <t t-elif="value['status'] == 'rejected'">

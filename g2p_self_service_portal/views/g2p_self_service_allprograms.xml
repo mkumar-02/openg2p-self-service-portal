@@ -191,31 +191,6 @@
                                                         </a>
                                                     </td>
                                                 </t>
-                                                <t t-elif="program['status']=='Rejected'">
-                                                    <td>
-                                                        <button
-                                                            string="Rejected"
-                                                            type="object"
-                                                            class="notapplied-button"
-                                                            disabled="1"
-                                                        >
-                                                            Rejected
-                                                        </button>
-                                                    </td>
-                                                    <td>
-                                                        <a
-                                                            t-attf-href="/selfservice/submitted/{{program['id']}}"
-                                                        >
-                                                            <button
-                                                                string="View"
-                                                                type="object"
-                                                                class="view-button"
-                                                            >
-                                                                View
-                                                            </button>
-                                                        </a>
-                                                    </td>
-                                                </t>
 
                                             </t>
                                             <t t-else="">

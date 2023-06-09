@@ -8,3 +8,8 @@ class ResConfigSettings(models.TransientModel):
         "ir.attachment",
         config_parameter="g2p_self_service_portal.self_service_logo_attachment",
     )
+
+    self_service_signup_id_type = fields.Many2one(
+        "g2p.id.type",
+        config_parameter="g2p_self_service_portal.self_service_signup_id_type",
+    )

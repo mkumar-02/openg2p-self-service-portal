@@ -3,7 +3,6 @@ import logging
 import random
 from datetime import datetime
 
-import requests
 from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
@@ -15,135 +14,6 @@ from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from .auth_oidc import G2POpenIDLogin
 
 _logger = logging.getLogger(__name__)
-
-
-class SelfServiceAuthSignup(AuthSignupHome):
-    @http.route(
-        "/web/signup",
-        type="http",
-        auth="public",
-        website=True,
-        sitemap=False,
-        csrf=False,
-    )
-    def web_auth_signup(self, *args, **kw):
-        otp = kw.get("otp", None)
-
-        if len(otp) > 0:
-            stored_otp = request.session["otp"]
-
-            if stored_otp and int(kw["otp"]) and stored_otp == int(kw["otp"]):
-                request.session.pop("otp")
-                request.session.pop("signup_form_filled")
-
-                # TODO: Check if user already present
-                if request.env["g2p.reg.id"].sudo().search([("value", "=", kw["vid"])]):
-                    # TODO: Display error message
-                    return request.redirect("/selfservice/login")
-
-                # TODO: Enable both email and phone login
-                request.params["login"] = kw["email"] if kw["email"] else kw["phone"]
-                res = super().web_auth_signup(*args, **kw)
-
-                current_partner = request.env.user.partner_id
-
-                request.env["res.partner"].sudo().browse(current_partner.id).write(
-                    {"is_registrant": True}
-                )
-
-                # Adding data of the user
-                for key in kw:
-                    if key in current_partner:
-                        current_partner[key] = kw[key]
-
-                # Adding VID number
-                if kw["vid"]:
-                    reg_id_type = (
-                        request.env["g2p.id.type"].sudo().search([("name", "=", "VID")])
-                    )
-                    if len(reg_id_type) == 0:
-                        reg_id_type.sudo().create({"name": "VID"})
-
-                    (
-                        request.env["g2p.reg.id"]
-                        .sudo()
-                        .create(
-                            {
-                                "partner_id": current_partner.id,
-                                "id_type": reg_id_type.id,
-                                "value": kw["vid"],
-                            }
-                        )
-                    )
-
-                # Adding phone number
-                request.env["g2p.phone.number"].sudo().create(
-                    {"phone_no": kw["phone"], "partner_id": current_partner.id}
-                )
-                return res
-
-            else:
-                return request.render(
-                    "g2p_self_service_portal.otp_authentication_page",
-                    {
-                        "error_message": "Incorrect OTP. Please try again.",
-                        "values": kw,
-                        "name": kw["name"],
-                    },
-                )
-        else:
-            res = super().web_auth_signup(*args, **kw)
-            return res
-
-    @http.route(
-        ["/selfservice/signup/otp"],
-        type="http",
-        auth="public",
-        website=True,
-        csrf=False,
-    )
-    def self_service_signup_otp(self, **kw):
-
-        if not request.session.get("signup_form_filled"):
-            return request.redirect("/selfservice")
-
-        request.session["otp"] = random.randint(100000, 999999)
-        generted_otp = request.session["otp"]
-
-        _logger.error(request.session["otp"])
-
-        # TODO: Use G2P Notification module to send the otp
-
-        response = requests.post(
-            "https://www.fast2sms.com/dev/bulkV2",
-            data={
-                "variables_values": generted_otp,
-                "route": "otp",
-                "numbers": kw["phone"],
-            },
-            headers={
-                "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
-            },
-        )
-
-        if response.status_code == 200:
-            _logger.info(response.json())
-        else:
-            _logger.error(response.status_code)
-
-        if request.httprequest.method == "POST":
-            kw["name"] = (
-                kw["family_name"].title()
-                + ", "
-                + kw["given_name"].title()
-                + " "
-                + kw["addl_name"].title()
-            )
-
-            return request.render(
-                "g2p_self_service_portal.otp_authentication_page",
-                {"values": kw, "name": kw["name"], "error_message": ""},
-            )
 
 
 class SelfServiceController(http.Controller):
@@ -172,10 +42,109 @@ class SelfServiceController(http.Controller):
 
     @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
     def self_service_signup(self, **kwargs):
+
         if request.session and request.session.uid:
             return request.redirect("/selfservice/home")
         request.session["signup_form_filled"] = True
+
+        if request.httprequest.method == "POST" and "otp" in kwargs:
+            stored_otp = request.session["otp"]
+
+            if stored_otp and int(kwargs["otp"]) and stored_otp == int(kwargs["otp"]):
+
+                request.session.pop("otp")
+                request.session.pop("signup_form_filled")
+
+                # TODO: Check if user already present
+
+                # TODO: Enable both email and phone login
+                request.params["login"] = (
+                    kwargs["email"] if kwargs["email"] else kwargs["phone"]
+                )
+                res = AuthSignupHome().web_auth_signup(**kwargs)
+
+                current_partner = request.env.user.partner_id
+
+                request.env["res.partner"].sudo().browse(current_partner.id).write(
+                    {"is_registrant": True}
+                )
+
+                # Adding data of the user
+                for key in kwargs:
+                    if key in current_partner:
+                        current_partner[key] = kwargs[key]
+
+                # Adding VID number
+                config = request.env["ir.config_parameter"].sudo()
+                reg_id_type_id = config.get_param(
+                    "g2p_self_service_portal.self_service_signup_id_type", None
+                )
+
+                if kwargs["vid"] and reg_id_type_id:
+
+                    (
+                        request.env["g2p.reg.id"]
+                        .sudo()
+                        .create(
+                            {
+                                "partner_id": current_partner.id,
+                                "id_type": reg_id_type_id,
+                                "value": kwargs["vid"],
+                            }
+                        )
+                    )
+
+                # Adding phone number
+                request.env["g2p.phone.number"].sudo().create(
+                    {"phone_no": kwargs["phone"], "partner_id": current_partner.id}
+                )
+                current_partner.phone = kwargs["phone"]
+
+                return res
+
+            else:
+                return request.render(
+                    "g2p_self_service_portal.otp_authentication_page",
+                    {
+                        "error_message": "Incorrect OTP. Please try again.",
+                        "values": kwargs,
+                        "name": kwargs["name"],
+                    },
+                )
+
         return request.render("g2p_self_service_portal.signup_page")
+
+    @http.route(
+        ["/selfservice/signup/otp"],
+        type="http",
+        auth="public",
+        website=True,
+        csrf=False,
+    )
+    def self_service_signup_otp(self, **kw):
+
+        if not request.session.get("signup_form_filled"):
+            return request.redirect("/selfservice")
+
+        request.session["otp"] = random.randint(100000, 999999)
+
+        _logger.error(request.session["otp"])
+
+        # TODO: Use G2P Notification module to send the otp
+
+        if request.httprequest.method == "POST":
+            kw["name"] = (
+                kw["family_name"].title()
+                + ", "
+                + kw["given_name"].title()
+                + " "
+                + kw["addl_name"].title()
+            )
+
+            return request.render(
+                "g2p_self_service_portal.otp_authentication_page",
+                {"values": kw, "name": kw["name"], "error_message": ""},
+            )
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)
     def self_service_logo(self, **kwargs):
@@ -218,18 +187,15 @@ class SelfServiceController(http.Controller):
             "not_eligible": "Not Eligible",
             "duplicated": "Not Eligible",
             "enrolled": "Enrolled",
-            "rejected": "Rejected",
         }
         application_states = {
-            "draft": "Applied",
-            "not_eligible": "Not Eligible",
-            "duplicated": "Not Eligible",
-            "enrolled": "Under Review",
-            "ent_approved": "Approved",
-            "again_enrolled": "Applied",
+            "active": "Applied",
+            "inprogress": "Under Review",
             "completed": "Completed",
             "rejected": "Rejected",
+            "closed": "Closed",
         }
+
         amount_received = 0
         myprograms = []
         for program in programs:
@@ -268,7 +234,6 @@ class SelfServiceController(http.Controller):
             )
             if len(membership) > 0:
                 for rec in membership.program_registrant_info_ids:
-                    _logger.warning(rec)
                     myprograms.append(
                         {
                             "id": program.id,
@@ -279,7 +244,9 @@ class SelfServiceController(http.Controller):
                             ),
                             "application_status": application_states.get(
                                 rec.state, "Error"
-                            ),
+                            )
+                            if not membership.state in ("not_eligible", "duplicated")
+                            else program_states.get(membership.state, "Error"),
                             "issued": "{:,.2f}".format(amount_issued),
                             "paid": "{:,.2f}".format(amount_received),
                             "enrollment_date": rec.create_date.strftime("%d-%b-%Y")
@@ -335,7 +302,6 @@ class SelfServiceController(http.Controller):
             "not_eligible": "Not Eligible",
             "duplicated": "Not Eligible",
             "enrolled": "Enrolled",
-            "rejected": "Rejected",
         }
 
         values = []
@@ -402,19 +368,18 @@ class SelfServiceController(http.Controller):
                 {
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
                     "application_id": detail.application_id,
-                    "status": detail.state,
+                    "status": detail.state
+                    if not detail.program_membership_id.state
+                    in ("duplicated", "not_eligible")
+                    else detail.program_membership_id.state,
                 }
             )
 
         re_apply = True
         for rec in submission_records:
             if rec["status"] in (
-                "draft",
-                "duplicated",
-                "enrolled",
-                "not_eligible",
-                "ent_approved",
-                "again_enrolled",
+                "active",
+                "inprogress",
             ):
                 re_apply = False
                 break
@@ -521,7 +486,7 @@ class SelfServiceController(http.Controller):
                 .sudo()
                 .create(
                     {
-                        "state": "draft",
+                        "state": "active",
                         "program_registrant_info": self.jsonize_form_data(
                             form_data, program, membership=program_member
                         ),
