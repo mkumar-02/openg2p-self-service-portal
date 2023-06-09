@@ -3,6 +3,7 @@ import logging
 import random
 from datetime import datetime
 
+import requests
 from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
@@ -26,8 +27,10 @@ class SelfServiceAuthSignup(AuthSignupHome):
         csrf=False,
     )
     def web_auth_signup(self, *args, **kw):
-        if request.httprequest.method == "POST":
-            stored_otp = request.session.get("otp")
+        otp = kw.get("otp", None)
+
+        if len(otp) > 0:
+            stored_otp = request.session["otp"]
 
             if stored_otp and int(kw["otp"]) and stored_otp == int(kw["otp"]):
                 request.session.pop("otp")
@@ -38,6 +41,7 @@ class SelfServiceAuthSignup(AuthSignupHome):
                     # TODO: Display error message
                     return request.redirect("/selfservice/login")
 
+                # TODO: Enable both email and phone login
                 request.params["login"] = kw["email"] if kw["email"] else kw["phone"]
                 res = super().web_auth_signup(*args, **kw)
 
@@ -47,35 +51,35 @@ class SelfServiceAuthSignup(AuthSignupHome):
                     {"is_registrant": True}
                 )
 
-                # Adding data into the res.patner
+                # Adding data of the user
                 for key in kw:
                     if key in current_partner:
                         current_partner[key] = kw[key]
 
                 # Adding VID number
-                reg_id_type = (
-                    request.env["g2p.id.type"].sudo().search([("name", "=", "VID")])
-                )
-                if len(reg_id_type) == 0:
-                    reg_id_type.create({"name": "VID"})
-
-                (
-                    request.env["g2p.reg.id"]
-                    .sudo()
-                    .create(
-                        {
-                            "partner_id": current_partner.id,
-                            "id_type": reg_id_type.id,
-                            "value": kw["vid"],
-                        }
+                if kw["vid"]:
+                    reg_id_type = (
+                        request.env["g2p.id.type"].sudo().search([("name", "=", "VID")])
                     )
-                )
+                    if len(reg_id_type) == 0:
+                        reg_id_type.sudo().create({"name": "VID"})
+
+                    (
+                        request.env["g2p.reg.id"]
+                        .sudo()
+                        .create(
+                            {
+                                "partner_id": current_partner.id,
+                                "id_type": reg_id_type.id,
+                                "value": kw["vid"],
+                            }
+                        )
+                    )
 
                 # Adding phone number
                 request.env["g2p.phone.number"].sudo().create(
                     {"phone_no": kw["phone"], "partner_id": current_partner.id}
                 )
-
                 return res
 
             else:
@@ -87,9 +91,9 @@ class SelfServiceAuthSignup(AuthSignupHome):
                         "name": kw["name"],
                     },
                 )
-
         else:
-            return request.redirect("/selfservice")
+            res = super().web_auth_signup(*args, **kw)
+            return res
 
     @http.route(
         ["/selfservice/signup/otp"],
@@ -100,32 +104,32 @@ class SelfServiceAuthSignup(AuthSignupHome):
     )
     def self_service_signup_otp(self, **kw):
 
-        # TODO: If page is reloaded then display/ redirect again to signup page.
         if not request.session.get("signup_form_filled"):
             return request.redirect("/selfservice")
 
         request.session["otp"] = random.randint(100000, 999999)
+        generted_otp = request.session["otp"]
 
         _logger.error(request.session["otp"])
 
         # TODO: Use G2P Notification module to send the otp
 
-        # response = requests.post(
-        #     "https://www.fast2sms.com/dev/bulkV2",
-        #     data={
-        #         "variables_values": generted_otp,
-        #         "route": "otp",
-        #         "numbers": kw["phone"],
-        #     },
-        #     headers={
-        #         "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
-        #     },
-        # )
+        response = requests.post(
+            "https://www.fast2sms.com/dev/bulkV2",
+            data={
+                "variables_values": generted_otp,
+                "route": "otp",
+                "numbers": kw["phone"],
+            },
+            headers={
+                "authorization": "wZMRVn2gWBmSstFT6hUcAHGJE4Nfakb1KyIqijLPldYv5u3zXx6UGcXVod8FLPIK1B0SARwezuWD54ha",
+            },
+        )
 
-        # if response.status_code == 200:
-        #     _logger.info(response.json())
-        # else:
-        #     _logger.error(response.status_code)
+        if response.status_code == 200:
+            _logger.info(response.json())
+        else:
+            _logger.error(response.status_code)
 
         if request.httprequest.method == "POST":
             kw["name"] = (
@@ -209,10 +213,22 @@ class SelfServiceController(http.Controller):
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
-        states = {
+        program_states = {
             "draft": "Applied",
-            "enrolled": "Enrolled",
             "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Enrolled",
+            "rejected": "Rejected",
+        }
+        application_states = {
+            "draft": "Applied",
+            "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Under Review",
+            "ent_approved": "Approved",
+            "again_enrolled": "Applied",
+            "completed": "Completed",
+            "rejected": "Rejected",
         }
         amount_received = 0
         myprograms = []
@@ -251,27 +267,31 @@ class SelfServiceController(http.Controller):
                 )
             )
             if len(membership) > 0:
-                myprograms.append(
-                    {
-                        "id": program.id,
-                        "name": program.name,
-                        "has_applied": len(membership) > 0,
-                        "status": states.get(membership.state, "Error"),
-                        "issued": "{:,.2f}".format(amount_issued),
-                        "paid": "{:,.2f}".format(amount_received),
-                        "enrollment_date": membership.enrollment_date.strftime(
-                            "%d-%b-%Y"
-                        )
-                        if membership.enrollment_date
-                        else None,
-                        "is_latest": (datetime.today() - program.create_date).days < 21,
-                        "application_id": membership.program_registrant_info_ids.sorted(
-                            "create_date", reverse=True
-                        )[0].application_id
-                        if membership.program_registrant_info_ids
-                        else None,
-                    }
-                )
+                for rec in membership.program_registrant_info_ids:
+                    _logger.warning(rec)
+                    myprograms.append(
+                        {
+                            "id": program.id,
+                            "name": program.name,
+                            "has_applied": len(membership) > 0,
+                            "program_status": program_states.get(
+                                membership.state, "Error"
+                            ),
+                            "application_status": application_states.get(
+                                rec.state, "Error"
+                            ),
+                            "issued": "{:,.2f}".format(amount_issued),
+                            "paid": "{:,.2f}".format(amount_received),
+                            "enrollment_date": rec.create_date.strftime("%d-%b-%Y")
+                            if rec.create_date
+                            else None,
+                            "is_latest": (datetime.today() - program.create_date).days
+                            < 21,
+                            "application_id": rec.application_id
+                            if rec.application_id
+                            else None,
+                        }
+                    )
 
         entitlement = sum(
             ent.amount_issued
@@ -312,9 +332,10 @@ class SelfServiceController(http.Controller):
         partner_id = request.env.user.partner_id
         states = {
             "draft": "Applied",
-            "enrolled": "Enrolled",
-            "duplicated": "Not Eligible",
             "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Enrolled",
+            "rejected": "Rejected",
         }
 
         values = []
@@ -381,14 +402,21 @@ class SelfServiceController(http.Controller):
                 {
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
                     "application_id": detail.application_id,
-                    "status": detail.status,
+                    "status": detail.state,
                 }
             )
 
-        active_application = False
+        re_apply = True
         for rec in submission_records:
-            if rec["status"] == "active":
-                active_application = True
+            if rec["status"] in (
+                "draft",
+                "duplicated",
+                "enrolled",
+                "not_eligible",
+                "ent_approved",
+                "again_enrolled",
+            ):
+                re_apply = False
                 break
 
         return request.render(
@@ -396,7 +424,10 @@ class SelfServiceController(http.Controller):
             {
                 "program_id": program.id,
                 "submission_records": submission_records,
-                "active_application": active_application,
+                "re_apply": re_apply,
+                "is_multiple_form_submission": True
+                if program.multiple_form_submission
+                else False,
             },
         )
 
@@ -485,24 +516,12 @@ class SelfServiceController(http.Controller):
                 else:
                     current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
 
-            program_registrant_info_ids = (
-                request.env["g2p.program.registrant_info"]
-                .sudo()
-                .search(
-                    [
-                        ("program_id", "=", program.id),
-                        ("registrant_id", "=", current_partner.id),
-                        ("status", "=", "active"),
-                    ]
-                )
-            )
-            program_registrant_info_ids.write({"status": "closed"})
             program_reg_info = (
                 request.env["g2p.program.registrant_info"]
                 .sudo()
                 .create(
                     {
-                        "status": "active",
+                        "state": "draft",
                         "program_registrant_info": self.jsonize_form_data(
                             form_data, program, membership=program_member
                         ),
@@ -517,7 +536,7 @@ class SelfServiceController(http.Controller):
                 return request.redirect(f"/selfservice/apply/{_id}")
             program_reg_info = (
                 program_member.program_registrant_info_ids.sorted(
-                    "create_date", reversed=True
+                    "create_date", reverse=True
                 )[0]
                 if program_member.program_registrant_info_ids
                 else None
@@ -528,7 +547,7 @@ class SelfServiceController(http.Controller):
             {
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
-                # TODO: Redirect to different page is application doesn't exist
+                # TODO: Redirect to different page if application doesn't exist
                 "application_id": program_reg_info.application_id
                 if program_reg_info
                 else None,

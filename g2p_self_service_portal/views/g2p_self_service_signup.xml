@@ -141,12 +141,12 @@
                                 t-att-disabled="1 if scan_status=='true' else 0"
                             >
                                 <t t-if="sex == 'Male'">
-                                    <option value="Male" selected="1">Male</option>
+                                    <option value="Male" t-att-selected="1">Male</option>
                                     <option value="Female">Female</option>
                                 </t>
                                 <t t-else="">
                                     <option value="Male">Male</option>
-                                    <option value="Female" selected="1">Female</option>
+                                    <option value="Female" t-att-selected="1">Female</option>
                                 </t>
                             </select>
                         </div>
@@ -178,6 +178,7 @@
                                         autocomplete="current-password"
                                         t-att-autofocus="'autofocus' if birthdate else None"
                                         maxlength="4096"
+                                        minlength="10"
                                     />
                                 </div>
                             </div>
@@ -195,6 +196,7 @@
                                         autocomplete="current-password"
                                         t-att-autofocus="'autofocus' if password else None"
                                         maxlength="4096"
+                                        minlength="10"
                                     />
                                 </div>
                             </div>

@@ -519,7 +519,7 @@ a:hover {
 .table-container {
     top: 120px;
     /* margin-left: 139px; */
-    width: 1088px;
+    width: 1100px;
     /* margin-right: 139px; */
     margin-bottom: 33px;
     padding-bottom: 10px;
@@ -723,7 +723,7 @@ td .program-name {
 }
 .notapplied-button {
     left: 811px;
-    width: 84px;
+    min-width: 84px;
     height: 25px;
     background: #dce3e8 0% 0% no-repeat padding-box;
     border-radius: 4px;
@@ -738,7 +738,7 @@ td .program-name {
 }
 .submit-button {
     left: 811px;
-    width: 84px;
+    min-width: 84px;
     height: 25px;
 
     background: #faf6cf 0% 0% no-repeat padding-box;
@@ -754,7 +754,7 @@ td .program-name {
 .enroll-button {
     left: 811px;
     height: 25px;
-    width: 84px;
+    min-width: 84px;
 
     background: #c7ebd1 0% 0% no-repeat padding-box;
     border-radius: 4px;
@@ -774,7 +774,7 @@ td .program-name {
     display: flex;
     justify-content: space-between;
     /* margin-left: 139px; */
-    width: 1088px;
+    width: 1100px;
     /* margin-right: 139px; */
     margin-bottom: 33px;
 }

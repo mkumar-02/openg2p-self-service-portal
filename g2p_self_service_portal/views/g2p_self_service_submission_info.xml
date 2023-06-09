@@ -40,14 +40,85 @@
                                             <td />
                                             <td><t t-esc="value['application_id']" /></td>
                                             <td><t t-esc="value['applied_on']" /></td>
-                                            <td><t t-esc="value['status']" /></td>
+                                            <td>
+                                                <t t-if="value['status'] == 'draft'">
+                                                    <button
+                                                        string="Applied"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Applied
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'not_eligible'">
+                                                    <button
+                                                        string="Not Eligible"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Not Eligible
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'duplicated'">
+                                                    <button
+                                                        string="Not Eligible"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Not Eligible
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'enrolled'">
+                                                    <button
+                                                        string="Under Review"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Under Review
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'ent_approved'">
+                                                    <button
+                                                        string="Approved"
+                                                        type="object"
+                                                        class="enroll-button"
+                                                        disabled="1"
+                                                    >
+                                                        Approved
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'rejected'">
+                                                    <button
+                                                        string="Rejected"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Rejected
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'completed'">
+                                                    <button
+                                                        string="Completed"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Completed
+                                                    </button>
+                                                </t>
+                                            </td>
                                         </tr>
                                     </t>
                                 </tbody>
                             </table>
                         </div>
                         <div id="page-buttons" class="pagination justify-content-center">
-                            <t t-if="not active_application">
+                            <t t-if="re_apply">
                                 <div class="proceed-to-application-btn">
                                     <a t-attf-href="/selfservice/apply/{{program_id}}">
                                         Proceed to Application
