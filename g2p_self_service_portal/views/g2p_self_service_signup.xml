@@ -11,7 +11,7 @@
             <div class="ssp-signup-body">
                 <div id="toast-container">
                     <div id="toast-message" />
-                    <button id="toast-close-btn" onclick="hide_toast()">
+                    <button id="toast-close-btn" onclick="hideToast()">
                         <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
                     </button>
                 </div>

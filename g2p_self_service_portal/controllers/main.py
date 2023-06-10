@@ -245,7 +245,7 @@ class SelfServiceController(http.Controller):
                             "application_status": application_states.get(
                                 rec.state, "Error"
                             )
-                            if not membership.state in ("not_eligible", "duplicated")
+                            if membership.state not in ("not_eligible", "duplicated")
                             else program_states.get(membership.state, "Error"),
                             "issued": "{:,.2f}".format(amount_issued),
                             "paid": "{:,.2f}".format(amount_received),
@@ -369,8 +369,8 @@ class SelfServiceController(http.Controller):
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
                     "application_id": detail.application_id,
                     "status": detail.state
-                    if not detail.program_membership_id.state
-                    in ("duplicated", "not_eligible")
+                    if detail.program_membership_id.state
+                    not in ("duplicated", "not_eligible")
                     else detail.program_membership_id.state,
                 }
             )
