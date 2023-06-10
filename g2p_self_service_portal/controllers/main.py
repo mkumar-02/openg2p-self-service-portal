@@ -407,8 +407,16 @@ class SelfServiceController(http.Controller):
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
-            if mem.program_id.id == _id and not multiple_form_submission:
-                return request.redirect(f"/selfservice/submitted/{_id}")
+            if mem.program_id.id == _id:
+                if multiple_form_submission:
+                    if mem.latest_registrant_info_status not in (
+                        "completed",
+                        "rejected",
+                    ):
+                        return request.redirect(f"/selfservice/submissions/{_id}")
+
+                else:
+                    return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 
