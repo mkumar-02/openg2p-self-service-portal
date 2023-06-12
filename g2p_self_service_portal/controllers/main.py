@@ -245,7 +245,7 @@ class SelfServiceController(http.Controller):
                             "application_status": application_states.get(
                                 rec.state, "Error"
                             )
-                            if not membership.state in ("not_eligible", "duplicated")
+                            if membership.state not in ("not_eligible", "duplicated")
                             else program_states.get(membership.state, "Error"),
                             "issued": "{:,.2f}".format(amount_issued),
                             "paid": "{:,.2f}".format(amount_received),
@@ -369,8 +369,8 @@ class SelfServiceController(http.Controller):
                     "applied_on": detail.create_date.strftime("%d-%b-%Y"),
                     "application_id": detail.application_id,
                     "status": detail.state
-                    if not detail.program_membership_id.state
-                    in ("duplicated", "not_eligible")
+                    if detail.program_membership_id.state
+                    not in ("duplicated", "not_eligible")
                     else detail.program_membership_id.state,
                 }
             )
@@ -407,8 +407,16 @@ class SelfServiceController(http.Controller):
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
-            if mem.program_id.id == _id and not multiple_form_submission:
-                return request.redirect(f"/selfservice/submitted/{_id}")
+            if mem.program_id.id == _id:
+                if multiple_form_submission:
+                    if mem.latest_registrant_info_status not in (
+                        "completed",
+                        "rejected",
+                    ):
+                        return request.redirect(f"/selfservice/submissions/{_id}")
+
+                else:
+                    return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 

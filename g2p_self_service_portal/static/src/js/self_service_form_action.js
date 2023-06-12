@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function show_toast(message) {
+function showToast(message) {
     const toast_message = document.querySelector("#toast-message");
     toast_message.textContent = message;
     const toast_container = document.querySelector("#toast-container");
@@ -7,41 +7,42 @@ function show_toast(message) {
 }
 
 // eslint-disable-next-line no-unused-vars
-function hide_toast() {
+function hideToast() {
     const toast_container = document.querySelector("#toast-container");
     toast_container.style.display = "none";
 }
 
 // eslint-disable-next-line no-unused-vars
-function hide_toast_success_msg() {
+function hideToastSuccessMsg() {
     const toast_msg = $(".toast-success-message")[0];
     toast_msg.style.display = "none";
 }
 
 // eslint-disable-next-line no-unused-vars
-function is_valid_email(email) {
+function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
 }
 
 // eslint-disable-next-line no-unused-vars
-function is_valid_url(url) {
+function isValidURL(url) {
     const urlPattern = /^(https?:\/\/)?[a-z0-9-]+\.[a-z]{2,}(\.[a-z]{2,})?$/i;
     return urlPattern.test(url);
 }
 
 // eslint-disable-next-line no-unused-vars
-function is_valid_tel_number(input_str) {
+function isValidTelNumber(input) {
     var re = /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/;
 
-    return re.test(input_str);
+    return re.test(input);
 }
 
 // eslint-disable-next-line no-unused-vars,complexity
-function form_submit_action() {
+function formSubmitAction() {
     // URL Change
     var formContainer = $(".s_website_form");
     var programForm = formContainer.find("form");
+    var disabledFields = document.querySelectorAll("input:disabled, select:disabled");
 
     var program_id = $("#program_submit_id");
 
@@ -61,7 +62,7 @@ function form_submit_action() {
         if (required_input_field.value === "") {
             required_input_field.style.borderColor = "#D32D2D";
             isValid = false;
-            show_toast("Please update all mandatory fields");
+            showToast("Please update all mandatory fields");
 
             if (required_input_field.type === "radio" || required_input_field.type === "checkbox") {
                 // Pass
@@ -95,12 +96,12 @@ function form_submit_action() {
             }
 
             if (required_input_field.type === "email") {
-                if (is_valid_email(required_input_field.value) === false) {
+                if (isValidEmail(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid email address</div>';
                     required_input_field.style.borderColor = "#D32D2D";
-                    show_toast("Please update all mandatory fields");
+                    showToast("Please update all mandatory fields");
 
                     if (
                         required_fields[i].getElementsByClassName("input-field-validation-message").length ===
@@ -114,11 +115,11 @@ function form_submit_action() {
                     }
                 }
             } else if (required_input_field.type === "url") {
-                if (is_valid_url(required_input_field.value) === false) {
+                if (isValidURL(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid url</div>';
-                    show_toast("Please update all mandatory fields");
+                    showToast("Please update all mandatory fields");
                     required_input_field.style.borderColor = "#D32D2D";
 
                     if (
@@ -133,11 +134,11 @@ function form_submit_action() {
                     }
                 }
             } else if (required_input_field.type === "tel") {
-                if (is_valid_tel_number(required_input_field.value) === false) {
+                if (isValidTelNumber(required_input_field.value) === false) {
                     isValid = false;
                     const validation_message =
                         '<div class="input-field-validation-message">Please enter a valid telephone number</div>';
-                    show_toast("Please update all mandatory fields");
+                    showToast("Please update all mandatory fields");
                     required_input_field.style.borderColor = "#D32D2D";
 
                     if (
@@ -188,12 +189,15 @@ function form_submit_action() {
     }
 
     if (isValid) {
+        for (var i = 0; i < disabledFields.length; i++) {
+            disabledFields[i].disabled = false;
+        }
         programForm.submit();
     }
 }
 
 // eslint-disable-next-line no-unused-vars
-function toggle_chat_bot() {
+function toggleChatBot() {
     var box = document.getElementById("chat-bot");
     if (box.style.display === "none") {
         box.style.display = "block";

@@ -85,10 +85,10 @@
                                             <td>
                                                 <t t-if="program['is_latest']">
                                                     <a href="#" class="program-name">
-                                                        <t t-esc="program['name']" />
                                                         <button class="badge badge-button">
                                                             <span>NEW</span>
                                                         </button>
+                                                        <t t-esc="program['name']" />
                                                     </a>
                                                 </t>
 
@@ -221,7 +221,7 @@
                                 /></div></td></tr></t> -->
                                 <t t-if="not programs">
                                     <tr>
-                                        <td colspan="7" class="no-programs">
+                                        <td colspan="8" class="no-programs">
                                             <div class="no-programs-container">
                                                 <div class="no-program-text">You haven’t enrolled into
                                                     any programs yet, please tap on the below link

@@ -19,14 +19,14 @@ function submitSignupForm() {
             isDataValid = false;
             requiredFields[field].style.borderColor = "#D32D2D";
             // eslint-disable-next-line no-undef
-            show_toast("Please update all mandatory fields");
+            showToast("Please update all mandatory fields");
         } else if (requiredFields[field].type === "tel") {
             // eslint-disable-next-line no-undef
-            if (!is_valid_tel_number(requiredFields[field].value)) {
+            if (!isValidTelNumber(requiredFields[field].value)) {
                 isDataValid = false;
                 requiredFields[field].style.borderColor = "#D32D2D";
                 // eslint-disable-next-line no-undef
-                show_toast("Please enter a valid Phone Number");
+                showToast("Please enter a valid Phone Number");
             }
         }
     }
@@ -36,7 +36,7 @@ function submitSignupForm() {
         passwordInputBox.style.borderColor = "#D32D2D";
         confirmPasswordInputBox.style.borderColor = "#D32D2D";
         // eslint-disable-next-line no-undef
-        show_toast("Password and Confirm Password should match");
+        showToast("Password and Confirm Password should match");
     } else if (isDataValid) {
         for (var i = 0; i < disabledFields.length; i++) {
             disabledFields[i].disabled = false;

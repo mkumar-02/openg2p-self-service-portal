@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars,complexity
-function reimbursement_form_submit_action() {
+function reimbursementFormSubmitAction() {
     var form = $("#reimbursement-form");
 
     var program_id = $("#program_submit_id");
@@ -19,7 +19,7 @@ function reimbursement_form_submit_action() {
             isValid = false;
             modal[0].click(close);
             // eslint-disable-next-line no-undef
-            show_toast("Please update all mandatory fields");
+            showToast("Please update all mandatory fields");
             inputFields[i].style.borderColor = "#DE514C";
         }
     }

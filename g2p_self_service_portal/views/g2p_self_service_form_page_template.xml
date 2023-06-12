@@ -32,7 +32,7 @@
 
                         <div id="toast-container">
                             <div id="toast-message" />
-                            <button id="toast-close-btn" onclick="hide_toast()">
+                            <button id="toast-close-btn" onclick="hideToast()">
                                 <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
                             </button>
                         </div>
@@ -70,7 +70,7 @@
 
                                     <div class="card-body" style="padding: 20px;">
                                         <button
-                                            onclick="form_submit_action()"
+                                            onclick="formSubmitAction()"
                                             t-att-program="program_id"
                                             id="program_submit_id"
                                             type="submit"

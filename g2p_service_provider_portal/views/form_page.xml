@@ -26,7 +26,7 @@
 
                         <div id="toast-container">
                             <div id="toast-message" />
-                            <button id="toast-close-btn" onclick="hide_toast()">
+                            <button id="toast-close-btn" onclick="hideToast()">
                                 <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
                             </button>
                         </div>
@@ -446,7 +446,7 @@
                                                         </button>
                                                         <button
                                                             id="program_submit_id"
-                                                            onclick="reimbursement_form_submit_action()"
+                                                            onclick="reimbursementFormSubmitAction()"
                                                             t-att-program="entitlement_id"
                                                             type="submit"
                                                             class="btn btn-primary modal-discard-button"

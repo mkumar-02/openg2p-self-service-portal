@@ -31,7 +31,7 @@
                                 Please note your application ID for future reference -
                                 <t t-esc="application_id" />
                             </div>
-                            <button id="toast-close-btn" onclick="hide_toast_success_msg()">
+                            <button id="toast-close-btn" onclick="hideToastSuccessMsg()">
                                 <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
                             </button>
                         </div>
