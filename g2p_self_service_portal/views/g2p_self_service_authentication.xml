@@ -48,7 +48,7 @@
                         <input type="hidden" name="family_name" t-att-value="values['family_name']" />
                         <input type="hidden" name="addl_name" t-att-value="values['addl_name']" />
                         <input type="hidden" name="name" t-att-value="name" />
-                        <input type="hidden" name="ext" t-att-value="ext" />
+                        <input type="hidden" name="ext" t-att-value="values['ext']" />
                         <input type="hidden" name="gender" t-att-value="values['sex']" />
                         <input type="hidden" name="password" t-att-value="values['password']" />
                         <input
