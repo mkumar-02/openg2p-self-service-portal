@@ -62,10 +62,10 @@
                                             <td>
                                                 <t t-if="program['is_latest']">
                                                     <!-- <a href="/program/" class="program-name"> -->
-                                                        <t t-esc="program['name']" />
                                                         <button class="badge badge-button" disabled="1">
                                                             <span>NEW</span>
                                                         </button>
+                                                        <t t-esc="program['name']" />
                                                     <!-- </a> -->
                                                 </t>
                                                 <t t-else="">

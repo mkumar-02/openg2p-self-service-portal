@@ -104,11 +104,11 @@
                                     </div>
                                 </t>
                                 <div
-                                    class="o_auth_oauth_providers list-group mt-1 mb-1 text-center oauth-link"
+                                    class="oe_signup_button list-group mt-1 mb-1 text-center oauth-link"
                                     style="padding: 10px"
                                 >
                                     <a href="/selfservice/signup" style="z-index: 100;">
-                                        Sign up
+                                        Sign Up
                                     </a>
                                 </div>
                             </div>

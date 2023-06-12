@@ -61,7 +61,7 @@ main {
 }
 
 .container-adjuster {
-    width: 1088px;
+    width: 1180px;
     margin: auto;
 }
 
@@ -111,14 +111,39 @@ footer#bottom .footer-container .nav {
     position: relative;
 }
 
-.ssp-login-box .card {
+.ssp-signup-box {
+    margin: auto;
+    top: 75px;
+    width: 444px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 15px #0000000d;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+}
+
+.ssp-signup-box {
+    width: 720px;
+    height: 618px;
+    margin: auto;
+    top: 75px;
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 15px #0000000d;
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+}
+
+.ssp-login-box .card,
+.ssp-signup-box .card {
     width: 100% !important;
     background: none;
     box-shadow: none;
     border-radius: 0px;
     padding: 0px;
 }
-.ssp-login-box .bg-100 {
+.ssp-login-box .bg-100,
+.ssp-signup-box .bg-100 {
     background: none !important;
     padding: 0px;
 }
@@ -137,11 +162,20 @@ footer#bottom .footer-container .nav {
     position: relative;
     text-align: center;
 }
-.ssp-login-box .card-body {
+.ssp-login-box .card-body,
+.ssp-signup-box .card-body {
     padding: 0px;
 }
 
-.ssp-login-box .logo-box {
+.ssp-login-box .oe_signup_button {
+    border: 1px solid #494daf;
+}
+
+.ssp-login-box .oe_signup_button a {
+    color: #494daf;
+}
+
+.ssp-login-box .logo-box .ssp-signup-box .logo-box {
     align-items: center;
 }
 .ssp-login-box .logo {
@@ -155,8 +189,16 @@ footer#bottom .footer-container .nav {
     margin-top: 20px;
 }
 
+.ssp-signup-box .logo {
+    width: 40%;
+    height: 40%;
+    opacity: 1;
+}
+
 .ssp-login-box .field-login label,
-.ssp-login-box .field-password label {
+.ssp-login-box .field-password label,
+.ssp-signup-box .field-login label,
+.ssp-signup-box .field-password label {
     font-weight: bolder;
     font-family: Inter;
 }
@@ -172,21 +214,34 @@ footer#bottom .footer-container .nav {
     max-height: 54px;
 }
 
-.ssp-login-box .btn-primary :hover {
+.ssp-signup-box .btn-primary {
+    color: #ffffff;
+    background-color: #494daf;
+    border-color: #494daf;
+    border-radius: 6px;
+    opacity: 1;
+    width: 50%;
+    min-height: 54px;
+    max-height: 54px;
+}
+
+.ssp-login-box .btn-primary :hover,
+.ssp-signup-box .btn-primary :hover {
     color: #ffffff;
     background-color: #272dd4;
     border-color: #272dd4;
     opacity: 1;
 }
 
-.ssp-login-box .btn-primary :active {
+.ssp-login-box .btn-primary :active .ssp-signup-box .btn-primary :active {
     color: #ffffff;
     background-color: #272dd4;
     border-color: #272dd4;
     opacity: 1;
 }
 
-.ssp-login-box .card {
+.ssp-login-box .card,
+.ssp-signup-box .card {
     max-width: 100%;
     width: 100%;
 }
@@ -200,19 +255,23 @@ footer#bottom .footer-container .nav {
 .ssp-login-box .reset-password {
     float: right;
 }
-.ssp-login-body a {
+.ssp-login-body a,
+.ssp-singup-body a {
     color: #494daf;
 }
-.ssp-login-box .form-control {
+.ssp-login-box .form-control,
+.ssp-signup-box .form-control {
     border-color: #e3e3e3;
     border-radius: 6px;
 }
-.ssp-login-box .list-group-item {
+.ssp-login-box .list-group-item,
+.ssp-signup-box .list-group-item {
     border: none;
     font-weight: 600;
     color: #000000;
 }
-.ssp-login-box .oauth-link {
+.ssp-login-box .oauth-link,
+.ssp-signup-box .oauth-link {
     border: 1px solid #d8d8d8;
     border-radius: 6px;
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -227,13 +286,19 @@ footer#bottom .footer-container .nav {
     max-width: 100%;
 }
 
+.ssp-signup-box .oe_signup_form {
+    max-width: 100%;
+    position: relative;
+    margin: 0px;
+}
+
 #alertbox {
     width: 100%;
     left: 0px;
     /* margin: ; */
 }
 .alertbox-adjuster {
-    width: 1088px;
+    width: 1180px;
     margin: auto;
 }
 .alertbox-message {
@@ -268,7 +333,7 @@ footer#bottom .footer-container .nav {
     left: 0px;
     /* margin-left: 139px;
     margin-right: 152px; */
-    width: 1083px;
+    width: 1180px;
     height: 90px;
     border: none;
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -465,7 +530,7 @@ a:hover {
     left: 0px;
     margin-left: 139px;
     margin-right: 139px;
-    width: 1088px;
+    width: 1180px;
     border: none;
     background: #ffffff 0% 0% no-repeat padding-box;
     display: flex;
@@ -519,7 +584,7 @@ a:hover {
 .table-container {
     top: 120px;
     /* margin-left: 139px; */
-    width: 1100px;
+    width: 1180px;
     /* margin-right: 139px; */
     margin-bottom: 33px;
     padding-bottom: 10px;
@@ -774,7 +839,7 @@ td .program-name {
     display: flex;
     justify-content: space-between;
     /* margin-left: 139px; */
-    width: 1100px;
+    width: 1180px;
     /* margin-right: 139px; */
     margin-bottom: 33px;
 }
@@ -1186,7 +1251,7 @@ li div p {
     padding-bottom: 14px !important;
 }
 
-.form-template .s_website_form_mark {
+.s_website_form_mark {
     color: #d32d2d;
 }
 

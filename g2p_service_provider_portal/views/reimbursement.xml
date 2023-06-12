@@ -33,6 +33,7 @@
                                         class="search-text"
                                         name="q"
                                         id="search-text"
+                                        disabled="1"
                                     />
                                     <span id="search-text-clear">
                                         <i class="fa fa-times" />
@@ -81,17 +82,17 @@
                                                             class="enroll-button"
                                                             disabled="1"
                                                         >
-                                                            Enrolled
+                                                            Approved
                                                         </button>
                                                     </t>
                                                     <t t-else="">
                                                         <button
-                                                            string="Submitted"
+                                                            string="Applied"
                                                             type="object"
                                                             class="notapplied-button"
                                                             disabled="1"
                                                         >
-                                                            Submitted
+                                                            Applied
                                                         </button>
                                                     </t>
                                                 </t>

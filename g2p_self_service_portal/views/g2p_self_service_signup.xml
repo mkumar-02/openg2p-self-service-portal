@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- TODO: Remove all hardcoding -->
-    <template id="signup_page" name="G2P Self Service Sign up">
+    <template id="signup_page" name="G2P Self Service Signup">
 
         <t t-call="g2p_self_service_portal.base">
             <t t-set="no_header" t-value="1" />
@@ -15,16 +15,12 @@
                         <img src="/g2p_self_service_portal/static/src/img/close_icon@2x.png" />
                     </button>
                 </div>
-                <div class="ssp-login-box" style="width: fit-content;">
+                <div class="ssp-signup-box">
                     <div class="logo-box">
-                        <img
-                            src="/g2p_self_service_portal/static/src/img/logo@2x.png"
-                            class="logo"
-                            style="width: 50%; height: 50%; margin-left: 25%; margin-right: 25%;"
-                        />
+                        <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
                     </div>
                     <form
-                        class="oe_login_form"
+                        class="oe_signup_form"
                         id="signup-form"
                         role="form"
                         t-attf-action="/selfservice/signup/otp"
@@ -35,35 +31,40 @@
                         <input type="hidden" name="redirect" value="/selfservice/home" />
                         <input type="hidden" name="vid" t-att-value="vid" />
 
-                        <div class="form-group field-login">
-                            <label for="email">Email</label>
-                            <input
-                                type="email"
-                                placeholder="Enter email address"
-                                name="email"
-                                t-att-value="email"
-                                id="email"
-                                t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
-                                autofocus="autofocus"
-                                autocapitalize="off"
-                            />
-                        </div>
-
-                        <div class="form-group field-login">
-                            <label for="phone">Phone </label>
-                            <span>*</span>
-                            <input
-                                type="tel"
-                                placeholder=""
-                                name="phone"
-                                t-att-value="phone"
-                                id="phone"
-                                t-attf-class="form-control required-field #{'form-control-sm' if form_small else ''}"
-                                required="required"
-                                autofocus="'autofocus' if email else None"
-                                oninput="validateInput(this)"
-                                maxlength="10"
-                            />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group field-login">
+                                    <label for="email">Email</label>
+                                    <input
+                                        type="email"
+                                        placeholder="Enter email address"
+                                        name="email"
+                                        t-att-value="email"
+                                        id="email"
+                                        t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                                        autofocus="autofocus"
+                                        autocapitalize="off"
+                                    />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group field-login">
+                                    <label for="phone">Phone </label>
+                                    <span class="s_website_form_mark">*</span>
+                                    <input
+                                        type="tel"
+                                        placeholder="Enter phone nuber"
+                                        name="phone"
+                                        t-att-value="phone"
+                                        id="phone"
+                                        t-attf-class="form-control required-field #{'form-control-sm' if form_small else ''}"
+                                        required="required"
+                                        autofocus="'autofocus' if email else None"
+                                        oninput="validateInput(this)"
+                                        maxlength="10"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
@@ -81,7 +82,7 @@
                             <div class="col-md-6">
                                 <div class="form-group field-fName">
                                     <label for="given_name">First Name</label>
-                                    <span>*</span>
+                                    <span class="s_website_form_mark">*</span>
                                     <input
                                         type="text"
                                         placeholder="Enter your first name"
@@ -116,7 +117,7 @@
                             <div class="col-md-6">
                                 <div class="form-group field-lName">
                                     <label for="family_name">Last Name</label>
-                                    <span>*</span>
+                                    <span class="s_website_form_mark">*</span>
                                     <input
                                         type="text"
                                         placeholder="Enter your last name"
@@ -132,42 +133,51 @@
                             </div>
                         </div>
 
-                        <div class="form-group ">
-                            <label for="sex">Sex</label>
-                            <select
-                                class="form-control"
-                                name="sex"
-                                id="sex"
-                                t-att-disabled="1 if scan_status=='true' else 0"
-                            >
-                                <t t-if="sex == 'Male'">
-                                    <option value="Male" t-att-selected="1">Male</option>
-                                    <option value="Female">Female</option>
-                                </t>
-                                <t t-else="">
-                                    <option value="Male">Male</option>
-                                    <option value="Female" t-att-selected="1">Female</option>
-                                </t>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="birthdate">Date of Birth</label>
-                            <input
-                                type="date"
-                                name="birthdate"
-                                id="birthdate"
-                                t-att-value="birthdate"
-                                t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
-                                t-att-readonly="1 if scan_status=='true' else 0"
-                            />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group ">
+                                    <label for="sex">Sex</label>
+                                    <select
+                                        class="form-control"
+                                        name="sex"
+                                        id="sex"
+                                        t-att-disabled="1 if scan_status=='true' else 0"
+                                    >
+                                        <t t-if="sex == 'Male'">
+                                            <option value="Male" t-att-selected="1">Male</option>
+                                            <option value="Female">Female</option>
+                                        </t>
+                                        <t t-elif="sex == 'Female'">
+                                            <option value="Male">Male</option>
+                                            <option value="Female" t-att-selected="1">Female</option>
+                                        </t>
+                                        <t t-else="">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </t>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="birthdate">Date of Birth</label>
+                                    <input
+                                        type="date"
+                                        name="birthdate"
+                                        id="birthdate"
+                                        t-att-value="birthdate"
+                                        t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
+                                        t-att-readonly="1 if scan_status=='true' else 0"
+                                    />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group field-password">
                                     <label for="password">Password</label>
-                                    <span>*</span>
+                                    <span class="s_website_form_mark">*</span>
                                     <input
                                         type="password"
                                         placeholder="Enter password"
@@ -185,7 +195,7 @@
                             <div class="col-md-6">
                                 <div class="form-group field-confirm-password">
                                     <label for="confirm_password">Confirm Password</label>
-                                    <span>*</span>
+                                    <span class="s_website_form_mark">*</span>
                                     <input
                                         type="password"
                                         placeholder="Re Enter password"
@@ -210,14 +220,14 @@
                         </p>
 
                         <div
-                            t-attf-class="clearfix oe_login_buttons text-center mb-1 pb-2 {{'pt-2' if form_small else 'pt-3'}}"
+                            t-attf-class="clearfix oe_signup_buttons text-center mb-1 pb-2 {{'pt-1' if form_small else 'pt-2'}}"
                         >
                             <button
                                 type="button"
                                 onclick="submitSignupForm()"
                                 id="oe_signup_button"
                                 class="btn btn-primary btn-block"
-                            >Sign up</button>
+                            >Sign Up</button>
                         </div>
 
                         <input type="hidden" name="redirect" t-att-value="redirect" />
