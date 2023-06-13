@@ -458,19 +458,9 @@ class SelfServiceController(http.Controller):
             program_member = prog_membs[0]
 
         if request.httprequest.method == "POST":
-<<<<<<< HEAD
-            form_data = kwargs
-
-            account_num = kwargs.get("Account number", None)
-
-            if account_num:
-                acc_id_type = (
-                    request.env["g2p.id.type"]
-=======
             if len(prog_membs) == 0:
                 program_member = (
                     request.env["g2p.program_membership"]
->>>>>>> upstream/15.0-develop-pilot001
                     .sudo()
                     .create(
                         {
