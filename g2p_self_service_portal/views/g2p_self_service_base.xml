@@ -109,7 +109,7 @@
                                     />
                                         </a>
                                         <div class="dropdown-menu user-block">
-                                            <ul>
+                                            <ul style="padding:0px">
                                                 <li>
                                                     <a
                                                 href="/selfservice/myprofile"
@@ -146,7 +146,7 @@
                             <p>I am here to assist you. Take a few minutes and lets connect!</p>
                         </div>
                         <div class="chat-assist-icon">
-                            <a href="#" onclick="toggle_chat_bot()">
+                            <a href="#" onclick="toggleChatBot()">
                                 <img src="/g2p_self_service_portal/static/src/img/Chat_Icon@2x.png" />
                             </a>
                         </div>

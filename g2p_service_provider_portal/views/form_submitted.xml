@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template
+        id="reimbursement_form_submitted"
+        name="G2P Service Provider Form Submitted"
+        inherit_id="g2p_self_service_portal.self_service_form_submitted"
+        primary="True"
+        priority="920"
+    >
+        <xpath expr="//t[@t-call='g2p_self_service_portal.base']" position="attributes">
+            <attribute name="t-call">g2p_service_provider_portal.base</attribute>
+        </xpath>
+        <xpath expr="//div[@class='details']" position="replace">
+            <div class="details">Claim Submission</div>
+        </xpath>
+        <xpath expr="//ol[@class='breadcrumb form-layout-breadcrumb']" position="replace">
+            <ol class="breadcrumb form-layout-breadcrumb">
+                <!-- <li class="breadcrumb-item">
+                    <a href="/serviceprovider/home">
+                        Reimbursements
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Submission
+                </li> -->
+            </ol>
+        </xpath>
+        <xpath expr="//p[@class='thank-you-msg']" position="replace">
+            <p class="thank-you-msg">
+                <i class="fa fa-check" style="color: #66ad5a;" />
+                Thank you for submitting the reimbursement application. Your claim is being processed.
+            </p>
+        </xpath>
+
+        <xpath expr="//h5[@class='action-heading']" position="replace">
+            <h5 class="action-heading">
+                Voucher ID - <t t-esc="entitlement" />
+            </h5>
+        </xpath>
+        <xpath expr="//a[@href='/selfservice/home']" position="replace">
+            <a href="/serviceprovider/home" class="btn btn-outline-primary btn-lg btn-block">
+                Go to Home
+            </a>
+        </xpath>
+    </template>
+</odoo>

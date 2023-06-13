@@ -1,6 +1,39 @@
 const alltable = document.getElementById("allprograms");
 const allheadercells = alltable.querySelectorAll("th");
+<<<<<<< HEAD:g2p_self_service_portal/static/src/js/self-service_search_sort_all.js
 const allRows = Array.from(alltable.rows).slice(1);
+=======
+const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
+
+allheadercells.forEach(function (th) {
+    // Default sort order
+    let sortOrder = "asc";
+    th.addEventListener("click", function () {
+        const columnIndex = th.cellIndex;
+        allRows.sort(function (a, b) {
+            const aCellValue = a.cells[columnIndex].innerText;
+            const bCellValue = b.cells[columnIndex].innerText;
+
+            let comparison = 0;
+            if (aCellValue > bCellValue) {
+                comparison = 1;
+            } else if (aCellValue < bCellValue) {
+                comparison = -1;
+            }
+
+            if (sortOrder === "desc") {
+                comparison *= -1;
+            }
+            return comparison;
+        });
+
+        sortOrder = sortOrder === "asc" ? "desc" : "asc";
+        allRows.forEach(function (row) {
+            alltable.tBodies[0].appendChild(row);
+        });
+    });
+});
+>>>>>>> upstream/15.0-develop-pilot001:g2p_self_service_portal/static/src/js/self_service_search_sort_all.js
 
 const itemsPerPage = 7;
 let currentPage = 1;

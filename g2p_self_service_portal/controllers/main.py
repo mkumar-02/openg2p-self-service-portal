@@ -1,16 +1,22 @@
 import json
 import logging
+import random
 from datetime import datetime
 
-from odoo import http
+from werkzeug.datastructures import FileStorage
+from werkzeug.exceptions import Forbidden, Unauthorized
+
+from odoo import _, http
 from odoo.http import request
 
-from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
+from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+
+from .auth_oidc import G2POpenIDLogin
 
 _logger = logging.getLogger(__name__)
 
 
-class SelfServiceContorller(http.Controller):
+class SelfServiceController(http.Controller):
     @http.route(["/selfservice"], type="http", auth="public", website=True)
     def self_service_root(self, **kwargs):
         if request.session and request.session.uid:
@@ -27,14 +33,118 @@ class SelfServiceContorller(http.Controller):
 
         context.update(
             dict(
-                providers=[
-                    p
-                    for p in OpenIDLogin().list_providers()
-                    if p.get("g2p_self_service_allowed", False)
-                ]
+                providers=G2POpenIDLogin().list_providers(
+                    domain=[("g2p_self_service_allowed", "=", True)]
+                )
             )
         )
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
+
+    @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
+    def self_service_signup(self, **kwargs):
+
+        if request.session and request.session.uid:
+            return request.redirect("/selfservice/home")
+        request.session["signup_form_filled"] = True
+
+        if request.httprequest.method == "POST" and "otp" in kwargs:
+            stored_otp = request.session["otp"]
+
+            if stored_otp and int(kwargs["otp"]) and stored_otp == int(kwargs["otp"]):
+
+                request.session.pop("otp")
+                request.session.pop("signup_form_filled")
+
+                # TODO: Check if user already present
+
+                # TODO: Enable both email and phone login
+                request.params["login"] = (
+                    kwargs["email"] if kwargs["email"] else kwargs["phone"]
+                )
+                res = AuthSignupHome().web_auth_signup(**kwargs)
+
+                current_partner = request.env.user.partner_id
+
+                request.env["res.partner"].sudo().browse(current_partner.id).write(
+                    {"is_registrant": True}
+                )
+
+                # Adding data of the user
+                for key in kwargs:
+                    if key in current_partner:
+                        current_partner[key] = kwargs[key]
+
+                # Adding VID number
+                config = request.env["ir.config_parameter"].sudo()
+                reg_id_type_id = config.get_param(
+                    "g2p_self_service_portal.self_service_signup_id_type", None
+                )
+
+                if kwargs["vid"] and reg_id_type_id:
+
+                    (
+                        request.env["g2p.reg.id"]
+                        .sudo()
+                        .create(
+                            {
+                                "partner_id": current_partner.id,
+                                "id_type": reg_id_type_id,
+                                "value": kwargs["vid"],
+                            }
+                        )
+                    )
+
+                # Adding phone number
+                request.env["g2p.phone.number"].sudo().create(
+                    {"phone_no": kwargs["phone"], "partner_id": current_partner.id}
+                )
+                current_partner.phone = kwargs["phone"]
+
+                return res
+
+            else:
+                return request.render(
+                    "g2p_self_service_portal.otp_authentication_page",
+                    {
+                        "error_message": "Incorrect OTP. Please try again.",
+                        "values": kwargs,
+                        "name": kwargs["name"],
+                    },
+                )
+
+        return request.render("g2p_self_service_portal.signup_page")
+
+    @http.route(
+        ["/selfservice/signup/otp"],
+        type="http",
+        auth="public",
+        website=True,
+        csrf=False,
+    )
+    def self_service_signup_otp(self, **kw):
+
+        if not request.session.get("signup_form_filled"):
+            return request.redirect("/selfservice")
+
+        request.session["otp"] = random.randint(100000, 999999)
+
+        _logger.error(request.session["otp"])
+
+        # TODO: Use G2P Notification module to send the otp
+
+        if request.httprequest.method == "POST":
+            kw["name"] = (
+                kw["family_name"].title()
+                + ", "
+                + kw["given_name"].title()
+                + " "
+                + kw["addl_name"].title()
+            )
+
+            return request.render(
+                "g2p_self_service_portal.otp_authentication_page",
+                {"values": kw, "name": kw["name"], "error_message": ""},
+            )
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)
     def self_service_logo(self, **kwargs):
@@ -67,11 +177,25 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/home"], type="http", auth="user", website=True)
     def self_service_home(self, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
         query = request.params.get("query")
         domain = [("name", "ilike", query)]
         programs = request.env["g2p.program"].sudo().search(domain).sorted("id")
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        program_states = {
+            "draft": "Applied",
+            "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Enrolled",
+        }
+        application_states = {
+            "active": "Applied",
+            "inprogress": "Under Review",
+            "completed": "Completed",
+            "rejected": "Rejected",
+            "closed": "Closed",
+        }
+
         amount_received = 0
         myprograms = []
         for program in programs:
@@ -85,6 +209,7 @@ class SelfServiceContorller(http.Controller):
                     ]
                 )
             )
+
             amount_issued = sum(
                 ent.amount_issued
                 for ent in request.env["g2p.payment"]
@@ -108,25 +233,32 @@ class SelfServiceContorller(http.Controller):
                 )
             )
             if len(membership) > 0:
-                myprograms.append(
-                    {
-                        "id": program.id,
-                        "name": program.name,
-                        "has_applied": len(membership) > 0,
-                        "status": states.get(membership.state, "Error"),
-                        "issued": "{:,.2f}".format(amount_issued),
-                        "paid": "{:,.2f}".format(amount_received),
-                        "enrollment_date": membership.enrollment_date.strftime(
-                            "%d-%b-%Y"
-                        )
-                        if membership.enrollment_date
-                        else None,
-                        "is_latest": (datetime.today() - program.create_date).days < 21,
-                        "application_id": membership.application_id
-                        if membership.application_id
-                        else None,
-                    }
-                )
+                for rec in membership.program_registrant_info_ids:
+                    myprograms.append(
+                        {
+                            "id": program.id,
+                            "name": program.name,
+                            "has_applied": len(membership) > 0,
+                            "program_status": program_states.get(
+                                membership.state, "Error"
+                            ),
+                            "application_status": application_states.get(
+                                rec.state, "Error"
+                            )
+                            if membership.state not in ("not_eligible", "duplicated")
+                            else program_states.get(membership.state, "Error"),
+                            "issued": "{:,.2f}".format(amount_issued),
+                            "paid": "{:,.2f}".format(amount_received),
+                            "enrollment_date": rec.create_date.strftime("%d-%b-%Y")
+                            if rec.create_date
+                            else None,
+                            "is_latest": (datetime.today() - program.create_date).days
+                            < 21,
+                            "application_id": rec.application_id
+                            if rec.application_id
+                            else None,
+                        }
+                    )
 
         entitlement = sum(
             ent.amount_issued
@@ -144,6 +276,7 @@ class SelfServiceContorller(http.Controller):
                 ]
             )
         )
+
         pending = entitlement - received
         labels = ["Received", "Pending"]
         values = [received, pending]
@@ -156,11 +289,20 @@ class SelfServiceContorller(http.Controller):
 
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
 
         programs = request.env["g2p.program"].sudo().search([])
 
+        if programs.fields_get("is_reimbursement_program"):
+            programs = programs.search([(("is_reimbursement_program", "=", False))])
+
         partner_id = request.env.user.partner_id
-        states = {"draft": "Submitted", "enrolled": "Enrolled"}
+        states = {
+            "draft": "Applied",
+            "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Enrolled",
+        }
 
         values = []
         for program in programs:
@@ -178,11 +320,15 @@ class SelfServiceContorller(http.Controller):
                 {
                     "id": program.id,
                     "name": program.name,
+                    # "description": program.description,
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
                     "is_latest": (datetime.today() - program.create_date).days < 21,
                     "is_form_mapped": True
                     if program.self_service_portal_form
+                    else False,
+                    "is_multiple_form_submission": True
+                    if program.multiple_form_submission
                     else False,
                 }
             )
@@ -199,15 +345,79 @@ class SelfServiceContorller(http.Controller):
         )
 
     @http.route(
+        ["/selfservice/submissions/<int:_id>"], type="http", auth="user", website=True
+    )
+    def self_service_all_submissions(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+        program = request.env["g2p.program"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        all_submission = (
+            request.env["g2p.program.registrant_info"]
+            .sudo()
+            .search(
+                [
+                    ("program_id", "=", program.id),
+                    ("registrant_id", "=", current_partner.id),
+                ]
+            )
+        )
+
+        submission_records = []
+        for detail in all_submission:
+            submission_records.append(
+                {
+                    "applied_on": detail.create_date.strftime("%d-%b-%Y"),
+                    "application_id": detail.application_id,
+                    "status": detail.state
+                    if detail.program_membership_id.state
+                    not in ("duplicated", "not_eligible")
+                    else detail.program_membership_id.state,
+                }
+            )
+
+        re_apply = True
+        for rec in submission_records:
+            if rec["status"] in (
+                "active",
+                "inprogress",
+            ):
+                re_apply = False
+                break
+
+        return request.render(
+            "g2p_self_service_portal.program_submission_info",
+            {
+                "program_id": program.id,
+                "submission_records": submission_records,
+                "re_apply": re_apply,
+                "is_multiple_form_submission": True
+                if program.multiple_form_submission
+                else False,
+            },
+        )
+
+    @http.route(
         ["/selfservice/apply/<int:_id>"], type="http", auth="user", website=True
     )
     def self_service_apply_programs(self, _id):
+        self.self_service_check_roles("REGISTRANT")
+
         program = request.env["g2p.program"].sudo().browse(_id)
+        multiple_form_submission = program.multiple_form_submission
         current_partner = request.env.user.partner_id
 
         for mem in current_partner.program_membership_ids:
             if mem.program_id.id == _id:
-                return request.redirect(f"/selfservice/submitted/{_id}")
+                if multiple_form_submission:
+                    if mem.latest_registrant_info_status not in (
+                        "completed",
+                        "rejected",
+                    ):
+                        return request.redirect(f"/selfservice/submissions/{_id}")
+
+                else:
+                    return request.redirect(f"/selfservice/submitted/{_id}")
 
         view = program.self_service_portal_form.view_id
 
@@ -228,17 +438,27 @@ class SelfServiceContorller(http.Controller):
         csrf=False,
     )
     def self_service_form_details(self, _id, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
         current_partner = request.env.user.partner_id
+        program_member = None
 
-        additional_info = (
-            current_partner.additional_g2p_info
-            if current_partner.additional_g2p_info
-            else []
+        prog_membs = (
+            request.env["g2p.program_membership"]
+            .sudo()
+            .search(
+                [
+                    ("partner_id", "=", current_partner.id),
+                    ("program_id", "=", program.id),
+                ]
+            )
         )
+        if len(prog_membs) > 0:
+            program_member = prog_membs[0]
 
         if request.httprequest.method == "POST":
+<<<<<<< HEAD
             form_data = kwargs
 
             account_num = kwargs.get("Account number", None)
@@ -246,87 +466,148 @@ class SelfServiceContorller(http.Controller):
             if account_num:
                 acc_id_type = (
                     request.env["g2p.id.type"]
+=======
+            if len(prog_membs) == 0:
+                program_member = (
+                    request.env["g2p.program_membership"]
+>>>>>>> upstream/15.0-develop-pilot001
                     .sudo()
-                    .search([("name", "=", "ACCOUNT_ID")], limit=1)
+                    .create(
+                        {
+                            "partner_id": current_partner.id,
+                            "program_id": program.id,
+                        }
+                    )
                 )
 
-                if len(acc_id_type) > 0:
+            for key in kwargs:
+                if isinstance(kwargs[key], FileStorage):
+                    kwargs[key] = request.httprequest.files.getlist(key)
 
-                    acc_reg_id = (
-                        request.env["g2p.reg.id"]
-                        .sudo()
-                        .search(
-                            [
-                                ("partner_id", "=", current_partner.id),
-                                ("id_type", "=", acc_id_type.id),
-                            ]
-                        )
-                    )
-                    if len(acc_reg_id) > 0:
-                        acc_reg_id.update({"value": account_num})
+            form_data = kwargs
 
-                    else:
-                        request.env["g2p.reg.id"].sudo().create(
-                            {
-                                "partner_id": current_partner.id,
-                                "id_type": acc_id_type.id,
-                                "value": account_num,
-                            }
-                        )
+            delete_key = self.get_field_to_exclude(form_data)
 
-            if isinstance(additional_info, list):
-                already_present = False
-                for element in additional_info:
-                    if element["id"] == _id:
-                        already_present = True
-                        element["data"].update(form_data)
-                        break
-                if not already_present:
-                    additional_info.append(
-                        {"id": _id, "name": program.name, "data": form_data}
-                    )
-            elif isinstance(additional_info, dict):
-                additional_info.update(form_data)
-            else:
-                _logger.error("Found Bad Additional G2P Info")
+            for item in delete_key:
+                del form_data[item]
 
-            current_partner.additional_g2p_info = additional_info
+            # Hardcoding Account number from form data for now
+            account_num = form_data.get("Account Number", None)
+            if account_num:
+                if len(current_partner.bank_ids) > 0:
+                    # TODO: Fixing value of first account number for now, if more than one exists
+                    current_partner.bank_ids[0].acc_number = account_num
+                else:
+                    current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
 
-            current_partner.program_registrant_info_ids = [
-                (0, 0, {"program_registrant_info": form_data, "program_id": program.id})
-            ]
-
-            apply_to_program = {
-                "partner_id": current_partner.id,
-                "program_id": program.id,
-            }
-
-            program_member = (
-                request.env["g2p.program_membership"].sudo().create(apply_to_program)
+            program_reg_info = (
+                request.env["g2p.program.registrant_info"]
+                .sudo()
+                .create(
+                    {
+                        "state": "active",
+                        "program_registrant_info": self.jsonize_form_data(
+                            form_data, program, membership=program_member
+                        ),
+                        "program_id": program.id,
+                        "registrant_id": current_partner.id,
+                    }
+                )
             )
 
         else:
-            program_member = (
-                request.env["g2p.program_membership"]
-                .sudo()
-                .search(
-                    [
-                        ("program_id", "=", program.id),
-                        ("partner_id", "=", current_partner.id),
-                    ],
-                    limit=1,
-                )
-            )
-
-            if len(program_member) < 1:
+            if not program_member:
                 return request.redirect(f"/selfservice/apply/{_id}")
+            program_reg_info = (
+                program_member.program_registrant_info_ids.sorted(
+                    "create_date", reverse=True
+                )[0]
+                if program_member.program_registrant_info_ids
+                else None
+            )
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
                 "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
-                "application_id": program_member.application_id,
-                "user": current_partner.given_name.capitalize(),
+                # TODO: Redirect to different page if application doesn't exist
+                "application_id": program_reg_info.application_id
+                if program_reg_info
+                else None,
+                "user": current_partner.given_name.capitalize()
+                if current_partner.given_name
+                else current_partner.name,
             },
         )
+
+    def self_service_check_roles(self, role_to_check):
+        # And add further role checks and return types
+        if role_to_check == "REGISTRANT":
+            if not request.session or not request.env.user:
+                raise Unauthorized(_("User is not logged in"))
+            if not request.env.user.partner_id.is_registrant:
+                raise Forbidden(_("User is not allowed to access the portal"))
+
+    def jsonize_form_data(self, data, program, membership=None):
+        for key in data:
+            value = data[key]
+            if isinstance(value, list):
+                if len(value) > 0 and isinstance(value[0], FileStorage):
+                    if not program.supporting_documents_store:
+                        _logger.error(
+                            "Supporting Documents Store is not set in Program Configuration"
+                        )
+                        data[key] = None
+                        continue
+
+                    data[key] = self.add_file_to_store(
+                        value,
+                        program.supporting_documents_store,
+                        program_membership=membership,
+                    )
+                    if not data.get(key, None):
+                        _logger.warning("Empty/No File received for field %s", key)
+                        continue
+
+        return data
+
+    @classmethod
+    def add_file_to_store(cls, files, store, program_membership=None):
+        if isinstance(files, FileStorage):
+            files = [
+                files,
+            ]
+        file_details = []
+        for file in files:
+            if store and file.filename:
+                if len(file.filename.split(".")) > 1:
+                    supporting_document_ext = "." + file.filename.split(".")[-1]
+                else:
+                    supporting_document_ext = None
+                document_file = store.add_file(
+                    file.stream.read(),
+                    extension=supporting_document_ext,
+                    program_membership=program_membership,
+                )
+                document_uuid = document_file.name.split(".")[0]
+                file_details.append(
+                    {
+                        "document_id": document_file.id,
+                        "document_uuid": document_uuid,
+                        "document_name": document_file.name,
+                        "document_slug": document_file.slug,
+                        "document_url": document_file.url,
+                    }
+                )
+        return file_details
+
+    def get_field_to_exclude(self, data):
+        current_partner = request.env.user.partner_id
+        keys = []
+        for key in data:
+            if key in current_partner:
+                current_partner[key] = data[key]
+                keys.append(key)
+
+        return keys

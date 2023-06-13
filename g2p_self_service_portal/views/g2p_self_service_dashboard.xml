@@ -64,7 +64,8 @@
                                         <th>Program Name <i class="fa fa-sort" />
                                         </th>
                                         <th>Application ID <i class="fa fa-sort" /></th>
-                                        <th>Status <i class="fa fa-sort" /></th>
+                                        <th>Program Status <i class="fa fa-sort" /></th>
+                                        <th>Application Status <i class="fa fa-sort" /></th>
                                         <th>Submitted On <i class="fa fa-sort" />
                                         </th>
                                         <th class="right-align">Entitlement (in USD) <i class="fa fa-sort" />
@@ -84,10 +85,10 @@
                                             <td>
                                                 <t t-if="program['is_latest']">
                                                     <a href="#" class="program-name">
-                                                        <t t-esc="program['name']" />
                                                         <button class="badge badge-button">
                                                             <span>NEW</span>
                                                         </button>
+                                                        <t t-esc="program['name']" />
                                                     </a>
                                                 </t>
 
@@ -104,31 +105,100 @@
                                                 <t t-esc="program['application_id']" />
                                             </td>
 
-
-                                            <t t-if="program['status']=='Submitted'">
-                                                <td>
-                                                    <button
+                                            <td>
+                                                <t t-if="program['program_status']=='Applied'">
+                                                        <button
                                                         string="Apply"
                                                         type="object"
                                                         class="submit-button"
+                                                        disabled="1"
                                                     >
-                                                    Submitted
-                                                    </button>
-                                                </td>
-                                            </t>
-                                            <t t-elif="program['status']=='Enrolled'">
-                                                <td>
+                                                        Applied
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['program_status']=='Enrolled'">
                                                     <button
                                                         string="Apply"
                                                         type="object"
                                                         class="enroll-button"
+                                                        disabled="1"
                                                     >
-                                                    Enrolled
+                                                        Enrolled
                                                     </button>
-                                                </td>
-                                            </t>
-
-
+                                                </t>
+                                                <t t-elif="program['program_status']=='Not Eligible'">
+                                                    <button
+                                                        string="Not Eligible"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Not Eligible
+                                                        </button>
+                                                </t>
+                                            </td>
+                                            <td>
+                                                <t t-if="program['application_status']=='Applied'">
+                                                        <button
+                                                        string="Apply"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Applied
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Not Eligible'">
+                                                        <button
+                                                        string="Not Eligible"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Not Eligible
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Under Review'">
+                                                        <button
+                                                        string="Under Review"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Under Review
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Completed'">
+                                                        <button
+                                                        string="Completed"
+                                                        type="object"
+                                                        class="enroll-button"
+                                                        disabled="1"
+                                                    >
+                                                        Completed
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Rejected'">
+                                                        <button
+                                                        string="Rejected"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Rejected
+                                                        </button>
+                                                </t>
+                                                <t t-elif="program['application_status']=='Closed'">
+                                                        <button
+                                                        string="Closed"
+                                                        type="object"
+                                                        class="notapplied-button"
+                                                        disabled="1"
+                                                    >
+                                                        Closed
+                                                        </button>
+                                                </t>
+                                            </td>
                                             <td>
                                                 <t t-esc="program['enrollment_date']" />
                                             </td>
@@ -151,7 +221,7 @@
                                 /></div></td></tr></t> -->
                                 <t t-if="not programs">
                                     <tr>
-                                        <td colspan="7" class="no-programs">
+                                        <td colspan="8" class="no-programs">
                                             <div class="no-programs-container">
                                                 <div class="no-program-text">You haven’t enrolled into
                                                     any programs yet, please tap on the below link
@@ -233,7 +303,7 @@
                                         </div>
                                     </li>
                                 </a>
-                                <li>
+                                <li id="faq">
 
                                     <div class="icon-image">
                                         <img
@@ -266,7 +336,7 @@
                             </div>
                             <script
                                 type="text/javascript"
-                                src="/g2p_self_service_portal/static/src/js/self-service_search_sort.js"
+                                src="/g2p_self_service_portal/static/src/js/self_service_search_sort.js"
                             />
                             <script
                                 type="text/javascript"

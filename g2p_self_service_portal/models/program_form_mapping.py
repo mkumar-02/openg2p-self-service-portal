@@ -12,6 +12,8 @@ class G2PProgram(models.Model):
         domain="[('is_portal_form', '=', 'True')]",
     )
 
+    multiple_form_submission = fields.Boolean(default=False)
+
     @api.constrains("self_service_portal_form")
     def update_form_template(self):
         form_view = self.self_service_portal_form.view_id
@@ -20,6 +22,9 @@ class G2PProgram(models.Model):
             {
                 "arch_db": form_view_template.replace(
                     "website.layout",
+                    "g2p_self_service_portal.self_service_form_template",
+                ).replace(
+                    "g2p_service_provider_portal.reimbursement_submission_form_template",
                     "g2p_self_service_portal.self_service_form_template",
                 )
             }
