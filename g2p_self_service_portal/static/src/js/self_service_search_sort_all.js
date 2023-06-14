@@ -1,8 +1,5 @@
 const alltable = document.getElementById("allprograms");
 const allheadercells = alltable.querySelectorAll("th");
-<<<<<<< HEAD:g2p_self_service_portal/static/src/js/self-service_search_sort_all.js
-const allRows = Array.from(alltable.rows).slice(1);
-=======
 const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
 
 allheadercells.forEach(function (th) {
@@ -33,7 +30,6 @@ allheadercells.forEach(function (th) {
         });
     });
 });
->>>>>>> upstream/15.0-develop-pilot001:g2p_self_service_portal/static/src/js/self_service_search_sort_all.js
 
 const itemsPerPage = 7;
 let currentPage = 1;
@@ -199,6 +195,13 @@ allheadercells.forEach(function (th) {
         // Hide search clear button
     });
 });
+
+// Disable pagination if no records or only one page
+if (totalPages <= 1 || allRows.length === 0) {
+    prevButton.disabled = true;
+    nextButton.disabled = true;
+}
+
 
 searchInputText.addEventListener("input", function (event) {
     const searchValue = event.target.value.toLowerCase();

@@ -9,15 +9,20 @@ headercells.forEach(function (th) {
         const columnIndex = th.cellIndex;
         const rows = Array.from(table.rows).slice(1);
         // Determine the data type for this column
+        
         let dataType = "text";
         const firstRow = rows[0];
         const firstCell = firstRow.cells[columnIndex];
-        const cellContent = firstCell.innerText.trim();
-        if (/^\d+$/.test(cellContent)) {
-            dataType = "number";
-        } else if (Date.parse(cellContent)) {
-            dataType = "date";
+        if(firstCell){
+            const cellContent = firstCell.innerText.trim();
+            if (/^\d+$/.test(cellContent)) {
+                dataType = "number";
+            } else if (Date.parse(cellContent)) {
+                dataType = "date";
+            }
+
         }
+       
 
         rows.sort(function (a, b) {
             let aCellValue = a.cells[columnIndex].innerText.trim();
@@ -48,6 +53,9 @@ headercells.forEach(function (th) {
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
 
         table.tBodies[0].append(...rows);
+
+       
+
     });
 });
 
