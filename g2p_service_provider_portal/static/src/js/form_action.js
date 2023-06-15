@@ -5,6 +5,7 @@ function reimbursementFormSubmitAction() {
     var program_id = $("#program_submit_id");
     form[0].action = `/serviceprovider/claim/${program_id[0].getAttribute("program")}`;
 
+    var fileUploadSize = program_id[0].getAttribute("file-size");
     var isValid = true;
 
     // TODO: validations
@@ -25,6 +26,11 @@ function reimbursementFormSubmitAction() {
     }
 
     if (isValid) {
-        form.submit();
+        // eslint-disable-next-line no-undef
+        if (isFileAllowed(fileUploadSize)) {
+            form.submit();
+        } else {
+            modal[0].click(close);
+        }
     }
 }

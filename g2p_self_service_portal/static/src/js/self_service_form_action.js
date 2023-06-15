@@ -52,7 +52,7 @@ function isFileAllowed(size) {
     var inputField = $(".s_website_form_input");
 
     for (let index = 0; index < inputField.length; index++) {
-        if (inputField[index].type == "file") {
+        if (inputField[index].type === "file") {
             inputField[index].style.borderColor = "#E3E3E3";
             for (let file = 0; file < inputField[index].files.length; file++) {
                 if (inputField[index].files[file].size > parseFloat(size) * 1000 * 1000) {
@@ -78,7 +78,7 @@ function formSubmitAction() {
 
     programForm[0].action = `/selfservice/submitted/${program_id[0].getAttribute("program")}`;
 
-    fileUploadSize = program_id[0].getAttribute("file-size");
+    var fileUploadSize = program_id[0].getAttribute("file-size");
 
     // Validation's //
     var isValid = true;

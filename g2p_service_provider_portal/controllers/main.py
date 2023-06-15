@@ -134,6 +134,11 @@ class ServiceProviderContorller(http.Controller):
         ):
             raise Forbidden()
 
+        config = request.env["ir.config_parameter"].sudo()
+        file_size = config.get_param(
+            "g2p_service_provider_portal.service_provider_file_upload_size", None
+        )
+
         # check if already claimed
         if len(entitlement.reimbursement_entitlement_ids) > 0:
             return request.redirect(f"/serviceprovider/claim/{_id}")
@@ -148,6 +153,7 @@ class ServiceProviderContorller(http.Controller):
                 if current_partner.given_name and current_partner.family_name
                 else current_partner.name.capitalize(),
                 "beneficiary": beneficiary,
+                "file_size": file_size,
             },
         )
 
