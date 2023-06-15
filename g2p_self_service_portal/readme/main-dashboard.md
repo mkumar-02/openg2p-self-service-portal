@@ -9,10 +9,13 @@
 
 ## Technology used
 
-- Html
-- Css
-- Python
-- Odoo
+Following technologies have used:
+
+- xml: Used for creating the structure of the website
+- CSS: Used for styling the website and making it visually appealing
+- JavaScript: Used for adding interactivity to the website and Added functionality
+- Odoo: Used for provides a range of features and functionalities, including website management
+- Python: Used for implementing business logic and build website modules
 
 ## Screens Designed
 

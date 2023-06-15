@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var mydata = JSON.parse(document.getElementById("pie_data").textContent);
-    if (mydata.values[0] > 0) {
+    console.log(mydata);
+    if (mydata.values[0] > 0 || mydata.values[1] > 0) {
         document.getElementById("chartContainer").innerHTML = "&nbsp;";
         document.getElementById("chartContainer").innerHTML =
             '<canvas id="myChart" width="500" height="500"></canvas>';
