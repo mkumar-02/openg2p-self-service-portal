@@ -320,6 +320,7 @@ class SelfServiceController(http.Controller):
                 {
                     "id": program.id,
                     "name": program.name,
+                    # "description": program.description,
                     "has_applied": len(membership) > 0,
                     "status": states.get(membership.state, "Error"),
                     "is_latest": (datetime.today() - program.create_date).days < 21,

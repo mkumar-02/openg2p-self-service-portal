@@ -19,6 +19,15 @@
                     <div class="logo-box">
                         <img src="/g2p_self_service_portal/static/src/img/logo@2x.png" class="logo" />
                     </div>
+                    <div class="note">
+                        <div class="container" style="padding:0px">
+                            <p class="mandatory-fields-note">
+                                Fields marked with
+                                "<span class="s_website_form_mark">*</span>"
+                                are mandatory
+                            </p>
+                        </div>
+                    </div>
                     <form
                         class="oe_signup_form"
                         id="signup-form"
@@ -49,7 +58,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group field-login">
-                                    <label for="phone">Phone </label>
+                                    <label for="phone">Mobile No.</label>
                                     <span class="s_website_form_mark">*</span>
                                     <input
                                         type="tel"
@@ -160,7 +169,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="birthdate">Date of Birth</label>
+                                    <label for="birthdate">Birthdate</label>
                                     <input
                                         type="date"
                                         name="birthdate"

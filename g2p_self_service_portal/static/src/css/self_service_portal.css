@@ -112,19 +112,8 @@ footer#bottom .footer-container .nav {
 }
 
 .ssp-signup-box {
-    margin: auto;
-    top: 75px;
-    width: 444px;
-    background: #ffffff 0% 0% no-repeat padding-box;
-    box-shadow: 0px 3px 15px #0000000d;
-    border-radius: 20px;
-    padding: 10px;
-    position: relative;
-}
-
-.ssp-signup-box {
     width: 720px;
-    height: 618px;
+    height: 670px;
     margin: auto;
     top: 75px;
     background: #ffffff 0% 0% no-repeat padding-box;
@@ -1196,16 +1185,16 @@ li div p {
     margin-bottom: 5px;
 }
 
-.form-template .note {
+.note {
     padding-top: 15px;
 }
 
-.form-template .note .container {
+.note .container {
     padding-left: 20px;
     padding-right: 20px;
 }
 
-.form-template .mandatory-fields-note {
+.mandatory-fields-note {
     background: #faf6cf 0% 0% no-repeat padding-box;
     border-radius: 4px;
     opacity: 1;
