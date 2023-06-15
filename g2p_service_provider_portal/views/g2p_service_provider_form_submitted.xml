@@ -11,7 +11,7 @@
             <attribute name="t-call">g2p_service_provider_portal.base</attribute>
         </xpath>
         <xpath expr="//div[@class='details']" position="replace">
-            <div class="details">Claim Submission</div>
+            <div class="details">Reimbursement Submission</div>
         </xpath>
         <xpath expr="//ol[@class='breadcrumb form-layout-breadcrumb']" position="replace">
             <ol class="breadcrumb form-layout-breadcrumb">

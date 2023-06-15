@@ -130,7 +130,7 @@ class SelfServiceController(http.Controller):
 
         _logger.error(request.session["otp"])
 
-        # TODO: Use G2P Notification module to send the otp
+        # TODO: Use G2P SMS Notification module to send otp
 
         if request.httprequest.method == "POST":
             kw["name"] = (
@@ -239,6 +239,10 @@ class SelfServiceController(http.Controller):
                             "id": program.id,
                             "name": program.name,
                             "has_applied": len(membership) > 0,
+                            "single_submission": len(
+                                membership.program_registrant_info_ids
+                            )
+                            == 1,
                             "program_status": program_states.get(
                                 membership.state, "Error"
                             ),
@@ -322,7 +326,13 @@ class SelfServiceController(http.Controller):
                     "name": program.name,
                     # "description": program.description,
                     "has_applied": len(membership) > 0,
+                    "single_submission": len(membership.program_registrant_info_ids)
+                    == 1,
                     "status": states.get(membership.state, "Error"),
+                    "is_application_rejected": membership.latest_registrant_info_status
+                    == "rejected"
+                    if membership.latest_registrant_info_status
+                    else False,
                     "is_latest": (datetime.today() - program.create_date).days < 21,
                     "is_form_mapped": True
                     if program.self_service_portal_form
@@ -419,6 +429,11 @@ class SelfServiceController(http.Controller):
                 else:
                     return request.redirect(f"/selfservice/submitted/{_id}")
 
+        config = request.env["ir.config_parameter"].sudo()
+        file_size = config.get_param(
+            "g2p_self_service_portal.self_service_file_upload_size", None
+        )
+
         view = program.self_service_portal_form.view_id
 
         return request.render(
@@ -426,6 +441,7 @@ class SelfServiceController(http.Controller):
             {
                 "program": program.name,
                 "program_id": program.id,
+                "file_size": file_size,
                 "user": request.env.user.given_name,
             },
         )

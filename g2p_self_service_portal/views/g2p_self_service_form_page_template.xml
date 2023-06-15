@@ -72,6 +72,7 @@
                                         <button
                                             onclick="formSubmitAction()"
                                             t-att-program="program_id"
+                                            t-att-file-size="file_size"
                                             id="program_submit_id"
                                             type="submit"
                                             class="btn btn-primary btn-lg btn-block form_submit_action"

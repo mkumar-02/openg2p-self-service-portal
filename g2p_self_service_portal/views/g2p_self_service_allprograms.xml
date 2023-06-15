@@ -69,10 +69,9 @@
                                                     <!-- </a> -->
                                                 </t>
                                                 <t t-else="">
-                                                    <a href="/program/" class="program-name">
+                                                    <!-- <a href="/program/" class="program-name"> -->
                                                         <t t-esc="program['name']" />
-
-                                                    </a>
+                                                    <!-- </a> -->
                                                 </t>
                                             </td>
 
@@ -124,15 +123,28 @@
                                                 </t>
                                                 <t t-elif="program['status']=='Enrolled'">
                                                     <td>
-                                                        <button
-                                                            string="Enrolled"
-                                                            type="object"
-                                                            class="enroll-button"
-                                                            disabled="1"
+                                                        <t
+                                                            t-if="program['single_submission'] == True and program['is_application_rejected']== True"
                                                         >
-                                                            Enrolled
-                                                        </button>
-
+                                                            <button
+                                                                string="Rejected"
+                                                                type="object"
+                                                                class="notapplied-button"
+                                                                disabled="1"
+                                                            >
+                                                                Rejected
+                                                            </button>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <button
+                                                                string="Apply"
+                                                                type="object"
+                                                                class="enroll-button"
+                                                                disabled="1"
+                                                            >
+                                                                Enrolled
+                                                            </button>
+                                                        </t>
                                                     </td>
                                                     <td>
                                                         <t t-if="program['is_form_mapped']">

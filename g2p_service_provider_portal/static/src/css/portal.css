@@ -154,7 +154,7 @@ input#statement_of_account {
     height: 115px;
     position: absolute;
     content-visibility: hidden;
-    max-width: 672px;
+    max-width: 735px;
 }
 
 .file-block {

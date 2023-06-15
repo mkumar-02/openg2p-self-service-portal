@@ -37,6 +37,36 @@ function isValidTelNumber(input) {
     return re.test(input);
 }
 
+// eslint-disable-next-line no-unused-vars
+function toggleChatBot() {
+    var box = document.getElementById("chat-bot");
+    if (box.style.display === "none") {
+        box.style.display = "block";
+    } else {
+        box.style.display = "none";
+    }
+}
+
+// eslint-disable-next-line no-unused-vars
+function isFileAllowed(size) {
+    var inputField = $(".s_website_form_input");
+
+    for (let index = 0; index < inputField.length; index++) {
+        if (inputField[index].type === "file") {
+            inputField[index].style.borderColor = "#E3E3E3";
+            for (let file = 0; file < inputField[index].files.length; file++) {
+                if (inputField[index].files[file].size > parseFloat(size) * 1000 * 1000) {
+                    inputField[index].style.borderColor = "#D32D2D";
+                    showToast("Please upload file of less than " + size + " MB.");
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+}
+
 // eslint-disable-next-line no-unused-vars,complexity
 function formSubmitAction() {
     // URL Change
@@ -47,6 +77,8 @@ function formSubmitAction() {
     var program_id = $("#program_submit_id");
 
     programForm[0].action = `/selfservice/submitted/${program_id[0].getAttribute("program")}`;
+
+    var fileUploadSize = program_id[0].getAttribute("file-size");
 
     // Validation's //
     var isValid = true;
@@ -192,16 +224,9 @@ function formSubmitAction() {
         for (var i = 0; i < disabledFields.length; i++) {
             disabledFields[i].disabled = false;
         }
-        programForm.submit();
-    }
-}
 
-// eslint-disable-next-line no-unused-vars
-function toggleChatBot() {
-    var box = document.getElementById("chat-bot");
-    if (box.style.display === "none") {
-        box.style.display = "block";
-    } else {
-        box.style.display = "none";
+        if (isFileAllowed(fileUploadSize)) {
+            programForm.submit();
+        }
     }
 }

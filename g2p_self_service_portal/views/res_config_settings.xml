@@ -22,6 +22,16 @@
                                     <label for="self_service_logo" string="Self Service Logo" />
                                     <field name="self_service_logo" class="text-center oe_inline" />
                                 </div>
+                                <div class="text-muted content-group mt16">
+                                    <label
+                                        for="self_service_file_upload_size"
+                                        string="Self Service File Upload Size(MB)"
+                                    />
+                                    <field
+                                        name="self_service_file_upload_size"
+                                        class="text-center oe_inline"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
