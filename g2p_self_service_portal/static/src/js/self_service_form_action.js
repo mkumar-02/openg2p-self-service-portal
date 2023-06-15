@@ -55,7 +55,7 @@ function isFileAllowed(size) {
         if (inputField[index].type == "file") {
             inputField[index].style.borderColor = "#E3E3E3";
             for (let file = 0; file < inputField[index].files.length; file++) {
-                if (inputField[index].files[file].size > parseInt(size) * 1000 * 1000) {
+                if (inputField[index].files[file].size > parseFloat(size) * 1000 * 1000) {
                     inputField[index].style.borderColor = "#D32D2D";
                     showToast("Please upload file of less than " + size + " MB.");
                     return false;

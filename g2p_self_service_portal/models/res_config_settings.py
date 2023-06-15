@@ -14,7 +14,7 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="g2p_self_service_portal.self_service_signup_id_type",
     )
 
-    self_service_file_upload_size = fields.Char(
+    self_service_file_upload_size = fields.Float(
         "File Size",
         config_parameter="g2p_self_service_portal.self_service_file_upload_size",
     )
