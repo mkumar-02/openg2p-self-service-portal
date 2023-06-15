@@ -84,20 +84,18 @@
                                             </td>
                                             <td>
                                                 <t t-if="program['is_latest']">
-                                                    <a href="#" class="program-name">
+                                                    <!-- <a href="#" class="program-name"> -->
                                                         <button class="badge badge-button">
                                                             <span>NEW</span>
                                                         </button>
                                                         <t t-esc="program['name']" />
-                                                    </a>
+                                                    <!-- </a> -->
                                                 </t>
 
                                                 <t t-else="">
-                                                    <a href="#" class="program-name">
+                                                    <!-- <a href="#" class="program-name"> -->
                                                         <t t-esc="program['name']" />
-
-                                                    </a>
-
+                                                    <!-- </a> -->
                                                 </t>
 
                                             </td>
@@ -117,14 +115,28 @@
                                                         </button>
                                                 </t>
                                                 <t t-elif="program['program_status']=='Enrolled'">
-                                                    <button
-                                                        string="Apply"
-                                                        type="object"
-                                                        class="enroll-button"
-                                                        disabled="1"
+                                                    <t
+                                                        t-if="program['single_submission'] == True and program['application_status']=='Rejected'"
                                                     >
-                                                        Enrolled
-                                                    </button>
+                                                        <button
+                                                            string="Rejected"
+                                                            type="object"
+                                                            class="notapplied-button"
+                                                            disabled="1"
+                                                        >
+                                                            Rejected
+                                                        </button>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <button
+                                                            string="Apply"
+                                                            type="object"
+                                                            class="enroll-button"
+                                                            disabled="1"
+                                                        >
+                                                            Enrolled
+                                                        </button>
+                                                    </t>
                                                 </t>
                                                 <t t-elif="program['program_status']=='Not Eligible'">
                                                     <button

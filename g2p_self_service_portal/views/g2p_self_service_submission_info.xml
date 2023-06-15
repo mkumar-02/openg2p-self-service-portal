@@ -115,6 +115,11 @@
                                     </a>
                                 </div>
                             </t>
+                            <t t-else="">
+                                <p>
+                                    Your application is still In Progress.
+                                </p>
+                            </t>
                         </div>
                     </div>
                 </div>
