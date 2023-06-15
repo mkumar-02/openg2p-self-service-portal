@@ -87,7 +87,7 @@
                     <div class="container py-5">
                         <div t-attf-class="card border-0 mx-auto bg-100">
                             <div class="card-body">
-                                <t t-if="len(providers) &gt; 0">
+                                <t t-if="providers and len(providers) &gt; 0">
                                     <div
                                         class="o_auth_oauth_providers list-group mt-1 mb-2 text-center oauth-link"
                                         style="padding:5px;"

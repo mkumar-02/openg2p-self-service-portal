@@ -49,19 +49,13 @@ searchClearText.style.display = "none";
 
 function showPage(page) {
     const rows = allRows.slice((page - 1) * itemsPerPage, page * itemsPerPage);
-
     // Hide all rows
     allRows.forEach((row) => (row.style.display = "none"));
-
     // Show rows for current page
     rows.forEach((row) => (row.style.display = ""));
 }
 function renderPageButtons() {
     // Angle bracket for left arrow
-    prevButton.disabled = true;
-    if (currentPage > 1) {
-        prevButton.disabled = false;
-    }
     prevButton.addEventListener("click", function () {
         currentPage--;
         showPage(currentPage);
@@ -74,12 +68,10 @@ function renderPageButtons() {
             }
         });
         // Disable prev button on first page
-        if (currentPage === 1) {
+
+        if (currentPage == 1) {
             prevButton.disabled = true;
         }
-        // Enable next button when prev button is clicked
-
-        nextButton.disabled = false;
     });
     pageButtonsContainer.appendChild(prevButton);
 
@@ -103,12 +95,12 @@ function renderPageButtons() {
                 }
             });
             // Enable/disable prev and next buttons based on current page
-            if (currentPage === 1) {
+            if (currentPage <= 1) {
                 prevButton.disabled = true;
             } else {
                 prevButton.disabled = false;
             }
-            if (currentPage === totalPages) {
+            if (currentPage == totalPages) {
                 nextButton.disabled = true;
             } else {
                 nextButton.disabled = false;
@@ -119,8 +111,8 @@ function renderPageButtons() {
     }
 
     // Angular bracket for right arrow
-    nextButton.disabled = true;
-    if (currentPage < totalPages) {
+
+    if (currentPage <= totalPages - 1) {
         nextButton.disabled = false;
     }
     nextButton.classList.add("next-button");
@@ -134,13 +126,18 @@ function renderPageButtons() {
                 button.classList.add("active");
             }
         });
-
-        if (currentPage === totalPages) {
+        if (currentPage == totalPages) {
             nextButton.disabled = true;
         }
         prevButton.disabled = false;
     });
     pageButtonsContainer.appendChild(nextButton);
+
+    // Disable pagination if no records or only one page
+    if (totalPages <= 1 || allRows.length === 0) {
+        prevButton.disabled = true;
+        nextButton.disabled = true;
+    }
 }
 showPage(currentPage);
 renderPageButtons();
