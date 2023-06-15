@@ -429,6 +429,11 @@ class SelfServiceController(http.Controller):
                 else:
                     return request.redirect(f"/selfservice/submitted/{_id}")
 
+        config = request.env["ir.config_parameter"].sudo()
+        file_size = config.get_param(
+            "g2p_self_service_portal.self_service_file_upload_size", None
+        )
+
         view = program.self_service_portal_form.view_id
 
         return request.render(
@@ -436,6 +441,7 @@ class SelfServiceController(http.Controller):
             {
                 "program": program.name,
                 "program_id": program.id,
+                "file_size": file_size,
                 "user": request.env.user.given_name,
             },
         )
