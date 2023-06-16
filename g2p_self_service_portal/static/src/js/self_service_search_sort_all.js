@@ -69,7 +69,7 @@ function renderPageButtons() {
         });
         // Disable prev button on first page
 
-        if (currentPage == 1) {
+        if (currentPage === 1) {
             prevButton.disabled = true;
         }
     });
@@ -100,7 +100,7 @@ function renderPageButtons() {
             } else {
                 prevButton.disabled = false;
             }
-            if (currentPage == totalPages) {
+            if (currentPage === totalPages) {
                 nextButton.disabled = true;
             } else {
                 nextButton.disabled = false;
@@ -126,7 +126,7 @@ function renderPageButtons() {
                 button.classList.add("active");
             }
         });
-        if (currentPage == totalPages) {
+        if (currentPage === totalPages) {
             nextButton.disabled = true;
         }
         prevButton.disabled = false;
