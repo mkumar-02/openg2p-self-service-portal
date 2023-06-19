@@ -1,3 +1,4 @@
+import json
 import logging
 from argparse import _AppendAction
 
@@ -225,7 +226,7 @@ class ServiceProviderContorller(http.Controller):
             # TODO: Check voucher code validation
             if reimbursement_claim == (2, None):
                 _logger.error("Not a valid Voucher Code")
-                return request.render(f"/serviceprovider/voucher/{_id}")
+                return request.redirect(f"/serviceprovider/voucher/{_id}")
 
         else:
             # TODO: search and return currently active claim
@@ -257,3 +258,22 @@ class ServiceProviderContorller(http.Controller):
                 raise Forbidden(
                     _AppendAction("User is not allowed to access the portal")
                 )
+
+    @http.route("/get_voucher_codes", type="http", auth="user", website=True)
+    def get_voucher_codes(self):
+        entitlements = (
+            request.env["g2p.entitlement"]
+            .sudo()
+            .search([("service_provider_id", "=", request.env.user.partner_id.id)])
+        )
+
+        voucher_details = []
+        for entilement in entitlements:
+            voucher_details.append(
+                {
+                    "beneficiary_name": entilement.partner_id.name,
+                    "code": entilement.code,
+                }
+            )
+
+        return json.dumps(voucher_details)

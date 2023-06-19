@@ -62,7 +62,7 @@
                                     <span class="s_website_form_mark">*</span>
                                     <input
                                         type="tel"
-                                        placeholder="Enter phone nuber"
+                                        placeholder="Enter phone number"
                                         name="phone"
                                         t-att-value="phone"
                                         id="phone"
