@@ -404,6 +404,7 @@
                                                             onclick="reimbursementFormSubmitAction()"
                                                             t-att-program="entitlement_id"
                                                             t-att-file-size="file_size"
+                                                            t-att-beneficiary="beneficiary['name']"
                                                             type="submit"
                                                             class="btn btn-primary modal-discard-button"
                                                         >
