@@ -222,6 +222,10 @@ class ServiceProviderContorller(http.Controller):
                 else None,
                 amount=actual_amount,
             )
+            # TODO: Check voucher code validation
+            if reimbursement_claim == (2, None):
+                _logger.error("Not a valid Voucher Code")
+                return request.render(f"/serviceprovider/voucher/{_id}")
 
         else:
             # TODO: search and return currently active claim

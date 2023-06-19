@@ -14,7 +14,7 @@
                         <div class="table-head-container">
                             <p class="table-title" />
 
-                            <form class="form-inline my-2 my-lg-0" action="/servcieprovider/voucher">
+                            <form class="form-inline my-2 my-lg-0">
                                 <div class="search-box">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -33,7 +33,6 @@
                                         class="search-text"
                                         name="q"
                                         id="search-text"
-                                        disabled="1"
                                     />
                                     <span id="search-text-clear">
                                         <i class="fa fa-times" />
@@ -47,7 +46,7 @@
                                     <tr>
                                         <th>Sr.No.</th>
                                         <th>Assistance Type <i class="fa fa-sort" /></th>
-                                        <th>Voucher ID</th>
+                                        <th>Voucher ID <i class="fa fa-sort" /></th>
                                         <th>Beneficiary Name <i class="fa fa-sort" /></th>
                                         <th>Assistance Amount <i class="fa fa-sort" /></th>
                                         <th>Status</th>
@@ -146,10 +145,6 @@
                         <script
                             type="text/javascript"
                             src="/g2p_service_provider_portal/static/src/js/table_pagination_and_row.js"
-                        />
-                        <script
-                            type="text/javascript"
-                            src="/g2p_self_service_portal/static/src/js/self_service_search_sort_all.js"
                         />
                     </div>
                 </div>

@@ -83,10 +83,16 @@ input#statement_of_account {
 }
 
 .beneficiary-modal-content {
-    max-width: 720px;
-    max-height: 555px;
+    min-width: 536px;
+    min-height: 345px;
     box-shadow: 0px 2px 5px #0000001a;
     border-radius: 10px;
+}
+
+.beneficiary-modal-content .beneficiary-value {
+    font: normal normal 600 13px/16px Inter;
+    color: #000000;
+    text-transform: uppercase;
 }
 
 .beneficiary-modal-content .modal-title {
@@ -95,8 +101,16 @@ input#statement_of_account {
 }
 
 .beneficiary-modal-content .modal-footer .modal-cancel-button,
-.container-right .modal-discard-button,
 .beneficiary-modal-content .modal-footer .modal-cancel-button:active {
+    background: #ffffff 0% 0% no-repeat padding-box !important;
+    border: 1px solid #704880 !important;
+    color: #704880 !important;
+    width: 165px;
+    height: 46px;
+    font: normal normal 600 14px/17px Inter;
+}
+
+.container-right .modal-discard-button {
     background: #704880 0% 0% no-repeat padding-box !important;
     font: normal normal 600 14px/17px Inter;
     color: #ffffff !important;
