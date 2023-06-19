@@ -28,7 +28,13 @@
         <xpath expr="//p[@class='thank-you-msg']" position="replace">
             <p class="thank-you-msg">
                 <i class="fa fa-check" style="color: #66ad5a;" />
-                Thank you for submitting the reimbursement application. Your claim is being processed.
+                Thank you for submitting the reimbursement application.
+                <t t-if="application_status == 'approved'">
+                    Your claim is approved.
+                </t>
+                <t t-else="">
+                    Your claim is being processed.
+                </t>
             </p>
         </xpath>
 
@@ -41,6 +47,9 @@
             <a href="/serviceprovider/home" class="btn btn-outline-primary btn-lg btn-block">
                 Go to Home
             </a>
+        </xpath>
+        <xpath expr="//button[@id='print_application']" position="attributes">
+            <attribute name="style">display:none;</attribute>
         </xpath>
     </template>
 </odoo>

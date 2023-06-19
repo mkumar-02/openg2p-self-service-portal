@@ -37,11 +37,12 @@ function reimbursementFormSubmitAction() {
             showToast("Please update all mandatory fields");
             inputFields[i].style.borderColor = "#DE514C";
         } else {
-            for (let i = 0; i < voucherDetails.length; i++) {
-                if (voucherDetails[i].beneficiary_name == beneficiayName) {
-                    if (voucherDetails[i].code == voucherInputField[0].value) {
-                        isValidVoucher = true;
-                    }
+            for (let j = 0; j < voucherDetails.length; j++) {
+                if (
+                    voucherDetails[j].beneficiary_name === beneficiayName &&
+                    voucherDetails[j].code === voucherInputField[0].value
+                ) {
+                    isValidVoucher = true;
                 }
             }
         }
