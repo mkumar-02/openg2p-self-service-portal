@@ -160,7 +160,13 @@ class SelfServiceController(http.Controller):
     @http.route(["/selfservice/myprofile"], type="http", auth="public", website=True)
     def self_service_profile(self, **kwargs):
         if request.session and request.session.uid:
-            return request.render("g2p_self_service_portal.profile_page")
+            current_partner = request.env.user.partner_id
+            return request.render(
+                "g2p_self_service_portal.profile_page",
+                {
+                    "current_partner": current_partner,
+                },
+            )
 
     @http.route(["/selfservice/aboutus"], type="http", auth="public", website=True)
     def self_service_about_us(self, **kwargs):

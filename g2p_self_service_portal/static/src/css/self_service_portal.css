@@ -601,6 +601,23 @@ a:hover {
     opacity: 1;
 }
 
+.current-partner-container {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 5px #0000001a;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.current-partner-container .row {
+    padding: 20px;
+}
+
+.current-partner-container .beneficiary-value {
+    font: normal normal 600 13px/16px Inter;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+}
+
 /* Main content styles */
 .main-container {
     background: #f5f9fc 0% 0% no-repeat padding-box;

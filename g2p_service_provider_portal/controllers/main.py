@@ -49,7 +49,13 @@ class ServiceProviderContorller(http.Controller):
     )
     def portal_profile(self, **kwargs):
         if request.session and request.session.uid:
-            return request.render("g2p_service_provider_portal.profile_page")
+            current_partner = request.env.user.partner_id
+            return request.render(
+                "g2p_service_provider_portal.profile_page",
+                {
+                    "current_partner": current_partner,
+                },
+            )
 
     @http.route(["/serviceprovider/aboutus"], type="http", auth="public", website=True)
     def portal_about_us(self, **kwargs):
