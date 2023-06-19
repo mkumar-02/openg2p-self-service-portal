@@ -1,3 +1,5 @@
+
+
 @font-face {
     font-family: "Inter";
     src: url("fonts/Inter-Regular.woff") format("woff");
@@ -58,6 +60,49 @@ header#top .header-container {
 main {
     width: 100%;
     margin: auto;
+}
+
+@media print {
+
+    .container-right {
+        display:none;
+    }
+    
+    .toast-success-container{
+        display: none !important;
+    }
+    .toast-success-message{
+        display: none !important;
+    }
+
+    .breadcrumb{
+        display: none !important;
+    }
+
+    .nav-user {
+        display: none !important;
+    }
+    .ssp-contact-us {
+        display: none !important;
+    }
+
+    .footer-container{
+        display: none !important;
+    }
+    .submit-message {
+        min-width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 20px;
+    }
+    .status-message {
+        display: none;
+    }
+   .main-container {
+    width: 100% !important;
+   }
+   .container-adjuster{
+    width: 100% !important;
+   }
 }
 
 .container-adjuster {
