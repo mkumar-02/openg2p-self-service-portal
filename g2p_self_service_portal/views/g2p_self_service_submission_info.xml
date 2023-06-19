@@ -71,7 +71,7 @@
                                                         Not Eligible
                                                     </button>
                                                 </t>
-                                                <t t-elif="value['status'] == 'enrolled'">
+                                                <t t-elif="value['status'] == 'inprogress'">
                                                     <button
                                                         string="Under Review"
                                                         type="object"
@@ -99,6 +99,16 @@
                                                         disabled="1"
                                                     >
                                                         Completed
+                                                    </button>
+                                                </t>
+                                                <t t-elif="value['status'] == 'closed'">
+                                                    <button
+                                                        string="Closed"
+                                                        type="object"
+                                                        class="submit-button"
+                                                        disabled="1"
+                                                    >
+                                                        Closed
                                                     </button>
                                                 </t>
                                             </td>

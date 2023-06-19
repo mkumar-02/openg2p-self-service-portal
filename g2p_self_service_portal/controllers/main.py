@@ -66,7 +66,10 @@ class SelfServiceController(http.Controller):
                 current_partner = request.env.user.partner_id
 
                 request.env["res.partner"].sudo().browse(current_partner.id).write(
-                    {"is_registrant": True}
+                    {
+                        "is_registrant": True,
+                        "registration_date": datetime.today().date(),
+                    }
                 )
 
                 # Adding data of the user

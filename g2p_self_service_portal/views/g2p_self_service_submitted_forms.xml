@@ -89,12 +89,24 @@
                                         >
                                             View My Programs
                                         </a>
+                                        <button
+                                            onclick="printApplication()"
+                                            id="print_application"
+                                            type="button"
+                                            class="btn btn-primary btn-lg btn-block form_submit_action"
+                                        >
+                                            <i class="fa fa-print" /> Print
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <script
+                    type="text/javascript"
+                    src="/g2p_self_service_portal/static/src/js/self_service_print_application.js"
+                />
             </div>
         </t>
    </template>

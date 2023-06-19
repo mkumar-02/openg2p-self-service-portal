@@ -106,16 +106,14 @@
                                                                             >
                                                                                 <span
                                                                                     class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
                                                                                 >First Name</span>
                                                                             </label>
-                                                                            <input
-                                                                                class="s_website_form_input"
-                                                                                type="text"
-                                                                                id="first_name"
-                                                                                name="first_name"
-                                                                                t-att-value="beneficiary['given_name'].capitalize() if beneficiary['given_name'] else None"
-                                                                                disabled="1"
-                                                                            />
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['given_name'] if beneficiary['given_name'] else '&#8209;'"
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
@@ -127,16 +125,14 @@
                                                                             >
                                                                                 <span
                                                                                     class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
                                                                                 >Last Name</span>
                                                                             </label>
-                                                                            <input
-                                                                                class="s_website_form_input"
-                                                                                type="text"
-                                                                                id="last_name"
-                                                                                name="last_name"
-                                                                                t-att-value="beneficiary['family_name'].capitalize() if beneficiary['family_name'] else None"
-                                                                                disabled="1"
-                                                                            />
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['family_name'] if beneficiary['family_name'] else '&#8209;'"
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -150,16 +146,14 @@
                                                                             >
                                                                                 <span
                                                                                     class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
                                                                                 >Email Address</span>
                                                                             </label>
-                                                                            <input
-                                                                                class="s_website_form_input"
-                                                                                type="email"
-                                                                                id="email"
-                                                                                name="email"
-                                                                                t-att-value="beneficiary['email']"
-                                                                                disabled="1"
-                                                                            />
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['email'] if beneficiary['email'] else '&#8209;'"
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
 
@@ -171,67 +165,13 @@
                                                                             >
                                                                                 <span
                                                                                     class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
                                                                                 >Mobile Number</span>
                                                                             </label>
-                                                                            <input
-                                                                                class="s_website_form_input"
-                                                                                type="tel"
-                                                                                id="mobile_number"
-                                                                                name="mobile_number"
-                                                                                t-att-value="beneficiary['phone']"
-                                                                                disabled="1"
-                                                                            />
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div class="s_website_form_field">
-                                                                    <label class="s_website_form_label">
-                                                                        <span
-                                                                            class="s_website_form_label_content"
-                                                                        >Gender</span>
-                                                                    </label>
-                                                                    <div class="row s_website_form_multiple">
-                                                                        <div
-                                                                            class="radio col-12 col-lg-4 col-md-6"
-                                                                        >
-                                                                            <div class="form-check">
-                                                                                <input
-                                                                                    type="radio"
-                                                                                    class="s_website_form_input form-check-input"
-                                                                                    id="Male"
-                                                                                    name="gender"
-                                                                                    disabled="1"
-                                                                                    value="Male"
-                                                                                    t-att-checked="1 if beneficiary['gender'] == 'Male' else 0"
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['phone'] if beneficiary['phone'] else '&#8209;'"
                                                                                 />
-                                                                                <label
-                                                                                    class="form-check-label s_website_form_check_label"
-                                                                                    for="Male"
-                                                                                >
-                                                                                    Male
-                                                                                </label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div
-                                                                            class="radio col-12 col-lg-4 col-md-6"
-                                                                        >
-                                                                            <div class="form-check">
-                                                                                <input
-                                                                                    type="radio"
-                                                                                    class="s_website_form_input form-check-input"
-                                                                                    id="Female"
-                                                                                    name="gender"
-                                                                                    disabled="1"
-                                                                                    value="Female"
-                                                                                    t-att-checked="1 if beneficiary['gender'] == 'Female' else 0"
-                                                                                />
-                                                                                <label
-                                                                                    class="form-check-label s_website_form_check_label"
-                                                                                    for="Female"
-                                                                                >
-                                                                                    Female
-                                                                                </label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -242,20 +182,35 @@
                                                                         <div class="s_website_form_field">
                                                                             <label
                                                                                 class="s_website_form_label"
+                                                                            >
+                                                                                <span
+                                                                                    class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
+                                                                                >Gender</span>
+                                                                            </label>
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['gender'] if beneficiary['gender'] else '&#8209;'"
+                                                                                />
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-lg-6">
+                                                                        <div class="s_website_form_field">
+                                                                            <label
+                                                                                class="s_website_form_label"
                                                                                 for="dob"
                                                                             >
                                                                                 <span
                                                                                     class="s_website_form_label_content"
+                                                                                    style="color: #666666;"
                                                                                 >Date of Birth</span>
                                                                             </label>
-                                                                            <input
-                                                                                class="s_website_form_input"
-                                                                                type="date"
-                                                                                id="dob"
-                                                                                name="dob"
-                                                                                t-att-value="beneficiary['birthdate']"
-                                                                                disabled="1"
-                                                                            />
+                                                                            <div class="beneficiary-value">
+                                                                                <t
+                                                                                    t-esc="beneficiary['birthdate'] if beneficiary['birthdate'] else '&#8209;'"
+                                                                                />
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -267,7 +222,7 @@
                                                                 class="btn btn-outline-primary modal-cancel-button"
                                                                 data-dismiss="modal"
                                                             >
-                                                                Cancel
+                                                                Close
                                                             </button>
                                                         </div>
                                                     </div>
