@@ -10,6 +10,7 @@ from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.addons.web.controllers.main import Home
 
 from .auth_oidc import G2POpenIDLogin
 
@@ -38,6 +39,18 @@ class SelfServiceController(http.Controller):
                 )
             )
         )
+
+        if request.httprequest.method == "POST":
+            res = Home().web_login(**kwargs)
+
+            if not request.params["login_success"]:
+                context["error"] = "Wrong login/password"
+                return request.render(
+                    "g2p_self_service_portal.login_page", qcontext=context
+                )
+
+            return res
+
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
 
     @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
@@ -109,7 +122,7 @@ class SelfServiceController(http.Controller):
                 return request.render(
                     "g2p_self_service_portal.otp_authentication_page",
                     {
-                        "error_message": "Incorrect OTP. Please try again.",
+                        "error": "Incorrect OTP. Please try again.",
                         "values": kwargs,
                         "name": kwargs["name"],
                     },
@@ -146,7 +159,7 @@ class SelfServiceController(http.Controller):
 
             return request.render(
                 "g2p_self_service_portal.otp_authentication_page",
-                {"values": kw, "name": kw["name"], "error_message": ""},
+                {"values": kw, "name": kw["name"]},
             )
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)

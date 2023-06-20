@@ -9,6 +9,7 @@ from odoo.http import request
 
 from odoo.addons.g2p_self_service_portal.controllers.auth_oidc import G2POpenIDLogin
 from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
+from odoo.addons.web.controllers.main import Home
 
 _logger = logging.getLogger(__name__)
 
@@ -35,6 +36,17 @@ class ServiceProviderContorller(http.Controller):
                 )
             )
         )
+        if request.httprequest.method == "POST":
+            res = Home().web_login(**kwargs)
+
+            if not request.params["login_success"]:
+                context["error"] = "Wrong login/password"
+                return request.render(
+                    "g2p_service_provider_portal.login_page", qcontext=context
+                )
+
+            return res
+
         return request.render(
             "g2p_service_provider_portal.login_page", qcontext=context
         )

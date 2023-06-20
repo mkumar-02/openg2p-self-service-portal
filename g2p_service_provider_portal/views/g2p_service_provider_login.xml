@@ -10,6 +10,10 @@
         <xpath expr="//link[contains(@href, 'self_service_portal.css')]" position="after">
             <link rel="stylesheet" href="/g2p_service_provider_portal/static/src/css/portal.css" />
         </xpath>
+        <xpath expr="//form[@class='oe_login_form']" position="attributes">
+            <attribute name="t-attf-action">/serviceprovider/login</attribute>
+            <attribute name="onsubmit">this.action = '/serviceprovider/login' + location.hash</attribute>
+        </xpath>
         <xpath expr="//img[@src='/g2p_self_service_portal/static/src/img/logo@2x.png']" position="replace">
             <img src="/g2p_service_provider_portal/static/src/img/logo@2x.png" class="logo" />
         </xpath>

@@ -49,7 +49,7 @@
                         <input type="hidden" name="addl_name" t-att-value="values['addl_name']" />
                         <input type="hidden" name="name" t-att-value="name" />
                         <input type="hidden" name="ext" t-att-value="values['ext']" />
-                        <input type="hidden" name="gender" t-att-value="values['sex']" />
+                        <input type="hidden" name="gender" t-att-value="values['gender']" />
                         <input type="hidden" name="password" t-att-value="values['password']" />
                         <input
                             type="hidden"
@@ -64,11 +64,6 @@
                         <p class="alert alert-success" t-if="message" role="status">
                             <t t-esc="message" />
                         </p>
-                        <t t-if="error_message != ''">
-                            <p class="alert alert-danger">
-                                <t t-esc="error_message" />
-                            </p>
-                        </t>
 
                         <div id="otp-timer">
                             <span>Time remaining <b>02:00</b></span>
