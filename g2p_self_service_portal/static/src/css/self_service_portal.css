@@ -1,5 +1,3 @@
-
-
 @font-face {
     font-family: "Inter";
     src: url("fonts/Inter-Regular.woff") format("woff");
@@ -63,19 +61,18 @@ main {
 }
 
 @media print {
-
     .container-right {
-        display:none;
+        display: none;
     }
-    
-    .toast-success-container{
+
+    .toast-success-container {
         display: none !important;
     }
-    .toast-success-message{
+    .toast-success-message {
         display: none !important;
     }
 
-    .breadcrumb{
+    .breadcrumb {
         display: none !important;
     }
 
@@ -86,7 +83,7 @@ main {
         display: none !important;
     }
 
-    .footer-container{
+    .footer-container {
         display: none !important;
     }
     .submit-message {
@@ -97,12 +94,12 @@ main {
     .status-message {
         display: none;
     }
-   .main-container {
-    width: 100% !important;
-   }
-   .container-adjuster{
-    width: 100% !important;
-   }
+    .main-container {
+        width: 100% !important;
+    }
+    .container-adjuster {
+        width: 100% !important;
+    }
 }
 
 .container-adjuster {
@@ -783,20 +780,8 @@ td .program-name {
 }
 
 .css-serial {
-    counter-reset: serial-number; /* Set the serial number counter to 0 */
     border-top: 1px solid #ddd;
 }
-
-.css-serial td:first-child:before {
-    counter-increment: serial-number; /* Increment the serial number counter */
-    content: counter(serial-number); /* Display the counter */
-}
-
-.css-serial .no-programs:first-child:before {
-    /* counter-increment: serial-number; Increment the serial number counter */
-    content: none; /* Display the counter */
-}
-
 .no-programs {
     height: 150px !important;
     vertical-align: middle;
