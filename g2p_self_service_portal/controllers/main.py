@@ -456,13 +456,13 @@ class SelfServiceController(http.Controller):
         )
 
     @http.route(
-        ["/selfservice/submitted/<int:_id>"],
+        ["/selfservice/submit/<int:_id>"],
         type="http",
         auth="user",
         website=True,
         csrf=False,
     )
-    def self_service_form_details(self, _id, **kwargs):
+    def self_service_form_submit(self, _id, **kwargs):
         self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
@@ -515,7 +515,7 @@ class SelfServiceController(http.Controller):
                 else:
                     current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
 
-            program_reg_info = (
+            (
                 request.env["g2p.program.registrant_info"]
                 .sudo()
                 .create(
@@ -533,19 +533,41 @@ class SelfServiceController(http.Controller):
         else:
             if not program_member:
                 return request.redirect(f"/selfservice/apply/{_id}")
-            program_reg_info = (
-                program_member.program_registrant_info_ids.sorted(
-                    "create_date", reverse=True
-                )[0]
-                if program_member.program_registrant_info_ids
-                else None
+
+        return request.redirect(f"/selfservice/submitted/{_id}")
+
+    @http.route(
+        ["/selfservice/submitted/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def self_service_form_details(self, _id, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
+
+        program = request.env["g2p.program"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        program_reg_info = (
+            request.env["g2p.program.registrant_info"]
+            .sudo()
+            .search(
+                [
+                    ("registrant_id", "=", current_partner.id),
+                    ("program_id", "=", program.id),
+                ]
             )
+            .sorted("create_date", reverse=True)
+        )
+
+        if len(program_reg_info) > 0:
+            program_reg_info = program_reg_info[0]
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
-                "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
+                "submission_date": program_reg_info.create_date.strftime("%d-%b-%Y"),
                 # TODO: Redirect to different page if application doesn't exist
                 "application_id": program_reg_info.application_id
                 if program_reg_info
