@@ -2,7 +2,7 @@
 <odoo>
    <template id="self_service_form_submitted" name="G2P Self Service Form Submitted">
         <t t-call="g2p_self_service_portal.base">
-            
+
             <div id="wrap" class="oe_structure oe_empty" />
             <div class="form-template">
                 <div class="main-container">
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 status-message"> 
+                            <div class="col-md-4 status-message">
                                 <div class="card container-right" style="width: auto; padding: 0px;">
                                     <div class="card-header" style="padding: 0px;">
                                         <h5 class="action-heading"><t t-esc="program" /></h5>
