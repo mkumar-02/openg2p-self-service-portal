@@ -76,7 +76,7 @@ function formSubmitAction() {
 
     var program_id = $("#program_submit_id");
 
-    programForm[0].action = `/selfservice/submitted/${program_id[0].getAttribute("program")}`;
+    programForm[0].action = `/selfservice/submit/${program_id[0].getAttribute("program")}`;
 
     var fileUploadSize = program_id[0].getAttribute("file-size");
 

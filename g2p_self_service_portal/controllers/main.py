@@ -10,6 +10,7 @@ from odoo import _, http
 from odoo.http import request
 
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+from odoo.addons.web.controllers.main import Home
 
 from .auth_oidc import G2POpenIDLogin
 
@@ -38,6 +39,18 @@ class SelfServiceController(http.Controller):
                 )
             )
         )
+
+        if request.httprequest.method == "POST":
+            res = Home().web_login(**kwargs)
+
+            if not request.params["login_success"]:
+                context["error"] = "Wrong login/password"
+                return request.render(
+                    "g2p_self_service_portal.login_page", qcontext=context
+                )
+
+            return res
+
         return request.render("g2p_self_service_portal.login_page", qcontext=context)
 
     @http.route(["/selfservice/signup"], type="http", auth="public", website=True)
@@ -109,7 +122,7 @@ class SelfServiceController(http.Controller):
                 return request.render(
                     "g2p_self_service_portal.otp_authentication_page",
                     {
-                        "error_message": "Incorrect OTP. Please try again.",
+                        "error": "Incorrect OTP. Please try again.",
                         "values": kwargs,
                         "name": kwargs["name"],
                     },
@@ -146,7 +159,7 @@ class SelfServiceController(http.Controller):
 
             return request.render(
                 "g2p_self_service_portal.otp_authentication_page",
-                {"values": kw, "name": kw["name"], "error_message": ""},
+                {"values": kw, "name": kw["name"]},
             )
 
     @http.route(["/selfservice/logo"], type="http", auth="public", website=True)
@@ -160,7 +173,13 @@ class SelfServiceController(http.Controller):
     @http.route(["/selfservice/myprofile"], type="http", auth="public", website=True)
     def self_service_profile(self, **kwargs):
         if request.session and request.session.uid:
-            return request.render("g2p_self_service_portal.profile_page")
+            current_partner = request.env.user.partner_id
+            return request.render(
+                "g2p_self_service_portal.profile_page",
+                {
+                    "current_partner": current_partner,
+                },
+            )
 
     @http.route(["/selfservice/aboutus"], type="http", auth="public", website=True)
     def self_service_about_us(self, **kwargs):
@@ -450,13 +469,13 @@ class SelfServiceController(http.Controller):
         )
 
     @http.route(
-        ["/selfservice/submitted/<int:_id>"],
+        ["/selfservice/submit/<int:_id>"],
         type="http",
         auth="user",
         website=True,
         csrf=False,
     )
-    def self_service_form_details(self, _id, **kwargs):
+    def self_service_form_submit(self, _id, **kwargs):
         self.self_service_check_roles("REGISTRANT")
 
         program = request.env["g2p.program"].sudo().browse(_id)
@@ -509,7 +528,7 @@ class SelfServiceController(http.Controller):
                 else:
                     current_partner.bank_ids = [(0, 0, {"acc_number": account_num})]
 
-            program_reg_info = (
+            (
                 request.env["g2p.program.registrant_info"]
                 .sudo()
                 .create(
@@ -527,19 +546,41 @@ class SelfServiceController(http.Controller):
         else:
             if not program_member:
                 return request.redirect(f"/selfservice/apply/{_id}")
-            program_reg_info = (
-                program_member.program_registrant_info_ids.sorted(
-                    "create_date", reverse=True
-                )[0]
-                if program_member.program_registrant_info_ids
-                else None
+
+        return request.redirect(f"/selfservice/submitted/{_id}")
+
+    @http.route(
+        ["/selfservice/submitted/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def self_service_form_details(self, _id, **kwargs):
+        self.self_service_check_roles("REGISTRANT")
+
+        program = request.env["g2p.program"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        program_reg_info = (
+            request.env["g2p.program.registrant_info"]
+            .sudo()
+            .search(
+                [
+                    ("registrant_id", "=", current_partner.id),
+                    ("program_id", "=", program.id),
+                ]
             )
+            .sorted("create_date", reverse=True)
+        )
+
+        if len(program_reg_info) > 1:
+            program_reg_info = program_reg_info[0]
 
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
-                "submission_date": program_member.enrollment_date.strftime("%d-%b-%Y"),
+                "submission_date": program_reg_info.create_date.strftime("%d-%b-%Y"),
                 # TODO: Redirect to different page if application doesn't exist
                 "application_id": program_reg_info.application_id
                 if program_reg_info

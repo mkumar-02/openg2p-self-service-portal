@@ -147,6 +147,9 @@ function renderPageButtons() {
     if (totalPages <= 1 || allRows.length === 0) {
         prevButton.disabled = true;
         nextButton.disabled = true;
+    } else {
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
     }
 }
 showPage(currentPage);
