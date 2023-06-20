@@ -153,10 +153,7 @@ class ServiceProviderContorller(http.Controller):
         ):
             raise Forbidden()
 
-        config = request.env["ir.config_parameter"].sudo()
-        file_size = config.get_param(
-            "g2p_service_provider_portal.service_provider_file_upload_size", None
-        )
+        file_size = entitlement.program_id.reimbursement_program_id.file_size_spp
 
         # check if already claimed
         if len(entitlement.reimbursement_entitlement_ids) > 0:

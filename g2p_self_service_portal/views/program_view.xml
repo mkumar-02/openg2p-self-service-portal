@@ -19,6 +19,11 @@ Part of OpenG2P. See LICENSE file for full copyright and licensing details.
                     </group>
                 </page>
             </xpath>
+            <xpath expr="//group[@name='accounting']/.." position="inside">
+                <group string="File Upload Size in Portal" name="file_upload_size">
+                    <field name="file_size_ssp" string="Self Service Portal (MB)" />
+                </group>
+            </xpath>
         </field>
     </record>
 

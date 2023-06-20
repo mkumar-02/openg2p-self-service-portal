@@ -451,10 +451,7 @@ class SelfServiceController(http.Controller):
                 else:
                     return request.redirect(f"/selfservice/submitted/{_id}")
 
-        config = request.env["ir.config_parameter"].sudo()
-        file_size = config.get_param(
-            "g2p_self_service_portal.self_service_file_upload_size", None
-        )
+        file_size = program.file_size_ssp
 
         view = program.self_service_portal_form.view_id
 

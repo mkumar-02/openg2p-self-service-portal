@@ -1,10 +1,12 @@
 # Part of OpenG2P. See LICENSE file for full copyright and licensing details.
 
-from odoo import models
+from odoo import fields, models
 
 
 class G2PReimbursementProgram(models.Model):
     _inherit = "g2p.program"
+
+    file_size_spp = fields.Float()
 
     def update_form_template(self):
         if self.is_reimbursement_program:
