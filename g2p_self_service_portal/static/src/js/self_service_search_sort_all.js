@@ -37,53 +37,45 @@ allheadercells.forEach(function (th) {
         allRows.forEach(function (row) {
             alltable.tBodies[0].appendChild(row);
         });
+        currentPage = 1; // Reset current page when sorting
+        showPage(currentPage);
+        renderPageButtons();
     });
 });
 
 const itemsPerPage = 7;
 let currentPage = 1;
-const totalPages = Math.ceil(allRows.length / itemsPerPage);
-const pageButtonsContainer = document.getElementById("page-buttons");
-pageButtonsContainer.innerHTML = "";
-
-// Add previous page button
-const prevButton = document.createElement("button");
-prevButton.innerHTML = '<i class="fa fa-angle-left"></i>';
-
-const nextButton = document.createElement("button");
-nextButton.innerHTML = '<i class="fa fa-angle-right"></i>';
-const searchInputText = document.getElementById("search-text");
-const searchClearText = document.getElementById("search-text-clear");
-searchClearText.style.display = "none";
+let filteredRows = []; // Array to store filtered rows
 
 function showPage(page) {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const rows = allRows.slice(startIndex, endIndex);
+    const rows = filteredRows.slice(startIndex, endIndex);
     // Hide all rows
     allRows.forEach((row) => (row.style.display = "none"));
     // Show rows for current page
     rows.forEach((row) => (row.style.display = ""));
 }
 function renderPageButtons() {
+    const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
+    const pageButtonsContainer = document.getElementById("page-buttons");
+    pageButtonsContainer.innerHTML = "";
+
+    // Add previous page button
+    const prevButton = document.createElement("button");
+    prevButton.innerHTML = '<i class="fa fa-angle-left"></i>';
+
+    // Add next page button
+    const nextButton = document.createElement("button");
+    nextButton.innerHTML = '<i class="fa fa-angle-right"></i>';
+
     // Angle bracket for left arrow
     prevButton.addEventListener("click", function () {
-        currentPage--;
-        showPage(currentPage);
-        // Update active class for buttons
-        const buttons = pageButtonsContainer.querySelectorAll("button");
-        buttons.forEach((button) => {
-            button.classList.remove("active");
-            if (Number(button.textContent) === currentPage) {
-                button.classList.add("active");
-            }
-        });
-        // Disable prev button on first page
-
-        if (currentPage === 1) {
-            prevButton.disabled = true;
+        if (currentPage > 1) {
+            currentPage--;
+            showPage(currentPage);
+            updatePaginationButtons();
         }
-        nextButton.disabled = false;
     });
     pageButtonsContainer.appendChild(prevButton);
 
@@ -98,76 +90,28 @@ function renderPageButtons() {
         button.addEventListener("click", function () {
             currentPage = i;
             showPage(currentPage);
-            // Update active class for buttons
-            const buttons = pageButtonsContainer.querySelectorAll("button");
-            buttons.forEach((btn) => {
-                btn.classList.remove("active");
-                if (Number(btn.textContent) === currentPage) {
-                    btn.classList.add("active");
-                }
-            });
-            // Enable/disable prev and next buttons based on current page
-            prevButton.disabled = currentPage === 1;
-            nextButton.disabled = currentPage === totalPages;
+            updatePaginationButtons();
         });
 
         pageButtonsContainer.appendChild(button);
     }
 
     // Angular bracket for right arrow
-
     nextButton.classList.add("next-button");
     nextButton.addEventListener("click", function () {
-        currentPage++;
-        showPage(currentPage);
-        const buttons = pageButtonsContainer.querySelectorAll("button");
-        buttons.forEach((button) => {
-            button.classList.remove("active");
-            if (Number(button.textContent) === currentPage) {
-                button.classList.add("active");
-            }
-        });
-        prevButton.disabled = false;
-        nextButton.disabled = currentPage === totalPages;
+        if (currentPage < totalPages) {
+            currentPage++;
+            showPage(currentPage);
+            updatePaginationButtons();
+        }
     });
     pageButtonsContainer.appendChild(nextButton);
 
-    // Disable pagination if no records or only one page
-    if (totalPages <= 1 || allRows.length === 0) {
-        prevButton.disabled = true;
-        nextButton.disabled = true;
-    } else {
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage === totalPages;
-    }
+    updatePaginationButtons();
 }
 
-searchInputText.addEventListener("input", function (event) {
-    const searchValue = event.target.value.toLowerCase();
-
-    for (let i = 1; i < alltable.rows.length; i++) {
-        const row = alltable.rows[i];
-        const cells = row.cells;
-        const cell = cells[1];
-
-        if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-    }
-
-    if (searchValue || searchInputText === document.activeElement) {
-        searchClearText.style.display = "block";
-    } else {
-        searchClearText.style.display = "none";
-    }
-});
-
-searchClearText.addEventListener("click", function () {
-    searchInputText.value = "";
-    currentPage = 1;
-    showPage(currentPage);
+function updatePaginationButtons() {
+    const pageButtonsContainer = document.getElementById("page-buttons");
     const buttons = pageButtonsContainer.querySelectorAll("button");
     buttons.forEach((button) => {
         button.classList.remove("active");
@@ -175,11 +119,48 @@ searchClearText.addEventListener("click", function () {
             button.classList.add("active");
         }
     });
-    prevButton.disabled = true;
-    // Enable next button when prev button is clicked
-    nextButton.disabled = false;
-    // Hide search clear button
-    searchClearText.style.display = "none";
+
+    const prevButton = pageButtonsContainer.querySelector("button:first-child");
+    const nextButton = pageButtonsContainer.querySelector(".next-button");
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === Math.ceil(filteredRows.length / itemsPerPage);
+}
+
+function applySearchFilter(searchValue) {
+    filteredRows = allRows.filter((row) => {
+        const cellValue = row.cells[1].innerText.toLowerCase();
+        return cellValue.includes(searchValue);
+    });
+}
+
+const searchInputText = document.getElementById("search-text");
+const searchClearText = document.getElementById("search-text-clear");
+searchClearText.style.display = "none";
+
+function handleSearch() {
+    const searchValue = searchInputText.value.toLowerCase();
+
+    if (searchValue) {
+        applySearchFilter(searchValue);
+        currentPage = 1; // Reset current page when searching
+        showPage(currentPage);
+        renderPageButtons();
+    } else {
+        filteredRows = allRows;
+        currentPage = 1; // Reset current page when clearing search
+        showPage(currentPage);
+        renderPageButtons();
+    }
+
+    searchClearText.style.display = searchValue ? "block" : "none";
+}
+
+searchInputText.addEventListener("input", handleSearch);
+
+searchClearText.addEventListener("click", function () {
+    searchInputText.value = "";
+    handleSearch();
 });
 
 document.addEventListener("click", function (event) {
@@ -187,5 +168,8 @@ document.addEventListener("click", function (event) {
         searchClearText.style.display = searchInputText.value ? "block" : "none";
     }
 });
+
+// Initial setup
+filteredRows = allRows; // Initialize filteredRows with all rows
 showPage(currentPage);
 renderPageButtons();
