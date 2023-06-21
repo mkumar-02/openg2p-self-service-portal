@@ -322,6 +322,7 @@
                                                     name="statement_of_account"
                                                     multiple="1"
                                                     onchange="display_uploaded_files()"
+                                                    accept="image/*,.pdf"
                                                 />
                                                     <div
                                                     id="multiple-file-upload"
@@ -335,7 +336,21 @@
                                                         style="margin: 0px"
                                                     >Upload Document or drag and drop your document(s) here</p>
                                                     </div>
-
+                                                    <t t-if="file_size">
+                                                        <div
+                                                        class="s_website_form_field_description small form-text text-muted"
+                                                        contenteditable="true"
+                                                    >Maximum <t
+                                                            t-esc="file_size"
+                                                        /> MB &#40;image/pdf&#41; File Size allowed.<br
+                                                        /></div>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <div
+                                                        class="s_website_form_field_description small form-text text-muted"
+                                                        contenteditable="true"
+                                                    >Only image/pdf file allowed.<br /></div>
+                                                    </t>
                                             </div>
                                         </div>
                                     </form>
