@@ -612,6 +612,7 @@ class SelfServiceController(http.Controller):
                         value,
                         program.supporting_documents_store,
                         program_membership=membership,
+                        tags=key,
                     )
                     if not data.get(key, None):
                         _logger.warning("Empty/No File received for field %s", key)
@@ -620,7 +621,7 @@ class SelfServiceController(http.Controller):
         return data
 
     @classmethod
-    def add_file_to_store(cls, files, store, program_membership=None):
+    def add_file_to_store(cls, files, store, program_membership=None, tags=None):
         if isinstance(files, FileStorage):
             files = [
                 files,
@@ -636,6 +637,7 @@ class SelfServiceController(http.Controller):
                     file.stream.read(),
                     extension=supporting_document_ext,
                     program_membership=program_membership,
+                    tags=tags,
                 )
                 document_uuid = document_file.name.split(".")[0]
                 file_details.append(
