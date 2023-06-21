@@ -22,7 +22,7 @@
         "views/g2p_service_provider_myprofile.xml",
         "views/g2p_service_provider_others.xml",
         "views/g2p_service_provider_reimbursement.xml",
-        "views/res_config_settings.xml",
+        "views/program_view.xml",
     ],
     "assets": {
         "web.assets_backend": [],
