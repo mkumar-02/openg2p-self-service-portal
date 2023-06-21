@@ -9,6 +9,7 @@ from odoo.http import request
 
 from odoo.addons.g2p_self_service_portal.controllers.auth_oidc import G2POpenIDLogin
 from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
+from odoo.addons.web.controllers.main import Home
 
 _logger = logging.getLogger(__name__)
 
@@ -35,6 +36,17 @@ class ServiceProviderContorller(http.Controller):
                 )
             )
         )
+        if request.httprequest.method == "POST":
+            res = Home().web_login(**kwargs)
+
+            if not request.params["login_success"]:
+                context["error"] = "Wrong login/password"
+                return request.render(
+                    "g2p_service_provider_portal.login_page", qcontext=context
+                )
+
+            return res
+
         return request.render(
             "g2p_service_provider_portal.login_page", qcontext=context
         )
@@ -49,7 +61,13 @@ class ServiceProviderContorller(http.Controller):
     )
     def portal_profile(self, **kwargs):
         if request.session and request.session.uid:
-            return request.render("g2p_service_provider_portal.profile_page")
+            current_partner = request.env.user.partner_id
+            return request.render(
+                "g2p_service_provider_portal.profile_page",
+                {
+                    "current_partner": current_partner,
+                },
+            )
 
     @http.route(["/serviceprovider/aboutus"], type="http", auth="public", website=True)
     def portal_about_us(self, **kwargs):
@@ -159,13 +177,13 @@ class ServiceProviderContorller(http.Controller):
         )
 
     @http.route(
-        ["/serviceprovider/claim/<int:_id>"],
+        ["/serviceprovider/submit/<int:_id>"],
         type="http",
         auth="user",
         website=True,
         csrf=False,
     )
-    def portal_post_submission(self, _id, **kwargs):
+    def portal_claim_submission(self, _id, **kwargs):
         self.check_roles("SERVICEPROVIDER")
 
         current_partner = request.env.user.partner_id
@@ -233,8 +251,34 @@ class ServiceProviderContorller(http.Controller):
             # TODO: Check whether entitlement.reimbursement_entitlement_ids[0].partner_id is same as current
             if len(entitlement.reimbursement_entitlement_ids) == 0:
                 return request.redirect(f"/serviceprovider/entitlement/{_id}")
-            else:
-                reimbursement_claim = entitlement.reimbursement_entitlement_ids[0]
+
+        return request.redirect(f"/serviceprovider/claim/{_id}")
+
+    @http.route(
+        ["/serviceprovider/claim/<int:_id>"],
+        type="http",
+        auth="user",
+        website=True,
+    )
+    def portal_post_submission(self, _id, **kwargs):
+        self.check_roles("SERVICEPROVIDER")
+
+        entitlement = request.env["g2p.entitlement"].sudo().browse(_id)
+        current_partner = request.env.user.partner_id
+
+        reimbursement_claim = (
+            request.env["g2p.entitlement"]
+            .sudo()
+            .search(
+                [
+                    ("partner_id", "=", current_partner.id),
+                    ("reimbursement_original_entitlement_id", "=", entitlement.id),
+                ]
+            )
+        )
+
+        if len(reimbursement_claim) < 1:
+            return request.redirect(f"/serviceprovider/entitlement/{_id}")
 
         return request.render(
             "g2p_service_provider_portal.reimbursement_form_submitted",

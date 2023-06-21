@@ -22,7 +22,7 @@ function reimbursementFormSubmitAction() {
     var fileUploadSize = program_id[0].getAttribute("file-size");
     var beneficiayName = program_id[0].getAttribute("beneficiary");
 
-    form[0].action = `/serviceprovider/claim/${program_id[0].getAttribute("program")}`;
+    form[0].action = `/serviceprovider/submit/${program_id[0].getAttribute("program")}`;
 
     var modal = $("#SubmitModal");
     var requiredFields = $(".s_website_form_required");

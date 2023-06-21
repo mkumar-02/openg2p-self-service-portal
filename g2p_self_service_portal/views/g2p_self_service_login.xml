@@ -16,9 +16,9 @@
                     <form
                         class="oe_login_form"
                         role="form"
-                        t-attf-action="/web/login"
+                        t-attf-action="/selfservice/login"
                         method="post"
-                        onsubmit="this.action = '/web/login' + location.hash"
+                        onsubmit="this.action = '/selfservice/login' + location.hash"
                     >
                         <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
                         <input type="hidden" name="redirect" value="/selfservice/home" />
