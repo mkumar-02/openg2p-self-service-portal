@@ -3,6 +3,8 @@ const allheadercells = alltable.querySelectorAll("th");
 const allRows = Array.from(alltable.querySelectorAll("tbody tr"));
 const tbody = alltable.getElementsByTagName("tbody");
 const totalRow = tbody[0].children.length;
+const itemsPerPage = 7;
+let currentPage = 1;
 
 function addTableSrNo() {
     for (let i = 0; i < totalRow; i++) {
@@ -11,42 +13,7 @@ function addTableSrNo() {
 }
 
 addTableSrNo();
-allheadercells.forEach(function (th) {
-    // Default sort order
-    let sortOrder = "asc";
-    th.addEventListener("click", function () {
-        const columnIndex = th.cellIndex;
-        allRows.sort(function (a, b) {
-            const aCellValue = a.cells[columnIndex].innerText;
-            const bCellValue = b.cells[columnIndex].innerText;
-
-            let comparison = 0;
-            if (aCellValue > bCellValue) {
-                comparison = 1;
-            } else if (aCellValue < bCellValue) {
-                comparison = -1;
-            }
-
-            if (sortOrder === "desc") {
-                comparison *= -1;
-            }
-            return comparison;
-        });
-
-        sortOrder = sortOrder === "asc" ? "desc" : "asc";
-        allRows.forEach(function (row) {
-            alltable.tBodies[0].appendChild(row);
-        });
-        currentPage = 1; // Reset current page when sorting
-        showPage(currentPage);
-        renderPageButtons();
-    });
-});
-
-const itemsPerPage = 7;
-let currentPage = 1;
-let filteredRows = []; // Array to store filtered rows
-
+let filteredRows = [];
 function showPage(page) {
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -56,6 +23,30 @@ function showPage(page) {
     // Show rows for current page
     rows.forEach((row) => (row.style.display = ""));
 }
+function updatePaginationButtons() {
+    const pageButtonsContainer = document.getElementById("page-buttons");
+    const buttons = pageButtonsContainer.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.classList.remove("active");
+        if (Number(button.textContent) === currentPage) {
+            button.classList.add("active");
+        }
+    });
+
+    const prevButton = pageButtonsContainer.querySelector("button:first-child");
+    const nextButton = pageButtonsContainer.querySelector(".next-button");
+
+    prevButton.disabled = currentPage === 1;
+    nextButton.disabled = currentPage === Math.ceil(filteredRows.length / itemsPerPage);
+}
+
+function applySearchFilter(searchValue) {
+    filteredRows = allRows.filter((row) => {
+        const cellValue = row.cells[1].innerText.toLowerCase();
+        return cellValue.includes(searchValue);
+    });
+}
+
 function renderPageButtons() {
     const totalPages = Math.ceil(filteredRows.length / itemsPerPage);
     const pageButtonsContainer = document.getElementById("page-buttons");
@@ -110,29 +101,37 @@ function renderPageButtons() {
     updatePaginationButtons();
 }
 
-function updatePaginationButtons() {
-    const pageButtonsContainer = document.getElementById("page-buttons");
-    const buttons = pageButtonsContainer.querySelectorAll("button");
-    buttons.forEach((button) => {
-        button.classList.remove("active");
-        if (Number(button.textContent) === currentPage) {
-            button.classList.add("active");
-        }
+allheadercells.forEach(function (th) {
+    // Default sort order
+    let sortOrder = "asc";
+    th.addEventListener("click", function () {
+        const columnIndex = th.cellIndex;
+        allRows.sort(function (a, b) {
+            const aCellValue = a.cells[columnIndex].innerText;
+            const bCellValue = b.cells[columnIndex].innerText;
+
+            let comparison = 0;
+            if (aCellValue > bCellValue) {
+                comparison = 1;
+            } else if (aCellValue < bCellValue) {
+                comparison = -1;
+            }
+
+            if (sortOrder === "desc") {
+                comparison *= -1;
+            }
+            return comparison;
+        });
+
+        sortOrder = sortOrder === "asc" ? "desc" : "asc";
+        allRows.forEach(function (row) {
+            alltable.tBodies[0].appendChild(row);
+        });
+        currentPage = 1;
+        showPage(currentPage);
+        renderPageButtons();
     });
-
-    const prevButton = pageButtonsContainer.querySelector("button:first-child");
-    const nextButton = pageButtonsContainer.querySelector(".next-button");
-
-    prevButton.disabled = currentPage === 1;
-    nextButton.disabled = currentPage === Math.ceil(filteredRows.length / itemsPerPage);
-}
-
-function applySearchFilter(searchValue) {
-    filteredRows = allRows.filter((row) => {
-        const cellValue = row.cells[1].innerText.toLowerCase();
-        return cellValue.includes(searchValue);
-    });
-}
+});
 
 const searchInputText = document.getElementById("search-text");
 const searchClearText = document.getElementById("search-text-clear");
@@ -143,12 +142,12 @@ function handleSearch() {
 
     if (searchValue) {
         applySearchFilter(searchValue);
-        currentPage = 1; // Reset current page when searching
+        currentPage = 1;
         showPage(currentPage);
         renderPageButtons();
     } else {
         filteredRows = allRows;
-        currentPage = 1; // Reset current page when clearing search
+        currentPage = 1;
         showPage(currentPage);
         renderPageButtons();
     }
@@ -170,6 +169,6 @@ document.addEventListener("click", function (event) {
 });
 
 // Initial setup
-filteredRows = allRows; // Initialize filteredRows with all rows
+filteredRows = allRows;
 showPage(currentPage);
 renderPageButtons();
