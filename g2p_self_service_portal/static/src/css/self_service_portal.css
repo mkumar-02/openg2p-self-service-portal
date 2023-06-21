@@ -797,20 +797,8 @@ td .program-name {
 }
 
 .css-serial {
-    counter-reset: serial-number; /* Set the serial number counter to 0 */
     border-top: 1px solid #ddd;
 }
-
-.css-serial td:first-child:before {
-    counter-increment: serial-number; /* Increment the serial number counter */
-    content: counter(serial-number); /* Display the counter */
-}
-
-.css-serial .no-programs:first-child:before {
-    /* counter-increment: serial-number; Increment the serial number counter */
-    content: none; /* Display the counter */
-}
-
 .no-programs {
     height: 150px !important;
     vertical-align: middle;
