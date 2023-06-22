@@ -203,6 +203,16 @@ class ServiceProviderContorller(http.Controller):
             # TODO: allow resubmission
 
             # TODO: Check if reimbursement program mapped to original program
+
+            current_partner_membership = (
+                current_partner.program_membership_ids.filtered(
+                    lambda x: x.program_id.id
+                    == entitlement.program_id.reimbursement_program_id.id
+                )
+            )
+            # TODO: Check current partner not part of prog memberships of
+            # reimbursement program.
+
             supporting_documents_store = (
                 entitlement.program_id.reimbursement_program_id.supporting_documents_store
             )
@@ -214,7 +224,10 @@ class ServiceProviderContorller(http.Controller):
                 "statement_of_account"
             )
             supporting_document_files = SelfServiceController.add_file_to_store(
-                supporting_documents, supporting_documents_store
+                supporting_documents,
+                supporting_documents_store,
+                program_membership=current_partner_membership,
+                tags="Statement of Account",
             )
             if not supporting_document_files:
                 _logger.warning(
