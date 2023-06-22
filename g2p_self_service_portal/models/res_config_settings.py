@@ -13,3 +13,13 @@ class ResConfigSettings(models.TransientModel):
         "g2p.id.type",
         config_parameter="g2p_self_service_portal.self_service_signup_id_type",
     )
+
+    # For now this is a list of references. Example:
+    # [
+    #   'g2p.program.notification.manager.sms,2',
+    #   'g2p.program.notification.manager.fast2sms,4',
+    #   'g2p.program.notification.manager.email,14'
+    # ]
+    self_service_otp_notification_managers = fields.Char(
+        config_parameter="g2p_self_service_portal.otp_notification_managers"
+    )
