@@ -150,7 +150,7 @@
                                         class="form-control"
                                         name="gender"
                                         id="gender"
-                                        t-att-disabled="1 if scan_status=='true' else 0"
+                                        t-att-disabled="1 if scan_status == 'true' and len(gender)>0 else 0"
                                     >
                                         <t t-if="gender == 'Male'">
                                             <option value="Male" t-att-selected="1">Male</option>

@@ -40,7 +40,7 @@ class ServiceProviderContorller(http.Controller):
             res = Home().web_login(**kwargs)
 
             if not request.params["login_success"]:
-                context["error"] = "Wrong login/password"
+                context["error"] = "Invalid Credentials"
                 return request.render(
                     "g2p_service_provider_portal.login_page", qcontext=context
                 )
