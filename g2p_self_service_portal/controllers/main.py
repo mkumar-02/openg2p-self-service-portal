@@ -676,7 +676,7 @@ class SelfServiceController(http.Controller):
                     "Notification Module not Installed. Error for %s", str(manager)
                 )
                 continue
-            manager.on_otp_send(data)
+            manager.on_otp_send(**data)
 
     def objects_from_ref_list_string(self, ref_list_string):
         ref_list = safe_eval.safe_eval(ref_list_string)
@@ -686,5 +686,5 @@ class SelfServiceController(http.Controller):
             if len(ref_split) > 1:
                 res_model = ref_split[0]
                 res_id = ref_split[1]
-                result.append(request.env[res_model].browse(res_id))
+                result.append(request.env[res_model].sudo().browse(int(res_id)))
         return result
