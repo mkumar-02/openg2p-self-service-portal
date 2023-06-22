@@ -44,7 +44,7 @@ class SelfServiceController(http.Controller):
             res = Home().web_login(**kwargs)
 
             if not request.params["login_success"]:
-                context["error"] = "Wrong login/password"
+                context["error"] = "Invalid Credentials"
                 return request.render(
                     "g2p_self_service_portal.login_page", qcontext=context
                 )
@@ -74,7 +74,7 @@ class SelfServiceController(http.Controller):
                 request.params["login"] = (
                     kwargs["email"] if kwargs["email"] else kwargs["phone"]
                 )
-                res = AuthSignupHome().web_auth_signup(**kwargs)
+                AuthSignupHome().web_auth_signup(**kwargs)
 
                 current_partner = request.env.user.partner_id
 
@@ -116,7 +116,7 @@ class SelfServiceController(http.Controller):
                 )
                 current_partner.phone = kwargs["phone"]
 
-                return res
+                return request.redirect("/selfservice")
 
             else:
                 return request.render(
