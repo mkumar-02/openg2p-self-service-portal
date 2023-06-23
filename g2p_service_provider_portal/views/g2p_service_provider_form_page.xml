@@ -282,6 +282,9 @@
                                                             type="number"
                                                             id="actual_amount"
                                                             name="actual_amount"
+                                                            step="any"
+                                                            min="0"
+                                                            oninput="validity.valid||(value='');"
                                                             placeholder="Enter Amount"
                                                             t-att-autofocus="'autofocus' if voucher_code else None"
                                                         />
