@@ -24,7 +24,7 @@
                             <p class="table-title">All Past Submissions</p>
                         </div>
                         <div class="tables-values-container">
-                            <table class="css-serial" id="myprograms">
+                            <table class="css-serial" id="allprograms">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -138,7 +138,7 @@
                     </div>
                     <script
                         type="text/javascript"
-                        src="/g2p_self_service_portal/static/src/js/self_service_search_sort.js"
+                        src="/g2p_self_service_portal/static/src/js/self_service_search_sort_all.js"
                     />
                 </div>
             </div>

@@ -4,7 +4,7 @@ const tbody = table.getElementsByTagName("tbody");
 const totalRow = tbody[0].children.length;
 
 function addTableSrNo() {
-    if (!tbody[0].firstChild.firstElementChild.className === "no-programs") {
+    if (!(tbody[0].firstChild.firstElementChild.className === "no-programs")) {
         for (let i = 0; i < totalRow; i++) {
             tbody[0].children[i].firstElementChild.innerText = i + 1;
         }

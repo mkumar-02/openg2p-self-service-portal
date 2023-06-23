@@ -7,10 +7,8 @@ const itemsPerPage = 7;
 let currentPage = 1;
 
 function addTableSrNo() {
-    if (!tbody[0].firstChild.firstElementChild.className === "no-programs") {
-        for (let i = 0; i < totalRow; i++) {
-            tbody[0].children[i].firstElementChild.innerText = i + 1;
-        }
+    for (let i = 0; i < totalRow; i++) {
+        tbody[0].children[i].firstElementChild.innerText = i + 1;
     }
 }
 
