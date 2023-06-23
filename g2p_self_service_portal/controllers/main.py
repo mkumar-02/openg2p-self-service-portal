@@ -8,6 +8,7 @@ from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
 from odoo.http import request
+from odoo.tools import safe_eval
 
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.addons.web.controllers.main import Home
@@ -142,11 +143,10 @@ class SelfServiceController(http.Controller):
         if not request.session.get("signup_form_filled"):
             return request.redirect("/selfservice")
 
-        request.session["otp"] = random.randint(100000, 999999)
-
-        _logger.error(request.session["otp"])
-
-        # TODO: Use G2P SMS Notification module to send otp
+        otp = random.randint(100000, 999999)
+        _logger.error(otp)
+        request.session["otp"] = otp
+        self.send_otp(otp, dict(kw))
 
         if request.httprequest.method == "POST":
             kw["name"] = (
@@ -660,3 +660,31 @@ class SelfServiceController(http.Controller):
                 keys.append(key)
 
         return keys
+
+    def send_otp(self, otp, data):
+        data["otp"] = otp
+        config = request.env["ir.config_parameter"].sudo()
+        otp_notification_managers = config.get_param(
+            "g2p_self_service_portal.otp_notification_managers", None
+        )
+        otp_notification_managers = self.objects_from_ref_list_string(
+            otp_notification_managers
+        )
+        for manager in otp_notification_managers:
+            if not hasattr(manager, "on_otp_send"):
+                _logger.error(
+                    "Notification Module not Installed. Error for %s", str(manager)
+                )
+                continue
+            manager.on_otp_send(**data)
+
+    def objects_from_ref_list_string(self, ref_list_string):
+        ref_list = safe_eval.safe_eval(ref_list_string)
+        result = []
+        for ref in ref_list:
+            ref_split = ref.split(",")
+            if len(ref_split) > 1:
+                res_model = ref_split[0]
+                res_id = ref_split[1]
+                result.append(request.env[res_model].sudo().browse(int(res_id)))
+        return result
