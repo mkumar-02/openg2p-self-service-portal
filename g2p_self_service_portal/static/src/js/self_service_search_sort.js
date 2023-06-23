@@ -1,5 +1,15 @@
 const table = document.getElementById("myprograms");
 const headercells = table.querySelectorAll("th");
+const tbody = table.getElementsByTagName("tbody");
+const totalRow = tbody[0].children.length;
+
+function addTableSrNo() {
+    for (let i = 0; i < totalRow; i++) {
+        tbody[0].children[i].firstElementChild.innerText = i + 1;
+    }
+}
+
+addTableSrNo();
 
 headercells.forEach(function (th) {
     // Default sort order

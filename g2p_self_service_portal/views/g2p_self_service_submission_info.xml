@@ -24,7 +24,7 @@
                             <p class="table-title">All Past Submissions</p>
                         </div>
                         <div class="tables-values-container">
-                            <table class="css-serial" id="allprograms">
+                            <table class="css-serial" id="myprograms">
                                 <thead>
                                     <tr>
                                         <th>No.</th>
@@ -38,8 +38,12 @@
 
                                         <tr>
                                             <td />
-                                            <td><t t-esc="value['application_id']" /></td>
-                                            <td><t t-esc="value['applied_on']" /></td>
+                                            <td>
+                                                <t t-esc="value['application_id']" />
+                                            </td>
+                                            <td>
+                                                <t t-esc="value['applied_on']" />
+                                            </td>
                                             <td>
                                                 <t t-if="value['status'] == 'active'">
                                                     <button
@@ -132,6 +136,10 @@
                             </t>
                         </div>
                     </div>
+                    <script
+                        type="text/javascript"
+                        src="/g2p_self_service_portal/static/src/js/self_service_search_sort.js"
+                    />
                 </div>
             </div>
         </t>

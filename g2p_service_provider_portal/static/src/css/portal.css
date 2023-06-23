@@ -199,3 +199,19 @@ input#statement_of_account {
         transform: rotate(45deg);
     }
 }
+.form-template .container-right .card-header .status {
+    padding-left: 20px;
+    padding-bottom: 20px;
+    margin-top: -12px;
+}
+
+.form-template .container-right .card-header .status button {
+    background: #c7ebd1 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+    color: #075e45;
+    height: 25px;
+    border: none;
+    padding-left: 13px;
+    padding-right: 11px;
+    font: normal normal 500 12px/15px Inter;
+}

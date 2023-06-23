@@ -295,6 +295,7 @@ class ServiceProviderContorller(http.Controller):
             {
                 "entitlement": entitlement.id,
                 "submission_date": reimbursement_claim.create_date.strftime("%d-%b-%Y"),
+                "approved_date": reimbursement_claim.date_approved,
                 "application_id": reimbursement_claim.id,
                 "application_status": reimbursement_claim.state,
                 "user": current_partner.given_name.capitalize()
