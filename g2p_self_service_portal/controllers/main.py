@@ -218,34 +218,10 @@ class SelfServiceController(http.Controller):
             "closed": "Closed",
         }
 
-        amount_received = 0
         myprograms = []
         for program in programs:
             membership = (
                 request.env["g2p.program_membership"]
-                .sudo()
-                .search(
-                    [
-                        ("partner_id", "=", partner_id.id),
-                        ("program_id", "=", program.id),
-                    ]
-                )
-            )
-
-            amount_issued = sum(
-                ent.amount_issued
-                for ent in request.env["g2p.payment"]
-                .sudo()
-                .search(
-                    [
-                        ("partner_id", "=", partner_id.id),
-                        ("program_id", "=", program.id),
-                    ]
-                )
-            )
-            amount_received = sum(
-                ent.amount_paid
-                for ent in request.env["g2p.payment"]
                 .sudo()
                 .search(
                     [
@@ -273,8 +249,18 @@ class SelfServiceController(http.Controller):
                             )
                             if membership.state not in ("not_eligible", "duplicated")
                             else program_states.get(membership.state, "Error"),
-                            "issued": "{:,.2f}".format(amount_issued),
-                            "paid": "{:,.2f}".format(amount_received),
+                            "issued": "{:,.2f}".format(
+                                rec.entitlement_id.initial_amount
+                                if rec.entitlement_id
+                                else 0
+                            ),
+                            "paid": "{:,.2f}".format(
+                                sum(
+                                    pay.amount_paid if pay else 0
+                                    for pay in rec.entitlement_id.payment_ids
+                                )
+                                or 0
+                            ),
                             "enrollment_date": rec.create_date.strftime("%d-%b-%Y")
                             if rec.create_date
                             else None,
@@ -287,20 +273,16 @@ class SelfServiceController(http.Controller):
                     )
 
         entitlement = sum(
-            ent.amount_issued
-            for ent in request.env["g2p.payment"]
+            ent.initial_amount if ent.state == "approved" else 0
+            for ent in request.env["g2p.entitlement"]
             .sudo()
             .search([("partner_id", "=", partner_id.id)])
         )
         received = sum(
-            ent.amount_paid
-            for ent in request.env["g2p.payment"]
+            pay.amount_paid if pay.status == "paid" else 0
+            for pay in request.env["g2p.payment"]
             .sudo()
-            .search(
-                [
-                    ("partner_id", "=", partner_id.id),
-                ]
-            )
+            .search([("partner_id", "=", partner_id.id)])
         )
 
         pending = entitlement - received
