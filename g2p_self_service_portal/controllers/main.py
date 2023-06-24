@@ -96,6 +96,11 @@ class SelfServiceController(http.Controller):
                 reg_id_type_id = config.get_param(
                     "g2p_self_service_portal.self_service_signup_id_type", None
                 )
+                def_notif_pref = config.get_param(
+                    "g2p_notifications_base.default_notification_preference", None
+                )
+                if def_notif_pref:
+                    current_partner.write({"notification_preference": def_notif_pref})
 
                 if kwargs["vid"] and reg_id_type_id:
 
