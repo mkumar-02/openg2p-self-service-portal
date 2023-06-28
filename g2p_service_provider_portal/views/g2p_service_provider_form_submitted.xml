@@ -49,7 +49,7 @@
                 <i class="fa fa-check" style="color: #66ad5a;" />
 
                 <t t-if="application_status == 'approved'">
-                    You application for reimbursement is approved.
+                    Your application for reimbursement is approved.
                 </t>
                 <t t-else="">
                     Thank you for submitting the reimbursement application.
