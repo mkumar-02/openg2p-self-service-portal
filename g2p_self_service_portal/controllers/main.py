@@ -501,7 +501,8 @@ class SelfServiceController(http.Controller):
             delete_key = self.get_field_to_exclude(form_data)
 
             for item in delete_key:
-                del form_data[item]
+                if item in form_data:
+                    del form_data[item]
 
             # Hardcoding Account number from form data for now
             account_num = form_data.get("Account Number", None)
