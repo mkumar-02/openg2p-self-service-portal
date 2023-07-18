@@ -1138,7 +1138,7 @@ li div p {
     right: 30px;
     width: 304px;
     height: 48px;
-    z-index: 999;
+    z-index: 1100;
 }
 
 #toast-message {
