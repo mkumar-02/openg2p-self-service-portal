@@ -11,7 +11,7 @@
 
             <div class="main-container">
                 <div class="container-adjuster">
-                    <div class="alert" id="alertbox">
+                    <!-- <div class="alert" id="alertbox">
                         <div class="alertbox-adjuster">
                             <div class="alertbox-message">
                                 <span
@@ -24,7 +24,7 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="table-container">
                         <div class="table-head-container">
                             <p class="table-title">My Programs</p>
@@ -354,10 +354,10 @@
                                 type="text/javascript"
                                 src="/g2p_self_service_portal/static/src/js/self_service_pie_chart.js"
                             />
-                            <script
+                            <!-- <script
                                 type="text/javascript"
                                 src="/g2p_self_service_portal/static/src/js/self_service_welcome_alert.js"
-                            />
+                            /> -->
                         </div>
                     </div>
                 </div>
