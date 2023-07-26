@@ -59,9 +59,7 @@ headercells.forEach(function (th) {
 
             return comparison;
         });
-
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
-
         table.tBodies[0].append(...rows);
     });
 });
@@ -78,18 +76,13 @@ searchInput.addEventListener("input", function (event) {
         const cells = row.cells;
         const cell = cells[1];
 
-        if (cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
+        if (cell && cell.innerText.toLowerCase().indexOf(searchValue) > -1) {
             row.style.display = "";
         } else {
             row.style.display = "none";
         }
     }
-
-    if (searchValue || searchInput === document.activeElement) {
-        searchClear.style.display = "block";
-    } else {
-        searchClear.style.display = "none";
-    }
+    searchClear.style.display = searchValue ? "block" : "none";
 });
 
 searchInput.addEventListener("focusout", function () {
