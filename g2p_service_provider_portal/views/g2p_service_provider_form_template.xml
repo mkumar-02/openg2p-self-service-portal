@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="reimbursement_submission_form" name="G2P Service Provider Portal New Reimbursement Request">
+    <template
+        id="reimbursement_form_template_view"
+        name="G2P Service Provider Portal New Reimbursement Request"
+    >
         <t t-call="g2p_service_provider_portal.base">
             <t t-set="title">New Reimbursement Request | Service Provider Portal</t>
             <div class="main-container">
@@ -241,122 +244,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <form id="reimbursement-form" method="post" enctype="multipart/form-data">
-                                        <div class="s_website_form_rows">
-                                            <div class="row">
-                                                <div class="col-lg-7">
-                                                    <div class="s_website_form_field s_website_form_required">
-                                                        <label
-                                                            class="s_website_form_label"
-                                                            for="voucher_code"
-                                                        >
-                                                            <span
-                                                                class="s_website_form_label_content"
-                                                            >Voucher Code</span>
-                                                            <span class="s_website_form_mark">*</span>
-                                                        </label>
-                                                        <br />
-                                                        <input
-                                                            class="s_website_form_input"
-                                                            type="text"
-                                                            id="voucher_code"
-                                                            name="voucher_code"
-                                                            autofocus="autofocus"
-                                                            placeholder="Enter Voucher Code"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <div class="s_website_form_field s_website_form_required">
-                                                        <label
-                                                            class="s_website_form_label"
-                                                            for="actual_amount"
-                                                        >
-                                                            <span
-                                                                class="s_website_form_label_content"
-                                                            >Actual Amount</span>
-                                                            <span class="s_website_form_mark">*</span>
-                                                        </label>
-                                                        <input
-                                                            class="s_website_form_input"
-                                                            type="number"
-                                                            id="actual_amount"
-                                                            name="actual_amount"
-                                                            step="any"
-                                                            min="0"
-                                                            oninput="validity.valid||(value='');"
-                                                            placeholder="Enter Amount"
-                                                            t-att-autofocus="'autofocus' if voucher_code else None"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="s_website_form_field">
-                                                <label class="s_website_form_label" for="comments">
-                                                    <span class="s_website_form_label_content">Comments</span>
-                                                </label>
-                                                <br />
-                                                <textarea
-                                                    class="s_website_form_input"
-                                                    id="comments"
-                                                    name="comments"
-                                                    style="min-height:78px"
-                                                    placeholder="Medical Assistance"
-                                                />
-                                                <br />
-                                            </div>
-                                            <div class="s_website_form_field s_website_form_required">
-                                                <label
-                                                    class="s_website_form_label"
-                                                    for="statement_of_account"
-                                                >
-                                                    <span
-                                                        class="s_website_form_label_content"
-                                                    >Statement of Account</span>
-                                                    <span class="s_website_form_mark">*</span>
-                                                </label>
-                                                <br />
-
-                                                    <input
-                                                    class="s_website_form_input"
-                                                    type="file"
-                                                    id="statement_of_account"
-                                                    name="statement_of_account"
-                                                    multiple="1"
-                                                    onchange="display_uploaded_files()"
-                                                    accept="image/*,.pdf"
-                                                />
-                                                    <div
-                                                    id="multiple-file-upload"
-                                                    onclick="upload_documents()"
-                                                >
-                                                        <i
-                                                        class="fa fa-upload upload-icon"
-                                                        style="color: #704880; font-size: x-large;"
-                                                    />
-                                                        <p
-                                                        style="margin: 0px"
-                                                    >Upload Document or drag and drop your document(s) here</p>
-                                                    </div>
-                                                    <t t-if="file_size">
-                                                        <div
-                                                        class="s_website_form_field_description small form-text text-muted"
-                                                        contenteditable="true"
-                                                    >Maximum <t
-                                                            t-esc="file_size"
-                                                        /> MB &#40;image/pdf&#41; File Size allowed.<br
-                                                        /></div>
-                                                    </t>
-                                                    <t t-else="">
-                                                        <div
-                                                        class="s_website_form_field_description small form-text text-muted"
-                                                        contenteditable="true"
-                                                    >Only image/pdf file allowed.<br /></div>
-                                                    </t>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    <t t-out="0" />
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -439,10 +327,6 @@
                         <script
                             type="text/javascript"
                             src="/g2p_service_provider_portal/static/src/js/form_action.js"
-                        />
-                        <script
-                            type="text/javascript"
-                            src="/g2p_service_provider_portal/static/src/js/multiple_file_upload.js"
                         />
                     </div>
                 </div>
