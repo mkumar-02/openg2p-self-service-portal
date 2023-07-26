@@ -27,7 +27,7 @@
                     </div> -->
                     <div class="table-container">
                         <div class="table-head-container">
-                            <p class="table-title">My Programs</p>
+                            <p class="table-title">My Applications</p>
                             <form class="form-inline my-2 my-lg-0" action="/selfservice/home">
                                 <div class="search-box">
                                     <svg
