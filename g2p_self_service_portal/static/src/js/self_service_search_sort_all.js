@@ -106,6 +106,14 @@ allheadercells.forEach(function (th) {
     let sortOrder = "asc";
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
+        const firstColumn = allRows.map((row) => row.cells[0]);
+
+        // Skip sorting if it's the first column
+        if (columnIndex === 0) {
+            return;
+        }
+        allRows.forEach((row) => row.removeChild(row.cells[0]));
+
         allRows.sort(function (a, b) {
             const aCellValue = a.cells[columnIndex].innerText;
             const bCellValue = b.cells[columnIndex].innerText;
@@ -122,7 +130,7 @@ allheadercells.forEach(function (th) {
             }
             return comparison;
         });
-
+        allRows.forEach((row, index) => row.insertBefore(firstColumn[index], row.cells[0]));
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
         allRows.forEach(function (row) {
             alltable.tBodies[0].appendChild(row);

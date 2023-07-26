@@ -20,8 +20,12 @@ headercells.forEach(function (th) {
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
         const rows = Array.from(table.rows).slice(1);
+        const firstColumn = rows.map((row) => row.cells[0]);
         // Determine the data type for this column
-
+        if (columnIndex === 0) {
+            return;
+        }
+        rows.forEach((row) => row.removeChild(row.cells[0]));
         let dataType = "text";
         const firstRow = rows[0];
         const firstCell = firstRow.cells[columnIndex];
@@ -59,7 +63,7 @@ headercells.forEach(function (th) {
 
             return comparison;
         });
-
+        rows.forEach((row, index) => row.insertBefore(firstColumn[index], row.cells[0]));
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
 
         table.tBodies[0].append(...rows);
