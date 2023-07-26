@@ -12,11 +12,12 @@
         "g2p_program_reimbursement",
     ],
     "data": [
+        "data/g2p_service_provider_form_action_data.xml",
         "views/auth_oauth_provider.xml",
         "views/g2p_service_provider_aboutus.xml",
         "views/g2p_service_provider_base.xml",
         "views/g2p_service_provider_contactus.xml",
-        "views/g2p_service_provider_form_page.xml",
+        "views/g2p_service_provider_form_template.xml",
         "views/g2p_service_provider_form_submitted.xml",
         "views/g2p_service_provider_login.xml",
         "views/g2p_service_provider_myprofile.xml",
@@ -29,6 +30,9 @@
         "web.assets_qweb": [],
         "web.assets_frontend": [],
         "web.assets_common": [],
+        "website.assets_editor": [
+            "g2p_service_provider_portal/static/src/js/reim_form_editor.js",
+        ],
     },
     "demo": [],
     "images": [],

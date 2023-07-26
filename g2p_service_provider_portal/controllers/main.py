@@ -2,6 +2,7 @@ import json
 import logging
 from argparse import _AppendAction
 
+from werkzeug.datastructures import FileStorage
 from werkzeug.exceptions import Forbidden, Unauthorized
 
 from odoo import _, http
@@ -159,8 +160,12 @@ class ServiceProviderContorller(http.Controller):
         if len(entitlement.reimbursement_entitlement_ids) > 0:
             return request.redirect(f"/serviceprovider/claim/{_id}")
 
+        view = (
+            entitlement.program_id.reimbursement_program_id.self_service_portal_form.view_id
+        )
+
         return request.render(
-            "g2p_service_provider_portal.reimbursement_submission_form",
+            view.id,
             {
                 "entitlement_id": _id,
                 "current_partner_name": current_partner.given_name.capitalize()
@@ -218,16 +223,18 @@ class ServiceProviderContorller(http.Controller):
             )
 
             # TODO: remove all hardcoding in the next lines
-            received_code = form_data.get("voucher_code", None)
-            actual_amount = form_data.get("actual_amount", None)
-            supporting_documents = request.httprequest.files.getlist(
-                "statement_of_account"
-            )
-            supporting_document_files = SelfServiceController.add_file_to_store(
-                supporting_documents,
+            received_code = form_data.get("code", None)
+            actual_amount = form_data.get("initial_amount", None)
+
+            document_details = {}
+            for key in kwargs:
+                if isinstance(kwargs[key], FileStorage):
+                    document_details[key] = request.httprequest.files.getlist(key)
+
+            supporting_document_files = self.process_documents(
+                document_details,
                 supporting_documents_store,
-                program_membership=current_partner_membership,
-                tags="Statement of Account",
+                membership=current_partner_membership,
             )
             if not supporting_document_files:
                 _logger.warning(
@@ -251,7 +258,7 @@ class ServiceProviderContorller(http.Controller):
                 else None,
                 amount=actual_amount,
             )
-            # TODO: Check voucher code validation
+
             if reimbursement_claim == (2, None):
                 _logger.error("Not a valid Voucher Code")
                 return request.redirect(f"/serviceprovider/voucher/{_id}")
@@ -333,3 +340,11 @@ class ServiceProviderContorller(http.Controller):
             )
 
         return json.dumps(voucher_details)
+
+    def process_documents(self, documents, store, membership):
+        all_file_details = []
+        for tag, document in documents.items():
+            all_file_details += SelfServiceController.add_file_to_store(
+                document, store, program_membership=membership, tags=tag
+            )
+        return all_file_details
