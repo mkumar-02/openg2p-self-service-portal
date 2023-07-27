@@ -100,7 +100,6 @@ function renderPageButtons() {
 
     updatePaginationButtons();
 }
-const firstColumn = allRows.map((row) => row.cells[0]);
 
 allheadercells.forEach(function (th) {
     // Default sort order
