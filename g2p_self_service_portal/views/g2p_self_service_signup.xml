@@ -81,6 +81,7 @@
                                 <div class="form-group field-ext">
                                     <label for="ext">Ext.</label>
                                     <select class="form-control" name="ext" id="ext">
+                                        <option value="" />
                                         <option value="Sr">Sr</option>
                                         <option value="JR">Jr</option>
                                         <option value="I">I</option>

@@ -149,7 +149,7 @@ class SelfServiceController(http.Controller):
             return request.redirect("/selfservice")
 
         otp = random.randint(100000, 999999)
-        _logger.error(otp)
+        _logger.error("New OTP Generated!! Phone-%s OTP-%s", kw.get("phone", ""), otp)
         request.session["otp"] = otp
         self.send_otp(otp, dict(kw))
 
