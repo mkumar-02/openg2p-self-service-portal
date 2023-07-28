@@ -125,8 +125,12 @@ allheadercells.forEach(function (th) {
         });
 
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
-        allRows.forEach(function (row) {
+        allRows.forEach((row) => {
             alltable.tBodies[0].appendChild(row);
+        });
+        allRows.forEach((row, index) => {
+            const firstCell = row.cells[0];
+            firstCell.innerText = index + 1;
         });
         currentPage = 1;
         showPage(currentPage);
