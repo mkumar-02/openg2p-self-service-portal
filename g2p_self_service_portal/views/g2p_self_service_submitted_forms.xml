@@ -70,7 +70,7 @@
                                     <div class="card-header" style="padding: 0px;">
                                         <h5 class="action-heading"><t t-esc="program" /></h5>
                                         <div class="form-status">
-                                            <button>Submitted</button>
+                                            <button><t t-esc="application_status" /></button>
                                         </div>
                                     </div>
                                     <div class="card-body" style="padding: 20px;">

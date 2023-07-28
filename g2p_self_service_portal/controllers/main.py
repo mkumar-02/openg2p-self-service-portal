@@ -561,11 +561,33 @@ class SelfServiceController(http.Controller):
         if len(program_reg_info) > 1:
             program_reg_info = program_reg_info[0]
 
+        application_states = {
+            "active": "Applied",
+            "inprogress": "Under Review",
+            "completed": "Completed",
+            "rejected": "Rejected",
+            "closed": "Closed",
+        }
+        program_states = {
+            "draft": "Applied",
+            "not_eligible": "Not Eligible",
+            "duplicated": "Not Eligible",
+            "enrolled": "Enrolled",
+        }
+
         return request.render(
             "g2p_self_service_portal.self_service_form_submitted",
             {
                 "program": program.name,
                 "submission_date": program_reg_info.create_date.strftime("%d-%b-%Y"),
+                "application_status": application_states.get(
+                    program_reg_info.state, "Error"
+                )
+                if program_reg_info.program_membership_id.state
+                not in ("not_eligible", "duplicated")
+                else program_states.get(
+                    program_reg_info.program_membership_id.state, "Error"
+                ),
                 # TODO: Redirect to different page if application doesn't exist
                 "application_id": program_reg_info.application_id
                 if program_reg_info
