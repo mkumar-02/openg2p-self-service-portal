@@ -63,8 +63,8 @@
                                     <div class="card-header" style="padding: 0px;">
                                         <h5 class="action-heading"><t t-esc="program" /></h5>
                                         <p class="action-description">
-                                            This scheme is available till 31st March, 2023.
-                                            Eligible members can avail the benefits by applying to this scheme.
+                                            Sample Text for Reference: This Scheme is available until xx March, 2023.
+                                            To avail benefits, please apply here.
                                         </p>
                                     </div>
 
