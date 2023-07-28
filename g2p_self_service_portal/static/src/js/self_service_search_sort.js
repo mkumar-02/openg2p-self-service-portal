@@ -60,6 +60,10 @@ headercells.forEach(function (th) {
             return comparison;
         });
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
+        rows.forEach((row, index) => {
+            const firstCell = row.cells[0];
+            firstCell.innerText = index + 1;
+        });
         table.tBodies[0].append(...rows);
     });
 });
