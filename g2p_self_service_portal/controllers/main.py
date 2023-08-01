@@ -333,7 +333,7 @@ class SelfServiceController(http.Controller):
                 {
                     "id": program.id,
                     "name": program.name,
-                    # "description": program.description,
+                    "description": program.description,
                     "has_applied": len(membership) > 0,
                     "single_submission": len(membership.program_registrant_info_ids)
                     == 1,

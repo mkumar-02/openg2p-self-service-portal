@@ -59,21 +59,64 @@
                                         <tr>
                                             <td>
                                             </td>
-                                            <td>
+                                            <td
+                                                data-toggle="modal"
+                                                t-att-data-target="'#exampleModalCenter_' + str(program['id'])"
+                                            >
                                                 <t t-if="program['is_latest']">
                                                     <!-- <a href="/program/" class="program-name"> -->
-                                                        <button class="badge badge-button" disabled="1">
-                                                            <span>NEW</span>
-                                                        </button>
-                                                        <t t-esc="program['name']" />
+                                                    <button class="badge badge-button" disabled="1">
+                                                        <span>NEW</span>
+                                                    </button>
+                                                    <t t-esc="program['name']" />
                                                     <!-- </a> -->
                                                 </t>
                                                 <t t-else="">
                                                     <!-- <a href="/program/" class="program-name"> -->
-                                                        <t t-esc="program['name']" />
+                                                    <t t-esc="program['name']" />
                                                     <!-- </a> -->
                                                 </t>
                                             </td>
+                                            <!-- Modal -->
+                                            <div
+                                                class="modal fade"
+                                                t-att-id="'exampleModalCenter_' + str(program['id'])"
+                                                tabindex="-1"
+                                                role="dialog"
+                                                aria-labelledby="exampleModalCenterTitle"
+                                                aria-hidden="true"
+                                            >
+                                                <div
+                                                    class="modal-dialog modal-dialog-centered modal-lg"
+                                                    style="width: 450px; height: 350px;"
+                                                    role="document"
+                                                >
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5
+                                                                class="modal-title"
+                                                                id="exampleModalLongTitle"
+                                                            ><t t-esc="program['name']" /></h5>
+                                                            <button
+                                                                type="button"
+                                                                class="close"
+                                                                data-dismiss="modal"
+                                                                aria-label="Close"
+                                                            >
+                                                                <span>&#215;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div
+                                                            class="modal-body"
+                                                            style="height: 300px; overflow-y: auto;"
+                                                        >
+                                                            <p>
+                                                                <t t-esc="program['description']" />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <t t-if="program['has_applied']">
 
