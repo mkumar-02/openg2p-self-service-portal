@@ -21,6 +21,13 @@ odoo.define("g2p_service_provider_portal.reim_form_editor", function (require) {
                 name: "initial_amount",
                 string: "Actual Amount",
             },
+            {
+                type: "binary",
+                custom: true,
+                required: true,
+                name: "invoice",
+                string: "Invoice",
+            },
         ],
     });
 });
