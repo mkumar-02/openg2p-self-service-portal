@@ -61,6 +61,7 @@ headercells.forEach(function (th) {
         });
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
         rows.forEach((row, index) => {
+            // eslint-disable-next-line no-shadow
             const firstCell = row.cells[0];
             firstCell.innerText = index + 1;
         });

@@ -44,6 +44,7 @@ function reimbursementFormSubmitAction() {
                     voucherDetails[j].code === voucherInputField[0].value
                 ) {
                     isValid = true;
+                    break;
                 } else if (voucherInputField[0]) {
                     isValid = false;
                     modal[0].click(close);
