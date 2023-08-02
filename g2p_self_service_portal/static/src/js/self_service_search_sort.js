@@ -108,5 +108,9 @@ searchClear.addEventListener("click", function () {
 document.addEventListener("click", function (event) {
     if (event.target !== searchInput && event.target !== searchClear) {
         searchClear.style.display = searchInput.value ? "block" : "none";
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            row.style.display = "";
+        }
     }
 });
