@@ -303,11 +303,12 @@ class SelfServiceController(http.Controller):
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
         self.self_service_check_roles("REGISTRANT")
-
-        programs = request.env["g2p.program"].sudo().search([])
+        programs = request.env["g2p.program"].sudo().search([("state", "=", "active")])
 
         if programs.fields_get("is_reimbursement_program"):
-            programs = programs.search([(("is_reimbursement_program", "=", False))])
+            programs = programs.search(
+                [("state", "=", "active"), ("is_reimbursement_program", "=", False)]
+            )
 
         partner_id = request.env.user.partner_id
         states = {
