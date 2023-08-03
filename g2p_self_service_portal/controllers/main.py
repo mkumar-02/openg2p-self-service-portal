@@ -13,7 +13,7 @@ from odoo.tools import safe_eval
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.addons.web.controllers.main import Home
 
-from .auth_oidc import G2POpenIDLogin
+from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 
 _logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ class SelfServiceController(http.Controller):
 
         context.update(
             dict(
-                providers=G2POpenIDLogin().list_providers(
+                providers=OpenIDLogin().list_providers(
                     domain=[("g2p_self_service_allowed", "=", True)]
                 )
             )
