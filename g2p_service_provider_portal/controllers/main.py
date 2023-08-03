@@ -8,7 +8,7 @@ from werkzeug.exceptions import Forbidden, Unauthorized
 from odoo import _, http
 from odoo.http import request
 
-from odoo.addons.g2p_self_service_portal.controllers.auth_oidc import G2POpenIDLogin
+from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
 from odoo.addons.web.controllers.main import Home
 
@@ -30,13 +30,15 @@ class ServiceProviderContorller(http.Controller):
         request.params["redirect"] = "/"
         context = {}
 
-        context.update(
-            dict(
-                providers=G2POpenIDLogin().list_providers(
-                    domain=[("g2p_service_provider_allowed", "=", True)]
-                )
+        providers = []
+        try:
+            providers = OpenIDLogin().list_providers(
+                domain=[("g2p_service_provider_allowed", "=", True)]
             )
-        )
+        except Exception:
+            providers = OpenIDLogin().list_providers()
+
+        context.update(dict(providers=providers))
         if request.httprequest.method == "POST":
             res = Home().web_login(**kwargs)
 
