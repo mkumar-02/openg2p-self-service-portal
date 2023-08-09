@@ -15,8 +15,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[g2p_self_service_portal](g2p_self_service_portal/) | 15.0.1.1.0 |  | G2P Self Service Portal
-[g2p_service_provider_portal](g2p_service_provider_portal/) | 15.0.1.1.0 |  | G2P Service Provider Portal
+[g2p_self_service_portal](g2p_self_service_portal/) | 15.0.1.2.0 |  | G2P Self Service Portal
+[g2p_service_provider_portal](g2p_service_provider_portal/) | 15.0.1.2.0 |  | G2P Service Provider Portal
 
 [//]: # (end addons)
 
