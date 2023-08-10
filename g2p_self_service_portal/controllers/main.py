@@ -10,10 +10,9 @@ from odoo import _, http
 from odoo.http import request
 from odoo.tools import safe_eval
 
+from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 from odoo.addons.web.controllers.main import Home
-
-from .auth_oidc import G2POpenIDLogin
 
 _logger = logging.getLogger(__name__)
 
@@ -33,13 +32,15 @@ class SelfServiceController(http.Controller):
         request.params["redirect"] = "/"
         context = {}
 
-        context.update(
-            dict(
-                providers=G2POpenIDLogin().list_providers(
-                    domain=[("g2p_self_service_allowed", "=", True)]
-                )
+        providers = []
+        try:
+            providers = OpenIDLogin().list_providers(
+                domain=[("g2p_self_service_allowed", "=", True)]
             )
-        )
+        except Exception:
+            providers = OpenIDLogin().list_providers()
+
+        context.update(dict(providers=providers))
 
         if request.httprequest.method == "POST":
             res = Home().web_login(**kwargs)
@@ -303,11 +304,12 @@ class SelfServiceController(http.Controller):
     @http.route(["/selfservice/programs"], type="http", auth="user", website=True)
     def self_service_all_programs(self, **kwargs):
         self.self_service_check_roles("REGISTRANT")
-
-        programs = request.env["g2p.program"].sudo().search([])
+        programs = request.env["g2p.program"].sudo().search([("state", "=", "active")])
 
         if programs.fields_get("is_reimbursement_program"):
-            programs = programs.search([(("is_reimbursement_program", "=", False))])
+            programs = programs.search(
+                [("state", "=", "active"), ("is_reimbursement_program", "=", False)]
+            )
 
         partner_id = request.env.user.partner_id
         states = {

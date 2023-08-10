@@ -61,6 +61,7 @@ headercells.forEach(function (th) {
         });
         sortOrder = sortOrder === "asc" ? "desc" : "asc";
         rows.forEach((row, index) => {
+            // eslint-disable-next-line no-shadow
             const firstCell = row.cells[0];
             firstCell.innerText = index + 1;
         });
@@ -107,5 +108,9 @@ searchClear.addEventListener("click", function () {
 document.addEventListener("click", function (event) {
     if (event.target !== searchInput && event.target !== searchClear) {
         searchClear.style.display = searchInput.value ? "block" : "none";
+        for (let i = 1; i < table.rows.length; i++) {
+            const row = table.rows[i];
+            row.style.display = "";
+        }
     }
 });
