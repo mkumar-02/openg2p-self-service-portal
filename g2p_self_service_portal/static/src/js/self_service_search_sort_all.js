@@ -100,6 +100,18 @@ function renderPageButtons() {
 
     updatePaginationButtons();
 }
+function compareCellValues(a, b, columnIndex) {
+    const aCellValue = a.cells[columnIndex].textContent.trim().toLowerCase();
+    const bCellValue = b.cells[columnIndex].textContent.trim().toLowerCase();
+
+    let comparison = 0;
+    if (aCellValue < bCellValue) {
+        comparison = -1;
+    } else if (aCellValue > bCellValue) {
+        comparison = 1;
+    }
+    return comparison;
+}
 
 allheadercells.forEach(function (th) {
     // Default sort order
@@ -107,15 +119,7 @@ allheadercells.forEach(function (th) {
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
         allRows.sort(function (a, b) {
-            const aCellValue = a.cells[columnIndex].innerText;
-            const bCellValue = b.cells[columnIndex].innerText;
-
-            let comparison = 0;
-            if (aCellValue > bCellValue) {
-                comparison = 1;
-            } else if (aCellValue < bCellValue) {
-                comparison = -1;
-            }
+            let comparison = compareCellValues(a, b, columnIndex);
 
             if (sortOrder === "desc") {
                 comparison *= -1;

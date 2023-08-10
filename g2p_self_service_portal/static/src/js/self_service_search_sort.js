@@ -26,8 +26,8 @@ headercells.forEach(function (th) {
         const firstRow = rows[0];
         const firstCell = firstRow.cells[columnIndex];
         if (firstCell) {
-            const cellContent = firstCell.innerText.trim();
-            if (/^\d+$/.test(cellContent)) {
+            const cellContent = firstCell.innerText.trim().replace(/,/g, "");
+            if (/^\d+(\.\d+)?$/.test(cellContent)) {
                 dataType = "number";
             } else if (Date.parse(cellContent)) {
                 dataType = "date";
