@@ -102,16 +102,15 @@ function renderPageButtons() {
     updatePaginationButtons();
 }
 function compareCellValues(a, b, columnIndex) {
-    const aCellValue = a.cells[columnIndex].textContent.trim().toLowerCase();
-    const bCellValue = b.cells[columnIndex].textContent.trim().toLowerCase();
+    const aCellValue = a.cells[columnIndex].textContent.trim().replace(/,/g, ".");
+    const bCellValue = b.cells[columnIndex].textContent.trim().replace(/,/g, ".");
+    const aNumber = parseFloat(aCellValue);
+    const bNumber = parseFloat(bCellValue);
 
-    let comparison = 0;
-    if (aCellValue < bCellValue) {
-        comparison = -1;
-    } else if (aCellValue > bCellValue) {
-        comparison = 1;
+    if (!isNaN(aNumber) && !isNaN(bNumber)) {
+        return aNumber - bNumber;
     }
-    return comparison;
+    return aCellValue.localeCompare(bCellValue);
 }
 
 allheadercells.forEach(function (th) {
