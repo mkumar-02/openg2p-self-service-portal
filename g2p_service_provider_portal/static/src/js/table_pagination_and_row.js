@@ -102,8 +102,8 @@ function renderPageButtons() {
     updatePaginationButtons();
 }
 function compareCellValues(a, b, columnIndex) {
-    const aCellValue = a.cells[columnIndex].textContent.trim().replace(/,/g, ".");
-    const bCellValue = b.cells[columnIndex].textContent.trim().replace(/,/g, ".");
+    const aCellValue = a.cells[columnIndex].textContent.trim().replace(/,/g, "");
+    const bCellValue = b.cells[columnIndex].textContent.trim().replace(/,/g, "");
     const aNumber = parseFloat(aCellValue);
     const bNumber = parseFloat(bCellValue);
 
