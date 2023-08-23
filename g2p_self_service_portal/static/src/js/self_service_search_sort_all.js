@@ -100,9 +100,17 @@ function renderPageButtons() {
 
     updatePaginationButtons();
 }
+function getCellValue(cell) {
+    const badge = cell.querySelector(".badge");
+    if (badge && badge.textContent.trim().toLowerCase() === "new") {
+        return cell.textContent.replace(/new/gi, "").trim().toLowerCase();
+    }
+    return cell.textContent.trim().toLowerCase();
+}
+
 function compareCellValues(a, b, columnIndex) {
-    const aCellValue = a.cells[columnIndex].textContent.trim().toLowerCase();
-    const bCellValue = b.cells[columnIndex].textContent.trim().toLowerCase();
+    const aCellValue = getCellValue(a.cells[columnIndex]);
+    const bCellValue = getCellValue(b.cells[columnIndex]);
 
     let comparison = 0;
     if (aCellValue < bCellValue) {
