@@ -1,0 +1,27 @@
+{
+    "name": "G2P Form Builder",
+    "category": "G2P",
+    "version": "15.0.1.1.0",
+    "sequence": 1,
+    "author": "OpenG2P",
+    "website": "https://openg2p.org",
+    "license": "Other OSI approved licence",
+    "development_status": "Alpha",
+    "depends": ["g2p_programs", "formio"],
+    "data": [
+        "views/program_view.xml",
+        "views/formio_builder.xml",
+        "wizard/g2p_self_service_program_view_wizard.xml",
+    ],
+    "assets": {
+        "web.assets_backend": [],
+        "web.assets_qweb": [],
+        "web.assets_frontend": [],
+        "web.assets_common": [],
+    },
+    "demo": [],
+    "images": [],
+    "application": True,
+    "installable": True,
+    "auto_install": False,
+}
