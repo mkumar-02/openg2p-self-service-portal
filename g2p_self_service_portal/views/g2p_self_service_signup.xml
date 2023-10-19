@@ -146,18 +146,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group ">
-                                    <label for="gender">Gender</label>
+                                    <label for="sex">Sex</label>
                                     <select
                                         class="form-control"
-                                        name="gender"
-                                        id="gender"
-                                        t-att-disabled="1 if scan_status == 'true' and len(gender)>0 else 0"
+                                        name="sex"
+                                        id="sex"
+                                        t-att-disabled="1 if scan_status == 'true' and len(sex)>0 else 0"
                                     >
-                                        <t t-if="gender == 'Male'">
+                                        <t t-if="sex == 'Male'">
                                             <option value="Male" t-att-selected="1">Male</option>
                                             <option value="Female">Female</option>
                                         </t>
-                                        <t t-elif="gender == 'Female'">
+                                        <t t-elif="sex == 'Female'">
                                             <option value="Male">Male</option>
                                             <option value="Female" t-att-selected="1">Female</option>
                                         </t>
@@ -178,7 +178,9 @@
                                         t-att-value="birthdate"
                                         t-attf-class="form-control #{'form-control-sm' if form_small else ''}"
                                         t-att-readonly="1 if scan_status=='true' else 0"
+                                        oninput="validateDOB(this.value)"
                                     />
+                                    <span id="dob-error" style="color: red; display: none;">Please select a valid date of birth.</span>
                                 </div>
                             </div>
                         </div>
@@ -251,6 +253,10 @@
                 <script
                     type="text/javascript"
                     src="/g2p_self_service_portal/static/src/js/self_service_signup_authentication.js"
+                />
+                <script
+                    type="text/javascript"
+                    src="/g2p_self_service_portal/static/src/js/self_service_signup_dob.js"
                 />
             </div>
         </t>
