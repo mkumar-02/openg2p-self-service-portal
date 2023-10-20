@@ -1908,3 +1908,8 @@ li div p {
     color: #494daf;
     font: normal normal 600 14px/17px Inter;
 }
+
+#allprograms th:nth-child(2),
+#allprograms td:nth-child(2) {
+    width: 45%;
+}
