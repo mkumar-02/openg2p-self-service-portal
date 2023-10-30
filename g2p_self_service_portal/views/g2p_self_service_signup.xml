@@ -180,7 +180,10 @@
                                         t-att-readonly="1 if scan_status=='true' else 0"
                                         oninput="validateDOB(this.value)"
                                     />
-                                    <span id="dob-error" style="color: red; display: none;">Please select a valid date of birth.</span>
+                                    <span
+                                        id="dob-error"
+                                        style="color: red; display: none;"
+                                    >Please select a valid date of birth.</span>
                                 </div>
                             </div>
                         </div>
