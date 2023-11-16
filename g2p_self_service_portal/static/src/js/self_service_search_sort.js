@@ -46,11 +46,15 @@ headercells.forEach(function (th) {
             let bCellValue = getCellValue(b.cells[columnIndex]);
 
             if (dataType === "number") {
-                aCellValue = parseFloat(aCellValue);
-                bCellValue = parseFloat(bCellValue);
+                aCellValue = parseFloat(aCellValue.replace(/,/g, ""));
+                bCellValue = parseFloat(bCellValue.replace(/,/g, ""));
             } else if (dataType === "date") {
                 aCellValue = new Date(aCellValue);
                 bCellValue = new Date(bCellValue);
+            }
+            if (dataType === "text") {
+                aCellValue = aCellValue.toLowerCase();
+                bCellValue = bCellValue.toLowerCase();
             }
 
             let comparison = 0;
