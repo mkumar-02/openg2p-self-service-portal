@@ -4,19 +4,12 @@ on:
   pull_request:
     branches:
       - "17.0*"
+      - "17.0*"
   push:
     branches:
-<<<<<<< before updating
-      - "15.0*"
-      - "15.0-ocabot-*"
-env:
-  OCA_GIT_USER_NAME: openg2p
-  OCA_GIT_USER_EMAIL: bot@openg2p.org
-=======
       - "17.0"
       - "17.0-ocabot-*"
 
->>>>>>> after updating
 jobs:
   unreleased-deps:
     runs-on: ubuntu-latest
@@ -45,12 +38,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-<<<<<<< before updating
-          - container: ghcr.io/oca/oca-ci/py3.8-odoo15.0:latest
-            makepot: "true"
-=======
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
->>>>>>> after updating
             name: test with Odoo
             makepot: "false"
     services:
@@ -63,6 +51,7 @@ jobs:
         ports:
           - 5432:5432
     steps:
+      - uses: actions/checkout@v3
       - uses: actions/checkout@v3
         with:
           persist-credentials: false
