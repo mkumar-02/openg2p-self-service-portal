@@ -10,7 +10,7 @@ from odoo.http import request
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.g2p_self_service_portal.controllers.main import SelfServiceController
-from odoo.addons.web.controllers.main import Home
+from odoo.addons.web.controllers.home import Home
 
 _logger = logging.getLogger(__name__)
 

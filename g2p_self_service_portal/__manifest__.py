@@ -1,10 +1,10 @@
 {
     "name": "G2P Self Service Portal",
     "category": "G2P",
-    "version": "15.0.1.2.0",
+    "version": "17.0.1.0.0",
     "sequence": 1,
     "author": "OpenG2P",
-    "website": "https://openg2p.org",
+    "website": "https://github.com/OpenG2P/openg2p-self-service-portal",
     "license": "Other OSI approved licence",
     "development_status": "Alpha",
     "depends": [
@@ -41,9 +41,6 @@
     ],
     "assets": {
         "web.assets_backend": [],
-        "web.assets_qweb": [
-            #   "views/g2p_self_service_portal.doughnut_chart.xml",
-        ],
         "web.assets_frontend": [
             "g2p_self_service_portal/static/src/js/self_service_form_action.js",
             # # "g2p_self_service_portal/static/src/js/self_service_pie_chart.js",
