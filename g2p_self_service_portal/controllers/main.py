@@ -12,7 +12,7 @@ from odoo.tools import safe_eval
 
 from odoo.addons.auth_oidc.controllers.main import OpenIDLogin
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
-from odoo.addons.web.controllers.main import Home
+from odoo.addons.web.controllers.home import Home
 
 _logger = logging.getLogger(__name__)
 
