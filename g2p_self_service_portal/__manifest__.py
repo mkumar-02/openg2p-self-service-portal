@@ -15,7 +15,7 @@
         "g2p_program_documents",
         "website",
         "web",
-        "auth_oidc",
+        "g2p_portal_auth",
     ],
     "data": [
         "data/g2p_self_service_form_action_data.xml",
@@ -29,7 +29,6 @@
         "views/g2p_self_service_aboutus.xml",
         "views/g2p_self_service_otherpage.xml",
         "views/g2p_self_service_contactus.xml",
-        "views/auth_oauth_provider.xml",
         "views/g2p_self_service_form_page_template.xml",
         "views/program_view.xml",
         "views/g2p_self_service_signup.xml",
