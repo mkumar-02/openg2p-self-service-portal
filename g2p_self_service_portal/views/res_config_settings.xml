@@ -7,30 +7,25 @@
         <field name="priority" eval="2000" />
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
-                <app data-key="g2p_self_service_portal">
-                    <block title="G2P Self Service Settings">
-                        <setting>
-                            <label for="self_service_logo" string="Self Service Logo" />
-                            <field name="self_service_logo" class="text-center oe_inline" />
+                <app
+                    string="G2P Self Service Settings"
+                    name="g2p_self_service_portal"
+                    logo="/g2p_self_service_portal/static/description/icon.png"
+                >
+                    <block title="Logo Settings">
+                        <setting string="Self Service Logo">
+                            <field name="self_service_logo" />
                         </setting>
-                        <block title="Signup Settings">
-                            <setting>
-                                <label for="self_service_signup_id_type" string="ID Type" />
-                                <field name="self_service_signup_id_type" class="text-center oe_inline" />
-                            </setting>
-                        </block>
-                        <block title="OTP Settings">
-                            <setting>
-                                <label
-                                    for="self_service_otp_notification_managers"
-                                    string="Notification Managers"
-                                />
-                                <field
-                                    name="self_service_otp_notification_managers"
-                                    class="text-center oe_inline"
-                                />
-                            </setting>
-                        </block>
+                    </block>
+                    <block title="Signup Settings">
+                        <setting string="ID Type">
+                            <field name="self_service_signup_id_type" />
+                        </setting>
+                    </block>
+                    <block title="OTP Settings">
+                        <setting string="Notification Managers">
+                            <field name="self_service_otp_notification_managers" />
+                        </setting>
                     </block>
                 </app>
             </xpath>
