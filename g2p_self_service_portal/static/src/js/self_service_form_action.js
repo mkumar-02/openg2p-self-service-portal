@@ -226,7 +226,7 @@ function formSubmitAction() {
         }
 
         if (isFileAllowed(fileUploadSize)) {
-            programForm.submit();
+            programForm[0].submit();
         }
     }
 }

@@ -42,7 +42,7 @@
                                 <div class="card container-left" style="width: auto; padding: 0px;">
                                     <div class="card-header form-card-header" style="padding: 0px;">
                                         <h5 class="mb-0 form-heading">Application Form</h5>
-                                        <p class="form-description"><t t-esc="program" /></p>
+                                        <p class="form-description"><t t-out="program" /></p>
                                     </div>
                                     <div class="card-body" style="padding: 0px;">
                                         <div class="note">
@@ -61,7 +61,7 @@
                             <div class="col-md-4">
                                 <div class="card container-right" style="width: auto; padding: 0px;">
                                     <div class="card-header" style="padding: 0px;">
-                                        <h5 class="action-heading"><t t-esc="program" /></h5>
+                                        <h5 class="action-heading"><t t-out="program" /></h5>
                                         <p class="action-description">
                                             Sample Text for Reference: This Scheme is available until xx March, 2023.
                                             To avail benefits, please apply here.
@@ -75,15 +75,15 @@
                                             t-att-file-size="file_size"
                                             id="program_submit_id"
                                             type="submit"
-                                            class="btn btn-primary btn-lg btn-block form_submit_action"
+                                            class="btn btn-primary btn-lg btn-block w-100 form_submit_action"
                                         >
                                             Submit
                                         </button>
                                         <button
                                             type="button"
-                                            class="btn btn-outline-primary btn-lg btn-block form_cancel_action"
-                                            data-toggle="modal"
-                                            data-target="#exampleModalCenter"
+                                            class="btn btn-outline-primary btn-lg btn-block w-100 form_cancel_action"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalCenter"
                                         >
                                             Cancel
                                         </button>
@@ -122,7 +122,7 @@
                                                         <button
                                                             type="button"
                                                             class="btn btn-outline-primary modal-cancel-button"
-                                                            data-dismiss="modal"
+                                                            data-bs-dismiss="modal"
                                                         >
                                                             Cancel
                                                         </button>
