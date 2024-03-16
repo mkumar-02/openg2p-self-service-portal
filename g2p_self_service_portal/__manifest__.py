@@ -29,6 +29,8 @@
         "views/g2p_self_service_aboutus.xml",
         "views/g2p_self_service_otherpage.xml",
         "views/g2p_self_service_contactus.xml",
+        # TODO: The 'auth_oidc' module was removed; a replacement is needed in the code
+        # "views/auth_oauth_provider.xml",
         "views/g2p_self_service_form_page_template.xml",
         "views/program_view.xml",
         "views/g2p_self_service_signup.xml",
