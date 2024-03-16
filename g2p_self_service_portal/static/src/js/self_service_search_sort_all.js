@@ -100,6 +100,26 @@ function renderPageButtons() {
 
     updatePaginationButtons();
 }
+function getCellValue(cell) {
+    const badge = cell.querySelector(".badge");
+    if (badge && badge.textContent.trim().toLowerCase() === "new") {
+        return cell.textContent.replace(/new/gi, "").trim().toLowerCase();
+    }
+    return cell.textContent.trim().toLowerCase();
+}
+
+function compareCellValues(a, b, columnIndex) {
+    const aCellValue = getCellValue(a.cells[columnIndex]);
+    const bCellValue = getCellValue(b.cells[columnIndex]);
+
+    let comparison = 0;
+    if (aCellValue < bCellValue) {
+        comparison = -1;
+    } else if (aCellValue > bCellValue) {
+        comparison = 1;
+    }
+    return comparison;
+}
 
 allheadercells.forEach(function (th) {
     // Default sort order
@@ -107,15 +127,7 @@ allheadercells.forEach(function (th) {
     th.addEventListener("click", function () {
         const columnIndex = th.cellIndex;
         allRows.sort(function (a, b) {
-            const aCellValue = a.cells[columnIndex].innerText;
-            const bCellValue = b.cells[columnIndex].innerText;
-
-            let comparison = 0;
-            if (aCellValue > bCellValue) {
-                comparison = 1;
-            } else if (aCellValue < bCellValue) {
-                comparison = -1;
-            }
+            let comparison = compareCellValues(a, b, columnIndex);
 
             if (sortOrder === "desc") {
                 comparison *= -1;

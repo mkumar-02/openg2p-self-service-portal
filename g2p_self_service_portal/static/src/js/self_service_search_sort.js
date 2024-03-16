@@ -13,6 +13,13 @@ function addTableSrNo() {
 
 addTableSrNo();
 
+function getCellValue(cell) {
+    const badge = cell.querySelector(".badge");
+    if (badge && badge.textContent.trim().toLowerCase() === "new") {
+        return cell.textContent.replace(/new/gi, "").trim();
+    }
+    return cell.textContent.trim();
+}
 headercells.forEach(function (th) {
     // Default sort order
     let sortOrder = "asc";
@@ -26,8 +33,8 @@ headercells.forEach(function (th) {
         const firstRow = rows[0];
         const firstCell = firstRow.cells[columnIndex];
         if (firstCell) {
-            const cellContent = firstCell.innerText.trim();
-            if (/^\d+$/.test(cellContent)) {
+            const cellContent = firstCell.innerText.trim().replace(/,/g, "");
+            if (/^\d+(\.\d+)?$/.test(cellContent)) {
                 dataType = "number";
             } else if (Date.parse(cellContent)) {
                 dataType = "date";
@@ -35,15 +42,19 @@ headercells.forEach(function (th) {
         }
 
         rows.sort(function (a, b) {
-            let aCellValue = a.cells[columnIndex].innerText.trim();
-            let bCellValue = b.cells[columnIndex].innerText.trim();
+            let aCellValue = getCellValue(a.cells[columnIndex]);
+            let bCellValue = getCellValue(b.cells[columnIndex]);
 
             if (dataType === "number") {
-                aCellValue = parseFloat(aCellValue);
-                bCellValue = parseFloat(bCellValue);
+                aCellValue = parseFloat(aCellValue.replace(/,/g, ""));
+                bCellValue = parseFloat(bCellValue.replace(/,/g, ""));
             } else if (dataType === "date") {
                 aCellValue = new Date(aCellValue);
                 bCellValue = new Date(bCellValue);
+            }
+            if (dataType === "text") {
+                aCellValue = aCellValue.toLowerCase();
+                bCellValue = bCellValue.toLowerCase();
             }
 
             let comparison = 0;

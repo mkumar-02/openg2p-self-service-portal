@@ -85,7 +85,11 @@
                                             <td>
                                                 <t t-if="program['is_latest']">
                                                     <!-- <a href="#" class="program-name"> -->
-                                                        <button class="badge badge-button">
+                                                        <button
+                                                        class="badge badge-button"
+                                                        disabled="1"
+                                                        data-sort-ignore="true"
+                                                    >
                                                             <span>NEW</span>
                                                         </button>
                                                         <t t-esc="program['name']" />

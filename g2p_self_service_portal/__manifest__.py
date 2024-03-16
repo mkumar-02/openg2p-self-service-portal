@@ -15,6 +15,7 @@
         "g2p_program_documents",
         "website",
         "web",
+        "g2p_portal_auth",
     ],
     "data": [
         "data/g2p_self_service_form_action_data.xml",
